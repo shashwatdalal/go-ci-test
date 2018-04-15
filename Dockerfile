@@ -6,4 +6,4 @@ WORKDIR /go/src/go-ci-test
 COPY . .
 
 #install libraries
-RUN go get -d -v gopkg.in/check.v1 github.com/tebeka/go2xunit
+RUN go get -v gopkg.in/check.v1 github.com/tebeka/go2xunit
