@@ -7,3 +7,4 @@ RUN go get gopkg.in/check.v1 github.com/tebeka/go2xunit
 #add util and tests
 RUN cd src && mkdir go-ci-test
 ADD . src/go-ci-test
+WORKDIR $GOPATH
