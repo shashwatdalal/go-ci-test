@@ -17,6 +17,11 @@ pipeline {
       steps {
         sh 'cd tests/ && go test -v | go2xunit -fail -output tests.xml'
       }
+      post {
+              always {
+                  junit 'tests/*.xml'
+              }
+          }
     }
   }
 }
