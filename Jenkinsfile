@@ -1,14 +1,17 @@
 pipeline {
-  agent {
-    dockerfile true
-  } 
   stages {
     stage('Docker Tests') {
+      agent {
+        dockerfile true
+      }
       steps {
         sh 'tree'
       }
     }
     stage('Build') {
+      agent {
+        dockerfile true
+      }
       steps {
         sh 'echo $GOROOT'
         sh 'echo $GOPATH'
