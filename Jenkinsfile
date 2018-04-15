@@ -16,7 +16,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'tree'
-        sh 'cd ../../.. && tree'
+        sh 'cd ../../../.. && tree'
         sh 'echo $GOPATH'
         sh 'cd test'
         sh 'go test -v | go2xunit -output tests.xml'
