@@ -1,7 +1,9 @@
 node {
-  def testImage = docker.build("test-image")
+  def goLangImage = docker.build("test-image")
    stage('Build') {
-       sh 'go run main.go'
+       goLangImage.inside {
+            sh tree
+       }
     }
     stage('Test') {
         sh 'cd ~/$GOPATH'
