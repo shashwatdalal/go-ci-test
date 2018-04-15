@@ -10,15 +10,13 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'echo $check'
-        sh 'echo $GOPATH'
-        sh 'pwd'
+        sh 'cd src'
         sh 'go build *.go'
       }
     }
     stage('Test') {
       steps {
-        sh 'cd src/'
+        sh 'cd test/'
         sh 'go test -v | go2xunit -output tests.xml'
       }
     }
