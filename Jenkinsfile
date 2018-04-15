@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    dockerfile true
-  }
+  def testImage = docker.build("test-image")
   stages {
     stage('Docker Tests') {
       steps {
