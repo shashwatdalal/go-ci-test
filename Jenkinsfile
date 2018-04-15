@@ -10,13 +10,12 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'cd src'
-        sh 'go build *.go'
+        sh 'go build main.go'
       }
     }
     stage('Test') {
       steps {
-        sh 'cd test/'
+        sh 'cd test'
         sh 'go test -v | go2xunit -output tests.xml'
       }
     }
