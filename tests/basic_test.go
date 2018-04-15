@@ -17,9 +17,8 @@ var _ = Suite(&MySuite{})
 func (s *MySuite) TestHelloWorld(c *C) {
 	c.Assert(42, Equals, 42)
 	c.Assert(io.ErrClosedPipe, ErrorMatches, "io: .*on closed pipe")
-	c.Check(Return60(), Equals, 60)
 }
 
-func (s *MySuite) TestSecond(c *C) {
-	c.Assert(52, Equals, 23)
+func (s *MySuite) TestReturn60(c *C) {
+	c.Assert(Return60(), Equals, 60)
 }
