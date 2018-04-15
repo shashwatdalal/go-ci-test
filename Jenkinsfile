@@ -16,7 +16,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'tree'
-        sh 'docker ps'
+        sh 'cd .. && tree'
         sh 'cd test'
         sh 'go test -v | go2xunit -output tests.xml'
       }
