@@ -10,6 +10,7 @@ pipeline {
     }
     stage('Build') {
       steps {
+        sh 'echo $GOROOT'
         sh 'cd src/'
         sh 'go build *.go'
       }
