@@ -1,5 +1,5 @@
 package util
 
 func Return60() int {
-	return 60
+	return 47
 }
