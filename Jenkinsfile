@@ -1,8 +1,8 @@
 node {
-  def goLangImage = docker.build("test-image")
+  def goLangImage = docker.build("goLang",".)
    stage('Build') {
        goLangImage.inside {
-            sh tree
+            sh 'tree'
        }
     }
     stage('Test') {
