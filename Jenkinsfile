@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh 'echo $GOROOT'
         sh 'echo $GOPATH'
-        sh 'cd src/'
+        sh 'pwd'
         sh 'go build *.go'
       }
     }
