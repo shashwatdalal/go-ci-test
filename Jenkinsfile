@@ -10,11 +10,13 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'go build main.go'
+        sh 'go run main.go'
       }
     }
     stage('Test') {
       steps {
+        sh 'tree'
+        sh 'docker ps'
         sh 'cd test'
         sh 'go test -v | go2xunit -output tests.xml'
       }
