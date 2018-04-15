@@ -1,14 +1,23 @@
-node {
-  def goLangImage = docker.build("golang")
-   stage('Build') {
-       goLangImage.inside {
-            sh 'tree'
-       }
+pipeline {
+  agent {
+    dockerfile true
+  }
+  stages {
+    stage('Docker Tests') {
+      steps {
+        sh 'tree'
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'go run main.go'
+      }
     }
     stage('Test') {
-        sh 'cd ~/$GOPATH'
-        sh 'tree'
-        sh 'cd test'
+      steps {
+        sh 'cd test/'
         sh 'go test -v | go2xunit -output tests.xml'
+      }
     }
+  }
 }
