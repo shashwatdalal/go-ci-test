@@ -15,7 +15,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd test/'
+        sh 'cd tests/'
         sh 'go test -v | go2xunit -output tests.xml'
       }
     }
