@@ -6,6 +6,7 @@ pipeline {
     stage('Docker Tests') {
       steps {
         sh 'tree'
+        isUnix()
       }
     }
     stage('Build') {
@@ -22,7 +23,9 @@ pipeline {
           post {
             always {
               junit 'tests/basic_test.xml'
+
             }
+
           }
         }
         stage('Handler Tests') {
@@ -32,7 +35,9 @@ pipeline {
           post {
             always {
               junit 'tests/handler_test.xml'
+
             }
+
           }
         }
       }
