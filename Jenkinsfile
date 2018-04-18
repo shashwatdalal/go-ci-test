@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Util Test') {
           steps {
-            sh 'cd tests/ && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
+            sh 'cd tests/ && go test basic_test.go -v '
           }
           post {
             always {
