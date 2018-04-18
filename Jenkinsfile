@@ -13,9 +13,9 @@ pipeline {
         sh 'go build main.go'
       }
     }
-    stage('Test') {
+    stage('Unit-Tests') {
       parallel {
-        stage('Util Tests') {
+        stage('Util Test') {
           steps {
             sh 'cd tests/ && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
           }
@@ -27,7 +27,7 @@ pipeline {
 
           }
         }
-        stage('Handler Tests') {
+        stage('Handler Test') {
           steps {
             sh 'cd tests/ && go test handler_test.go -v | go2xunit -fail -output handler_test.xml'
           }
