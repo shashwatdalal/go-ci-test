@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Util Test') {
           steps {
-            sh 'cd tests/ && go test basic_test.go -v '
+            sh 'cd tests/ && go test basic_test.go -v'
           }
           post {
             always {
