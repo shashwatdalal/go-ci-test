@@ -6,7 +6,6 @@ pipeline {
     stage('Docker Tests') {
       steps {
         sh 'tree'
-        isUnix()
       }
     }
     stage('Build') {
