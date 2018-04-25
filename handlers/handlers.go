@@ -15,3 +15,4 @@ func HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
 	// (e.g. Redis) by performing a simple PING, and include them in the response.
 	io.WriteString(w, `{"alive": true}`)
 }
+

@@ -2,10 +2,18 @@ package main
 
 import (
 	"fmt"
-	. "go-ci-test/util"
+	"time"
 )
 
 func main() {
-	fmt.Println("Hello world")
-  fmt.Println(Return60())
+	go func() {
+		for {
+			printText("sheep")
+		}
+	}()
+
+}
+func printText(s string) {
+	fmt.Println(s)
+	time.Sleep(500)
 }
