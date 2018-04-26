@@ -1,0 +1,2 @@
+FAIL: basic_test.go:22: MySuite.TestReturn60
+--- FAIL: Test (0.00s)
