@@ -20,5 +20,5 @@ func (s *MySuite) TestHelloWorld(c *C) {
 }
 
 func (s *MySuite) TestReturn60(c *C) {
-	c.Assert(Return60(), Equals, 50)
+	c.Assert(Return60(), Equals, 60)
 }
