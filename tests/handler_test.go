@@ -14,6 +14,7 @@ func TestHealthCheckHandler(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	//asdf
 
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
