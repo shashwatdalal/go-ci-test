@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="FirstTest" time="20" tests="1" failures="0" errors="0">
+   <testsuite name="FirstTest" tests="1" failures="0" errors="0" time="20" timestamp="2018-04-28 21:57:29" hostname="root - 33e44fd781d4" id="Test Suites/FirstTest">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/katalon/katalon/project/Reports/FirstTest/20180428_215728"/>
+         <property name="logFiles" value="/katalon/katalon/project/Reports/FirstTest/20180428_215728/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="root - 33e44fd781d4"/>
+         <property name="os" value="Linux 64bit"/>
+         <property name="katalonVersion" value="5.3.1.1"/>
+         <property name="browser" value="Chrome 64.0.3282.186"/>
+         <property name="hostAddress" value="172.17.0.2"/>
+         <property name="sessionId" value="b36282b3f6997e4fb5c9e53997f746e6"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Linux"/>
+      </properties>
+      <testcase name="Test Cases/basic-test" classname="Test Cases/basic-test" status="PASSED">
+         <system-out><![CDATA[2018-04-28 21:57:30 - [TEST_CASE][PASSED] - Test Cases/basic-test: Test Cases/basic-test
+
+2018-04-28 21:57:30 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+
+2018-04-28 21:57:33 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-04-28 21:57:33 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'https://shashwatdalal.github.io/' successfully
+
+2018-04-28 21:57:38 - [MESSAGE][PASSED] - Navigate to 'https://shashwatdalal.github.io/' successfully
+
+2018-04-28 21:57:38 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Shashwat Dalal/a_LinkedIn' is clicked on
+
+2018-04-28 21:57:50 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Shashwat Dalal/a_LinkedIn' is clicked on
+
+2018-04-28 21:57:50 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
+
+2018-04-28 21:57:50 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-04-28 21:57:29 - [TEST_SUITE][PASSED] - FirstTest: Test Cases/basic-test]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>
