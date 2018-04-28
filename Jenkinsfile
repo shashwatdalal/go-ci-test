@@ -21,7 +21,7 @@ pipeline {
           }
           post {
             always {
-              junit 'tests/basic_test.xml'
+              junit 'tests/go-tests/basic_test.xml'
 
             }
 
@@ -29,11 +29,11 @@ pipeline {
         }
         stage('Handler Test') {
           steps {
-            sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml && cd /.. && tree'
+            sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml'
           }
           post {
             always {
-              junit 'tests/handler_test.xml'
+              junit 'tests/go-tests/handler_test.xml'
             }
           }
         }
