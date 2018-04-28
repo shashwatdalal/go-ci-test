@@ -39,5 +39,10 @@ pipeline {
         }
       }
     }
+    stage('Integration Tests') {
+          steps {
+            sh 'cd tests/integration-tests && ./run_chrome'
+          }
+        }
   }
 }
