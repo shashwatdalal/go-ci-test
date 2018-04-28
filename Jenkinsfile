@@ -1,7 +1,4 @@
 pipeline {
-  agent {
-    dockerfile true
-  }
   stages {
     stage('Docker Tests') {
       steps {
@@ -9,11 +6,17 @@ pipeline {
       }
     }
     stage('Build') {
+      agent {
+        dockerfile true
+      }
       steps {
         sh 'go build main.go'
       }
     }
     stage('Unit-Tests') {
+      agent {
+        dockerfile true
+      }
       parallel {
         stage('Util Test') {
           steps {
