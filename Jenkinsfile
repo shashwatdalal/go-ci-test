@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Handler Test') {
           steps {
-            sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml'
+            sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml && cd /.. && tree'
           }
           post {
             always {
