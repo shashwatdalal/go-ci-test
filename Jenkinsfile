@@ -1,11 +1,6 @@
 pipeline {
   agent none
   stages {
-    stage('Docker Tests') {
-      steps {
-        sh 'tree'
-      }
-    }
     stage('Build') {
       agent {
         dockerfile true
