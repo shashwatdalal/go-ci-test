@@ -41,6 +41,7 @@ pipeline {
     }
     stage('Integration Tests') {
         steps {
+            sh 'exit'
             sh 'cd tests/integration-tests && ./run_chrome'
          }
      }
