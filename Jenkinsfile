@@ -39,11 +39,5 @@ pipeline {
         }
       }
     }
-    stage('Build') {
-      steps {
-      sh 'exit'
-      sh 'go build main.go'
-      }
-     }
   }
 }
