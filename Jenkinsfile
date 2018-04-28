@@ -22,9 +22,7 @@ pipeline {
           post {
             always {
               junit 'tests/basic_test.xml'
-
             }
-
           }
         }
         stage('Handler Test') {
@@ -34,12 +32,23 @@ pipeline {
           post {
             always {
               junit 'tests/handler_test.xml'
-
             }
-
           }
         }
       }
+    }
+    stage('Integration-Tests') {
+      agent {
+        none
+      }
+      steps {
+        sh 'cd tests/integration-tests && ./run_chrome'
+       }
+       post {
+         always {
+           junit 'tests/handler_test.xml'
+          }
+       }
     }
   }
 }
