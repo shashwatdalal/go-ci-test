@@ -22,7 +22,9 @@ pipeline {
           post {
             always {
               junit 'tests/basic_test.xml'
+
             }
+
           }
         }
         stage('Handler Test') {
@@ -37,5 +39,11 @@ pipeline {
         }
       }
     }
+    stage('Build') {
+      steps {
+      sh 'exit'
+      sh 'go build main.go'
+      }
+     }
   }
 }
