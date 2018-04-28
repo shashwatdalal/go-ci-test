@@ -15,11 +15,11 @@ pipeline {
       }
     }
     stage('Unit-Tests') {
-      agent {
-        dockerfile true
-      }
       parallel {
         stage('Util Test') {
+         agent {
+                dockerfile true
+          }
           steps {
             sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
           }
@@ -30,6 +30,9 @@ pipeline {
           }
         }
         stage('Handler Test') {
+          agent {
+            dockerfile true
+          }
           steps {
             sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml'
           }
@@ -42,9 +45,6 @@ pipeline {
       }
     }
     stage('Integration-Tests') {
-      agent {
-        none
-      }
       steps {
         sh 'cd tests/integration-tests && ./run_chrome'
        }
