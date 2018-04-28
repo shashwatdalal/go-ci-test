@@ -1,5 +1,5 @@
 FROM golang:1.10.1-alpine3.7
-RUN apk update && apk add git tree make
+RUN apk update && apk add git tree make bash
 
 #set up workdir
 WORKDIR /go/src/go-ci-test
