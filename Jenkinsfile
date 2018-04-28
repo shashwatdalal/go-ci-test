@@ -1,18 +1,14 @@
 pipeline {
-  agent none
+  agent {
+    dockerfile true
+  }
   stages {
     stage('Docker Tests') {
-      agent {
-        dockerfile true
-      }
       steps {
         sh 'tree'
       }
     }
     stage('Build') {
-      agent {
-              dockerfile true
-            }
       steps {
         sh 'go build main.go'
       }
@@ -20,9 +16,6 @@ pipeline {
     stage('Unit-Tests') {
       parallel {
         stage('Util Test') {
-        agent {
-                dockerfile true
-              }
           steps {
             sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
           }
@@ -35,9 +28,6 @@ pipeline {
           }
         }
         stage('Handler Test') {
-        agent {
-                dockerfile true
-              }
           steps {
             sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml'
           }
@@ -50,7 +40,7 @@ pipeline {
       }
     }
     stage('Integration Tests') {
-          steps {
+        steps {
             sh 'cd tests/integration-tests && tree'
           }
         }
