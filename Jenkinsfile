@@ -51,8 +51,7 @@ pipeline {
     stage('Integration-Tests') {
       agent any
       steps {
-      sh 'cd tests/integration-tests'
-      sh 'ls -l'
+      sh 'cd tests/integration-tests && ./run_chrome'
       }
      }
   }
