@@ -2,34 +2,34 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-04-29T15:44:48</date>
-  <millis>1525016688157</millis>
+  <date>2018-04-29T19:56:28</date>
+  <millis>1525031788953</millis>
   <sequence>0</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startSuite</method>
   <thread>1</thread>
-  <message>Start Test Suite : Test Suites/FirstTest</message>
+  <message>Start Test Suite : Test Suites/firstTest</message>
   <nestedLevel>0</nestedLevel>
-  <property name="name">FirstTest</property>
+  <property name="name">firstTest</property>
   <property name="description"></property>
-  <property name="id">Test Suites/FirstTest</property>
+  <property name="id">Test Suites/firstTest</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:48</date>
-  <millis>1525016688227</millis>
+  <date>2018-04-29T19:56:28</date>
+  <millis>1525031788981</millis>
   <sequence>1</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Logging run data &amp;apos;hostName&amp;apos; with value &amp;apos;root - 869903844f47&amp;apos;</message>
+  <message>Logging run data &amp;apos;hostName&amp;apos; with value &amp;apos;root - 23ec4bb48fce&amp;apos;</message>
   <nestedLevel>0</nestedLevel>
-  <property name="hostName">root - 869903844f47</property>
+  <property name="hostName">root - 23ec4bb48fce</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:48</date>
-  <millis>1525016688254</millis>
+  <date>2018-04-29T19:56:28</date>
+  <millis>1525031788983</millis>
   <sequence>2</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -40,8 +40,8 @@
   <property name="os">Linux 64bit</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:48</date>
-  <millis>1525016688256</millis>
+  <date>2018-04-29T19:56:28</date>
+  <millis>1525031788984</millis>
   <sequence>3</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -52,8 +52,8 @@
   <property name="hostAddress">172.17.0.2</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:48</date>
-  <millis>1525016688267</millis>
+  <date>2018-04-29T19:56:28</date>
+  <millis>1525031788986</millis>
   <sequence>4</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -64,24 +64,24 @@
   <property name="katalonVersion">5.3.1.1</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:49</date>
-  <millis>1525016689079</millis>
+  <date>2018-04-29T19:56:29</date>
+  <millis>1525031789506</millis>
   <sequence>5</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startTest</method>
   <thread>1</thread>
-  <message>Start Test Case : Test Cases/basic-test</message>
+  <message>Start Test Case : Test Cases/Tesco-Test</message>
   <nestedLevel>1</nestedLevel>
-  <property name="name">Test Cases/basic-test</property>
+  <property name="name">Test Cases/Tesco-Test</property>
   <property name="description"></property>
-  <property name="id">Test Cases/basic-test</property>
-  <property name="source">\\katalon\\katalon\\project\\Test Cases\\basic-test.tc</property>
+  <property name="id">Test Cases/Tesco-Test</property>
+  <property name="source">\\katalon\\katalon\\project\\Test Cases\\Tesco-Test.tc</property>
   <property name="isOptional">false</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:49</date>
-  <millis>1525016689111</millis>
+  <date>2018-04-29T19:56:29</date>
+  <millis>1525031789588</millis>
   <sequence>6</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -91,8 +91,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:49</date>
-  <millis>1525016689696</millis>
+  <date>2018-04-29T19:56:30</date>
+  <millis>1525031790103</millis>
   <sequence>7</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -104,8 +104,8 @@
   <property name="stepIndex">1</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:50</date>
-  <millis>1525016690517</millis>
+  <date>2018-04-29T19:56:30</date>
+  <millis>1525031790798</millis>
   <sequence>8</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -115,8 +115,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:50</date>
-  <millis>1525016690524</millis>
+  <date>2018-04-29T19:56:30</date>
+  <millis>1525031790811</millis>
   <sequence>9</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -126,8 +126,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:50</date>
-  <millis>1525016690598</millis>
+  <date>2018-04-29T19:56:30</date>
+  <millis>1525031790880</millis>
   <sequence>10</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -137,20 +137,20 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695591</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792608</millis>
   <sequence>12</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Logging run data &amp;apos;sessionId&amp;apos; with value &amp;apos;31ff4ee57cf998c8c458f79a5f179ed8&amp;apos;</message>
+  <message>Logging run data &amp;apos;sessionId&amp;apos; with value &amp;apos;b9236c125ff94d4b25fc8466eb561510&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
-  <property name="sessionId">31ff4ee57cf998c8c458f79a5f179ed8</property>
+  <property name="sessionId">b9236c125ff94d4b25fc8466eb561510</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695649</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792630</millis>
   <sequence>13</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -161,8 +161,8 @@
   <property name="browser">Chrome 64.0.3282.186</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695650</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792631</millis>
   <sequence>14</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -173,8 +173,8 @@
   <property name="platform">Linux</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695652</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792637</millis>
   <sequence>15</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -185,8 +185,8 @@
   <property name="seleniumVersion">3.7.1</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695653</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792642</millis>
   <sequence>16</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -197,8 +197,8 @@
   <property name="proxyInformation">ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695654</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792650</millis>
   <sequence>17</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -208,8 +208,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695668</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792653</millis>
   <sequence>18</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -219,8 +219,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695677</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792656</millis>
   <sequence>19</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -232,8 +232,8 @@
   <property name="stepIndex">2</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695723</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792694</millis>
   <sequence>20</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -243,30 +243,30 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:55</date>
-  <millis>1525016695739</millis>
+  <date>2018-04-29T19:56:32</date>
+  <millis>1525031792698</millis>
   <sequence>21</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Navigating to &amp;apos;https://shashwatdalal.github.io/&amp;apos;</message>
+  <message>Navigating to &amp;apos;https://www.tesco.com/&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697709</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796379</millis>
   <sequence>22</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Navigate to &amp;apos;https://shashwatdalal.github.io/&amp;apos; successfully</message>
+  <message>Navigate to &amp;apos;https://www.tesco.com/&amp;apos; successfully</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697715</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796380</millis>
   <sequence>23</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -276,8 +276,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697716</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796380</millis>
   <sequence>24</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -289,53 +289,20 @@
   <property name="stepIndex">3</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697749</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796398</millis>
   <sequence>25</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Shashwat Dalal/a_LinkedIn&amp;apos;</message>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697757</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796437</millis>
   <sequence>26</sequence>
-  <level>WARNING</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Test object with id &amp;apos;Object Repository/Page_Shashwat Dalal/a_LinkedIn&amp;apos; does not exist</message>
-  <nestedLevel>1</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697857</millis>
-  <sequence>27</sequence>
-  <level>INFO</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Finding Test Object with id &amp;apos;Object Repository/&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697865</millis>
-  <sequence>28</sequence>
-  <level>WARNING</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Test object with id &amp;apos;Object Repository/&amp;apos; does not exist</message>
-  <nestedLevel>1</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:44:57</date>
-  <millis>1525016697888</millis>
-  <sequence>29</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
@@ -344,21 +311,64 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698573</millis>
-  <sequence>30</sequence>
-  <level>FAILED</level>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796438</millis>
+  <sequence>27</sequence>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Unable to click on object (Root cause: java.lang.IllegalArgumentException: Object is null)</message>
+  <message>Checking timeout</message>
   <nestedLevel>1</nestedLevel>
-  <property name="attachment">1525016697905.png</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698582</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796463</millis>
+  <sequence>28</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; located by &amp;apos;By.xpath: //a[@href = &amp;apos;#&amp;apos; and @title = &amp;apos;Groceries&amp;apos; and (text() = &amp;apos;Groceries&amp;apos; or . = &amp;apos;Groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796565</millis>
+  <sequence>29</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; located by &amp;apos;By.xpath: //a[@href = &amp;apos;#&amp;apos; and @title = &amp;apos;Groceries&amp;apos; and (text() = &amp;apos;Groceries&amp;apos; or . = &amp;apos;Groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796566</millis>
+  <sequence>30</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Clicking on object: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796691</millis>
   <sequence>31</sequence>
+  <level>PASSED</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Object: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; is clicked on</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796691</millis>
+  <sequence>32</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endKeyword</method>
@@ -367,510 +377,289 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698587</millis>
-  <sequence>32</sequence>
-  <logger>com.kms.katalon.core.logging.KeywordLogger</logger>
-  <level>FAILED</level>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796692</millis>
+  <sequence>33</sequence>
+  <level>START</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>startKeyword</method>
+  <thread>1</thread>
+  <message>Start action : click</message>
+  <nestedLevel>1</nestedLevel>
+  <property name="startLine">29</property>
+  <property name="stepIndex">4</property>
+</record>
+<record>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796693</millis>
+  <sequence>34</sequence>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Test Cases/basic-test FAILED because (of) Unable to click on object (Root cause: java.lang.IllegalArgumentException: Object is null)</message>
-  <exception>
-    <message>com.kms.katalon.core.exception.StepFailedException: Unable to click on object (Root cause: java.lang.IllegalArgumentException: Object is null)</message>
-    <frame>
-      <class>com.kms.katalon.core.keyword.internal.KeywordMain</class>
-      <method>stepFailed</method>
-      <line>36</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain</class>
-      <method>stepFailed</method>
-      <line>65</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain</class>
-      <method>runKeyword</method>
-      <line>27</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.builtin.ClickKeyword</class>
-      <method>click</method>
-      <line>86</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.builtin.ClickKeyword</class>
-      <method>execute</method>
-      <line>67</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.keyword.internal.KeywordExecutor</class>
-      <method>executeKeywordForPlatform</method>
-      <line>53</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords</class>
-      <method>click</method>
-      <line>616</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$click$1</class>
-      <method>call</method>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.CallSiteArray</class>
-      <method>defaultCall</method>
-      <line>48</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>113</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>125</line>
-    </frame>
-    <frame>
-      <class>Script1524921427217</class>
-      <method>run</method>
-      <line>27</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.ScriptEngine</class>
-      <method>run</method>
-      <line>183</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.ScriptEngine</class>
-      <method>runScriptAsRawText</method>
-      <line>108</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>runScript</method>
-      <line>291</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>doExecute</method>
-      <line>282</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>processExecutionPhase</method>
-      <line>261</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>accessMainPhase</method>
-      <line>253</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>execute</method>
-      <line>201</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestSuiteExecutor</class>
-      <method>accessTestCaseMainPhase</method>
-      <line>121</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestSuiteExecutor</class>
-      <method>accessTestSuiteMainPhase</method>
-      <line>107</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestSuiteExecutor</class>
-      <method>execute</method>
-      <line>76</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseMain</class>
-      <method>startTestSuite</method>
-      <line>99</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseMain$startTestSuite$0</class>
-      <method>call</method>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.CallSiteArray</class>
-      <method>defaultCall</method>
-      <line>48</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>113</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>141</line>
-    </frame>
-    <frame>
-      <class>TempTestSuite1525016685870</class>
-      <method>run</method>
-      <line>34</line>
-    </frame>
-    <frame>
-      <class>groovy.lang.GroovyShell</class>
-      <method>runScriptOrMainOrTestOrRunnable</method>
-      <line>263</line>
-    </frame>
-    <frame>
-      <class>groovy.lang.GroovyShell</class>
-      <method>run</method>
-      <line>518</line>
-    </frame>
-    <frame>
-      <class>groovy.lang.GroovyShell</class>
-      <method>run</method>
-      <line>507</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>processOnce</method>
-      <line>653</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>run</method>
-      <line>384</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>process</method>
-      <line>370</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>processArgs</method>
-      <line>129</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>main</method>
-      <line>109</line>
-    </frame>
-    <frame>
-      <class>sun.reflect.NativeMethodAccessorImpl</class>
-      <method>invoke0</method>
-    </frame>
-    <frame>
-      <class>sun.reflect.NativeMethodAccessorImpl</class>
-      <method>invoke</method>
-      <line>62</line>
-    </frame>
-    <frame>
-      <class>sun.reflect.DelegatingMethodAccessorImpl</class>
-      <method>invoke</method>
-      <line>43</line>
-    </frame>
-    <frame>
-      <class>java.lang.reflect.Method</class>
-      <method>invoke</method>
-      <line>498</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.tools.GroovyStarter</class>
-      <method>rootLoader</method>
-      <line>109</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.tools.GroovyStarter</class>
-      <method>main</method>
-      <line>131</line>
-    </frame>
-  </exception>
-  <nestedLevel>0</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698603</millis>
-  <sequence>33</sequence>
-  <level>END</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>endTest</method>
-  <thread>1</thread>
-  <message>End Test Case : Test Cases/basic-test</message>
-  <nestedLevel>0</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698638</millis>
-  <sequence>34</sequence>
-  <level>START</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>startTest</method>
-  <thread>1</thread>
-  <message>Start Test Case : Test Cases/form-test</message>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
-  <property name="name">Test Cases/form-test</property>
-  <property name="description"></property>
-  <property name="id">Test Cases/form-test</property>
-  <property name="source">\\katalon\\katalon\\project\\Test Cases\\form-test.tc</property>
-  <property name="isOptional">false</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698794</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796703</millis>
   <sequence>35</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Evaluating variables for test case</message>
+  <message>Checking object</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698973</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796711</millis>
   <sequence>36</sequence>
-  <level>START</level>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>startKeyword</method>
+  <method>logMessage</method>
   <thread>1</thread>
-  <message>Start action : openBrowser</message>
+  <message>Checking timeout</message>
   <nestedLevel>1</nestedLevel>
-  <property name="startLine">25</property>
-  <property name="stepIndex">1</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698975</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796717</millis>
   <sequence>37</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Opening browser</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Shop groceries&amp;apos; or . = &amp;apos;Shop groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:58</date>
-  <millis>1525016698987</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796787</millis>
   <sequence>38</sequence>
-  <level>WARNING</level>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>A browser is already opened. Closing browser and opening a new one</message>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Shop groceries&amp;apos; or . = &amp;apos;Shop groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699067</millis>
+  <date>2018-04-29T19:56:36</date>
+  <millis>1525031796787</millis>
   <sequence>39</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Starting &amp;apos;Chrome&amp;apos; driver</message>
+  <message>Clicking on object: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699919</millis>
-  <sequence>41</sequence>
-  <level>RUN_DATA</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Logging run data &amp;apos;sessionId&amp;apos; with value &amp;apos;b3c0669cccb9d366d7ae04456027c947&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-  <property name="sessionId">b3c0669cccb9d366d7ae04456027c947</property>
-</record>
-<record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699932</millis>
-  <sequence>42</sequence>
-  <level>RUN_DATA</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Logging run data &amp;apos;browser&amp;apos; with value &amp;apos;Chrome 64.0.3282.186&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-  <property name="browser">Chrome 64.0.3282.186</property>
-</record>
-<record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699935</millis>
-  <sequence>43</sequence>
-  <level>RUN_DATA</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Logging run data &amp;apos;platform&amp;apos; with value &amp;apos;Linux&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-  <property name="platform">Linux</property>
-</record>
-<record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699937</millis>
-  <sequence>44</sequence>
-  <level>RUN_DATA</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Logging run data &amp;apos;seleniumVersion&amp;apos; with value &amp;apos;3.7.1&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-  <property name="seleniumVersion">3.7.1</property>
-</record>
-<record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699939</millis>
-  <sequence>45</sequence>
-  <level>RUN_DATA</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Logging run data &amp;apos;proxyInformation&amp;apos; with value &amp;apos;ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-  <property name="proxyInformation">ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}</property>
-</record>
-<record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699949</millis>
-  <sequence>46</sequence>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800376</millis>
+  <sequence>40</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Browser is opened with url: &amp;apos;&amp;apos;</message>
+  <message>Object: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; is clicked on</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699953</millis>
-  <sequence>47</sequence>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800377</millis>
+  <sequence>41</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endKeyword</method>
   <thread>1</thread>
-  <message>End action : openBrowser</message>
+  <message>End action : click</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699957</millis>
-  <sequence>48</sequence>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800377</millis>
+  <sequence>42</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startKeyword</method>
   <thread>1</thread>
-  <message>Start action : navigateToUrl</message>
+  <message>Start action : setText</message>
   <nestedLevel>1</nestedLevel>
-  <property name="startLine">27</property>
-  <property name="stepIndex">2</property>
+  <property name="startLine">31</property>
+  <property name="stepIndex">5</property>
 </record>
 <record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699966</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800378</millis>
+  <sequence>43</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800442</millis>
+  <sequence>44</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking object</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800443</millis>
+  <sequence>45</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking text</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800445</millis>
+  <sequence>46</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking timeout</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800448</millis>
+  <sequence>47</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos; located by &amp;apos;By.xpath: //input[@type = &amp;apos;search&amp;apos; and @id = &amp;apos;search-input&amp;apos; and @name = &amp;apos;query&amp;apos; and @placeholder = &amp;apos;Search&amp;apos;]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800523</millis>
+  <sequence>48</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos; located by &amp;apos;By.xpath: //input[@type = &amp;apos;search&amp;apos; and @id = &amp;apos;search-input&amp;apos; and @name = &amp;apos;query&amp;apos; and @placeholder = &amp;apos;Search&amp;apos;]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800523</millis>
   <sequence>49</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Checking url</message>
+  <message>Clearing text of object &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:44:59</date>
-  <millis>1525016699967</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800621</millis>
   <sequence>50</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Navigating to &amp;apos;https://www.w3schools.com/html/html_forms.asp&amp;apos;</message>
+  <message>Checking timeout</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703401</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800622</millis>
   <sequence>51</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos; located by &amp;apos;By.xpath: //input[@type = &amp;apos;search&amp;apos; and @id = &amp;apos;search-input&amp;apos; and @name = &amp;apos;query&amp;apos; and @placeholder = &amp;apos;Search&amp;apos;]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800645</millis>
+  <sequence>52</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos; located by &amp;apos;By.xpath: //input[@type = &amp;apos;search&amp;apos; and @id = &amp;apos;search-input&amp;apos; and @name = &amp;apos;query&amp;apos; and @placeholder = &amp;apos;Search&amp;apos;]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800668</millis>
+  <sequence>53</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Setting text of object &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos; to value &amp;apos;milk&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800783</millis>
+  <sequence>54</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Navigate to &amp;apos;https://www.w3schools.com/html/html_forms.asp&amp;apos; successfully</message>
+  <message>Text &amp;apos;milk&amp;apos; is set on object &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/input_query&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703401</millis>
-  <sequence>52</sequence>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800783</millis>
+  <sequence>55</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endKeyword</method>
   <thread>1</thread>
-  <message>End action : navigateToUrl</message>
+  <message>End action : setText</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703402</millis>
-  <sequence>53</sequence>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800784</millis>
+  <sequence>56</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startKeyword</method>
   <thread>1</thread>
-  <message>Start action : doubleClick</message>
+  <message>Start action : click</message>
   <nestedLevel>1</nestedLevel>
-  <property name="startLine">29</property>
-  <property name="stepIndex">3</property>
+  <property name="startLine">33</property>
+  <property name="stepIndex">6</property>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703402</millis>
-  <sequence>54</sequence>
-  <level>INFO</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Finding Test Object with id &amp;apos;Object Repository/Page_HTML Forms/input_firstname&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703402</millis>
-  <sequence>55</sequence>
-  <level>WARNING</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Test object with id &amp;apos;Object Repository/Page_HTML Forms/input_firstname&amp;apos; does not exist</message>
-  <nestedLevel>1</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703486</millis>
-  <sequence>56</sequence>
-  <level>INFO</level>
-  <class>com.kms.katalon.core.logging.KeywordLogger</class>
-  <method>logMessage</method>
-  <thread>1</thread>
-  <message>Finding Test Object with id &amp;apos;Object Repository/&amp;apos;</message>
-  <nestedLevel>1</nestedLevel>
-</record>
-<record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703492</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800784</millis>
   <sequence>57</sequence>
-  <level>WARNING</level>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Test object with id &amp;apos;Object Repository/&amp;apos; does not exist</message>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/button_Search&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703501</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800794</millis>
   <sequence>58</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -880,270 +669,249 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703689</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800796</millis>
   <sequence>59</sequence>
-  <level>FAILED</level>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Unable to double click on object (Root cause: java.lang.IllegalArgumentException: Object is null)</message>
+  <message>Checking timeout</message>
   <nestedLevel>1</nestedLevel>
-  <property name="attachment">1525016703503.png</property>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703691</millis>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800804</millis>
   <sequence>60</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/button_Search&amp;apos; located by &amp;apos;By.xpath: //button[@type = &amp;apos;submit&amp;apos; and (text() = &amp;apos;Search&amp;apos; or . = &amp;apos;Search&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800866</millis>
+  <sequence>61</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/button_Search&amp;apos; located by &amp;apos;By.xpath: //button[@type = &amp;apos;submit&amp;apos; and (text() = &amp;apos;Search&amp;apos; or . = &amp;apos;Search&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:40</date>
+  <millis>1525031800867</millis>
+  <sequence>62</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Clicking on object: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/button_Search&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801183</millis>
+  <sequence>63</sequence>
+  <level>PASSED</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Object: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/button_Search&amp;apos; is clicked on</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801184</millis>
+  <sequence>64</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endKeyword</method>
   <thread>1</thread>
-  <message>End action : doubleClick</message>
+  <message>End action : click</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703691</millis>
-  <sequence>61</sequence>
-  <logger>com.kms.katalon.core.logging.KeywordLogger</logger>
-  <level>FAILED</level>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801184</millis>
+  <sequence>65</sequence>
+  <level>START</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>startKeyword</method>
+  <thread>1</thread>
+  <message>Start action : click</message>
+  <nestedLevel>1</nestedLevel>
+  <property name="startLine">35</property>
+  <property name="stepIndex">7</property>
+</record>
+<record>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801184</millis>
+  <sequence>66</sequence>
+  <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Test Cases/form-test FAILED because (of) Unable to double click on object (Root cause: java.lang.IllegalArgumentException: Object is null)</message>
-  <exception>
-    <message>com.kms.katalon.core.exception.StepFailedException: Unable to double click on object (Root cause: java.lang.IllegalArgumentException: Object is null)</message>
-    <frame>
-      <class>com.kms.katalon.core.keyword.internal.KeywordMain</class>
-      <method>stepFailed</method>
-      <line>36</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain</class>
-      <method>stepFailed</method>
-      <line>65</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.internal.WebUIKeywordMain</class>
-      <method>runKeyword</method>
-      <line>27</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.builtin.DoubleClickKeyword</class>
-      <method>doubleClick</method>
-      <line>87</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.builtin.DoubleClickKeyword</class>
-      <method>execute</method>
-      <line>67</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.keyword.internal.KeywordExecutor</class>
-      <method>executeKeywordForPlatform</method>
-      <line>53</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords</class>
-      <method>doubleClick</method>
-      <line>697</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords$doubleClick$2</class>
-      <method>call</method>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.CallSiteArray</class>
-      <method>defaultCall</method>
-      <line>48</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>113</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>125</line>
-    </frame>
-    <frame>
-      <class>Script1524958069791</class>
-      <method>run</method>
-      <line>29</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.ScriptEngine</class>
-      <method>run</method>
-      <line>183</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.ScriptEngine</class>
-      <method>runScriptAsRawText</method>
-      <line>108</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>runScript</method>
-      <line>291</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>doExecute</method>
-      <line>282</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>processExecutionPhase</method>
-      <line>261</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>accessMainPhase</method>
-      <line>253</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseExecutor</class>
-      <method>execute</method>
-      <line>201</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestSuiteExecutor</class>
-      <method>accessTestCaseMainPhase</method>
-      <line>121</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestSuiteExecutor</class>
-      <method>accessTestSuiteMainPhase</method>
-      <line>107</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestSuiteExecutor</class>
-      <method>execute</method>
-      <line>76</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseMain</class>
-      <method>startTestSuite</method>
-      <line>99</line>
-    </frame>
-    <frame>
-      <class>com.kms.katalon.core.main.TestCaseMain$startTestSuite$0</class>
-      <method>call</method>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.CallSiteArray</class>
-      <method>defaultCall</method>
-      <line>48</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>113</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.runtime.callsite.AbstractCallSite</class>
-      <method>call</method>
-      <line>141</line>
-    </frame>
-    <frame>
-      <class>TempTestSuite1525016685870</class>
-      <method>run</method>
-      <line>34</line>
-    </frame>
-    <frame>
-      <class>groovy.lang.GroovyShell</class>
-      <method>runScriptOrMainOrTestOrRunnable</method>
-      <line>263</line>
-    </frame>
-    <frame>
-      <class>groovy.lang.GroovyShell</class>
-      <method>run</method>
-      <line>518</line>
-    </frame>
-    <frame>
-      <class>groovy.lang.GroovyShell</class>
-      <method>run</method>
-      <line>507</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>processOnce</method>
-      <line>653</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>run</method>
-      <line>384</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>process</method>
-      <line>370</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>processArgs</method>
-      <line>129</line>
-    </frame>
-    <frame>
-      <class>groovy.ui.GroovyMain</class>
-      <method>main</method>
-      <line>109</line>
-    </frame>
-    <frame>
-      <class>sun.reflect.NativeMethodAccessorImpl</class>
-      <method>invoke0</method>
-    </frame>
-    <frame>
-      <class>sun.reflect.NativeMethodAccessorImpl</class>
-      <method>invoke</method>
-      <line>62</line>
-    </frame>
-    <frame>
-      <class>sun.reflect.DelegatingMethodAccessorImpl</class>
-      <method>invoke</method>
-      <line>43</line>
-    </frame>
-    <frame>
-      <class>java.lang.reflect.Method</class>
-      <method>invoke</method>
-      <line>498</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.tools.GroovyStarter</class>
-      <method>rootLoader</method>
-      <line>109</line>
-    </frame>
-    <frame>
-      <class>org.codehaus.groovy.tools.GroovyStarter</class>
-      <method>main</method>
-      <line>131</line>
-    </frame>
-  </exception>
-  <nestedLevel>0</nestedLevel>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Results for milk/span_Add&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703693</millis>
-  <sequence>62</sequence>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801186</millis>
+  <sequence>67</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking object</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801187</millis>
+  <sequence>68</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking timeout</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:41</date>
+  <millis>1525031801187</millis>
+  <sequence>69</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Results for milk/span_Add&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Add&amp;apos; or . = &amp;apos;Add&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:42</date>
+  <millis>1525031802300</millis>
+  <sequence>70</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Found 23 web elements with id: &amp;apos;Object Repository/Page_Results for milk/span_Add&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Add&amp;apos; or . = &amp;apos;Add&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:42</date>
+  <millis>1525031802305</millis>
+  <sequence>71</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Clicking on object: &amp;apos;Object Repository/Page_Results for milk/span_Add&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804587</millis>
+  <sequence>72</sequence>
+  <level>PASSED</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Object: &amp;apos;Object Repository/Page_Results for milk/span_Add&amp;apos; is clicked on</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804588</millis>
+  <sequence>73</sequence>
+  <level>END</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>endKeyword</method>
+  <thread>1</thread>
+  <message>End action : click</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804588</millis>
+  <sequence>74</sequence>
+  <level>START</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>startKeyword</method>
+  <thread>1</thread>
+  <message>Start action : closeBrowser</message>
+  <nestedLevel>1</nestedLevel>
+  <property name="startLine">37</property>
+  <property name="stepIndex">8</property>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804600</millis>
+  <sequence>75</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Closing browser</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804748</millis>
+  <sequence>76</sequence>
+  <level>PASSED</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Browser is closed</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804749</millis>
+  <sequence>77</sequence>
+  <level>END</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>endKeyword</method>
+  <thread>1</thread>
+  <message>End action : closeBrowser</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804749</millis>
+  <sequence>78</sequence>
+  <level>PASSED</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Test Cases/Tesco-Test</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804750</millis>
+  <sequence>79</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endTest</method>
   <thread>1</thread>
-  <message>End Test Case : Test Cases/form-test</message>
+  <message>End Test Case : Test Cases/Tesco-Test</message>
   <nestedLevel>0</nestedLevel>
 </record>
 <record>
-  <date>2018-04-29T15:45:03</date>
-  <millis>1525016703863</millis>
-  <sequence>63</sequence>
+  <date>2018-04-29T19:56:44</date>
+  <millis>1525031804783</millis>
+  <sequence>80</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endSuite</method>
   <thread>1</thread>
-  <message>End Test Suite : Test Suites/FirstTest</message>
+  <message>End Test Suite : Test Suites/firstTest</message>
   <nestedLevel>0</nestedLevel>
 </record>
 </log>

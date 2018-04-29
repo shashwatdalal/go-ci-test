@@ -53,6 +53,11 @@ pipeline {
       steps {
       sh 'cd tests/integration-tests && ./run_chrome'
       }
+      post {
+                  always {
+                    junit 'tests/reports/chrome/*.xml'
+                  }
+                }
      }
   }
 }
