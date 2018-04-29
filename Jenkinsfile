@@ -28,7 +28,7 @@ pipeline {
           }
           post {
             always {
-              junit 'tests/basic_test.xml'
+              junit 'tests/go-tests/basic_test.xml'
 
             }
           }
@@ -42,7 +42,7 @@ pipeline {
           }
           post {
             always {
-              junit 'tests/handler_test.xml'
+              junit 'tests/go-tests/handler_test.xml'
             }
           }
         }
