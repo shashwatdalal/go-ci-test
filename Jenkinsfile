@@ -1,22 +1,22 @@
-pipeline {
-  agent {
-    dockerfile true
-  }
+node {
+
+	def goImage = docker.build()
+
   stages {
     stage('Docker Tests') {
-      steps {
+     goImage.inside {
         sh 'tree'
-      }
+     }
     }
     stage('Build') {
-      steps {
+      goImage.inside{
         sh 'go build main.go'
       }
     }
     stage('Unit-Tests') {
       parallel {
         stage('Util Test') {
-          steps {
+          goImage.inside{
             sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
           }
           post {
@@ -41,7 +41,6 @@ pipeline {
     }
     stage('Integration Tests') {
         steps {
-            sh 'exit'
             sh 'cd tests/integration-tests && ./run_chrome'
          }
      }

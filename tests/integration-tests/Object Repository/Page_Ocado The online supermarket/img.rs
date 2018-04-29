@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_LinkedIn</name>
+   <name>img</name>
    <tag></tag>
-   <elementGuidId>b989f2c0-141a-445a-9787-b02879d6829a</elementGuidId>
+   <elementGuidId>3d0c7416-ac7e-45d2-8252-32e0f1c36cce</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -11,34 +11,27 @@
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>a</value>
+      <value>img</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>href</name>
+      <name>src</name>
       <type>Main</type>
-      <value>https://www.linkedin.com/in/shashwat-pritesh-dalal-5450b5113/</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>icon fa-linkedin fa-2x</value>
+      <value>/webshop/static/images/logos/6.9.51.1/brandLogo.png</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>text</name>
+      <name>alt</name>
       <type>Main</type>
-      <value>LinkedIn</value>
+      <value>Ocado - Home</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;header&quot;)/nav[@class=&quot;use-middle&quot;]/ul[1]/li[2]/a[@class=&quot;icon fa-linkedin fa-2x&quot;]</value>
+      <value>id(&quot;brandLogo&quot;)/a[1]/img[1]</value>
    </webElementProperties>
 </WebElementEntity>
