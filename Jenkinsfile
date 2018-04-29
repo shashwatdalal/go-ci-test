@@ -52,7 +52,7 @@ pipeline {
       agent any
       steps {
       sh 'cd tests/integration-tests'
-      sh './run_chrome'
+      sh 'ls -l'
       }
      }
   }
