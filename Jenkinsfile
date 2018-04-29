@@ -51,10 +51,10 @@ pipeline {
     stage('Integration-Tests') {
       agent any
       steps {
-      sh 'cd tests/integration-tests && ./run_chrome'
+      sh 'cd tests/integration-tests && tree && ./run_chrome'
       }
       post {
-                  always {
+      always {
                     junit 'tests/reports/chrome/*.xml'
                   }
                 }
