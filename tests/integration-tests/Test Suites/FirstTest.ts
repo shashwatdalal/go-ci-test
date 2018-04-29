@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>FirstTest</name>
+   <name>firstTest</name>
    <tag></tag>
    <isRerun>false</isRerun>
+   <lastRun>2018-04-29T20:51:50</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
-   <pageLoadTimeout>30</pageLoadTimeout>
+   <pageLoadTimeout>10</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>960e6827-f9a0-4cf9-9e4c-0ba9c08fce08</testSuiteGuid>
+   <testSuiteGuid>84e1736e-32a2-4e0b-b177-6b008cbeb351</testSuiteGuid>
    <testCaseLink>
-      <guid>73fbcaf1-6809-4ae3-b6f8-bf9dccc6954a</guid>
+      <guid>30750cac-6005-4f6e-99d4-25eebe621eb1</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/basic-test</testCaseId>
-   </testCaseLink>
-   <testCaseLink>
-      <guid>e2ee6bb3-2b72-4c3a-8dff-18f9aeba7320</guid>
-      <isReuseDriver>false</isReuseDriver>
-      <isRun>true</isRun>
-      <testCaseId>Test Cases/form-test</testCaseId>
+      <testCaseId>Test Cases/Tesco-Test</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

@@ -18,36 +18,21 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUiBuiltInKeywords
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-
-import org.junit.After
 import org.openqa.selenium.Keys as Keys
 
 WebUI.openBrowser('')
 
-WebUI.navigateToUrl('https://www.w3schools.com/html/html_forms.asp')
+WebUI.navigateToUrl('https://www.tesco.com/')
 
-WebUI.doubleClick(findTestObject('Page_HTML Forms/input_firstname'))
+WebUI.click(findTestObject('Page_Tesco - Online Groceries Homew/a_Groceries'))
 
-WebUI.setText(findTestObject('Page_HTML Forms/input_firstname'), 'Shashwat')
+WebUI.click(findTestObject('Page_Tesco - Online Groceries Homew/span_Shop groceries'))
 
-WebUI.setText(findTestObject('Page_HTML Forms/input_lastname'), 'Dalal')
+WebUI.setText(findTestObject('Page_Tesco Groceries  Online Food S/input_query'), 'milk')
 
-WebUI.click(findTestObject('Page_HTML Forms/input'))
+WebUI.click(findTestObject('Page_Tesco Groceries  Online Food S/button_Search'))
 
-WebUI.switchToWindowTitle('Forms action page')
-
-WebUI.click(findTestObject('Page_Forms action page/div_firstnameShashwatlastnameD'))
-
-WebUI.switchToWindowTitle('HTML Forms')
-
-WebUI.click(findTestObject('Page_HTML Forms/a_HTML Responsive'))
-
-WebUI.click(findTestObject('Page_HTML Responsive Web Design/a_Try it Yourself'))
-
-WebUI.switchToWindowTitle('Tryit Editor v3.5')
-
-WebUI.click(findTestObject('Page_Tryit Editor v3.5/button_Run'))
-
+WebUI.click(findTestObject('Page_Results for milk/span_Add'))
 
 WebUI.closeBrowser()
 

@@ -17,6 +17,7 @@ public class GlobalVariable {
     static {
         def allVariables = [:]        
         allVariables.put('default', [:])
+        allVariables.put('local', allVariables['default'] + [:])
         
         String profileName = RunConfiguration.getExecutionProfile()
         

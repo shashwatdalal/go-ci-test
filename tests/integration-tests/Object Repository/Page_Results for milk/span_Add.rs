@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>img</name>
+   <name>span_Add</name>
    <tag></tag>
-   <elementGuidId>3d0c7416-ac7e-45d2-8252-32e0f1c36cce</elementGuidId>
+   <elementGuidId>93876bc9-d910-44e9-853f-2935b50d7ff8</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -11,27 +11,27 @@
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>img</value>
+      <value>span</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>aria-hidden</name>
+      <type>Main</type>
+      <value>true</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>src</name>
+      <name>text</name>
       <type>Main</type>
-      <value>/webshop/static/images/logos/6.9.51.1/brandLogo.png</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>alt</name>
-      <type>Main</type>
-      <value>Ocado - Home</value>
+      <value>Add</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;brandLogo&quot;)/a[1]/img[1]</value>
+      <value>id(&quot;254656543&quot;)/div[@class=&quot;product-controls--wrapper&quot;]/form[1]/div[@class=&quot;controls&quot;]/div[@class=&quot;inputControl-wrapper&quot;]/button[@class=&quot;button small add-control button-secondary&quot;]/span[1]</value>
    </webElementProperties>
 </WebElementEntity>
