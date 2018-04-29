@@ -51,8 +51,8 @@ pipeline {
     stage('Integration-Tests') {
       agent any
       steps {
-      sh 'exit'
-      sh 'go build main.go'
+      sh 'cd tests/integration/tests'
+      sh './run_chrome'
       }
      }
   }
