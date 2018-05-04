@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="firstTest" time="29" tests="1" failures="0" errors="0">
-   <testsuite name="firstTest" tests="1" failures="0" errors="0" time="29" timestamp="2018-04-29 20:16:09" hostname="root - 2d8ad37ac42a" id="Test Suites/firstTest">
+<testsuites name="SecondTest" time="16" tests="1" failures="0" errors="0">
+   <testsuite name="SecondTest" tests="1" failures="0" errors="0" time="16" timestamp="2018-05-04 18:28:20" hostname="root - 2f84dc7b58b4" id="Test Suites/SecondTest">
       <properties>
          <property name="deviceName" value=""/>
          <property name="devicePlatform" value=""/>
-         <property name="logFolder" value="/katalon/katalon/project/Reports/firstTest/20180429_201607"/>
-         <property name="logFiles" value="/katalon/katalon/project/Reports/firstTest/20180429_201607/execution0.log"/>
+         <property name="logFolder" value="/katalon/katalon/project/Reports/SecondTest/20180504_182817"/>
+         <property name="logFiles" value="/katalon/katalon/project/Reports/SecondTest/20180504_182817/execution0.log"/>
          <property name="attachments" value=""/>
-         <property name="hostName" value="root - 2d8ad37ac42a"/>
+         <property name="hostName" value="root - 2f84dc7b58b4"/>
          <property name="os" value="Linux 64bit"/>
          <property name="katalonVersion" value="5.3.1.1"/>
          <property name="browser" value="Chrome 64.0.3282.186"/>
          <property name="hostAddress" value="172.17.0.2"/>
-         <property name="sessionId" value="72f16d3b5105499f71cfe4a349cbef59"/>
+         <property name="sessionId" value="5b9191ba56e15452bb89661980febddc"/>
          <property name="seleniumVersion" value="3.7.1"/>
          <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
          <property name="platform" value="Linux"/>
       </properties>
       <testcase name="Test Cases/Tesco-Test" classname="Test Cases/Tesco-Test" status="PASSED">
-         <system-out><![CDATA[2018-04-29 20:16:10 - [TEST_CASE][PASSED] - Test Cases/Tesco-Test: Test Cases/Tesco-Test
+         <system-out><![CDATA[2018-05-04 18:28:21 - [TEST_CASE][PASSED] - Test Cases/Tesco-Test: Test Cases/Tesco-Test
 
-2018-04-29 20:16:10 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+2018-05-04 18:28:21 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
 
-2018-04-29 20:16:14 - [MESSAGE][PASSED] - Browser is opened with url: ''
+2018-05-04 18:28:26 - [MESSAGE][PASSED] - Browser is opened with url: ''
 
-2018-04-29 20:16:14 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'https://www.tesco.com/' successfully
+2018-05-04 18:28:26 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'https://www.tesco.com/' successfully
 
-2018-04-29 20:16:23 - [MESSAGE][PASSED] - Navigate to 'https://www.tesco.com/' successfully
+2018-05-04 18:28:29 - [MESSAGE][PASSED] - Navigate to 'https://www.tesco.com/' successfully
 
-2018-04-29 20:16:23 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
+2018-05-04 18:28:29 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
 
-2018-04-29 20:16:24 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
+2018-05-04 18:28:29 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
 
-2018-04-29 20:16:24 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
+2018-05-04 18:28:29 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
 
-2018-04-29 20:16:31 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
+2018-05-04 18:28:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
 
-2018-04-29 20:16:31 - [TEST_STEP][PASSED] - setText: Text 'milk' is set on object 'Object Repository/Page_Tesco Groceries  Online Food S/input_query'
+2018-05-04 18:28:32 - [TEST_STEP][PASSED] - setText: Text 'milk' is set on object 'Object Repository/Page_Tesco Groceries  Online Food S/input_query'
 
-2018-04-29 20:16:31 - [MESSAGE][PASSED] - Text 'milk' is set on object 'Object Repository/Page_Tesco Groceries  Online Food S/input_query'
+2018-05-04 18:28:33 - [MESSAGE][PASSED] - Text 'milk' is set on object 'Object Repository/Page_Tesco Groceries  Online Food S/input_query'
 
-2018-04-29 20:16:31 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/button_Search' is clicked on
+2018-05-04 18:28:33 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/button_Search' is clicked on
 
-2018-04-29 20:16:31 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/button_Search' is clicked on
+2018-05-04 18:28:33 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/button_Search' is clicked on
 
-2018-04-29 20:16:31 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Results for milk/span_Add' is clicked on
+2018-05-04 18:28:33 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Results for milk/span_Add' is clicked on
 
-2018-04-29 20:16:38 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Results for milk/span_Add' is clicked on
+2018-05-04 18:28:36 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Results for milk/span_Add' is clicked on
 
-2018-04-29 20:16:38 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
+2018-05-04 18:28:36 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
 
-2018-04-29 20:16:38 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+2018-05-04 18:28:36 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
          <system-err><![CDATA[]]></system-err>
       </testcase>
-      <system-out><![CDATA[2018-04-29 20:16:09 - [TEST_SUITE][PASSED] - firstTest: Test Cases/Tesco-Test]]></system-out>
+      <system-out><![CDATA[2018-05-04 18:28:20 - [TEST_SUITE][PASSED] - SecondTest: Test Cases/Tesco-Test]]></system-out>
       <system-err><![CDATA[]]></system-err>
    </testsuite>
 </testsuites>

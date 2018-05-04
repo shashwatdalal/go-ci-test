@@ -51,7 +51,7 @@ pipeline {
     stage('Integration-Tests') {
       agent any
       steps {
-      sh 'cd tests/integration-tests && tree && ./run_chrome'
+      sh 'cd tests/integration-tests && tree && sudo ./run_chrome'
       }
       post {
       always {
