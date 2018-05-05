@@ -1,17 +1,14 @@
 pipeline {
   agent none
   stages {
-    stage('Docker Tests') {
-        agent {
-          dockerfile true
-        }
+    stage('Build Docker Image') {
       steps {
-        sh 'tree'
+        sh 'docker build -t go-ci-test .'
       }
     }
     stage('Build') {
        agent {
-            dockerfile true
+           image 'go-cl-test:latest' 
        }
       steps {
         sh 'go build main.go'
@@ -54,10 +51,10 @@ pipeline {
       sh 'cd tests/integration-tests && tree && sudo ./run_chrome'
       }
       post {
-      always {
-                    junit 'tests/reports/chrome/*.xml'
-                  }
-                }
-     }
+        always {
+          junit 'tests/reports/chrome/*.xml'
+        }
+      }
+    }
   }
 }
