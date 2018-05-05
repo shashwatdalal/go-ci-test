@@ -28,7 +28,6 @@ pipeline {
               junit 'tests/go-tests/basic_test.xml'
 
             }
-
           }
         }
         stage('Handler Test') {
@@ -58,6 +57,7 @@ pipeline {
       post {
         always {
           junit 'tests/reports/chrome/*.xml'
+        }
       }
     }
   }
