@@ -2,35 +2,19 @@ pipeline {
   agent none
   stages {
     stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t go-ci-test .'
-      }
+      agent any
+      steps { sh 'docker build -t go-ci-test .' }
     }
     stage('Build') {
-       agent {
-         docker {
-           image 'go-cl-test:latest'
-         }
-       }
-      steps {
-        sh 'go build main.go'
-      }
+       agent { docker { image 'go-cl-test:latest' } }
+      steps { sh 'go build main.go' }
     }
     stage('Unit-Tests') {
       parallel {
         stage('Util Test') {
-          agent {
-            dockerfile true
-          }
-          steps {
-            sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
-          }
-          post {
-            always {
-              junit 'tests/go-tests/basic_test.xml'
-
-            }
-          }
+          agent { dockerfile true }
+          steps { sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml' }
+          post { always { junit 'tests/go-tests/basic_test.xml' } }
         }
         stage('Handler Test') {
           agent {
