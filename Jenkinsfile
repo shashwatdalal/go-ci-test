@@ -53,7 +53,7 @@ pipeline {
         label 'katalon-tests'
       }
       steps {
-      sh 'cd tests/integration-tests && tree && sudo ./run_chrome'
+      sh 'cd tests/integration-tests && ./run_chrome'
       }
       post {
       always {
