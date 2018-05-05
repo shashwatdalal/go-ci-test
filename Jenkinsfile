@@ -58,13 +58,6 @@ pipeline {
       post {
         always {
           junit 'tests/reports/chrome/*.xml'
-<<<<<<< HEAD
-        }
-=======
-
-        }
-
->>>>>>> 8e0210100f91ee1395f7442e74c13ef6f1341127
       }
     }
   }
