@@ -8,7 +8,9 @@ pipeline {
     }
     stage('Build') {
        agent {
-           image 'go-cl-test:latest' 
+         docker {
+           image 'go-cl-test:latest'
+         }
        }
       steps {
         sh 'go build main.go'
