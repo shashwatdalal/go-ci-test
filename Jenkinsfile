@@ -2,17 +2,17 @@ pipeline {
   agent none
   stages {
     stage('Docker Tests') {
-        agent {
-          dockerfile true
-        }
+      agent {
+        dockerfile true
+      }
       steps {
         sh 'tree'
       }
     }
     stage('Build') {
-       agent {
-            dockerfile true
-       }
+      agent {
+        dockerfile true
+      }
       steps {
         sh 'go build main.go'
       }
@@ -21,8 +21,8 @@ pipeline {
       parallel {
         stage('Util Test') {
           agent {
-                    dockerfile true
-               }
+            dockerfile true
+          }
           steps {
             sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml'
           }
@@ -31,35 +31,40 @@ pipeline {
               junit 'tests/go-tests/basic_test.xml'
 
             }
+
           }
         }
         stage('Handler Test') {
           agent {
-                    dockerfile true
-               }
+            dockerfile true
+          }
           steps {
             sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml'
           }
           post {
             always {
               junit 'tests/go-tests/handler_test.xml'
+
             }
+
           }
         }
       }
     }
-    stage('Integration-Tests') {
+    stage('System-Tests') {
       agent {
         label 'katalon-tests'
       }
       steps {
-      sh 'cd tests/integration-tests && ./run_chrome'
+        sh 'cd tests/integration-tests && ./run_chrome'
       }
       post {
-      always {
-                    junit 'tests/reports/chrome/*.xml'
-                  }
-                }
-     }
+        always {
+          junit 'tests/reports/chrome/*.xml'
+
+        }
+
+      }
+    }
   }
 }
