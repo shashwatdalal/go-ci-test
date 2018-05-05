@@ -40,6 +40,7 @@ pipeline {
     }
     stage('Integration-Tests') {
       agent {
+        dockerfile false
         label 'katalon-tests'
       }
       steps {
