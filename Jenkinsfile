@@ -49,7 +49,9 @@ pipeline {
       }
     }
     stage('Integration-Tests') {
-      agent any
+      agent {
+        label: 'katalon-tests'
+      }
       steps {
       sh 'cd tests/integration-tests && tree && sudo ./run_chrome'
       }
