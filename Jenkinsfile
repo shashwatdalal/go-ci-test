@@ -50,7 +50,7 @@ pipeline {
     }
     stage('Integration-Tests') {
       agent {
-        label: 'katalon-tests'
+        label 'katalon-tests'
       }
       steps {
       sh 'cd tests/integration-tests && tree && sudo ./run_chrome'
