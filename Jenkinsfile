@@ -7,7 +7,7 @@ pipeline {
         sh 'docker build -t go-ci-test .'
       }
     }
-    stage('Build') {
+    stage('Build Source') {
       agent {
         docker {
           image 'go-ci-test:latest'
