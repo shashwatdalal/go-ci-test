@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="SecondTest" time="38" tests="1" failures="0" errors="0">
+   <testsuite name="SecondTest" tests="1" failures="0" errors="0" time="38" timestamp="2018-05-07 22:23:52" hostname="shashwatdalal - 69.172.201.153" id="Test Suites/SecondTest">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/Users/shashwatdalal/Documents/go/src/go-ci-test/tests/integration-tests/Reports/SecondTest/20180507_222346"/>
+         <property name="logFiles" value="/Users/shashwatdalal/Documents/go/src/go-ci-test/tests/integration-tests/Reports/SecondTest/20180507_222346/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="shashwatdalal - 69.172.201.153"/>
+         <property name="os" value="Mac OS X 64bit"/>
+         <property name="katalonVersion" value="5.4.1.1"/>
+         <property name="browser" value="Chrome 66.0.3359.139"/>
+         <property name="hostAddress" value="69.172.201.153"/>
+         <property name="sessionId" value="f50f1c65b7ec30fce61584f2970c56d0"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Mac OS X"/>
+      </properties>
+      <testcase name="Test Cases/tesco-test" classname="Test Cases/tesco-test" status="PASSED">
+         <system-out><![CDATA[2018-05-07 22:23:52 - [TEST_CASE][PASSED] - Test Cases/tesco-test: Test Cases/tesco-test
+
+2018-05-07 22:23:53 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+
+2018-05-07 22:23:55 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-05-07 22:23:55 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'https://www.tesco.com/' successfully
+
+2018-05-07 22:24:03 - [MESSAGE][PASSED] - Navigate to 'https://www.tesco.com/' successfully
+
+2018-05-07 22:24:03 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
+
+2018-05-07 22:24:03 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
+
+2018-05-07 22:24:03 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
+
+2018-05-07 22:24:06 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
+
+2018-05-07 22:24:06 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment' is clicked on
+
+2018-05-07 22:24:12 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment' is clicked on
+
+2018-05-07 22:24:12 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle' is clicked on
+
+2018-05-07 22:24:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle' is clicked on
+
+2018-05-07 22:24:17 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf' is clicked on
+
+2018-05-07 22:24:22 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf' is clicked on
+
+2018-05-07 22:24:22 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Bananas/span_Add' is clicked on
+
+2018-05-07 22:24:30 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Bananas/span_Add' is clicked on
+
+2018-05-07 22:24:30 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
+
+2018-05-07 22:24:30 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-05-07 22:23:52 - [TEST_SUITE][PASSED] - SecondTest: Test Cases/tesco-test]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>
