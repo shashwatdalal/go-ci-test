@@ -5,7 +5,7 @@ pipeline {
       agent any
       steps { sh 'docker build -t go-ci-test .' }
     }
-    stage('Build') {
+    stage('Build Source') {
        agent { docker { image 'go-ci-test:latest' } }
       steps { sh 'go build main.go' }
     }
@@ -24,9 +24,18 @@ pipeline {
       }
     }
     stage('System-Tests') {
-      agent { label 'katalon-tests' }
-      steps { sh 'cd tests/integration-tests && ./run_chrome' }
-      post { always { junit 'tests/reports/chrome/*.xml' } }
+      parallel {
+        stage('Chrome') {
+          agent { label 'katalon-tests' }
+          steps { sh 'cd tests/integration-tests && ./run_chrome' }
+          post { always { junit 'tests/reports/chrome/*.xml' } }
+        }
+        stage('Firefox') {
+          agent { label 'katalon-tests' }
+          steps { sh 'cd tests/integration-tests && ./run_firefox' }
+          post { always { junit 'tests/reports/firefox/*.xml' } }
+        }
+      }
     }
   }
 }
