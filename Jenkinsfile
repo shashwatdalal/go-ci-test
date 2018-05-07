@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('Build Docker Image') {
+    stage('Build Dockerfile') {
       agent any
       steps { sh 'docker build -t go-ci-test .' }
     }
@@ -19,7 +19,7 @@ pipeline {
         stage('Handler Test') {
           agent { docker { image 'go-ci-test:latest' } }
           steps { sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml' }
-          post { always { junit 'tests/go-tests/handler_test.xml' }}
+          post { always { junit 'tests/go-tests/handler_test.xml' } }
         }
       }
     }
