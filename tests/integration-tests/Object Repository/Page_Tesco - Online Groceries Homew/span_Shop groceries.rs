@@ -3,7 +3,7 @@
    <description></description>
    <name>span_Shop groceries</name>
    <tag></tag>
-   <elementGuidId>6f8a6157-18e6-4ea1-8996-ae2abfcc34cb</elementGuidId>
+   <elementGuidId>153dd665-5fa1-43a3-a156-cb919e26d42b</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>

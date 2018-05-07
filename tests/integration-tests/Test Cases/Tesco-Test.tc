@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Tesco-Test</name>
+   <name>tesco-test</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>b5b44532-98c7-4ccf-9d77-e0dc609c9cf1</testCaseGuid>
+   <testCaseGuid>afbe89e7-7cb1-45d5-bd1f-6a4326091cf6</testCaseGuid>
 </TestCaseEntity>

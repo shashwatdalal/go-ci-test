@@ -3,7 +3,7 @@
    <description></description>
    <name>span_Add</name>
    <tag></tag>
-   <elementGuidId>622282a9-4949-480e-acb5-ebf7e46c78f6</elementGuidId>
+   <elementGuidId>78153ed5-6fe1-4245-a46b-060400d5ea32</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -32,6 +32,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;main&quot;)/div[@class=&quot;main__content&quot;]/div[1]/div[1]/div[@class=&quot;product-details-page&quot;]/div[2]/div[@class=&quot;grocery-product&quot;]/div[@class=&quot;tile-container&quot;]/div[@class=&quot;grocery-product__container grocery-product__container--main&quot;]/section[@class=&quot;product-title&quot;]/div[@class=&quot;product-controls--wrapper&quot;]/form[1]/div[@class=&quot;controls&quot;]/div[@class=&quot;inputControl-wrapper&quot;]/button[@class=&quot;button small add-control button-secondary&quot;]/span[1]</value>
+      <value>id(&quot;275280804&quot;)/div[@class=&quot;product-controls--wrapper&quot;]/form[1]/div[@class=&quot;controls&quot;]/div[@class=&quot;inputControl-wrapper&quot;]/button[@class=&quot;button small add-control button-secondary&quot;]/span[1]</value>
    </webElementProperties>
 </WebElementEntity>

@@ -13,9 +13,9 @@ DriverCleanerCollector.getInstance().addDriverCleaner(new com.kms.katalon.core.w
 DriverCleanerCollector.getInstance().addDriverCleaner(new com.kms.katalon.core.mobile.contribution.MobileDriverCleaner())
 
 
-RunConfiguration.setExecutionSettingFile('/var/folders/nm/hjfhvwsj6fl3qrwqnjbzkd4r0000gn/T/Katalon/Test Cases/Tesco-Test/20180506_204511/execution.properties')
+RunConfiguration.setExecutionSettingFile('/var/folders/nm/hjfhvwsj6fl3qrwqnjbzkd4r0000gn/T/Katalon/Test Cases/tesco-test/20180507_204432/execution.properties')
 
 TestCaseMain.beforeStart()
 
-        TestCaseMain.runTestCase('Test Cases/Tesco-Test', new TestCaseBinding('Test Cases/Tesco-Test', [:]), FailureHandling.STOP_ON_FAILURE , false)
+        TestCaseMain.runTestCase('Test Cases/tesco-test', new TestCaseBinding('Test Cases/tesco-test', [:]), FailureHandling.STOP_ON_FAILURE , false)
     

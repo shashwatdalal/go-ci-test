@@ -3,7 +3,7 @@
    <description></description>
    <name>a_Groceries</name>
    <tag></tag>
-   <elementGuidId>fed0b38a-0021-44aa-8b3d-b9957a798277</elementGuidId>
+   <elementGuidId>0ba4d6dd-5641-47a4-ac80-3f019d654ed4</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
