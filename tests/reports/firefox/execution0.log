@@ -2,34 +2,34 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555363</millis>
+  <date>2018-05-08T12:53:39</date>
+  <millis>1525784019860</millis>
   <sequence>0</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startSuite</method>
   <thread>1</thread>
-  <message>Start Test Suite : Test Suites/SecondTest</message>
+  <message>Start Test Suite : Test Suites/UI-Tests</message>
   <nestedLevel>0</nestedLevel>
-  <property name="name">SecondTest</property>
+  <property name="name">UI-Tests</property>
   <property name="description"></property>
-  <property name="id">Test Suites/SecondTest</property>
+  <property name="id">Test Suites/UI-Tests</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555420</millis>
+  <date>2018-05-08T12:53:39</date>
+  <millis>1525784019945</millis>
   <sequence>1</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Logging run data &amp;apos;hostName&amp;apos; with value &amp;apos;root - 6c265de4e3ab&amp;apos;</message>
+  <message>Logging run data &amp;apos;hostName&amp;apos; with value &amp;apos;root - 8a2e6d061c62&amp;apos;</message>
   <nestedLevel>0</nestedLevel>
-  <property name="hostName">root - 6c265de4e3ab</property>
+  <property name="hostName">root - 8a2e6d061c62</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555421</millis>
+  <date>2018-05-08T12:53:39</date>
+  <millis>1525784019952</millis>
   <sequence>2</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -40,8 +40,8 @@
   <property name="os">Linux 64bit</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555430</millis>
+  <date>2018-05-08T12:53:39</date>
+  <millis>1525784019952</millis>
   <sequence>3</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -52,8 +52,8 @@
   <property name="hostAddress">172.17.0.2</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555431</millis>
+  <date>2018-05-08T12:53:39</date>
+  <millis>1525784019955</millis>
   <sequence>4</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -64,24 +64,24 @@
   <property name="katalonVersion">5.3.1.1</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555921</millis>
+  <date>2018-05-08T12:53:40</date>
+  <millis>1525784020594</millis>
   <sequence>5</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startTest</method>
   <thread>1</thread>
-  <message>Start Test Case : Test Cases/tesco-test</message>
+  <message>Start Test Case : Test Cases/TescoTest</message>
   <nestedLevel>1</nestedLevel>
-  <property name="name">Test Cases/tesco-test</property>
+  <property name="name">Test Cases/TescoTest</property>
   <property name="description"></property>
-  <property name="id">Test Cases/tesco-test</property>
-  <property name="source">\\katalon\\katalon\\project\\Test Cases\\tesco-test.tc</property>
+  <property name="id">Test Cases/TescoTest</property>
+  <property name="source">\\katalon\\katalon\\project\\Test Cases\\TescoTest.tc</property>
   <property name="isOptional">false</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:15</date>
-  <millis>1525728555976</millis>
+  <date>2018-05-08T12:53:40</date>
+  <millis>1525784020678</millis>
   <sequence>6</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -91,8 +91,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:16</date>
-  <millis>1525728556383</millis>
+  <date>2018-05-08T12:53:41</date>
+  <millis>1525784021380</millis>
   <sequence>7</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -104,8 +104,8 @@
   <property name="stepIndex">1</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:17</date>
-  <millis>1525728557157</millis>
+  <date>2018-05-08T12:53:42</date>
+  <millis>1525784022219</millis>
   <sequence>8</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -115,8 +115,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:17</date>
-  <millis>1525728557176</millis>
+  <date>2018-05-08T12:53:42</date>
+  <millis>1525784022239</millis>
   <sequence>9</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -126,8 +126,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:17</date>
-  <millis>1525728557295</millis>
+  <date>2018-05-08T12:53:42</date>
+  <millis>1525784022383</millis>
   <sequence>10</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -137,20 +137,20 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564457</millis>
+  <date>2018-05-08T12:53:48</date>
+  <millis>1525784028970</millis>
   <sequence>12</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Logging run data &amp;apos;sessionId&amp;apos; with value &amp;apos;d12e48e4-8bb5-4b3d-a6fd-99cc23b28847&amp;apos;</message>
+  <message>Logging run data &amp;apos;sessionId&amp;apos; with value &amp;apos;8ed2aa1e-eae3-4f1c-8d8f-c65b49b908ac&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
-  <property name="sessionId">d12e48e4-8bb5-4b3d-a6fd-99cc23b28847</property>
+  <property name="sessionId">8ed2aa1e-eae3-4f1c-8d8f-c65b49b908ac</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564485</millis>
+  <date>2018-05-08T12:53:48</date>
+  <millis>1525784028992</millis>
   <sequence>13</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -161,8 +161,8 @@
   <property name="browser">Firefox 58.0</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564487</millis>
+  <date>2018-05-08T12:53:48</date>
+  <millis>1525784028994</millis>
   <sequence>14</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -173,8 +173,8 @@
   <property name="platform">Linux</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564491</millis>
+  <date>2018-05-08T12:53:48</date>
+  <millis>1525784028998</millis>
   <sequence>15</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -185,8 +185,8 @@
   <property name="seleniumVersion">3.7.1</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564493</millis>
+  <date>2018-05-08T12:53:49</date>
+  <millis>1525784029010</millis>
   <sequence>16</sequence>
   <level>RUN_DATA</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -197,8 +197,8 @@
   <property name="proxyInformation">ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564494</millis>
+  <date>2018-05-08T12:53:49</date>
+  <millis>1525784029019</millis>
   <sequence>17</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -208,8 +208,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564495</millis>
+  <date>2018-05-08T12:53:49</date>
+  <millis>1525784029021</millis>
   <sequence>18</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -219,8 +219,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564496</millis>
+  <date>2018-05-08T12:53:49</date>
+  <millis>1525784029024</millis>
   <sequence>19</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -232,8 +232,8 @@
   <property name="stepIndex">2</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564508</millis>
+  <date>2018-05-08T12:53:49</date>
+  <millis>1525784029050</millis>
   <sequence>20</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -243,8 +243,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:24</date>
-  <millis>1525728564510</millis>
+  <date>2018-05-08T12:53:49</date>
+  <millis>1525784029053</millis>
   <sequence>21</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -254,8 +254,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:28</date>
-  <millis>1525728568908</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034058</millis>
   <sequence>22</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -265,8 +265,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:28</date>
-  <millis>1525728568909</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034059</millis>
   <sequence>23</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -276,8 +276,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:28</date>
-  <millis>1525728568909</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034060</millis>
   <sequence>24</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -289,8 +289,8 @@
   <property name="stepIndex">3</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:28</date>
-  <millis>1525728568915</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034093</millis>
   <sequence>25</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -300,8 +300,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:28</date>
-  <millis>1525728568953</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034159</millis>
   <sequence>26</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -311,8 +311,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:28</date>
-  <millis>1525728568956</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034161</millis>
   <sequence>27</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -322,30 +322,30 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569026</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034222</millis>
   <sequence>28</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; located by &amp;apos;By.xpath: //a[@href = &amp;apos;#&amp;apos; and @title = &amp;apos;Groceries&amp;apos; and (text() = &amp;apos;Groceries&amp;apos; or . = &amp;apos;Groceries&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; located by &amp;apos;By.xpath: //a[@href = &amp;apos;#&amp;apos; and @title = &amp;apos;Groceries&amp;apos; and (text() = &amp;apos;Groceries&amp;apos; or . = &amp;apos;Groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569108</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034250</millis>
   <sequence>29</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; located by &amp;apos;By.xpath: //a[@href = &amp;apos;#&amp;apos; and @title = &amp;apos;Groceries&amp;apos; and (text() = &amp;apos;Groceries&amp;apos; or . = &amp;apos;Groceries&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries&amp;apos; located by &amp;apos;By.xpath: //a[@href = &amp;apos;#&amp;apos; and @title = &amp;apos;Groceries&amp;apos; and (text() = &amp;apos;Groceries&amp;apos; or . = &amp;apos;Groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569109</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034251</millis>
   <sequence>30</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -355,8 +355,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569425</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034591</millis>
   <sequence>31</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -366,8 +366,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569426</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034591</millis>
   <sequence>32</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -377,8 +377,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569427</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034592</millis>
   <sequence>33</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -390,8 +390,8 @@
   <property name="stepIndex">4</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569427</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034592</millis>
   <sequence>34</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -401,8 +401,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569432</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034597</millis>
   <sequence>35</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -412,8 +412,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569433</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034597</millis>
   <sequence>36</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -423,30 +423,30 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569446</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034604</millis>
   <sequence>37</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Shop groceries&amp;apos; or . = &amp;apos;Shop groceries&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Shop groceries&amp;apos; or . = &amp;apos;Shop groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569476</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034645</millis>
   <sequence>38</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Shop groceries&amp;apos; or . = &amp;apos;Shop groceries&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Shop groceries&amp;apos; or . = &amp;apos;Shop groceries&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:29</date>
-  <millis>1525728569478</millis>
+  <date>2018-05-08T12:53:54</date>
+  <millis>1525784034647</millis>
   <sequence>39</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -456,8 +456,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573525</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040859</millis>
   <sequence>40</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -467,8 +467,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573527</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040860</millis>
   <sequence>41</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -478,8 +478,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573533</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040860</millis>
   <sequence>42</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -491,8 +491,8 @@
   <property name="stepIndex">5</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573538</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040867</millis>
   <sequence>43</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -502,8 +502,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573549</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040895</millis>
   <sequence>44</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -513,8 +513,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573552</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040898</millis>
   <sequence>45</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -524,30 +524,30 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573555</millis>
+  <date>2018-05-08T12:54:00</date>
+  <millis>1525784040900</millis>
   <sequence>46</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fooddepartment&amp;apos; or . = &amp;apos;ShopFresh Fooddepartment&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fooddepartment&amp;apos; or . = &amp;apos;ShopFresh Fooddepartment&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573660</millis>
+  <date>2018-05-08T12:54:01</date>
+  <millis>1525784041946</millis>
   <sequence>47</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fooddepartment&amp;apos; or . = &amp;apos;ShopFresh Fooddepartment&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fooddepartment&amp;apos; or . = &amp;apos;ShopFresh Fooddepartment&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:33</date>
-  <millis>1525728573660</millis>
+  <date>2018-05-08T12:54:01</date>
+  <millis>1525784041953</millis>
   <sequence>48</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -557,8 +557,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574342</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042589</millis>
   <sequence>49</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -568,8 +568,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574344</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042590</millis>
   <sequence>50</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -579,8 +579,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574346</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042592</millis>
   <sequence>51</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -592,8 +592,8 @@
   <property name="stepIndex">6</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574349</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042597</millis>
   <sequence>52</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -603,8 +603,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574364</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042608</millis>
   <sequence>53</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -614,8 +614,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574367</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042617</millis>
   <sequence>54</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -625,30 +625,30 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574370</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042620</millis>
   <sequence>55</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fruitaisle&amp;apos; or . = &amp;apos;ShopFresh Fruitaisle&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fruitaisle&amp;apos; or . = &amp;apos;ShopFresh Fruitaisle&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574417</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042669</millis>
   <sequence>56</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fruitaisle&amp;apos; or . = &amp;apos;ShopFresh Fruitaisle&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopFresh Fruitaisle&amp;apos; or . = &amp;apos;ShopFresh Fruitaisle&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:34</date>
-  <millis>1525728574419</millis>
+  <date>2018-05-08T12:54:02</date>
+  <millis>1525784042670</millis>
   <sequence>57</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -658,8 +658,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575018</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043331</millis>
   <sequence>58</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -669,8 +669,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575019</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043331</millis>
   <sequence>59</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -680,8 +680,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575020</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043332</millis>
   <sequence>60</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -693,8 +693,8 @@
   <property name="stepIndex">7</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575027</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043332</millis>
   <sequence>61</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -704,8 +704,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575033</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043336</millis>
   <sequence>62</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -715,8 +715,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575034</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043337</millis>
   <sequence>63</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -726,30 +726,30 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575036</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043338</millis>
   <sequence>64</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopBananasshelf&amp;apos; or . = &amp;apos;ShopBananasshelf&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopBananasshelf&amp;apos; or . = &amp;apos;ShopBananasshelf&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575051</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043384</millis>
   <sequence>65</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopBananasshelf&amp;apos; or . = &amp;apos;ShopBananasshelf&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Found 1 web elements with id: &amp;apos;Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;ShopBananasshelf&amp;apos; or . = &amp;apos;ShopBananasshelf&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575054</millis>
+  <date>2018-05-08T12:54:03</date>
+  <millis>1525784043387</millis>
   <sequence>66</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -759,8 +759,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575841</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044585</millis>
   <sequence>67</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -770,8 +770,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575841</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044586</millis>
   <sequence>68</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -781,8 +781,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575841</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044586</millis>
   <sequence>69</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -794,19 +794,19 @@
   <property name="stepIndex">8</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575842</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044586</millis>
   <sequence>70</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos;</message>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Bananas/label_Weight&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575844</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044588</millis>
   <sequence>71</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -816,8 +816,8 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575844</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044589</millis>
   <sequence>72</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -827,52 +827,52 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:35</date>
-  <millis>1525728575845</millis>
+  <date>2018-05-08T12:54:04</date>
+  <millis>1525784044589</millis>
   <sequence>73</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Finding web element with id: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Add&amp;apos; or . = &amp;apos;Add&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Bananas/label_Weight&amp;apos; located by &amp;apos;By.xpath: //label[(text() = &amp;apos;Weight&amp;apos; or . = &amp;apos;Weight&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:36</date>
-  <millis>1525728576558</millis>
+  <date>2018-05-08T12:54:05</date>
+  <millis>1525784045608</millis>
   <sequence>74</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Found 6 web elements with id: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Add&amp;apos; or . = &amp;apos;Add&amp;apos;)]&amp;apos; in &amp;apos;15&amp;apos; second(s)</message>
+  <message>Found 2 web elements with id: &amp;apos;Object Repository/Page_Bananas/label_Weight&amp;apos; located by &amp;apos;By.xpath: //label[(text() = &amp;apos;Weight&amp;apos; or . = &amp;apos;Weight&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:36</date>
-  <millis>1525728576559</millis>
+  <date>2018-05-08T12:54:05</date>
+  <millis>1525784045612</millis>
   <sequence>75</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Clicking on object: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos;</message>
+  <message>Clicking on object: &amp;apos;Object Repository/Page_Bananas/label_Weight&amp;apos;</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578361</millis>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046325</millis>
   <sequence>76</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Object: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos; is clicked on</message>
+  <message>Object: &amp;apos;Object Repository/Page_Bananas/label_Weight&amp;apos; is clicked on</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578361</millis>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046327</millis>
   <sequence>77</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
@@ -882,22 +882,123 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578361</millis>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046328</millis>
   <sequence>78</sequence>
+  <level>START</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>startKeyword</method>
+  <thread>1</thread>
+  <message>Start action : click</message>
+  <nestedLevel>1</nestedLevel>
+  <property name="startLine">39</property>
+  <property name="stepIndex">9</property>
+</record>
+<record>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046329</millis>
+  <sequence>79</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding Test Object with id &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046362</millis>
+  <sequence>80</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking object</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046367</millis>
+  <sequence>81</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Checking timeout</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046393</millis>
+  <sequence>82</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Finding web element with id: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Add&amp;apos; or . = &amp;apos;Add&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046551</millis>
+  <sequence>83</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Found 6 web elements with id: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos; located by &amp;apos;By.xpath: //span[(text() = &amp;apos;Add&amp;apos; or . = &amp;apos;Add&amp;apos;)]&amp;apos; in &amp;apos;30&amp;apos; second(s)</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:06</date>
+  <millis>1525784046553</millis>
+  <sequence>84</sequence>
+  <level>INFO</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Clicking on object: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos;</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:09</date>
+  <millis>1525784049947</millis>
+  <sequence>85</sequence>
+  <level>PASSED</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>logMessage</method>
+  <thread>1</thread>
+  <message>Object: &amp;apos;Object Repository/Page_Bananas/span_Add&amp;apos; is clicked on</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:09</date>
+  <millis>1525784049949</millis>
+  <sequence>86</sequence>
+  <level>END</level>
+  <class>com.kms.katalon.core.logging.KeywordLogger</class>
+  <method>endKeyword</method>
+  <thread>1</thread>
+  <message>End action : click</message>
+  <nestedLevel>1</nestedLevel>
+</record>
+<record>
+  <date>2018-05-08T12:54:09</date>
+  <millis>1525784049949</millis>
+  <sequence>87</sequence>
   <level>START</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>startKeyword</method>
   <thread>1</thread>
   <message>Start action : closeBrowser</message>
   <nestedLevel>1</nestedLevel>
-  <property name="startLine">39</property>
-  <property name="stepIndex">9</property>
+  <property name="startLine">41</property>
+  <property name="stepIndex">10</property>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578379</millis>
-  <sequence>79</sequence>
+  <date>2018-05-08T12:54:09</date>
+  <millis>1525784049987</millis>
+  <sequence>88</sequence>
   <level>INFO</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
@@ -906,9 +1007,9 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578854</millis>
-  <sequence>80</sequence>
+  <date>2018-05-08T12:54:10</date>
+  <millis>1525784050310</millis>
+  <sequence>89</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
@@ -917,9 +1018,9 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578855</millis>
-  <sequence>81</sequence>
+  <date>2018-05-08T12:54:10</date>
+  <millis>1525784050311</millis>
+  <sequence>90</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endKeyword</method>
@@ -928,36 +1029,36 @@
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578855</millis>
-  <sequence>82</sequence>
+  <date>2018-05-08T12:54:10</date>
+  <millis>1525784050311</millis>
+  <sequence>91</sequence>
   <level>PASSED</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>logMessage</method>
   <thread>1</thread>
-  <message>Test Cases/tesco-test</message>
+  <message>Test Cases/TescoTest</message>
   <nestedLevel>1</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578856</millis>
-  <sequence>83</sequence>
+  <date>2018-05-08T12:54:10</date>
+  <millis>1525784050313</millis>
+  <sequence>92</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endTest</method>
   <thread>1</thread>
-  <message>End Test Case : Test Cases/tesco-test</message>
+  <message>End Test Case : Test Cases/TescoTest</message>
   <nestedLevel>0</nestedLevel>
 </record>
 <record>
-  <date>2018-05-07T21:29:38</date>
-  <millis>1525728578927</millis>
-  <sequence>84</sequence>
+  <date>2018-05-08T12:54:10</date>
+  <millis>1525784050338</millis>
+  <sequence>93</sequence>
   <level>END</level>
   <class>com.kms.katalon.core.logging.KeywordLogger</class>
   <method>endSuite</method>
   <thread>1</thread>
-  <message>End Test Suite : Test Suites/SecondTest</message>
+  <message>End Test Suite : Test Suites/UI-Tests</message>
   <nestedLevel>0</nestedLevel>
 </record>
 </log>
