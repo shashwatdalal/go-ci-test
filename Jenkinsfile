@@ -27,12 +27,12 @@ pipeline {
       parallel {
         stage('Chrome') {
           agent { label 'katalon-chrome-tests' }
-          steps { sh 'cd tests/integration-tests && ./run_chrome' }
+          steps { sh 'cd tests/ui-tests && ./run_chrome' }
           post { always { junit 'tests/reports/chrome/*.xml' } }
         }
         stage('Firefox') {
           agent { label 'katalon-firefox-tests' }
-          steps { sh 'cd tests/integration-tests && ./run_firefox' }
+          steps { sh 'cd tests/ui-tests && ./run_firefox' }
           post { always { junit 'tests/reports/firefox/*.xml' } }
         }
       }
