@@ -15,6 +15,6 @@
       <guid>2eea5882-7663-46ec-aac2-b34cd756358c</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/tesco-test</testCaseId>
+      <testCaseId>Test Cases/UITest</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>

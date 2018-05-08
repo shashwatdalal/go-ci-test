@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>tesco-test</name>
+   <name>UITest</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>afbe89e7-7cb1-45d5-bd1f-6a4326091cf6</testCaseGuid>
