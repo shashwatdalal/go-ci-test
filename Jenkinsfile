@@ -32,5 +32,9 @@ pipeline {
         }
       }
     }
+    stage('Production') {
+      agent { label 'production' }
+      steps { sh 'git pull' }
+    }
   }
 }

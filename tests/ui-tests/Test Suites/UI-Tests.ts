@@ -4,6 +4,7 @@
    <name>UI-Tests</name>
    <tag></tag>
    <isRerun>false</isRerun>
+   <lastRun>2018-05-28T11:28:34</lastRun>
    <mailRecipient></mailRecipient>
    <numberOfRerun>0</numberOfRerun>
    <pageLoadTimeout>30</pageLoadTimeout>

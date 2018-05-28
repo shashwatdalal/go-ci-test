@@ -11,8 +11,8 @@ func main() {
 			printText("sheep")
 		}
 	}()
-
 }
+
 func printText(s string) {
 	fmt.Println(s)
 	time.Sleep(500)
