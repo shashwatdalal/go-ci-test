@@ -1,0 +1,30 @@
+#menupanel {
+  /* Sizing */
+  width: 20%;
+  height: 100%;
+  left: 0%;
+  position: absolute;
+
+  /* Aesthetics */
+  background-color: #002663;
+}
+
+#menutable {
+  height: 100%;
+  width: 100%;
+  border-spacing: 0;
+}
+
+#menutable td {
+  text-align: center;
+  height: 25%;
+  width: 100%;
+}
+
+#menutable a, a:visited {
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  font-size: 4vmin;
+}

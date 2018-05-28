@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handlers.HealthCheckHandler)
+	http.Handle("/", http.FileServer(http.Dir("./web/splash.html")))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
