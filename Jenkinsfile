@@ -25,7 +25,7 @@ pipeline {
     }
     stage('Production') {
       agent { label 'production' }
-      steps { sh 'git pull && echo $USER && sudo docker build -t go-ci-test .' && docker run -d -p 8080:8080 go-ci-test }
+      steps { sh 'git pull && echo $USER && sudo docker build -t go-ci-test . && docker run -d -p 8080:8080 go-ci-test' }
     }
   }
 }
