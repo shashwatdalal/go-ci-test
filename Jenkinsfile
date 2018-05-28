@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Production') {
       agent { label 'production' }
-      steps { sh 'git pull' }
+      steps { sh 'git pull' && docker build -t go-ci-test . }
     }
   }
 }
