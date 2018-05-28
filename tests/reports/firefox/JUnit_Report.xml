@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="UI-Tests" time="30" tests="1" failures="0" errors="0">
-   <testsuite name="UI-Tests" tests="1" failures="0" errors="0" time="30" timestamp="2018-05-08 12:53:39" hostname="root - 8a2e6d061c62" id="Test Suites/UI-Tests">
+<testsuites name="UI-Tests" time="27" tests="1" failures="0" errors="0">
+   <testsuite name="UI-Tests" tests="1" failures="0" errors="0" time="27" timestamp="2018-05-12 11:50:45" hostname="root - 7506aef34e27" id="Test Suites/UI-Tests">
       <properties>
          <property name="deviceName" value=""/>
          <property name="devicePlatform" value=""/>
-         <property name="logFolder" value="/katalon/katalon/project/Reports/UI-Tests/20180508_125337"/>
-         <property name="logFiles" value="/katalon/katalon/project/Reports/UI-Tests/20180508_125337/execution0.log"/>
+         <property name="logFolder" value="/katalon/katalon/project/Reports/UI-Tests/20180512_115041"/>
+         <property name="logFiles" value="/katalon/katalon/project/Reports/UI-Tests/20180512_115041/execution0.log"/>
          <property name="attachments" value=""/>
-         <property name="hostName" value="root - 8a2e6d061c62"/>
+         <property name="hostName" value="root - 7506aef34e27"/>
          <property name="os" value="Linux 64bit"/>
          <property name="katalonVersion" value="5.3.1.1"/>
          <property name="browser" value="Firefox 58.0"/>
          <property name="hostAddress" value="172.17.0.2"/>
-         <property name="sessionId" value="8ed2aa1e-eae3-4f1c-8d8f-c65b49b908ac"/>
+         <property name="sessionId" value="ba669d6e-5ea1-487f-bde1-87c19277d1d0"/>
          <property name="seleniumVersion" value="3.7.1"/>
          <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
          <property name="platform" value="Linux"/>
       </properties>
       <testcase name="Test Cases/TescoTest" classname="Test Cases/TescoTest" status="PASSED">
-         <system-out><![CDATA[2018-05-08 12:53:40 - [TEST_CASE][PASSED] - Test Cases/TescoTest: Test Cases/TescoTest
+         <system-out><![CDATA[2018-05-12 11:50:46 - [TEST_CASE][PASSED] - Test Cases/TescoTest: Test Cases/TescoTest
 
-2018-05-08 12:53:41 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+2018-05-12 11:50:47 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
 
-2018-05-08 12:53:49 - [MESSAGE][PASSED] - Browser is opened with url: ''
+2018-05-12 11:50:57 - [MESSAGE][PASSED] - Browser is opened with url: ''
 
-2018-05-08 12:53:49 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'https://www.tesco.com/' successfully
+2018-05-12 11:50:57 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'https://www.tesco.com/' successfully
 
-2018-05-08 12:53:54 - [MESSAGE][PASSED] - Navigate to 'https://www.tesco.com/' successfully
+2018-05-12 11:51:02 - [MESSAGE][PASSED] - Navigate to 'https://www.tesco.com/' successfully
 
-2018-05-08 12:53:54 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
+2018-05-12 11:51:02 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
 
-2018-05-08 12:53:54 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
+2018-05-12 11:51:02 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/a_Groceries' is clicked on
 
-2018-05-08 12:53:54 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
+2018-05-12 11:51:02 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
 
-2018-05-08 12:54:00 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
+2018-05-12 11:51:06 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco - Online Groceries Homew/span_Shop groceries' is clicked on
 
-2018-05-08 12:54:00 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment' is clicked on
+2018-05-12 11:51:06 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment' is clicked on
 
-2018-05-08 12:54:02 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment' is clicked on
+2018-05-12 11:51:07 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fooddepartment' is clicked on
 
-2018-05-08 12:54:02 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle' is clicked on
+2018-05-12 11:51:07 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle' is clicked on
 
-2018-05-08 12:54:03 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle' is clicked on
+2018-05-12 11:51:09 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopFresh Fruitaisle' is clicked on
 
-2018-05-08 12:54:03 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf' is clicked on
+2018-05-12 11:51:09 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf' is clicked on
 
-2018-05-08 12:54:04 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf' is clicked on
+2018-05-12 11:51:09 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Tesco Groceries  Online Food S/span_ShopBananasshelf' is clicked on
 
-2018-05-08 12:54:04 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Bananas/label_Weight' is clicked on
+2018-05-12 11:51:09 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Bananas/label_Weight' is clicked on
 
-2018-05-08 12:54:06 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Bananas/label_Weight' is clicked on
+2018-05-12 11:51:11 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Bananas/label_Weight' is clicked on
 
-2018-05-08 12:54:06 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Bananas/span_Add' is clicked on
+2018-05-12 11:51:11 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Bananas/span_Add' is clicked on
 
-2018-05-08 12:54:09 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Bananas/span_Add' is clicked on
+2018-05-12 11:51:13 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Bananas/span_Add' is clicked on
 
-2018-05-08 12:54:09 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
+2018-05-12 11:51:13 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
 
-2018-05-08 12:54:10 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+2018-05-12 11:51:13 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
          <system-err><![CDATA[]]></system-err>
       </testcase>
-      <system-out><![CDATA[2018-05-08 12:53:39 - [TEST_SUITE][PASSED] - UI-Tests: Test Cases/TescoTest]]></system-out>
+      <system-out><![CDATA[2018-05-12 11:50:45 - [TEST_SUITE][PASSED] - UI-Tests: Test Cases/TescoTest]]></system-out>
       <system-err><![CDATA[]]></system-err>
    </testsuite>
 </testsuites>

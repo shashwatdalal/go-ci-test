@@ -30,12 +30,11 @@ pipeline {
           steps { sh 'cd tests/ui-tests && ./run_chrome' }
           post { always { junit 'tests/reports/chrome/*.xml' } }
         }
-        stage('Firefox') {
-          agent { label 'katalon-firefox-tests' }
-          steps { sh 'cd tests/ui-tests && ./run_firefox' }
-          post { always { junit 'tests/reports/firefox/*.xml' } }
-        }
       }
+    }
+    stage('Deploy') {
+      agent any
+      steps { sh 'echo 'deploying'' }
     }
   }
 }
