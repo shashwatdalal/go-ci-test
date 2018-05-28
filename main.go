@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 	"net/http"
-	"go-ci-test/handlers"
 	"log"
 )
 
