@@ -10,6 +10,7 @@ import (
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./web/")))
 	log.Fatal(http.ListenAndServe(":8080", nil))
+	//comment
 }
 
 func printText(s string) {
