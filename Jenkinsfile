@@ -23,18 +23,9 @@ pipeline {
         }
       }
     }
-    stage('System-Tests') {
-      parallel {
-        stage('Chrome') {
-          agent { label 'katalon-chrome-tests' }
-          steps { sh 'cd tests/ui-tests && ./run_chrome' }
-          post { always { junit 'tests/reports/chrome/*.xml' } }
-        }
-      }
-    }
     stage('Production') {
       agent { label 'production' }
-      steps { sh 'git pull && docker build -t go-ci-test .' }
+      steps { sh 'git pull && echo $USER && docker build -t go-ci-test .' }
     }
   }
 }
