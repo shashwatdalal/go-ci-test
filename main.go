@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("./web/splash.html")))
+	http.Handle("/", http.FileServer(http.Dir("./web/")))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
