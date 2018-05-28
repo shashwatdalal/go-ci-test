@@ -1,0 +1,29 @@
+#userinfo table, td {
+  max-width: 80%;
+  /* border: 2px solid white; */
+  margin: auto;
+  text-align: center;
+  padding: 2%;
+  width: 50%;
+}
+
+#contentcontainer {
+  /* Sizing */
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10%;
+  padding-bottom: 10%;
+
+  /* Aesthetics */
+  /* background-color: grey; */
+}
+
+.circleimg {
+  max-width: 30%;
+  height: auto;
+  margin: auto;
+  clip-path: circle(80px at center);
+  display: block;
+}
