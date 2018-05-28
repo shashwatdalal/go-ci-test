@@ -32,8 +32,5 @@ pipeline {
         }
       }
     }
-    stage('Deploy') {
-      agent any
-    }
   }
 }
