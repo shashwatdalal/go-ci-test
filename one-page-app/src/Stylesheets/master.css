@@ -22,16 +22,11 @@ body {
   display: table-cell;
   vertical-align: middle;
   position:fixed;
+
   /* Aesthetics */
 }
 
 #contentpanel {
-  /* Sizing */
-  width: 80%;
-  height: 100%;
-  left: 20%;
-  position: absolute;
-
   /* Aesthetics */
   background-color: black;
   color: white;
