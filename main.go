@@ -9,7 +9,7 @@ import (
 
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./one-page-app/build")))
-	log.Fatal(http.ListenAndServe(":80", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func printText(s string) {
