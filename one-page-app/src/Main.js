@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Chat from './Chat';
 import Profile from './Profile';
 import Leaderboards from './Leaderboards';
