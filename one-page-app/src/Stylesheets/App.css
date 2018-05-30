@@ -5,13 +5,13 @@
 
 .header {
   grid-area: hd;
-  padding: 0px;
+  padding: 2px;
 }
 
 .wrapper {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(120px, auto);
+    grid-auto-rows: minmax(80px, auto);
     grid-template-areas:
       "hd hd hd hd hd hd hd hd hd"
       "mn mn mn mn mn mn mn mn mn"
