@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
 body {
   /* Sizing */
   width: 100%;
@@ -7,9 +9,10 @@ body {
   display: table;
   position: absolute;
 
-
   /* Aesthetics  */
   background-color: white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
 }
 
 #pagewrapper {
@@ -23,13 +26,8 @@ body {
   /* Aesthetics */
 }
 
-#calendarpanel {
-  /* Sizing */
-  width: 80%;
-  height: 100%;
-  left: 20%;
-  position: absolute;
-
+#contentpanel {
   /* Aesthetics */
   background-color: black;
+  color: white;
 }

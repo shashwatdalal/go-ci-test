@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"time"
 	"net/http"
-	"log"
+  "log"
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("./web/")))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	http.Handle("/", http.FileServer(http.Dir("./one-page-app/build")))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func printText(s string) {

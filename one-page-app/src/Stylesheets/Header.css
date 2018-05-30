@@ -1,0 +1,42 @@
+#menupanel {
+  background-color: #333333;
+  color: white;
+  align-content: center;
+}
+
+#menupanel h1 {
+  text-align: center;
+  margin: auto;
+}
+
+#menuwrapper {
+  margin: auto;
+  text-align: center;
+}
+
+#menupanel ul {
+  align-self: center;
+  margin: auto;
+  border: 0;
+  list-style-type: none;
+  padding: 0;
+  display: inline block;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+#menupanel li {
+  display: inline-block;
+}
+
+#menupanel li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+#menupanel li a:hover {
+    background-color: #111111;
+}

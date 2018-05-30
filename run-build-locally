@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+npm install
+npm run-script build
+rm -rf node_modules
+docker build -t go-ci-test .
+docker run -d --rm --name main-app -p 8080:8080 go-ci-test
