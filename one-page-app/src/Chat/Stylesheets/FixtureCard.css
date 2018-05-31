@@ -24,15 +24,20 @@
 * {box-sizing: border-box;}
 
 .card {
-  border: 1px solid;
-  padding: 20px;
-  box-shadow: 5px;
-  border-radius: 5px;
-  max-width: 1500px;
-  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: black;
 }
 
 .card > div {
   border-radius: 5px;
   padding: 1em;
+}
+
+h1 {
+  padding-bottom: 0.3em;
+  margin: 0;
+  border: 0;
 }
