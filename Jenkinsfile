@@ -10,14 +10,14 @@ node {
     }
 
     stage('React Tests') {
-        docker.image('shashwatdalal/node-image').withRun('-v $PWD:/node').inside {
+        docker.image('shashwatdalal/node-image').inside('-v $PWD:/node') {
           yarn install
           yarn build
         }
     }
 
     stage('Go Tests') {
-      docker.image('shashwatdalal/go-lang-image').withRun('-v $PWD:/go/src/go-ci-test').inside {
+      docker.image('shashwatdalal/go-lang-image').inside('-v $PWD:/go/src/go-ci-test') {
         go build -o main
       }
     }
