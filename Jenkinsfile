@@ -31,11 +31,12 @@ node {
           prodImage.push("latest")
         }
     }
-
-    stage('Deploy') {
-        node { label 'production' }
-              steps { sh 'sudo docker pull shashwatdalal/prod-image && \
+}
+node { label 'production' }
+{
+	stage('Deploy') {
+  steps { sh 'sudo docker pull shashwatdalal/prod-image && \
                           sudo docker stop main && \
                           sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image' }
-    }
+   }
 }
