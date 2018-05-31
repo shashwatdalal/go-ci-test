@@ -51,6 +51,15 @@ a:hover {
   padding-bottom: 15px;
 }
 
+.AvTable {
+  width: 100%;
+  text-align: center;
+}
+
+.AvTable table {
+  margin: 0 auto; /* or margin: 0 auto 0 auto */
+}
+
 .resultcard {
   height: 15em;
   width: 40%;

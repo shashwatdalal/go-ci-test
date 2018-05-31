@@ -1,0 +1,12 @@
+
+.table {
+  margin: auto;
+}
+
+.checked {
+  background-color: #004d99;
+}
+
+.unchecked {
+  background-color: #e6f2ff;
+}

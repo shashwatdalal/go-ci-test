@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './Stylesheets/master.css'
-import './Stylesheets/profile.css'
-import axios from 'axios'
+import './Stylesheets/master.css';
+import './Stylesheets/profile.css';
+import AvailabiltyTable from './Profile/AvailabiltyTable';
+import axios from 'axios';
 
 class Profile extends Component {
   state = {
@@ -68,7 +69,9 @@ class Profile extends Component {
           <h3 class='centertext'>Age: <span class='thintext'>{this.state.age}</span></h3>
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location}</span></h3>
           <h3 class='centertext'>Score: <span class='thintext'>{this.state.score}</span></h3>
-
+          <div class="AvTable">
+          <AvailabiltyTable />
+          </div>
           <div id='resultsbox'>
           {
             this.state.matches.map(item =>
@@ -81,6 +84,7 @@ class Profile extends Component {
             )
           }
           </div>
+
 
         </div>
       </div>
