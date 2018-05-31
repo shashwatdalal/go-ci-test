@@ -35,7 +35,7 @@ node {
     stage('Deploy') {
 			node("production") {
         sh 'sudo docker pull shashwatdalal/prod-image && \
-            sudo docker rm -f $(docker ps -a -q) && \
+            sudo docker rm -f $(sudo docker ps -a -q) && \
             sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image'
       }
     }
