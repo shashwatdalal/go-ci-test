@@ -32,7 +32,15 @@ node {
         }
     }
 
-    stage('Deploy') {
+    stage('Deploy to Test') {
+      node("integration-test") {
+            sh 'sudo docker pull shashwatdalal/prod-image && \
+                sudo docker stop main && \
+                sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image'
+      }
+    }
+
+    stage('Deploy to Production') {
 			node("production") {
         sh 'sudo docker pull shashwatdalal/prod-image && \
             sudo docker stop main && \
