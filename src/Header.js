@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Stylesheets/Header.css';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   render() {
@@ -8,11 +9,11 @@ class Header extends Component {
           <h1>"PLACEHOLDER"</h1>
           <div id="menuwrapper">
           <ul>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/matchmaking">Matchmaking</a></li>
-            <li><a href="/leaderboards">Leaderboards</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/chat">Chat</a></li>
+            <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/matchmaking">Matchmaking</Link></li>
+            <li><Link to="/leaderboards">Leaderboards</Link></li>
+            <li><Link to="/teams">Teams</Link></li>
+            <li><Link to="/chat">Chat</Link></li>
           </ul>
           </div>
       </div>
