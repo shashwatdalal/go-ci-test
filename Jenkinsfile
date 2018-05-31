@@ -5,8 +5,8 @@ node {
     }
 
     stage('Build images') {
-        docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang")
-        docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node")
+        docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
+        docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
     }
 
     stage('React Tests') {
