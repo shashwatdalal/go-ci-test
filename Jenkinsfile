@@ -1,5 +1,4 @@
 node {
-
 		def goImage
 		def nodeImage
 
@@ -27,7 +26,6 @@ node {
     }
 
     stage('Push Image') {
-        sh 'ls'
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
           prodImage.push("latest")
@@ -35,7 +33,7 @@ node {
     }
 
     stage('Deploy') {
-        agent { label 'production' }
+        node { label 'production' }
               steps { sh 'sudo docker pull shashwatdalal/prod-image && \
                           sudo docker stop main && \
                           sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image' }
