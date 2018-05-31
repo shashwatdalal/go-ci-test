@@ -10,7 +10,7 @@ class Profile extends Component {
           <table id='userinfo'>
             <thead>
               <td colspan="2">
-                <img src="img/matchmakingbutton.jpg" class="circleimg" alt="Thomas Yung" />
+                <img src="img/matchmakingbutton.jpg" class="circleimg" alt="Profile Picture" />
               </td>
             </thead>
             <tr>
