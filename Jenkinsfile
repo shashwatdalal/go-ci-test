@@ -33,8 +33,9 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
         prodImage.inside {
-					sh 'ls'
+					sh 'pwd'
         }
+        sh 'pwd'
         prodImage.push()
     }
 }
