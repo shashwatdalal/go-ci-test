@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("./one-page-app/build")))
+	http.Handle("/", http.FileServer(http.Dir("./build")))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

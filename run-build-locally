@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-cd one-page-app
 yarn install
 yarn build
 rm -rf node_modules
-cd ..
-docker build -t go-ci-test .
-docker run -d --rm --name main-app -p 8080:8080 go-ci-test

@@ -1,34 +1,37 @@
-pipeline {
-  agent none
-  stages {
-    stage('Build Dockerfile') {
-      agent any
-      steps { sh 'docker build -t go-ci-test .' }
+node {
+    def go-image
+    def node-image
+    def prod-image
+
+    stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+        checkout scm
     }
-    stage('Build Source') {
-       agent { docker { image 'go-ci-test:latest' } }
-      steps { sh 'go build main.go' }
+
+    stage('Build images') {
+        go-image = docker.build("shashwatdalal/go-lang-image","./dockerfiles/Dockerfile.goLang")
+        node-image = docker.build("shashwatdalal/node-image","./dockerfiles/Dockerfile.node")
     }
-    stage('Unit-Tests') {
-      parallel {
-        stage('Util Test') {
-          agent { docker { image 'go-ci-test:latest' } }
-          steps { sh 'cd tests/go-tests && go test basic_test.go -v | go2xunit -fail -output basic_test.xml' }
-          post { always { junit 'tests/go-tests/basic_test.xml' } }
+
+    stage('React Tests') {
+        docker.image('shashwatdalal/node-image').withRun('-v $PWD:node') {
+          yarn install
+          yarn build
         }
-        stage('Handler Test') {
-          agent { docker { image 'go-ci-test:latest' } }
-          steps { sh 'cd tests/go-tests && go test handler_test.go -v | go2xunit -fail -output handler_test.xml' }
-          post { always { junit 'tests/go-tests/handler_test.xml' } }
-        }
+    }
+
+    stage('Go Tests') {
+      docker.image('shashwatdalal/go-lang-image').withRun('-v $PWD:/go/src/go-ci-test') {
+        go build -o main
       }
     }
-    stage('Production') {
-      agent { label 'production' }
-      steps { sh 'git pull && \
-                  sudo docker build -t go-ci-test . && \
-                  sudo docker stop main-app && \
-                  sudo docker run -d --rm --name main-app -p 80:8080 go-ci-test' }
+
+    stage('Push image') {
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
+        prod-image = docker.build("shashwatdalal/prod-image","./dockerfiles/Dockerfile.prod")
+        prod-image.push()
     }
-  }
 }

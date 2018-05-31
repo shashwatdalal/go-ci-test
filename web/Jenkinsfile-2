@@ -1,0 +1,10 @@
+node {
+	def app
+	stage('SCM clone') {
+		checkout scm
+	}
+
+	stage('Build Docker Images') {
+		def goImage = docker.build("goImage",Dockerfile)
+	}
+}
