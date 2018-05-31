@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
 import FixtureCard from './FixtureCard';
-import './FixtureList.css';
+import './Stylesheets/FixtureList.css';
+
+var axios = require('axios');
 
 class FixtureList extends Component {
-
   state = {
-    items: [
-      {
-        id:0,
-        team:"Firemen Five",
-        date:"16/06/2018",
-        venue: "Westway"
-      },
-      {
-        id:1,
-        team:"Hammersmith FC",
-        date:"12/06/2018",
-        venue:"Westway"
-      },
-      {
-        id:2,
-        team: "Tom's Tanks & Engines",
-        date:"13/06/2018",
-        venue:"Ethos"
-      }
-    ]
-  };
+      fixtures: []
+  }
+
+  componentDidMount() {
+    var _this = this;
+    this.serverRequest =
+      axios
+        .get("promoted_fixtures.json")
+        .then(function(result) {
+          _this.setState({
+            fixtures: result.data.fixtures
+          });
+        })
+  }
+
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
 
   render() {
     return (
-      <div>
+      <div class="FixtureList">
         <h1>Fixtures</h1>
         {
-          this.state.items.map(item => (<FixtureCard key={`li-${item.id}`} data={item}/>))
+          this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.id}`} data={fixture}/>))
         }
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FixtureCard.css';
+import './Stylesheets/FixtureCard.css';
 
 const FixtureCard = props => {
   return <div class="card">
