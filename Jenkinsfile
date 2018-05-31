@@ -22,7 +22,7 @@ node {
 
     stage('Go Tests') {
       goImage.inside('-v $PWD:/go/src/go-ci-test') {
-        go build -o main
+        sh 'go build -o main'
       }
     }
 
@@ -32,6 +32,9 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
+        prodImage.inside {
+					sh 'ls'
+        }
         prodImage.push()
     }
 }
