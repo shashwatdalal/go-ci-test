@@ -2,6 +2,6 @@ FROM alpine
 
 WORKDIR /main-app
 COPY /build main-app/build
-COPY main .
+COPY main main-app
 
 EXPOSE 8080
