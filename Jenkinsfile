@@ -1,16 +1,12 @@
 node {
-    def go-image
-    def node-image
-    def prod-image
-
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
         checkout scm
     }
 
     stage('Build images') {
-        go-image = docker.build("shashwatdalal/go-lang-image","./dockerfiles/Dockerfile.goLang")
-        node-image = docker.build("shashwatdalal/node-image","./dockerfiles/Dockerfile.node")
+        docker.build("shashwatdalal/go-lang-image","./dockerfiles/Dockerfile.goLang")
+        docker.build("shashwatdalal/node-image","./dockerfiles/Dockerfile.node")
     }
 
     stage('React Tests') {
@@ -31,7 +27,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        prod-image = docker.build("shashwatdalal/prod-image","./dockerfiles/Dockerfile.prod")
+        def docker.build("shashwatdalal/prod-image","./dockerfiles/Dockerfile.prod")
         prod-image.push()
     }
 }
