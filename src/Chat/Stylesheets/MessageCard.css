@@ -4,10 +4,13 @@
 }
 
 .message {
+  grid-area: ms;
+}
+
+.message_text {
   border-radius: 2px;
   border: 1px solid #ccc;
   padding-bottom: 0.1em;
-  grid-area: ms;
 }
 
 .venue {
