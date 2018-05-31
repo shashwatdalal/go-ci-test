@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Project>
-   <description></description>
-   <name>ui-tests</name>
-   <tag></tag>
-   <UUID>55e75c6c-98d1-4141-8932-de11d35721f4</UUID>
-   <migratedVersion>5.4.0</migratedVersion>
-   <pageLoadTimeout>0</pageLoadTimeout>
-</Project>
