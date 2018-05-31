@@ -1,23 +1,27 @@
 node {
+
+		def goImage
+		def nodeImage
+
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
         checkout scm
     }
 
     stage('Build images') {
-        docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
-        docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
+        goImage = docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
+        nodeImage = docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
     }
 
     stage('React Tests') {
-        docker.image('shashwatdalal/node-image').inside('-v $PWD:/node') {
+       nodeImage.inside('-v $PWD:/node') {
           yarn install
           yarn build
         }
     }
 
     stage('Go Tests') {
-      docker.image('shashwatdalal/go-lang-image').inside('-v $PWD:/go/src/go-ci-test') {
+      goImage.inside('-v $PWD:/go/src/go-ci-test') {
         go build -o main
       }
     }
