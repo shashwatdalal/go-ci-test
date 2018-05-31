@@ -15,8 +15,8 @@ node {
 
     stage('React Tests') {
        nodeImage.inside('-v $PWD:/node') {
-          yarn install
-          yarn build
+          sh 'yarn install'
+          sh 'yarn build'
         }
     }
 
