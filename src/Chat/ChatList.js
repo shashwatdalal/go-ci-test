@@ -21,9 +21,6 @@ class ChatList extends Component {
         })
   }
 
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
 
   render() {
     return (
