@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("./build")))
+	http.Handle("/", http.FileServer(http.Dir("./build/index.html")))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
