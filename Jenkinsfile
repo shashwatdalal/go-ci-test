@@ -29,6 +29,7 @@ node {
     }
 
     stage('Push image') {
+        sh 'ls'
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
         prodImage.push()
     }
