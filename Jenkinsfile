@@ -18,18 +18,15 @@ node {
           sh 'yarn install'
           sh 'yarn build'
         }
-        sh 'ls'
     }
 
     stage('Go Tests') {
       goImage.inside('-v $PWD:/go/src/go-ci-test') {
-
         sh 'go build -o main'
       }
-      sh 'ls'
     }
 
-    stage('Push image') {
+    stage('Push Image') {
         sh 'ls'
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
@@ -39,8 +36,8 @@ node {
 
     stage('Deploy') {
         agent { label 'production' }
-              steps { sh 'docker pull shashwatdalal/prod-image && \
+              steps { sh 'sudo docker pull shashwatdalal/prod-image && \
                           sudo docker stop main && \
-                          sudo docker run -d --rm --name main -p 80:8080 go-ci-test' }
+                          sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image' }
     }
 }
