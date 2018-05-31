@@ -1,23 +1,10 @@
-#userinfo table, td {
+#username {
   max-width: 80%;
-  /* border: 2px solid white; */
-  margin: auto;
-  text-align: center;
-  padding: 2%;
-  width: 50%;
-}
-
-#contentcontainer {
-  /* Sizing */
-  width: 80%;
-  height: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 10%;
-  padding-bottom: 10%;
-
-  /* Aesthetics */
-  /* background-color: grey; */
+  border: 2px solid black;
+  padding: 2%;
+  font-size: 7.5vmin;
 }
 
 .circleimg {
@@ -26,4 +13,62 @@
   margin: auto;
   clip-path: circle(80px at center);
   display: block;
+}
+
+.centertext {
+  text-align: center;
+}
+
+.thintext {
+  font-size: 3vmin;
+  font-weight: 400;
+}
+
+a {
+  font-size: 2vmin;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: overline;
+}
+
+.resultcard h2 {
+  font-size: 5vmin;
+}
+
+.oppname {
+  font-size: 2.5vmin;
+}
+
+#resultsbox {
+  height: 250px;
+  overflow-y:auto;
+  scroll-behavior: smooth;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.resultcard {
+  height: 220px;
+  width: 40%;
+  padding-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  /* border: 2px solid black; */
+}
+
+.win {
+  background-color: #c1ffd1;
+}
+
+.lose {
+  background-color: #ffbaba;
+}
+
+.draw {
+  background-color: #fffac1;
 }

@@ -27,7 +27,21 @@ body {
 }
 
 #contentpanel {
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
   /* Aesthetics */
-  background-color: black;
-  color: white;
+  /* background-color: black; */
+  /* color: black; */
+}
+
+#contentcontainer {
+  /* Sizing */
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /* Aesthetics */
+  /* background-color: grey; */
 }
