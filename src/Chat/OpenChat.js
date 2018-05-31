@@ -23,10 +23,6 @@ class OpenChat extends Component {
         })
   }
 
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
-
   render() {
     return (
       <div class="ChatPanel">

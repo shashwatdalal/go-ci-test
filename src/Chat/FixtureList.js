@@ -21,10 +21,6 @@ class FixtureList extends Component {
         })
   }
 
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
-
   render() {
     return (
       <div class="FixtureList">
