@@ -23,6 +23,7 @@ node {
 
     stage('Go Tests') {
       goImage.inside('-v $PWD:/go/src/go-ci-test') {
+
         sh 'go build -o main'
       }
       sh 'ls'
