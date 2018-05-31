@@ -4,7 +4,7 @@ node {
 
     stage('Regression Test') {
       node("katalon-chrome-tests") {
-        sh 'tree'
+        sh 'cd .. && tree'
       }
     }
 }
