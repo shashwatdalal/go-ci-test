@@ -18,20 +18,18 @@ node {
           sh 'yarn install'
           sh 'yarn build'
         }
+        sh 'ls'
     }
 
     stage('Go Tests') {
       goImage.inside('-v $PWD:/go/src/go-ci-test') {
         sh 'go build -o main'
       }
+      sh 'ls'
     }
 
     stage('Push image') {
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
-        prodImage.withRun() {
-					sh 'pwd'
-        }
-        sh 'pwd'
         prodImage.push()
     }
 }
