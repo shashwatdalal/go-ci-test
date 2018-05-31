@@ -32,6 +32,8 @@ node {
     stage('Push image') {
         sh 'ls'
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
-        prodImage.push()
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+          prodImage.push("latest")
+        }
     }
 }
