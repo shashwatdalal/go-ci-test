@@ -8,7 +8,7 @@ node {
     }
 
     stage('Build Images') {
-        goImage = docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
+        goIhmage = docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
         nodeImage = docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
 
     }
@@ -43,7 +43,7 @@ node {
 
     stage('Regression Test') {
       node("katalon-chrome-tests") {
-          sh 'cd ../.. && git pull && ./run_chrome'
+          sh 'cd ../.. && tree && ./run_chrome'
       }
     }
 
