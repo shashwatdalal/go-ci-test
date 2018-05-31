@@ -33,6 +33,12 @@ node {
       }
     }
 
+    stage('Regression Test') {
+      node("katalon-chrome-tests") {
+        sh 'ls'
+      }
+    }
+
     stage('Deploy to Production') {
 			node("production") {
         sh 'sudo docker pull shashwatdalal/prod-image && \
