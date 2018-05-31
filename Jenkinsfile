@@ -2,12 +2,12 @@ node {
 		def goImage
 		def nodeImage
 
-    stage('Clone repository') {
+    stage('Clone Repository') {
         /* Let's make sure we have the repository cloned to our workspace */
         checkout scm
     }
 
-    stage('Build images') {
+    stage('Build Images') {
         goImage = docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
         nodeImage = docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
     }
@@ -35,7 +35,7 @@ node {
     stage('Deploy') {
 			node("production") {
         sh 'sudo docker pull shashwatdalal/prod-image && \
-            sudo docker rm -f $(sudo docker ps -a -q) && \
+            sudo docker stop main && sudo docker rm main && \
             sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image'
       }
     }
