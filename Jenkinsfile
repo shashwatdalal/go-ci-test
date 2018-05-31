@@ -10,7 +10,7 @@ node {
     stage('Build images') {
         goImage = docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
         nodeImage = docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
-    }nom s
+    }
 
     stage('React Tests') {
        nodeImage.inside('-v $PWD:/node') {
