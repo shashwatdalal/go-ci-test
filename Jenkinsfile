@@ -36,4 +36,11 @@ node {
           prodImage.push("latest")
         }
     }
+
+    stage('Deploy') {
+        agent { label 'production' }
+              steps { sh 'docker pull shashwatdalal/prod-image && \
+                          sudo docker stop main && \
+                          sudo docker run -d --rm --name main -p 80:8080 go-ci-test' }
+    }
 }
