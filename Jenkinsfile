@@ -10,7 +10,7 @@ node {
     stage('Build images') {
         goImage = docker.build("shashwatdalal/go-lang-image","-f ./dockerfiles/Dockerfile.goLang .")
         nodeImage = docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
-    }
+    }nom s
 
     stage('React Tests') {
        nodeImage.inside('-v $PWD:/node') {
@@ -35,7 +35,7 @@ node {
     stage('Deploy') {
 			node("production") {
         sh 'sudo docker pull shashwatdalal/prod-image && \
-            sudo docker stop main && \
+            sudo docker rm -f $(docker ps -a -q) && \
             sudo docker run -d --rm --name main -p 80:8080 shashwatdalal/prod-image'
       }
     }
