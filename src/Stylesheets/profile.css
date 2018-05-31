@@ -42,7 +42,7 @@ a:hover {
 }
 
 #resultsbox {
-  height: 250px;
+  height: 18em;
   overflow-y:auto;
   scroll-behavior: smooth;
   border-top: 2px solid black;
@@ -52,7 +52,7 @@ a:hover {
 }
 
 .resultcard {
-  height: 220px;
+  height: 15em;
   width: 40%;
   padding-top: 5px;
   margin-left: auto;
