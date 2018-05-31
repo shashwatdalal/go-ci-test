@@ -10,7 +10,7 @@ node {
     }
 
     stage('React Tests') {
-        docker.image('shashwatdalal/node-image').withRun('-v $PWD:node') {
+        docker.image('shashwatdalal/node-image').withRun('-v $PWD:/node') {
           yarn install
           yarn build
         }
