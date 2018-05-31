@@ -1,0 +1,5 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+core-ui,,,2018-05-31 22:15:49,2018-05-31 22:15:51,2.209s,FAILED
+,,,,,,
+Test Cases/basic-navigation,,,2018-05-31 22:15:49,2018-05-31 22:15:51,1.696s,FAILED
+openBrowser,,,2018-05-31 22:15:50,2018-05-31 22:15:51,1.317s,FAILED

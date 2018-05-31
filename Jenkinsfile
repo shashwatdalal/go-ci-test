@@ -42,8 +42,8 @@ node {
 
     stage('Regression Tests') {
       node("katalon-chrome-tests") {
-                  sh 'cd ../../ git pull && ./run_chrome'
-            }
+        sh 'cd tests/webapp-ui-tests && ./run_chrome'
+      }
     }
 
     stage('Deploy to Production') {

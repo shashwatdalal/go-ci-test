@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="core-ui" time="7" tests="1" failures="0" errors="0">
+   <testsuite name="core-ui" tests="1" failures="0" errors="0" time="7" timestamp="2018-05-31 22:16:11" hostname="shashwatdalal - 69.172.201.153" id="Test Suites/core-ui">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="/Users/shashwatdalal/Documents/UI/webapp-ui-tests/Reports/core-ui/20180531_221608"/>
+         <property name="logFiles" value="/Users/shashwatdalal/Documents/UI/webapp-ui-tests/Reports/core-ui/20180531_221608/execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="shashwatdalal - 69.172.201.153"/>
+         <property name="os" value="Mac OS X 64bit"/>
+         <property name="katalonVersion" value="5.4.1.1"/>
+         <property name="browser" value="Chrome 67.0.3396.62"/>
+         <property name="hostAddress" value="69.172.201.153"/>
+         <property name="sessionId" value="771bd0db31f744d2586d3c03f9b97c3a"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Mac OS X"/>
+      </properties>
+      <testcase name="Test Cases/basic-navigation" classname="Test Cases/basic-navigation" status="PASSED">
+         <system-out><![CDATA[2018-05-31 22:16:11 - [TEST_CASE][PASSED] - Test Cases/basic-navigation: Test Cases/basic-navigation
+
+2018-05-31 22:16:12 - [TEST_STEP][PASSED] - openBrowser: Browser is opened with url: ''
+
+2018-05-31 22:16:16 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2018-05-31 22:16:16 - [TEST_STEP][PASSED] - navigateToUrl: Navigate to 'http://35.177.16.42/' successfully
+
+2018-05-31 22:16:16 - [MESSAGE][PASSED] - Navigate to 'http://35.177.16.42/' successfully
+
+2018-05-31 22:16:16 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Sports Organiser App/a_Profile' is clicked on
+
+2018-05-31 22:16:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Sports Organiser App/a_Profile' is clicked on
+
+2018-05-31 22:16:17 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Sports Organiser App/a_Matchmaking' is clicked on
+
+2018-05-31 22:16:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Sports Organiser App/a_Matchmaking' is clicked on
+
+2018-05-31 22:16:17 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Sports Organiser App/a_Leaderboards' is clicked on
+
+2018-05-31 22:16:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Sports Organiser App/a_Leaderboards' is clicked on
+
+2018-05-31 22:16:17 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Sports Organiser App/a_Teams' is clicked on
+
+2018-05-31 22:16:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Sports Organiser App/a_Teams' is clicked on
+
+2018-05-31 22:16:17 - [TEST_STEP][PASSED] - click: Object: 'Object Repository/Page_Sports Organiser App/a_Chat' is clicked on
+
+2018-05-31 22:16:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Page_Sports Organiser App/a_Chat' is clicked on
+
+2018-05-31 22:16:17 - [TEST_STEP][PASSED] - closeBrowser: Browser is closed
+
+2018-05-31 22:16:18 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2018-05-31 22:16:11 - [TEST_SUITE][PASSED] - core-ui: Test Cases/basic-navigation]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>
