@@ -2,5 +2,4 @@ FROM alpine
 
 RUN apk update && apk add nodejs yarn
 
-WORKDIR /node
 COPY . .
