@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import LocationPicker from 'react-location-picker';
+import TimeDurationPicker from 'rc-time-duration-picker';
+import DateTimePicker from 'react-datetime-picker';
+import * as Datetime from 'react-datetime';
+import moment from 'moment';
+
+import './Matchmaking/Stylesheets/datetime.css';
+
 
 const defaultPosition = {
     lat: 51.509865,
@@ -12,17 +19,22 @@ class Matchmaking extends Component {
 
     constructor(props) {
         super(props);
+
+
         this.state = {
             Sport: "",
             Radius: 2000,
-            address: "",
+            address: "London",
             position: {
-                lat: 0.0,
-                lng: 0.0,
-            }
+                lat: 51.509865,
+                lng: -0.118092
+            },
+            date: new Date(),
+            Duration: 30
         }
         this.setValue = this.setValue.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
 
@@ -33,18 +45,23 @@ class Matchmaking extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         var url = "http://localhost:3000/echo?";
-
-        url += encodeURIComponent(document.getElementById('input1').value).replace(/%20/g, "+");
-        url += encodeURIComponent()
-        url += encodeURIComponent(document.getElementById('input4').value).replace(/%20/g, "+");
+        var StartDate = moment(this.state.Date);
+        var EndDate = StartDate.add(this.state.Duration, 'minute');
+        url += "Sport=" + this.state.Sport + "&";
+        url += "Location=(" + this.state.position.lat + "," + this.state.position.lng + ')&';
+        url += "Radius=" + this.state.Radius + "&";
+        url += "StartDate=" + StartDate.format() + "&";
+        url += "EndDate=" + EndDate.format();
 
         axios.get(url).then(response => console.log(response));
+
 
     }
 
     handleLocationChange({position, address}) {
-        this.setState({ position, address });
+        this.setState({position, address});
     }
 
     render() {
@@ -65,18 +82,16 @@ class Matchmaking extends Component {
                                onChange={this.setValue.bind(this, 'Sport')}/>
                         <br />
 
-                        {/*Location*/}
-                        {/*<br />*/}
-                        {/*<input type='text' name='Latitude' id='input2'/>*/}
-                        {/*<br />*/}
-                        {/*<input type='text' name='Longitude' id='input3'/>*/}
-                        {/*<br />*/}
-
+                        Location
                         <LocationPicker
-                            containerElement={ <div style={ {height: '100%'} } /> }
-                            mapElement={ <div style={ {height: '400px'} } /> }
+                            name='Location'
+                            id='input2'
+
+                            value={this.state.position}
+                            containerElement={ <div style={ {height: '100%'} }/> }
+                            mapElement={ <div style={ {height: '400px'} }/> }
                             defaultPosition={defaultPosition}
-                            radius = {parseInt(this.state.Radius)}
+                            radius={parseInt(this.state.Radius)}
                             onChange={this.handleLocationChange}
                         />
 
@@ -93,10 +108,25 @@ class Matchmaking extends Component {
                             onChange={this.setValue.bind(this, 'Radius')}/>
                         <br />
 
-                        {/*Available Dates*/}
-                        {/*<br />*/}
-                        {/*<input value="Availability" type='datetime-local' name='Available dates' id='input5'/>*/}
-                        {/*<br />*/}
+                        Availability
+                        <br />
+
+                        <div id='datetime'>
+                            <DateTimePicker
+                                value={this.state.date}
+                                onChange={date => this.setState({date:date}) }/>
+                        </div>
+                        <br />
+
+
+                        Duration
+                        <br /><input value={parseInt(this.state.Duration)}
+                                     type='text'
+                                     name='Duration'
+                                     id='input1'
+                                     onChange={this.setValue.bind(this, 'Duration')}/>
+                        <br />
+
 
                         <input type="submit" value="Submit"/>
                     </form>
