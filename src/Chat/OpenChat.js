@@ -7,8 +7,32 @@ var axios = require('axios');
 class OpenChat extends Component {
   state = {
       chat_name: "Chat",
-      messages: []
+      messages: [],
+      message:""
   }
+
+  inputChange(e) {
+    const value = e.target.value;
+    this.setState({
+      message: value
+    })
+  }
+
+  sendMessage() {
+    this.setState({
+      messages: [
+        ...this.state.messages,
+        {
+          sender:"Marcel",
+          message:this.state.message
+        }
+      ],
+      message:""
+    })
+    var messageBox = document.getElementById("MessageBox");
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
 
   componentDidMount() {
     var _this = this;
@@ -26,10 +50,21 @@ class OpenChat extends Component {
   render() {
     return (
       <div class="ChatPanel">
-        <h1>{this.state.chat_name}</h1>
-        {
-          this.state.messages.map(message => (<MessageCard data={message}/>))
-        }
+        <div class="ChatHeader">
+          <h1>{this.state.chat_name}</h1>
+        </div>
+        <div id="MessageBox" class="MessageBox">
+          {
+            this.state.messages.map(message => (<MessageCard data={message}/>))
+          }
+        </div>
+        <div class="MessageEntry">
+          <input
+            type="text"
+            onChange={e => this.inputChange(e)}
+            value={this.state.message}/>
+            <button class="SendButton" onClick={() => this.sendMessage()}>Send</button>
+        </div>
       </div>
     );
   }

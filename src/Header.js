@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     return (
       <div id='menupanel'>
-          <h1>"PLACEHOLDER"</h1>
+          <h1>MatchUps</h1>
           <div id="menuwrapper">
           <ul>
             <li><Link to="/profile">Profile</Link></li>
