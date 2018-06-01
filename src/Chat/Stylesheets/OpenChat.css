@@ -8,17 +8,40 @@ h1 {
 }
 
 .MessageBox {
-  height: 79vh;
+  height: 78vh;
   overflow-y:auto;
   scroll-behavior: smooth;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
 }
 
-.MessageEntry {
-  height: 4vh;
+.MessageBuilder {
+  width: 80%;
+  height: 100%;
 }
 
+input[type=text] {
+    width: 80%;
+    height: 100%;
+    margin: 8px 0;
+    font-size: 2vh;
+    padding: 1.5vh 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.SendButton {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+    width: 20%;
+    height: 100%;
+    font-size: 2vh;
+    padding: 1.5vh 0;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 .ChatPanel {
   height: 100%;

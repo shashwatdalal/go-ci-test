@@ -63,7 +63,7 @@ class OpenChat extends Component {
             type="text"
             onChange={e => this.inputChange(e)}
             value={this.state.message}/>
-            <button onClick={() => this.sendMessage()}>Send</button>
+            <button class="SendButton" onClick={() => this.sendMessage()}>Send</button>
         </div>
       </div>
     );

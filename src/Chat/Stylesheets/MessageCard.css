@@ -21,9 +21,14 @@
 }
 
 .message_sent, .message_received {
+  font-size: 1.2vh;
+}
+
+.message_sent, .message_received {
+  font-size: 1.7vh;
   border-radius: 2px;
   border: 1px solid #ccc;
-  padding-bottom: 0.1em;
+  padding-bottom: 0.05vh;
 }
 
 .venue {
