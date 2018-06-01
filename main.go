@@ -30,7 +30,7 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("./build")))
 
 	// Bring up matches in chat mode
-	http.Handle("/teammatches", getTeamMatches)
+	http.HandleFunc("/teammatches", getTeamMatches)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
