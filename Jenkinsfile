@@ -43,7 +43,7 @@ node {
 
     stage('Regression Test') {
       node("katalon-chrome-tests") {
-          sh 'cd ../.. && tree && ./run_chrome'
+          sh 'pwd && cd ../ && tree && ./run_chrome'
       }
     }
 
