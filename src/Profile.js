@@ -6,12 +6,11 @@ import axios from 'axios';
 
 class Profile extends Component {
   state = {
-    username: "thomasyung_",
-    name: "Thomas Yung",
-    age: 20,
-    location: "Manchester",
-    score: 1000,
-    input: "",
+    username: "",
+    name: "",
+    age: -1,
+    location: "",
+    score: -1,
     matches: [
       {
         date: "03-12-17",
@@ -34,9 +33,33 @@ class Profile extends Component {
     ]
   };
 
-  loadProfile() {
+  loadUserInformation() {
     // Query DB
-    axios.get('http://localhost:9000/echo?test').then(response => console.log(response));
+    var _this = this;
+    var username = 'thomasyung_';
+    axios.get('/getuserinfo?username='+username)
+         .then(function(response) {
+           _this.setState({
+             name: response.data.Name,
+             age: response.data.Age,
+             location: response.data.Location,
+             score: response.data.Score
+           });
+         });
+  }
+
+  loadUserAvailability() {
+
+  }
+
+  loadUserFixtures() {
+
+  }
+
+  componentDidMount() {
+    this.loadUserInformation();
+    this.loadUserAvailability();
+    this.loadUserFixtures();
   }
 
   getResult(item) {
@@ -55,15 +78,10 @@ class Profile extends Component {
     this.setState({input: value});
   }
 
-  // <input type='text' onChange={e => this.inputChange(e)}/>
-  // <button onClick={this.loadProfile()}>Submit</button>
-
-
   render() {
     return (
       <div id='contentpanel'>
         <div id='contentcontainer'>
-          <a><p class='centertext'>Load Details</p></a>
           <h1 id='username' class='centertext'>{this.state.username.toUpperCase()}</h1>
           <h3 class='centertext'>Name: <span class='thintext'>{this.state.name}</span></h3>
           <h3 class='centertext'>Age: <span class='thintext'>{this.state.age}</span></h3>
@@ -72,6 +90,7 @@ class Profile extends Component {
           <div class="AvTable">
             <AvailabiltyTable />
           </div>
+
           <div id='resultsbox'>
           {
             this.state.matches.map(item =>
