@@ -1,5 +1,28 @@
 h1 {
   margin: 0;
-  padding-bottom: 0.3em;
   border: 0;
 }
+
+.ChatHeader {
+  height: 4vh;
+}
+
+.MessageBox {
+  height: 79vh;
+  overflow-y:auto;
+  scroll-behavior: smooth;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.MessageEntry {
+  height: 4vh;
+}
+
+
+.ChatPanel {
+  height: 100%;
+  border-bottom: 2px solid black;
+  display: block;
+}
+* {box-sizing: border-box;}

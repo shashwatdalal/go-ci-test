@@ -70,7 +70,7 @@ class Profile extends Component {
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location}</span></h3>
           <h3 class='centertext'>Score: <span class='thintext'>{this.state.score}</span></h3>
           <div class="AvTable">
-          <AvailabiltyTable />
+            <AvailabiltyTable />
           </div>
           <div id='resultsbox'>
           {
@@ -84,6 +84,7 @@ class Profile extends Component {
             )
           }
           </div>
+
 
 
         </div>

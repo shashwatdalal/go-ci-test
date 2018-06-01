@@ -7,7 +7,6 @@ import Teams from './Teams';
 import { Switch, Route } from 'react-router-dom'
 
 const Main = () => (
-  <main>
     <Switch>
       <Route exact path='/' component={Profile}/>
       <Route path='/chat' component={Chat}/>
@@ -16,7 +15,6 @@ const Main = () => (
       <Route path='/matchmaking' component={Matchmaking}/>
       <Route path='/Teams' component={Teams}/>
     </Switch>
-  </main>
 )
 
 export default Main;

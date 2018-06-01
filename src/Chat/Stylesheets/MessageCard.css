@@ -1,13 +1,24 @@
-.sender {
-  text-align: center;
+.message_sender_received {
+  text-align: left;
   grid-area: sd;
 }
 
-.message {
+.message_sender_sent {
+  text-align: right;
+  grid-area: sd;
+}
+
+.message_sent {
+  text-align: right;
   grid-area: ms;
 }
 
-.message_text {
+.message_received {
+  grid-area: ms;
+  text-align: left;
+}
+
+.message_sent, .message_received {
   border-radius: 2px;
   border: 1px solid #ccc;
   padding-bottom: 0.1em;
