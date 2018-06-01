@@ -7,6 +7,7 @@ import (
 	"database/sql"
   _ "github.com/lib/pq"
 	"encoding/json"
+	"fmt"
 )
 
 const (
