@@ -12,20 +12,19 @@ node {
         nodeImage = docker.build("shashwatdalal/node-image","-f ./dockerfiles/Dockerfile.node .")
 
     }
-		parallel {
-      stage('React Tests') {
+		parallel (
+      React Tests: {
         nodeImage.inside('-v $PWD:/node') {
           sh 'yarn install'
           sh 'yarn build'
         }
-      }
-
-      stage('Go Tests') {
+      },
+      Go Tests: {
         goImage.inside('-v $PWD:/go/src/go-ci-test') {
           sh 'go build -o main'
         }
       }
-    }
+    )
 
     stage('Push Image') {
         def prodImage = docker.build("shashwatdalal/prod-image","-f ./dockerfiles/Dockerfile.prod .")
