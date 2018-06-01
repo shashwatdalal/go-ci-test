@@ -10,11 +10,13 @@
 
 .message_sent {
   text-align: right;
+  float: right;
   grid-area: ms;
 }
 
 .message_received {
   grid-area: ms;
+  float: right;
   text-align: left;
 }
 
