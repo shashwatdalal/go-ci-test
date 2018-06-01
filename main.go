@@ -73,9 +73,8 @@ func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	j,_ := json.Marshal(result)
-	fmt.Fprintln(w, string(j))
+	fmt.Fprintln(writer, string(j))
 	fmt.Println(string(j))
-  return res
 }
 
 func checkErr(err error) {
@@ -84,7 +83,3 @@ func checkErr(err error) {
     }
 }
 
-func addMatch(writer http.ResponseWriter, request *http.Request) {
-    data, err := url.QueryUnescape(r.URL.RawQuery)
-
-}
