@@ -18,7 +18,7 @@ const (
   DB_PORT     = "5432"
 )
 
-type Match struct {
+type Advertisement struct {
 	Name      string
 	StartTime  string
 	EndTime  	string
@@ -39,7 +39,7 @@ func matchmaking(writer http.ResponseWriter, request *http.Request) {
 	writer.Write([]byte("hello"))
 }
 
-// NOTE: This is a hardcoded test to demostrate that the communication channels work
+// This is a hardcoded test to demostrate that the communication channels work
 func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -48,19 +48,18 @@ func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
   checkErr(err)
 
 	// Run query
-	fmt.Println("#Querying")
   query := fmt.Sprintf("SELECT * FROM advertisements_example WHERE location='W6' AND start_time >= '2018-05-20 12:00:00' AND end_time <= '2018-05-20 16:00:00';")
-  fmt.Println("\tQuery: ", query)
   rows, err := db.Query(query)
   checkErr(err)
 
+	// Initialise the json response
 	var jsonText = []byte(`[]`)
-
-	var result []Match
+	var result []Advertisement
 	err = json.Unmarshal([]byte(jsonText), &result)
 
+	// Add every database hit to the result
 	for rows.Next() {
-		data := Match{}
+		data := Advertisement{}
 		err = rows.Scan(
 			&data.Name,
 			&data.StartTime,
@@ -69,12 +68,10 @@ func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 			&data.Sport)
 
 		result = append(result, data)
-		fmt.Println("HIT: ", data)
 	}
 
-	j,_ := json.Marshal(result)
-	fmt.Fprintln(writer, string(j))
-	fmt.Println(string(j))
+	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
+	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 }
 
 func checkErr(err error) {
@@ -82,4 +79,3 @@ func checkErr(err error) {
         fmt.Println(err)
     }
 }
-

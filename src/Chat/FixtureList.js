@@ -11,14 +11,10 @@ class FixtureList extends Component {
 
   componentDidMount() {
     var _this = this;
-    this.serverRequest =
-      axios
-        .get("promoted_fixtures.json")
-        .then(function(result) {
-          _this.setState({
-            fixtures: result.data.fixtures
-          });
-        })
+    this.serverRequest = axios.get("/teammatches")
+                              .then(function(result) {
+                                _this.setState({fixtures: result.data});
+                              })
   }
 
   render() {
