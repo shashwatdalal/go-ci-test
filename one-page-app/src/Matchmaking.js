@@ -3,6 +3,10 @@ import axios from 'axios';
 
 import LocationPicker from 'react-location-picker';
 
+const defaultPosition = {
+    lat: 51.509865,
+    lng: -0.118092
+};
 
 class Matchmaking extends Component {
 
@@ -10,33 +14,37 @@ class Matchmaking extends Component {
         super(props);
         this.state = {
             Sport: "",
-            Latitude: 0.0,
-            Longitude: 0.0,
-            Radius: 2
+            Radius: 2000,
+            address: "",
+            position: {
+                lat: 0.0,
+                lng: 0.0,
+            }
         }
-        this.handleSubmit = this.bind
-
+        this.setValue = this.setValue.bind(this);
+        this.handleLocationChange = this.handleLocationChange.bind(this);
     }
 
 
     setValue(field, event) {
-        //If the input fields were directly within this
-        //this component, we could use this.refs.[FIELD].value
-        //Instead, we want to save the data for when the form is submitted
         var object = {};
         object[field] = event.target.value;
         this.setState(object);
     }
 
     handleSubmit(event) {
-        var url = "http://localhost:9000/echo?"
+        var url = "http://localhost:3000/echo?";
 
         url += encodeURIComponent(document.getElementById('input1').value).replace(/%20/g, "+");
+        url += encodeURIComponent()
         url += encodeURIComponent(document.getElementById('input4').value).replace(/%20/g, "+");
 
-        axios.get(url).then(response => console.log(response))
+        axios.get(url).then(response => console.log(response));
 
-        event.preventDefault();
+    }
+
+    handleLocationChange({position, address}) {
+        this.setState({ position, address });
     }
 
     render() {
@@ -64,13 +72,21 @@ class Matchmaking extends Component {
                         {/*<input type='text' name='Longitude' id='input3'/>*/}
                         {/*<br />*/}
 
+                        <LocationPicker
+                            containerElement={ <div style={ {height: '100%'} } /> }
+                            mapElement={ <div style={ {height: '400px'} } /> }
+                            defaultPosition={defaultPosition}
+                            radius = {parseInt(this.state.Radius)}
+                            onChange={this.handleLocationChange}
+                        />
+
                         Radius
                         <br />
                         <input
-                            value={this.state.Radius}
-                            min="2"
-                            max="50"
-                            step="1"
+                            value={parseInt(this.state.Radius)}
+                            min="2000"
+                            max="50000"
+                            step="1000"
                             type='range'
                             name='Radius'
                             id='input4'
@@ -83,7 +99,6 @@ class Matchmaking extends Component {
                         {/*<br />*/}
 
                         <input type="submit" value="Submit"/>
-                        <br />
                     </form>
                 </div>
             </div>
