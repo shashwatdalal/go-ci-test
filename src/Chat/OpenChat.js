@@ -62,9 +62,15 @@ class OpenChat extends Component {
           <input
             type="text"
             onChange={e => this.inputChange(e)}
-            value={this.state.message}/>
+            value={this.state.message}
+            onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  this.sendMessage()
+                }
+              }}/>
             <button class="SendButton" onClick={() => this.sendMessage()}>Send</button>
         </div>
+
       </div>
     );
   }
