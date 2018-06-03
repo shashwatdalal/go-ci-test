@@ -14,12 +14,6 @@ node {
     }
     stage("Source Build / Tests") {
 		 parallel (
-        "React Tests": {
-          nodeImage.inside('-v $PWD:/node') {
-            sh 'yarn install'
-            sh 'yarn build'
-          }
-        },
         "Go Tests": {
           goImage.inside('-v $PWD:/go/src/go-ci-test') {
             sh 'go build -o main'
