@@ -18,6 +18,11 @@ class OpenChat extends Component {
     })
   }
 
+  scrollChat() {
+    var messageBox = document.getElementById("MessageBox");
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
   sendMessage() {
     this.setState({
       messages: [
@@ -28,9 +33,9 @@ class OpenChat extends Component {
         }
       ],
       message:""
-    })
-    var messageBox = document.getElementById("MessageBox");
-    messageBox.scrollTop = messageBox.scrollHeight;
+    }, () => {
+      this.scrollChat();
+    });
   }
 
 
@@ -44,6 +49,8 @@ class OpenChat extends Component {
             chat_name: result.data.chat_name,
             messages: result.data.chat_messages
           });
+            var messageBox = document.getElementById("MessageBox");
+            messageBox.scrollTop = messageBox.scrollHeight;
         })
   }
 
