@@ -1,0 +1,39 @@
+.TeamGrid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: minmax(20px, auto);
+    grid-template-areas:
+            ". ti ti ti ti . . . ."
+            ". ti ti ti ti . . ct ."
+            ". ti ti ti ti . . . ."
+            ". ti ti ti ti . inv inv inv"
+            ". ti ti ti ti . . . ."
+
+}
+* {box-sizing: border-box;}
+
+.TeamGrid {
+    border: 1px solid #ccc;
+    margin: 0 0 1px 0;
+    text-decoration: none;
+    color: black;
+}
+
+.invitation {
+    grid-area: inv;
+}
+
+.createteam {
+    grid-area: ct;
+}
+
+
+.teaminfo {
+    background-color: white;
+    grid-area: ti;
+    height: 78vh;
+    overflow-y:auto;
+    scroll-behavior: smooth;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
