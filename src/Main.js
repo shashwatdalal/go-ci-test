@@ -3,7 +3,7 @@ import Chat from './Chat';
 import Profile from './Profile';
 import Leaderboards from './Leaderboards';
 import Matchmaking from './Matchmaking';
-import Teams from './Teams';
+import Teams from './Teams/Teams';
 import { Switch, Route } from 'react-router-dom'
 
 const Main = () => (
