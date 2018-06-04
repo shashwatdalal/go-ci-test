@@ -10,6 +10,7 @@ import (
 )
 
 type Advertisement struct {
+	// Add ID
 	Name       string
 	StartTime  string
 	EndTime  	 string
@@ -20,47 +21,11 @@ type Advertisement struct {
 type Message struct {
 	Sender		string
 	Message		string
+	Date      string
 }
 
 // This is a hardcoded test to demostrate that the communication channels work
 func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-  checkErr(err)
-
-	chat_name = "team1chat";
-	query_text = "SELECT * FROM" + chat_name + " WHERE location='W6'"
-
-	// Run query
-  query := fmt.Sprintf("SELECT * FROM %s WHERE location='W6'", chat_name);
-  rows, err := db.Query(query)
-  checkErr(err)
-
-	// Initialise the json response
-	var jsonText = []byte(`[]`)
-	var result []Advertisement
-	err = json.Unmarshal([]byte(jsonText), &result)
-
-	// Add every database hit to the result
-	for rows.Next() {
-		data := Advertisement{}
-		err = rows.Scan(
-			&data.Name,
-			&data.StartTime,
-			&data.EndTime,
-			&data.Location,
-			&data.Sport)
-
-		result = append(result, data)
-	}
-
-	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Fprintln(writer, string(j)) // Write the result to the sender
-}
-
-func getChatMessages(writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
