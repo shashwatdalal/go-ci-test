@@ -9,8 +9,8 @@ import (
 	"fmt"
 )
 
-type Advertisement struct {
-	// Add ID
+type PromotedAdvertisement struct {
+	AdID			 string
 	Name       string
 	StartTime  string
 	EndTime  	 string
@@ -24,7 +24,6 @@ type Message struct {
 	Date      string
 }
 
-// This is a hardcoded test to demostrate that the communication channels work
 func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -32,20 +31,24 @@ func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
   db, err := sql.Open("postgres", dbinfo)
   checkErr(err)
 
+	team_name := "Toms Tanks"
+	fields := "advertisements.advert_id, advertisements.name, advertisements.start_time, advertisements.end_time, advertisements.location, advertisements.sport";
+
 	// Run query
-  query := fmt.Sprintf("SELECT * FROM advertisements_example WHERE location='W6' AND start_time >= '2018-05-20 12:00:00' AND end_time <= '2018-05-20 16:00:00';")
+  query := fmt.Sprintf("SELECT %s FROM advertisements JOIN promoted_fixtures ON advertisements.advert_id=promoted_fixtures.advert_id WHERE promoted_fixtures.name='%s';", fields, team_name)
   rows, err := db.Query(query)
   checkErr(err)
 
 	// Initialise the json response
 	var jsonText = []byte(`[]`)
-	var result []Advertisement
+	var result []PromotedAdvertisement
 	err = json.Unmarshal([]byte(jsonText), &result)
 
 	// Add every database hit to the result
 	for rows.Next() {
-		data := Advertisement{}
+		data := PromotedAdvertisement{}
 		err = rows.Scan(
+			&data.AdID,
 			&data.Name,
 			&data.StartTime,
 			&data.EndTime,
@@ -56,5 +59,6 @@ func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
+	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 }
