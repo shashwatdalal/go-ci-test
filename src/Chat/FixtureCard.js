@@ -6,55 +6,51 @@ class FixtureCard extends Component {
     upvotes: 3,
     downvotes: 0,
     upvoted: false,
-    downvoted: true
+    downvoted: false
   }
 
   toggle_upvote() {
     // Write upvote to file, check if upvote already in file
-    {console.log("toggle_upvote");}
-    this.state.upvotes++;
     if (this.state.downvoted) {
-      this.setState = {
-        downvotes: this.state.downvotes--,
-        upvotes: this.state.upvotes++,
+      this.setState({
+        downvotes: this.state.downvotes - 1,
+        upvotes: this.state.upvotes + 1,
         upvoted: true,
         downvoted: false
-      }
+      })
     } else if (this.state.upvoted) {
-      this.setState = {
-        upvotes: this.state.upvotes--,
-        upvotes: false
-      }
+      this.setState({
+        upvotes: this.state.upvotes - 1,
+        upvoted: false
+      })
     } else {
-      this.setState = {
-        upvotes: this.state.upvotes++,
+      this.setState({
+        upvotes: this.state.upvotes + 1,
         upvoted: true
-      }
+      })
     }
   }
 
 
   toggle_downvote() {
     // Write downvote to file, check if upvote already in file
-    {console.log("toggle_downvote");}
-    this.state.downvotes++;
     if (this.state.upvoted) {
-      this.setState = {
-        upvotes: this.state.upvotes--,
-        downvotes: this.state.downvotes++,
+      this.setState({
+        upvotes: this.state.upvotes - 1,
+        downvotes: this.state.downvotes + 1,
         upvoted: false,
         downvoted: true
-      }
+      })
     } else if (this.state.downvoted) {
-      this.setState = {
-        downvotes: this.state.downvotes--,
+      this.setState({
+        downvotes: this.state.downvotes - 1,
         downvoted: false
-      }
+      })
     } else {
-      this.setState = {
-        downvotes: this.state.downvotes++,
+      this.setState({
+        downvotes: this.state.downvotes + 1,
         downvoted: true
-      }
+      })
     }
   }
 

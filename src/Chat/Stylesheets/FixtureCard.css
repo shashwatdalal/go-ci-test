@@ -83,5 +83,6 @@ h1 {
 }
 
 .arrow-up, .arrow-down, .arrow-up-selected, .arrow-down-selected {
+  cursor: pointer;
   display: inline-block;
 }

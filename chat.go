@@ -24,6 +24,64 @@ type Message struct {
 	Date      string
 }
 
+func getChatMessages(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+  db, err := sql.Open("postgres", dbinfo)
+  checkErr(err)
+
+	// Obtain username (query is of the form ?username)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	team_name := (strings.Split(getquery, "=")[1])
+	chat_name := team_name + "_chat"
+
+	// Run query
+  query := fmt.Sprintf("SELECT * FROM %s;", chat_name)
+  rows, err := db.Query(query)
+  checkErr(err)
+
+	// Add the only database hit to the result
+	rows.Next()
+	data := UserInfo{}
+	err = rows.Scan(
+		&data.Sender,
+		&data.Message,
+		&data.Date)
+
+	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+}
+
+func tallyUpvotesDownvotes(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+  db, err := sql.Open("postgres", dbinfo)
+  checkErr(err)
+
+	// Obtain username (query is of the form ?username)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	params := strings.Split(strings.Split(getquery, "?")[1], "&")
+	team_name := string.Split(params, "=")[1]
+	fixture_id := string.Split(params, "=")[1]
+	upvote_name := team_name + "_upvotes"
+	downvote_name := team_name + "_downvotes"
+
+	// Run query
+  query := fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", upvote_name, fixture_id)
+  upvotes, err := db.Query(query)
+	checkErr(err)
+	query := fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", downvote_name, fixture_id)
+  downvotes, err := db.Query(query)
+  checkErr(err)
+
+	result := [2]int{strconv.ParseInt(upvotes), strconv.ParseInt(downvotes)}
+
+	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+}
+
 func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
