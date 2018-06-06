@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import "./Stylesheets/MainGrid.css"
 import Invitations from "./Invitations"
-import TeamCard from "./TeamsCard"
+import TeamsCard from "./TeamsCard"
 import { Button } from 'react-bootstrap'
 
-class Teams extends Component {
+export default class Teams extends Component {
     render() {
         return (
             <div class="TeamGrid">
                 <div class="teaminfo">
-                    <TeamCard/>
+                    <TeamsCard/>
                 </div>
                 <div class="createTeam">
                     <Button bsStyle="success" bsSize="large">
@@ -23,4 +23,3 @@ class Teams extends Component {
     }
 }
 
-export default Teams;

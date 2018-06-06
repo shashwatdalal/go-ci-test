@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import {declineInvitation, acceptInvitation,fetchInvitations} from "../actions/invitationsActions";
+import { connect} from "react-redux";
 
 class Invitations extends Component {
 
-    constructor(props) {
-        super()
-        this.state = {"teams": ["Sexy Pandas","Marcel FC","Andy Ris","Obi1"]}
-    }
-
-    declineInvitation(teamToDecline) {
-      this.setState({
-          "teams": this.state.teams.filter(team => team != teamToDecline)
-      })
-    }
-
-    acceptInvitation(teamToAccept) {
-        this.setState({
-            "teams": this.state.teams.filter(team => team != teamToAccept)
-        })
+    componentWillMount() {
+        this.props.fetchInvitations();
     }
 
     render() {
         return (
             <div>
                 <ListGroup>
-                    { this.state.teams.map((team) =>
-                    <ListGroupItem header={team}>
-                        <Button bsStyle="success" onClick={this.acceptInvitation.bind(this,team)}> Accept </Button>
-                        <Button bsStyle="danger" onClick={this.declineInvitation.bind(this,team)}> Decline </Button>
+                    { this.props.invitations.map((invitation) =>
+                    <ListGroupItem header={invitation.name}>
+                        <Button bsStyle="success" onClick={this.props.acceptInvitation.bind(this,invitation)}> Accept </Button>
+                        <Button bsStyle="danger" onClick={this.props.declineInvitation.bind(this,invitation)}> Decline </Button>
                     </ListGroupItem>
                     )}
                 </ListGroup>
-            </div>);
+            </div>
+           );
     }
 }
 
-export default Invitations;
+const mapStateToProps = state => ({
+    invitations: state.invitations
+});
+
+export default connect(mapStateToProps, {acceptInvitation,declineInvitation,fetchInvitations})(Invitations)
