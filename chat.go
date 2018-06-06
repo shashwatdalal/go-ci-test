@@ -7,6 +7,8 @@ import (
   _ "github.com/lib/pq"
 	"encoding/json"
 	"fmt"
+	"net/url"
+	"strings"
 )
 
 type PromotedAdvertisement struct {
@@ -43,7 +45,7 @@ func getChatMessages(writer http.ResponseWriter, request *http.Request) {
 
 	// Add the only database hit to the result
 	rows.Next()
-	data := UserInfo{}
+	data := Message{}
 	err = rows.Scan(
 		&data.Sender,
 		&data.Message,
@@ -62,9 +64,9 @@ func tallyUpvotesDownvotes(writer http.ResponseWriter, request *http.Request) {
 
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	params := strings.Split(strings.Split(getquery, "?")[1], "&")
-	team_name := string.Split(params, "=")[1]
-	fixture_id := string.Split(params, "=")[1]
+	params := strings.Split((strings.Split(getquery, "?"))[1], "&")
+	team_name := strings.Split(params[0], "=")[1]
+	fixture_id := strings.Split(params[1], "=")[1]
 	upvote_name := team_name + "_upvotes"
 	downvote_name := team_name + "_downvotes"
 
@@ -72,13 +74,23 @@ func tallyUpvotesDownvotes(writer http.ResponseWriter, request *http.Request) {
   query := fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", upvote_name, fixture_id)
   upvotes, err := db.Query(query)
 	checkErr(err)
-	query := fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", downvote_name, fixture_id)
+	query = fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", downvote_name, fixture_id)
   downvotes, err := db.Query(query)
   checkErr(err)
+	num_upvotes := 0
+	num_downvotes := 0
 
-	result := [2]int{strconv.ParseInt(upvotes), strconv.ParseInt(downvotes)}
+	for upvotes.Next() {
+		err = upvotes.Scan(
+			&num_upvotes)
+	}
+	for downvotes.Next() {
+		err = downvotes.Scan(
+			&num_downvotes)
+	}
+	result := [2]int{num_upvotes, num_downvotes}
 
-	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 }
 
