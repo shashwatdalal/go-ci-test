@@ -11,6 +11,11 @@ import (
 	"strings"
 )
 
+/*
+ * TODO: Refactor merging for GetUserFixtures
+ * TODO: Refactor common database behaviour
+ */
+
 type UserInfo struct {
 	Username  string
 	Name      string
@@ -208,4 +213,39 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 
 	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+})
+
+// Update the user availability for the user and values specified in the url
+var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	checkErr(err)
+
+	// Obtain the bitmaps (query is of the form ?username=name&fst=x&snd=y)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+
+	username := strings.Split((strings.Split(getquery, "=")[1]), "&")[0]
+
+	fstString := strings.Split((strings.Split(getquery, "=")[2]), "&")[0]
+	fstBitmap, _ := strconv.ParseInt(fstString, 10, 64)
+
+	sndString := (strings.Split(getquery, "=")[3])
+	sndBitmap, _ := strconv.ParseInt(sndString, 10, 64)
+
+	// Run query
+	query := fmt.Sprintf("UPDATE availabilities SET fst_half=%d, snd_half=%d WHERE username='%s'",
+											 fstBitmap, sndBitmap, username)
+	rows, err := db.Query(query)
+	fmt.Println(rows)
+	rows.Next()
+	fmt.Println(rows)
+	checkErr(err)
+
+	if err == nil {
+		fmt.Fprintln(writer, "success") // Write the result to the sender
+	} else {
+		fmt.Fprintln(writer, "fail") // Write the result to the sender
+	}
 })
