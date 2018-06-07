@@ -1,5 +1,6 @@
 import {FETCH_INVITATIONS, DECLINE_INVITATION, ACCEPT_INVITATION, ADD_TEAM} from "./types";
-import { serverDomain } from "../ipconfig"
+import {serverDomain} from "../ipconfig"
+import {fetchPins} from "./pinsActions";
 
 export const fetchInvitations = () => dispatch => {
     fetch(serverDomain + "/getInvitations")
@@ -19,6 +20,7 @@ export const acceptInvitation = invitation => dispatch => {
         type: ADD_TEAM,
         payload: invitation
     });
+    invitation.players.map(p => dispatch(fetchPins(p,invitation.name)));
 };
 
 export const declineInvitation = invitation => dispatch => {

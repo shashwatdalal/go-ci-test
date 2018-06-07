@@ -71,16 +71,16 @@ class Matchmaking extends Component {
                 <div id="request_form">
                     <form onSubmit={this.handleSubmit}>
 
-                        <br />
+                        <br/>
 
                         Sport
-                        <br />
+                        <br/>
                         <input value={this.state.Sport}
                                type='text'
                                name='Sport'
                                id='input1'
                                onChange={this.setValue.bind(this, 'Sport')}/>
-                        <br />
+                        <br/>
 
                         Location
                         <LocationPicker
@@ -88,15 +88,15 @@ class Matchmaking extends Component {
                             id='input2'
 
                             value={this.state.position}
-                            containerElement={ <div style={ {height: '100%'} }/> }
-                            mapElement={ <div style={ {height: '400px'} }/> }
+                            containerElement={<div style={{height: '100%'}}/>}
+                            mapElement={<div style={{height: '400px'}}/>}
                             defaultPosition={defaultPosition}
                             radius={parseInt(this.state.Radius)}
                             onChange={this.handleLocationChange}
                         />
 
                         Radius
-                        <br />
+                        <br/>
                         <input
                             value={parseInt(this.state.Radius)}
                             min="2000"
@@ -106,26 +106,26 @@ class Matchmaking extends Component {
                             name='Radius'
                             id='input4'
                             onChange={this.setValue.bind(this, 'Radius')}/>
-                        <br />
+                        <br/>
 
                         Availability
-                        <br />
+                        <br/>
 
                         <div id='datetime'>
                             <DateTimePicker
                                 value={this.state.date}
-                                onChange={date => this.setState({date:date}) }/>
+                                onChange={date => this.setState({date: date})}/>
                         </div>
-                        <br />
+                        <br/>
 
 
                         Duration
-                        <br /><input value={parseInt(this.state.Duration)}
-                                     type='text'
-                                     name='Duration'
-                                     id='input1'
-                                     onChange={this.setValue.bind(this, 'Duration')}/>
-                        <br />
+                        <br/><input value={parseInt(this.state.Duration)}
+                                    type='text'
+                                    name='Duration'
+                                    id='input1'
+                                    onChange={this.setValue.bind(this, 'Duration')}/>
+                        <br/>
 
 
                         <input type="submit" value="Submit"/>

@@ -1,0 +1,35 @@
+.TeamCardsGrid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: minmax(20px, auto);
+    grid-template-areas:
+            ".  tn tn tn tn tn tn tn tn "
+            ".  tc tc .  mp mp mp mp . ";
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.TeamCardsGrid {
+    border: 1px solid #ccc;
+    margin: 0 0 1px 0;
+    text-decoration: none;
+    color: black;
+}
+
+.map {
+    grid-area: mp;
+    background-color: blanchedalmond;
+    height: 50vh;
+    align-self: start;
+    text-align: center;
+}
+
+.teamname {
+    grid-area: tn;
+}
+.teamcard {
+    background-color: white;
+    grid-area: tc;
+}

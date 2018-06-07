@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "google-map-react": "^1.0.3",
     "moment": "^2.22.2",
     "rc-time-duration-picker": "^1.0.12",
     "react": "^16.4.0",

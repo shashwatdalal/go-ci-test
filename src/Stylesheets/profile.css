@@ -1,83 +1,83 @@
 #username {
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  border: 2px solid black;
-  padding: 2%;
-  font-size: 7.5vmin;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    padding: 2%;
+    font-size: 7.5vmin;
 }
 
 .circleimg {
-  max-width: 30%;
-  height: auto;
-  margin: auto;
-  clip-path: circle(80px at center);
-  display: block;
+    max-width: 30%;
+    height: auto;
+    margin: auto;
+    clip-path: circle(80px at center);
+    display: block;
 }
 
 .centertext {
-  text-align: center;
+    text-align: center;
 }
 
 .thintext {
-  font-size: 3vmin;
-  font-weight: 400;
+    font-size: 3vmin;
+    font-weight: 400;
 }
 
 a {
-  font-size: 2vmin;
-  text-decoration: underline;
+    font-size: 2vmin;
+    text-decoration: underline;
 }
 
 a:hover {
-  text-decoration: overline;
+    text-decoration: overline;
 }
 
 .resultcard h2 {
-  font-size: 5vmin;
+    font-size: 5vmin;
 }
 
 .oppname {
-  font-size: 2.5vmin;
+    font-size: 2.5vmin;
 }
 
 #resultsbox {
-  height: 18em;
-  overflow-y:auto;
-  scroll-behavior: smooth;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  padding-top: 15px;
-  padding-bottom: 15px;
+    height: 18em;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .AvTable {
-  width: 100%;
-  text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
 .AvTable table {
-  margin: 0 auto; /* or margin: 0 auto 0 auto */
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
 }
 
 .resultcard {
-  height: 15em;
-  width: 40%;
-  padding-top: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-  /* border: 2px solid black; */
+    height: 15em;
+    width: 40%;
+    padding-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    /* border: 2px solid black; */
 }
 
 .win {
-  background-color: #c1ffd1;
+    background-color: #c1ffd1;
 }
 
 .lose {
-  background-color: #ffbaba;
+    background-color: #ffbaba;
 }
 
 .draw {
-  background-color: #fffac1;
+    background-color: #fffac1;
 }

@@ -3,8 +3,8 @@ import {addTeam} from "../actions/teamsActions";
 
 const initialState = [];
 
-export default function(state = initialState, action) {
-    switch(action.type) {
+export default function (state = initialState, action) {
+    switch (action.type) {
         case ACCEPT_INVITATION:
             return state.filter(teams => teams.name !== action.payload.name);
         case DECLINE_INVITATION:

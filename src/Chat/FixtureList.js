@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import FixtureCard from './FixtureCard';
 import './Stylesheets/FixtureList.css';
 
 var axios = require('axios');
 
 class FixtureList extends Component {
-  state = {
-      fixtures: []
-  }
+    state = {
+        fixtures: []
+    }
 
-  componentDidMount() {
-    var _this = this;
-    this.serverRequest = axios.get("/teammatches")
-                              .then(function(result) {
-                                _this.setState({fixtures: result.data});
-                              })
-  }
+    componentDidMount() {
+        var _this = this;
+        this.serverRequest = axios.get("/teammatches")
+            .then(function (result) {
+                _this.setState({fixtures: result.data});
+            })
+    }
 
-  render() {
-    return (
-      <div class="FixtureList">
-        <h1>Fixtures</h1>
-        {
-          this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.id}`} data={fixture}/>))
-        }
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div class="FixtureList">
+                <h1>Fixtures</h1>
+                {
+                    this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.id}`} data={fixture}/>))
+                }
+            </div>
+        );
+    }
 }
 
 export default FixtureList;

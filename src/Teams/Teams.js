@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "./Stylesheets/MainGrid.css"
 import Invitations from "./Invitations"
 import TeamsCard from "./TeamsCard"
-import { Button } from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 export default class Teams extends Component {
     render() {

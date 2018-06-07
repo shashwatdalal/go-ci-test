@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class Leaderboards extends Component {
-  render() {
-    return ("Place code for Leaderboards here");
-  }
+    render() {
+        return ("Place code for Leaderboards here");
+    }
 }
 
 

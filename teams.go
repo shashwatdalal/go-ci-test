@@ -85,15 +85,15 @@ var sexyPandas = Team{
 		{
 			NAME:     "Allissa Flemyng",
 			IMAGE:    "https://robohash.org/rerumrerumdolorum.png?size=100x100&set=set1",
-			LOCATION: "Alençon"},
+			LOCATION: "Motomachi"},
 		{
 			NAME:     "Nona Langforth",
 			IMAGE:    "https://robohash.org/nesciuntquosaepe.png?size=100x100&set=set1",
-			LOCATION: "Ulricehamn"},
+			LOCATION: "Yamate"},
 		{
 			NAME:     "Prescott Mathevon",
 			IMAGE:    "https://robohash.org/quidemsequidolorum.png?size=100x100&set=set1",
-			LOCATION: "María la Baja"}},
+			LOCATION: "Honmoku"}},
 }
 
 var MarcelFC = Team{
