@@ -1,5 +1,5 @@
 import React from 'react';
-import Chat from './Chat';
+import Chat from './Chat/Chat';
 import Profile from './Profile';
 import Leaderboards from './Leaderboards';
 import Matchmaking from './Matchmaking';

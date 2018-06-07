@@ -5,12 +5,6 @@ import './Stylesheets/OpenChat.css';
 var axios = require('axios');
 
 class OpenChat extends Component {
-  state = {
-      chat_name: "Chat",
-      messages: [],
-      message:""
-  }
-
   inputChange(e) {
     const value = e.target.value;
     this.setState({
@@ -18,44 +12,33 @@ class OpenChat extends Component {
     })
   }
 
-  sendMessage() {
-    this.setState({
-      messages: [
-        ...this.state.messages,
-        {
-          sender:"Marcel",
-          message:this.state.message
-        }
-      ],
-      message:""
-    })
+  scrollChat() {
     var messageBox = document.getElementById("MessageBox");
     messageBox.scrollTop = messageBox.scrollHeight;
   }
 
-
   componentDidMount() {
-    var _this = this;
-    this.serverRequest =
-      axios
-        .get("chat.json")
-        .then(function(result) {
-          _this.setState({
-            chat_name: result.data.chat_name,
-            messages: result.data.chat_messages
-          });
-        })
+    this.props.fetchMessages();
+    scrollChat();
   }
+
+  sendMessage() {
+   this.props.sendMessage(this.state.message);
+   scrollChat();
+   this.setState(){
+     message:""
+   }
+ }
 
   render() {
     return (
       <div class="ChatPanel">
         <div class="ChatHeader">
-          <h1>{this.state.chat_name}</h1>
+          <h1>{this.props.chat_name}</h1>
         </div>
         <div id="MessageBox" class="MessageBox">
           {
-            this.state.messages.map(message => (<MessageCard data={message}/>))
+            this.props.messages.map(message => (<MessageCard data={message}/>))
           }
         </div>
         <div class="MessageEntry">
@@ -74,6 +57,10 @@ class OpenChat extends Component {
       </div>
     );
   }
-}
 
-export default OpenChat;
+  const mapStateToProps = state => ({
+      chat_id: state.chat_id,
+      chat_name: state.chat_name,
+      messages: state.messages
+  })
+}

@@ -5,22 +5,9 @@ import './Stylesheets/ChatList.css';
 var axios = require('axios');
 
 class ChatList extends Component {
-  state = {
-      chats: []
-  }
-
   componentDidMount() {
-    var _this = this;
-    this.serverRequest =
-      axios
-        .get("chats.json")
-        .then(function(result) {
-          _this.setState({
-            chats: result.data.chats
-          });
-        })
+    this.props.fetchChats();
   }
-
 
   render() {
     return (
@@ -32,6 +19,11 @@ class ChatList extends Component {
       </div>
     );
   }
+
+  const mapStateToProps = state => ({
+      chat_id: state.chat_id,
+      chats: state.chats
+  })
 }
 
 export default ChatList;

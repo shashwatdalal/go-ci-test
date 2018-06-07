@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import FixtureList from './Chat/FixtureList';
-import ChatList from './Chat/ChatList';
-import OpenChat from './Chat/OpenChat';
+import FixtureList from './FixtureList';
+import ChatList from './ChatList';
+import OpenChat from './OpenChat';
 import './Stylesheets/Chat.css';
 
-class Chat extends Component {
+export default class Chat extends Component {
   render() { return (
     <div class="chat_wrapper">
       <div id="chatlist" class="sidemenu"><ChatList/></div>
@@ -14,6 +14,3 @@ class Chat extends Component {
     </div>
   )}
 }
-
-
-export default Chat;
