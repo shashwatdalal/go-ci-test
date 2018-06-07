@@ -7,11 +7,11 @@ export const fetchTeams = () => dispatch => {
     fetch(serverDomain + "/getTeams")
         .then(res => res.json())
         .then(teams => {
+            teams.map(team => team.players.map(p => dispatch(fetchPins(p,team))));
             dispatch({
                 type: FETCH_TEAMS,
                 payload: teams
             });
-            teams.map(team => team.players.map(p => dispatch(fetchPins(p,team))));
         });
 };
 
