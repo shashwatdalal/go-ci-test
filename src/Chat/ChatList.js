@@ -13,15 +13,19 @@ class ChatList extends Component {
     return (
       <div class="ChatList">
         <h1>Chats</h1>
+        {this.props.chats.map((chat, index) =>
+            <div eventKey={chat.id} title={t.name}>
+              (<ChatOverviewCard key={`chat-card-${chat.id}`} data={chat}/>))
+            </div>
+        )}
         {
-          this.state.chats.map(chat => (<ChatOverviewCard key={`li-${chat.id}`} data={chat}/>))
+          this.state.chats.map(chat => (<ChatOverviewCard key={`chat-card-${chat.id}`} data={chat}/>))
         }
       </div>
     );
   }
 
   const mapStateToProps = state => ({
-      chat_id: state.chat_id,
       chats: state.chats
   })
 }
