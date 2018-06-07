@@ -28,6 +28,7 @@ type Message struct {
 
 func getChatMessages(writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
+	fmt.Println("getChatMessages")
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
@@ -36,23 +37,57 @@ func getChatMessages(writer http.ResponseWriter, request *http.Request) {
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	team_name := (strings.Split(getquery, "=")[1])
-	chat_name := team_name + "_chat"
+	chat_name := team_name + "_messages"
 
 	// Run query
   query := fmt.Sprintf("SELECT * FROM %s;", chat_name)
   rows, err := db.Query(query)
   checkErr(err)
 
-	// Add the only database hit to the result
-	rows.Next()
-	data := Message{}
-	err = rows.Scan(
-		&data.Sender,
-		&data.Message,
-		&data.Date)
+	var result []Message
 
-	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+	for rows.Next() {
+		data := Message{}
+		err = rows.Scan(
+			&data.Sender,
+			&data.Message,
+			&data.Date)
+
+		result = append(result, data)
+	}
+
+	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
+	fmt.Println(string(j))
+	fmt.Println("getChatMessages")
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+}
+
+func addMessage(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+  db, err := sql.Open("postgres", dbinfo)
+  checkErr(err)
+
+	// Obtain team_name (query is of the form ?username)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	team_name := (strings.Split(getquery, "=")[1])
+	chat_name := team_name + "_messages"
+
+	decoder := json.NewDecoder(request.Body)
+  var message Message
+  err = decoder.Decode(&message)
+  if err != nil {
+      panic(err)
+			defer request.Body.Close()
+  }
+
+	// Run query
+  query := fmt.Sprintf("INSERT INTO %s VALUES('%s', '%s', LOCALTIMESTAMP);",
+							chat_name, message.Sender, message.Message)
+	fmt.Println(query)
+  _, err = db.Query(query)
+  checkErr(err)
 }
 
 func tallyUpvotesDownvotes(writer http.ResponseWriter, request *http.Request) {

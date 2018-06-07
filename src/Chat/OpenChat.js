@@ -24,18 +24,28 @@ class OpenChat extends Component {
   }
 
   sendMessage() {
+    var d = new Date();
+    var time = d.getTime();
+    var new_message = {
+      Sender:"Marcel",
+      Message:this.state.message,
+      Time: time
+    }
     this.setState({
       messages: [
         ...this.state.messages,
-        {
-          sender:"Marcel",
-          message:this.state.message
-        }
+        new_message
       ],
       message:""
     }, () => {
       this.scrollChat();
     });
+    var team_name = "team1"
+    var request = '/addMessage?team=' + team_name
+    axios.post(request, new_message)
+      .then(function(response){
+        console.log(response)
+      });
   }
 
 
@@ -43,11 +53,11 @@ class OpenChat extends Component {
     var _this = this;
     this.serverRequest =
       axios
-        .get("chat.json")
+        .get("getChatMessages?team=team1")
         .then(function(result) {
           _this.setState({
-            chat_name: result.data.chat_name,
-            messages: result.data.chat_messages
+            chat_name: "\"Testing\"",
+            messages: result.data
           });
             var messageBox = document.getElementById("MessageBox");
             messageBox.scrollTop = messageBox.scrollHeight;
@@ -55,6 +65,7 @@ class OpenChat extends Component {
   }
 
   render() {
+    console.log()
     return (
       <div class="ChatPanel">
         <div class="ChatHeader">
@@ -62,7 +73,7 @@ class OpenChat extends Component {
         </div>
         <div id="MessageBox" class="MessageBox">
           {
-            this.state.messages.map(message => (<MessageCard data={message}/>))
+            this.state.messages.map(message => (<MessageCard data={message} />))
           }
         </div>
         <div class="MessageEntry">

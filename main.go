@@ -20,6 +20,8 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("./build")))
 
 	http.HandleFunc("/teammatches", getTeamMatches)
+	http.HandleFunc("/getChatMessages", getChatMessages)
+	http.HandleFunc("/addMessage", addMessage)
 	http.HandleFunc("/getuserinfo", getUserInfo)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
