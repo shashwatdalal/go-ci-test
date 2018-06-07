@@ -182,7 +182,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 		}
 	}
 
-	j,_ = json.Marshal(result)        // Convert the list of DB hits to a JSON
+	j,_ := json.Marshal(result)        // Convert the list of DB hits to a JSON
 	fmt.Println(string(j))           // Write the result to the console
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
