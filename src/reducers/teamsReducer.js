@@ -1,5 +1,4 @@
 import {ADD_TEAM, FETCH_PIN, FETCH_TEAMS} from "../actions/types";
-import {fetchPins} from "../actions/pinsActions";
 
 const initialState = [];
 

@@ -22,21 +22,6 @@ class TeamsCard extends Component {
                             <div class="teamname">
                                 <h1>{t.name}</h1>
                             </div>
-                            <div class="teamcard">
-                                <h2>Players</h2>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            {t.players.map(p =>
-                                                <div>
-                                                    <img src={p.image}/>
-                                                    <p>{p.name}</p>
-                                                </div>
-                                            )}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
                             <div class="map">
                                <h2>Map</h2>
                                 <SimpleMap

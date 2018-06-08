@@ -25,23 +25,23 @@ var greaterKudu = Team{
 		{
 			NAME:     "Cloe Plover",
 			IMAGE:    "https://robohash.org/blanditiisquibeatae.png?size=100x100&set=set1",
-			LOCATION: "Kore"},
+			LOCATION: "Canary Wharf"},
 		{
 			NAME:     "Celinka Pidgeley",
 			IMAGE:    "https://robohash.org/temporaestnesciunt.png?size=100x100&set=set1",
-			LOCATION: "Valle de Ángeles"},
+			LOCATION: "South Kensington"},
 		{
 			NAME:     "Marven Clive",
 			IMAGE:    "https://robohash.org/voluptatumminimaeum.png?size=100x100&set=set1",
-			LOCATION: "Vryburg"},
+			LOCATION: "Putney"},
 		{
 			NAME:     "Julienne Micheli",
 			IMAGE:    "https://robohash.org/mollitiavoluptatibusoptio.png?size=100x100&set=set1",
-			LOCATION: "Rosário do Sul"},
+			LOCATION: "Camden"},
 		{
 			NAME:     "Garvey Coiley",
 			IMAGE:    "https://robohash.org/eacommodinatus.png?size=100x100&set=set1",
-			LOCATION: "Norsborg"}},
+			LOCATION: "Dulwich"}},
 }
 
 var blackKangaroo = Team{

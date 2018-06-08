@@ -4,7 +4,7 @@
     grid-auto-rows: minmax(20px, auto);
     grid-template-areas:
             ".  tn tn tn tn tn tn tn tn "
-            ".  tc tc .  mp mp mp mp . ";
+            ".  mp mp mp mp mp mp mp . ";
 }
 
 * {
