@@ -27,9 +27,9 @@ func main() {
 	r.Handle("/getuseravail", GetUserAvailability).Methods("GET")
 	r.Handle("/updateavail", UpdateUserAvailability).Methods("GET")
 
-	http.HandleFunc("/teammatches", getTeamMatches)
-	http.HandleFunc("/getChatMessages", getChatMessages)
-	http.HandleFunc("/addMessage", addMessage)
+	r.Handle("/teammatches", GetTeamMatches).Methods("GET")
+	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")
+	r.Handle("/addMessage", AddMessage).Methods("POST")
 
 
 	r.Handle("/getTeams", GetTeams).Methods("GET")
