@@ -1,6 +1,7 @@
 import React from 'react';
 import './Stylesheets/AvailabilityTable.css';
 import UserProfile from './UserProfile';
+import Button from "react-bootstrap/es/Button";
 
 var axios = require('axios');
 
@@ -213,7 +214,10 @@ export default class AvailabiltyTable extends React.Component {
         <table>
           {this.createTable()}
         </table>
-        <h4 onClick={e => this.update(e)}>Submit</h4>
+          <Button bsStyle="primary" bsSize="large"
+                  onClick={e => this.update(e)}>
+            Submit
+          </Button>
       </div>
     )
   }
