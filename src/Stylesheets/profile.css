@@ -81,3 +81,7 @@ a:hover {
 .draw {
     background-color: #fffac1;
 }
+
+.unplayed {
+  background-color: grey;
+}

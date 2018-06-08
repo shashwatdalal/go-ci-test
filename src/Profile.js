@@ -11,7 +11,7 @@ class Profile extends Component {
     age: -1,
     location: "",
     score: -1,
-    matches: [
+    fixtures: [
       {
         date: "03-12-17",
         opponent: "Shashwat Dalal",
@@ -48,26 +48,32 @@ class Profile extends Component {
          });
   }
 
-  loadUserAvailability() {
-
-  }
-
   loadUserFixtures() {
-
+    var username = 'thomasyung_';
+    axios.get('/getuserfixtures?username='+username)
+         .then(function(response) {
+           _this.setState({
+             fixtures: response.data
+           });
+         });
   }
 
   componentDidMount() {
     this.loadUserInformation();
-    this.loadUserAvailability();
     this.loadUserFixtures();
   }
 
   getResult(item) {
+    if (item.scoreFor == NULL) {
+      return "unplayed";
+    }
+
     if (item.scoreFor > item.scoreAgainst) {
       return "win";
     }
+
     if (item.scoreFor < item.scoreAgainst) {
-      return "lose"
+      return "lose";
     }
 
     return "draw";
@@ -76,6 +82,12 @@ class Profile extends Component {
   inputChange(e) {
     const value = e.target.value;
     this.setState({input: value});
+  }
+
+  getForTeam(item) {
+    if (item.ForTeam != "") {
+      return "for " + item.ForTeam;
+    }
   }
 
   render() {
@@ -93,11 +105,12 @@ class Profile extends Component {
 
           <div id='resultsbox'>
           {
-            this.state.matches.map(item =>
+            this.state.fixtures.map(item =>
               <div class={"resultcard " + this.getResult(item)}>
-              <p class='centertext'>versus <a><span class='oppname'>{item.opponent}</span></a></p>
-              <h2 class='centertext'>{item.scoreFor} - {item.scoreAgainst}</h2>
-              <p class='centertext'>{item.date}</p>
+              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition}</span></a><br />
+              {this.getForTeam(item)} in {item.Sport}</p>
+              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAgainst}</h2>
+              <p class='centertext'>{item.Date}, {item.Location}</p>
 
               </div>
             )
