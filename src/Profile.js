@@ -3,7 +3,7 @@ import './Stylesheets/master.css';
 import './Stylesheets/profile.css';
 import AvailabiltyTable from './Profile/AvailabiltyTable';
 import axios from 'axios';
-import UserProfile from '../UserProfile';
+import UserProfile from './UserProfile';
 
 class Profile extends Component {
   state = {
@@ -34,7 +34,7 @@ class Profile extends Component {
     var username = UserProfile.getName();
     axios.get('/getuserfixtures?username='+username)
          .then(function(response) {
-           _this.setState({
+           this.setState({
              fixtures: response.data
            });
          });
@@ -46,7 +46,7 @@ class Profile extends Component {
   }
 
   getResult(item) {
-    if (item.scoreFor == NULL) {
+    if (item.scoreFor == "") {
       return "unplayed";
     }
 

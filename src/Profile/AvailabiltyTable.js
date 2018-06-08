@@ -6,13 +6,13 @@ var axios = require('axios');
 
 export default class AvailabiltyTable extends React.Component {
   state = {
-    availabilities: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    availability: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
   }
 
   numToDay(i) {
@@ -44,7 +44,7 @@ export default class AvailabiltyTable extends React.Component {
            var sndBitmap = parseInt(response.data.SndHalf);
            var avail = this.bitmapToMatrix(fstBitmap, sndBitmap);
            this.setState({
-             availabilities: avail
+             availability: avail
            })
          });
   }
@@ -91,7 +91,7 @@ export default class AvailabiltyTable extends React.Component {
 
   // Convert the state availability matrix to a pair of bitmaps
   matrixToBitmap() {
-    var av = this.state.availabilities;
+    var av = this.state.availability;
     var res = new Array(2);
 
     // First bitmap (rows 0, 1, 2 and 3)
@@ -165,7 +165,7 @@ export default class AvailabiltyTable extends React.Component {
   update(e) {
     e.preventDefault();
 
-    // Create new availabilities matrix
+    // Create new availability matrix
     var newAvails = new Array(7) // 7 rows for the days
 
     for (var row = 0; row < 7; row++) {
@@ -181,11 +181,12 @@ export default class AvailabiltyTable extends React.Component {
 
     // Set state to new matrix
     this.setState({
-      availabilities: newAvails
+      availability: newAvails
     })
 
     // Convert matrix to two bitmap values
     var bitmaps = this.matrixToBitmap();
+    var username = UserProfile.getName();
 
     // Send the bitmap values to the server
     axios.get("/updateuseravail?username" +
