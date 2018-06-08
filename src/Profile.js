@@ -3,6 +3,7 @@ import './Stylesheets/master.css';
 import './Stylesheets/profile.css';
 import AvailabiltyTable from './Profile/AvailabiltyTable';
 import axios from 'axios';
+import UserProfile from '../UserProfile';
 
 class Profile extends Component {
   state = {
@@ -17,7 +18,7 @@ class Profile extends Component {
   loadUserInformation() {
     // Query DB
     var _this = this;
-    var username = 'thomasyung_';
+    var username = UserProfile.getName();
     axios.get('/getuserinfo?username='+username)
          .then(function(response) {
            _this.setState({
@@ -30,7 +31,7 @@ class Profile extends Component {
   }
 
   loadUserFixtures() {
-    var username = 'thomasyung_';
+    var username = UserProfile.getName();
     axios.get('/getuserfixtures?username='+username)
          .then(function(response) {
            _this.setState({

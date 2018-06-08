@@ -20,11 +20,17 @@ func main() {
 	r := mux.NewRouter()
 	r.Handle("/teammatches", GetTeamMatches).Methods("GET")
 
+
 	// Profile page
 	r.Handle("/getuserinfo", GetUserInfo).Methods("GET")
 	r.Handle("/getuserfixtures", GetUserFixtures).Methods("GET")
 	r.Handle("/getuseravail", GetUserAvailability).Methods("GET")
 	r.Handle("/updateavail", UpdateUserAvailability).Methods("GET")
+
+	http.HandleFunc("/teammatches", getTeamMatches)
+	http.HandleFunc("/getChatMessages", getChatMessages)
+	http.HandleFunc("/addMessage", addMessage)
+
 
 	r.Handle("/getTeams", GetTeams).Methods("GET")
 	r.Handle("/getInvitations", GetInvitations).Methods("GET")

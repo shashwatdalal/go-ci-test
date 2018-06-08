@@ -1,27 +1,40 @@
 .team {
-    text-align: center;
-    grid-area: tm;
+  text-align: left;
+  grid-area: tm;
 }
 
 .date {
-    grid-area: dt;
-    text-align: right;
+  grid-area: dt;
+  text-align: left;
 }
 
 .venue {
-    grid-area: vn;
-    text-align: left;
+  grid-area: vn;
+  text-align: right;
+}
+
+.upvote {
+  grid-area: uv;
+}
+
+.downvote {
+  grid-area: dv;
+}
+
+.sport {
+  text-align: left;
+  grid-area: sp;
 }
 
 .card {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-auto-rows: minmax(20px, auto);
-    grid-template-areas: "tm tm tm tm tm tm tm tm tm" "dt dt dt dt .  vn vn vn vn"
-}
-
-* {
-    box-sizing: border-box;
+    grid-row-gap: 1vh;
+    grid-template-areas:
+      "tm tm tm tm tm .  sp sp sp"
+      "dt dt dt dt dt dt dt dt dt"
+      "vn vn vn vn vn .  .  uv dv"
 }
 
 .card {
@@ -32,13 +45,43 @@
     color: black;
 }
 
-.card > div {
-    border-radius: 5px;
-    padding: 1em;
-}
-
 h1 {
     padding-bottom: 0.3em;
     margin: 0;
     border: 0;
+}
+
+.arrow-up, .arrow-up-selected {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.arrow-up {
+  border-bottom: 10px solid #e6ffe6;
+}
+
+.arrow-up-selected {
+  border-bottom: 10px solid #00ff00;
+}
+
+.arrow-down, .arrow-down-selected {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.arrow-down {
+  border-top: 10px solid #ffcccc;
+}
+
+.arrow-down-selected {
+  border-top: 10px solid #ff0000;
+}
+
+.arrow-up, .arrow-down, .arrow-up-selected, .arrow-down-selected {
+  cursor: pointer;
+  display: inline-block;
 }

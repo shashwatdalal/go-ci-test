@@ -81,8 +81,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	checkErr(err)
 
 	// Obtain username (query is of the form ?username=name)
-	// getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	getquery, err := url.QueryUnescape("?username=thomasyung_")
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := strings.Split(getquery, "=")[1]
 
 	ordering := "ORDER BY date DESC"

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Stylesheets/AvailabilityTable.css';
+import UserProfile from '../UserProfile';
 
 var axios = require('axios');
 
@@ -36,7 +37,8 @@ export default class AvailabiltyTable extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/getuseravail")
+    var username = UserProfile.getName();
+    axios.get("/getuseravail?username=" + username)
          .then(function(response) {
            var fstBitmap = parseInt(response.data.FstHalf);
            var sndBitmap = parseInt(response.data.SndHalf);
