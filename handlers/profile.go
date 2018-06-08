@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 	"strconv"
-	. "go-ci-test/utils"
+	. "../utils"
 )
 
 /*

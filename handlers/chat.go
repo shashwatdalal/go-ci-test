@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"net/url"
 	"strings"
-	. "go-ci-test/utils"
+	. "../utils"
 )
 
 type PromotedAdvertisement struct {
