@@ -283,6 +283,7 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 
 	// Obtain the bitmaps (query is of the form ?username=name&fst=x&snd=y)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	fmt.Println(getquery);
 
 	username := strings.Split((strings.Split(getquery, "=")[1]), "&")[0]
 

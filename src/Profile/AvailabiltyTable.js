@@ -200,7 +200,7 @@ export default class AvailabiltyTable extends React.Component {
     var username = UserProfile.getName();
 
     // Send the bitmap values to the server
-    axios.get("/updateuseravail?username" +
+    axios.get("/updateuseravail?username=" +
               username + "&fst=" + bitmaps[0] + "&snd=" + bitmaps[1])
          .then(function(response) {
            if (response.data == "fail") {
