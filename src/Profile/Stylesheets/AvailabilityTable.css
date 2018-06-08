@@ -1,7 +1,9 @@
 .checked {
     background-color: #004d99;
+    border: solid 1px white;
 }
 
 .unchecked {
+  border: solid 1px white;
     background-color: #e6f2ff;
 }
