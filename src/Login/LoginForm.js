@@ -4,7 +4,7 @@ import UserProfile from '../Profile/UserProfile';
 
 var axios = require('axios');
 
-class NewUserForm extends React.Component {
+class LoginForm extends React.Component {
   state = {
     username: "",
     pwd: ""
@@ -44,14 +44,11 @@ class NewUserForm extends React.Component {
   usernameGroup() {
     return <FormGroup controlId="formHorizontal">
       <Col componentClass={ControlLabel} sm={2}>
-        Usernameee
+        Username
       </Col>
       <Col sm={10}>
         <FormControl type="text" placeholder="Username" value={this.state.username}
           onChange={e => this.usernameChange(e)}/>
-
-            <FormControl.Feedback />
-            <HelpBlock>Validation is based on string length.</HelpBlock>
       </Col>
     </FormGroup>
   }
@@ -87,4 +84,4 @@ class NewUserForm extends React.Component {
   }
 }
 
-export default NewUserForm;
+export default LoginForm;

@@ -6,18 +6,18 @@ import './Stylesheets/OpenChat.css';
 var axios = require('axios');
 
 class OpenChat extends Component {
-    state = {
-        chat_name: "Chat",
-        messages: [],
-        message: ""
-    }
+  state = {
+      chat_name: "Chat",
+      messages: [],
+      message: ""
+  }
 
-    inputChange(e) {
-        const value = e.target.value;
-        this.setState({
-            message: value
-        })
-    }
+  inputChange(e) {
+      const value = e.target.value;
+      this.setState({
+          message: value
+      })
+  }
 
   scrollChat() {
     var messageBox = document.getElementById("MessageBox");
@@ -79,6 +79,7 @@ class OpenChat extends Component {
         </div>
         <div class="MessageEntry">
           <input
+            id="MessageEntry"
             type="text"
             onChange={e => this.inputChange(e)}
             value={this.state.message}

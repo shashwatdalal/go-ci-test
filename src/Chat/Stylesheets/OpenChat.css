@@ -20,7 +20,7 @@ h1 {
     height: 100%;
 }
 
-input[type=text] {
+#MessageEntry {
     width: 80%;
     height: 100%;
     margin: 8px 0;

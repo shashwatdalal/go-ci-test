@@ -1,9 +1,12 @@
 package handlers
+
 import (
     "fmt"
     "log"
     "golang.org/x/crypto/bcrypt"
 
+    "net/url"
+    "strings"
     "net/http"
     "database/sql"
     _ "github.com/lib/pq"
@@ -18,11 +21,6 @@ type UserInfoInput struct {
 	Dob       string
 	Location  string
 	Score     int
-  Pwd       string
-}
-
-type LoginAttempt struct {
-  Username  string
   Pwd       string
 }
 
@@ -58,17 +56,15 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
   db, err := sql.Open("postgres", dbinfo)
   CheckErr(err)
 
-  decoder := json.NewDecoder(request.Body)
-  var loginAttempt LoginAttempt
-  err = decoder.Decode(&loginAttempt)
-  if err != nil {
-      panic(err)
-			defer request.Body.Close()
-  }
+	// Obtain username (query is of the form ?username)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 
+  params := strings.Split((strings.Split(getquery, "?"))[1], "&")
+	username := strings.Split(params[0], "=")[1]
+	pwd := strings.Split(params[1], "=")[1]
 
 	// Run query
-  query := fmt.Sprintf("SELECT pwd_hash FROM users WHERE username='%s';", loginAttempt.Username)
+  query := fmt.Sprintf("SELECT pwd_hash FROM users WHERE username='%s';", username)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -81,7 +77,7 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
   if (err != nil) {
     // If error then no entry was found in the database for the username given
     fmt.Fprintln(writer, "User Not Found")
-  } else if (!ComparePasswords(pwd_hash, []byte(loginAttempt.Pwd))) {
+  } else if (!ComparePasswords(pwd_hash, []byte(pwd))) {
     // If compare passwords returns false then we have an incorrect password attempt
     fmt.Fprintln(writer, "Incorrect Password")
   } else {
