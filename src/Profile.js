@@ -71,11 +71,6 @@ class Profile extends Component {
     }
   }
 
-  inputChange(e) {
-    const value = e.target.value;
-    this.setState({input: value});
-  }
-
   getForTeam(item) {
     if (item.ForTeam != "") {
       return "for " + item.ForTeam;

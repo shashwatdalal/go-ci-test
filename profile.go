@@ -257,7 +257,7 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	username := (strings.Split(getquery, "=")[1])
 
   // Run query
-	query := fmt.Sprintf("SELECT * FROM availabilities WHERE username='%s';", username)
+	query := fmt.Sprintf("SELECT fst_half, snd_half FROM availabilities WHERE username='%s';", username)
 	rows, err := db.Query(query)
 	checkErr(err)
 
@@ -296,9 +296,8 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	query := fmt.Sprintf("UPDATE availabilities SET fst_half=%d, snd_half=%d WHERE username='%s'",
 											 fstBitmap, sndBitmap, username)
 	rows, err := db.Query(query)
-	fmt.Println(rows)
 	rows.Next()
-	fmt.Println(rows)
+	fmt.Println(query)
 	checkErr(err)
 
 	if err == nil {

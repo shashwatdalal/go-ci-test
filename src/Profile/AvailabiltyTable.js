@@ -38,15 +38,25 @@ export default class AvailabiltyTable extends React.Component {
 
   componentDidMount() {
     var username = UserProfile.getName();
+    var _this = this;
     axios.get("/getuseravail?username=" + username)
          .then(function(response) {
-           var fstBitmap = parseInt(response.data.FstHalf);
-           var sndBitmap = parseInt(response.data.SndHalf);
-           var avail = this.bitmapToMatrix(fstBitmap, sndBitmap);
-           this.setState({
+           var fstBitmap = 0 + Number(parseInt(response.data.FstHalf, 10));
+           var sndBitmap = 0 + Number(parseInt(response.data.SndHalf, 10));
+           console.log("fst: " + fstBitmap + "| type: " + fstBitmap.type)
+           console.log("snd: " + sndBitmap + "| type: " + sndBitmap.type)
+           var avail = _this.bitmapToMatrix(fstBitmap, sndBitmap);
+           _this.setState({
              availability: avail
            })
          });
+       // console.log(this.state.fstHalf)
+       //     console.log(this.state.sndHalf)
+       //     var avail = this.bitmapToMatrix(this.state.fstHalf, this.state.sndHalf);
+       //     this.setState({
+       //       availability: avail
+       //     })
+
   }
 
   createTable = () => {
@@ -98,8 +108,8 @@ export default class AvailabiltyTable extends React.Component {
     var bitmap = 0;
 
     // Set and shift
-    for (var col = 0; col < 16; col++) {
-      for (var row = 0; row < 4; row++) {
+    for (var row = 0; row < 4; row++) {
+      for (var col = 0; col < 16; col++) {
         if (av[row][col]) {
           // Set to one
           bitmap = bitmap | 0x1;
@@ -116,8 +126,8 @@ export default class AvailabiltyTable extends React.Component {
     bitmap = 0;
 
     // Set and shift
-    for (var col = 0; col < 16; col++) {
-      for (var row = 4; row < 7; row++) {
+    for (var row = 4; row < 7; row++) {
+      for (var col = 0; col < 16; col++) {
         if (av[row][col]) {
           // Set to one
           bitmap = bitmap | 0x1;
@@ -137,15 +147,14 @@ export default class AvailabiltyTable extends React.Component {
   bitmapToMatrix(fst, snd) {
     // Create new matrix
     var matrix = new Array(7) // 7 rows for the days
-
     for (var row = 0; row < 7; row++) {
       matrix[row] = new Array(16)
     }
 
     // Process first bitmap (rows 0, 1, 2 and 3)
     // Read and shift
-    for (var col = 15; col >= 0; col--) {
-      for (var row = 3; row >= 0; row--) {
+    for (var row = 3; row >= 0; row--) {
+      for (var col = 15; col >= 0; col--) {
         matrix[row][col] = fst & 0x1;
         fst = fst >> 1;
       }
@@ -153,12 +162,14 @@ export default class AvailabiltyTable extends React.Component {
 
     // Process second bitmap (rows 4, 5 and 6)
     // Read and shift
-    for (var col = 15; col >= 0; col--) {
-      for (var row = 6; row >= 4; row--) {
+    for (var row = 6; row >= 4; row--) {
+      for (var col = 15; col >= 0; col--) {
         matrix[row][col] = snd & 0x1;
         snd = snd >> 1;
       }
     }
+
+    return matrix;
   }
 
   // Submit the modified availability to the server
