@@ -3,6 +3,7 @@ import './Stylesheets/master.css';
 import './Stylesheets/profile.css';
 import AvailabiltyTable from './Profile/AvailabiltyTable';
 import axios from 'axios';
+import UserProfile from './Profile/UserProfile';
 
 class Profile extends Component {
   state = {
@@ -11,32 +12,14 @@ class Profile extends Component {
     age: -1,
     location: "",
     score: -1,
-    matches: [
-      {
-        date: "03-12-17",
-        opponent: "Shashwat Dalal",
-        scoreFor: 3,
-        scoreAgainst: 2,
-      },
-      {
-        date: "12-04-17",
-        opponent: "Andy Li",
-        scoreFor: 2,
-        scoreAgainst: 2,
-      },
-      {
-        date: "29-12-97",
-        opponent: "Marcel Kenlay",
-        scoreFor: 1,
-        scoreAgainst: 10,
-      }
-    ]
+    fixtures: [],
+    upcoming: []
   };
 
   loadUserInformation() {
     // Query DB
     var _this = this;
-    var username = 'thomasyung_';
+    var username = UserProfile.getName();
     axios.get('/getuserinfo?username='+username)
          .then(function(response) {
            _this.setState({
@@ -48,34 +31,64 @@ class Profile extends Component {
          });
   }
 
-  loadUserAvailability() {
-
-  }
-
   loadUserFixtures() {
-
+    var _this = this;
+    var username = UserProfile.getName();
+    axios.get('/getuserfixtures?username='+username)
+         .then(function(response) {
+           _this.setState({
+             fixtures: response.data
+           });
+         });
   }
+
+  loadUpcoming() {
+        var _this = this;
+        var username = UserProfile.getName();
+        axios.get('/getuserupcoming?username=' + username)
+            .then(function (response) {
+                _this.setState({
+                    fixtures: response.data
+                });
+            });
+    }
 
   componentDidMount() {
     this.loadUserInformation();
-    this.loadUserAvailability();
     this.loadUserFixtures();
+    // this.loadUpcoming();
   }
 
   getResult(item) {
-    if (item.scoreFor > item.scoreAgainst) {
-      return "win";
-    }
-    if (item.scoreFor < item.scoreAgainst) {
-      return "lose"
+    if (item.scoreFor == "") {
+      return "unplayed";
     }
 
-    return "draw";
+    if (item.ScoreHome == item.ScoreAway) {
+      return "draw";
+    }
+
+    if (item.IsHome) {
+      if (item.ScoreHome > item.ScoreAway) {
+        return "win";
+      }
+      if (item.ScoreHome < item.ScoreAway) {
+        return "lose";
+      }
+    } else {
+      if (item.ScoreHome < item.ScoreAway) {
+        return "win";
+      }
+      if (item.ScoreHome > item.ScoreAway) {
+        return "lose";
+      }
+    }
   }
 
-  inputChange(e) {
-    const value = e.target.value;
-    this.setState({input: value});
+  getForTeam(item) {
+    if (item.ForTeam != "") {
+      return "for " + item.ForTeam;
+    }
   }
 
   render() {
@@ -92,16 +105,20 @@ class Profile extends Component {
           </div>
 
           <div id='resultsbox'>
-          {
-            this.state.matches.map(item =>
-              <div class={"resultcard " + this.getResult(item)}>
-              <p class='centertext'>versus <a><span class='oppname'>{item.opponent}</span></a></p>
-              <h2 class='centertext'>{item.scoreFor} - {item.scoreAgainst}</h2>
-              <p class='centertext'>{item.date}</p>
 
-              </div>
-            )
-          }
+                  {
+                      this.state.fixtures.map(item =>
+                          <div class={"resultcard " + this.getResult(item)}>
+                              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
+                                  {this.getForTeam(item)} in {item.Sport}</p>
+                              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
+                              <p class='centertext'>{item.Date}, {item.Location}</p>
+
+                          </div>
+                      )
+                  }
+
+
           </div>
 
 

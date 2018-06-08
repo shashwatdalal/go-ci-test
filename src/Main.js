@@ -1,8 +1,8 @@
 import React from 'react';
-import Chat from './Chat';
+import Chat from './Chat/Chat';
 import Profile from './Profile';
-import Leaderboards from './Leaderboards';
-import Matchmaking from './Matchmaking';
+import Leaderboards from './Leaderboards/Leaderboards';
+import Matchmaking from './Matchmaking/Matchmaking';
 import Teams from './Teams/Teams';
 import {Switch, Route} from 'react-router-dom'
 
