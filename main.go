@@ -5,7 +5,7 @@ import (
   "log"
   _ "github.com/lib/pq"
 	"github.com/gorilla/mux"
-	. "go-ci-test/handlers"
+	. "./handlers"
 )
 func main() {
 	r := mux.NewRouter()
