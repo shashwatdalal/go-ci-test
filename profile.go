@@ -37,7 +37,7 @@ type Fixture struct {
 	Location      string
 	Date          string
 	ScoreHome     int
-	ScoreAgainst  int
+	ScoreAway     int
 	IsHome        bool
 }
 
@@ -112,7 +112,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Location,
 			&data.Date,
 			&data.ScoreHome,
-			&data.ScoreAgainst)
+			&data.ScoreAway)
 
 		data.IsHome = true
 		singleHome = append(singleHome, data)
@@ -135,7 +135,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Location,
 			&data.Date,
 			&data.ScoreHome,
-			&data.ScoreAgainst)
+			&data.ScoreAway)
 
 		data.IsHome = false
 		singleAway = append(singleAway, data)
@@ -174,7 +174,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Location,
 			&data.Date,
 			&data.ScoreHome,
-			&data.ScoreAgainst)
+			&data.ScoreAway)
 
 		data.IsHome = true
 
@@ -199,7 +199,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Location,
 			&data.Date,
 			&data.ScoreHome,
-			&data.ScoreAgainst)
+			&data.ScoreAway)
 
 		data.IsHome = false
 

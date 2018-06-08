@@ -11,26 +11,7 @@ class Profile extends Component {
     age: -1,
     location: "",
     score: -1,
-    fixtures: [
-      {
-        date: "03-12-17",
-        opponent: "Shashwat Dalal",
-        scoreFor: 3,
-        scoreAgainst: 2,
-      },
-      {
-        date: "12-04-17",
-        opponent: "Andy Li",
-        scoreFor: 2,
-        scoreAgainst: 2,
-      },
-      {
-        date: "29-12-97",
-        opponent: "Marcel Kenlay",
-        scoreFor: 1,
-        scoreAgainst: 10,
-      }
-    ]
+    fixtures: []
   };
 
   loadUserInformation() {
@@ -68,15 +49,25 @@ class Profile extends Component {
       return "unplayed";
     }
 
-    if (item.scoreFor > item.scoreAgainst) {
-      return "win";
+    if (item.ScoreHome == item.ScoreAway) {
+      return "draw";
     }
 
-    if (item.scoreFor < item.scoreAgainst) {
-      return "lose";
+    if (item.IsHome) {
+      if (item.ScoreHome > item.ScoreAway) {
+        return "win";
+      }
+      if (item.ScoreHome < item.ScoreAway) {
+        return "lose";
+      }
+    } else {
+      if (item.ScoreHome < item.ScoreAway) {
+        return "win";
+      }
+      if (item.ScoreHome > item.ScoreAway) {
+        return "lose";
+      }
     }
-
-    return "draw";
   }
 
   inputChange(e) {
@@ -107,9 +98,9 @@ class Profile extends Component {
           {
             this.state.fixtures.map(item =>
               <div class={"resultcard " + this.getResult(item)}>
-              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition}</span></a><br />
+              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
               {this.getForTeam(item)} in {item.Sport}</p>
-              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAgainst}</h2>
+              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
               <p class='centertext'>{item.Date}, {item.Location}</p>
 
               </div>
