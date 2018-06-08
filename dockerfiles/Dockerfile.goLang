@@ -8,4 +8,5 @@ RUN go get -v gopkg.in/check.v1 github.com/tebeka/go2xunit github.com/lib/pq git
 ENV GOBIN /go/bin
 WORKDIR /go/src/go-ci-test
 COPY . .
+RUN pwd
 RUN tree
