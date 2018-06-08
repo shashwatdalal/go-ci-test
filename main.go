@@ -22,7 +22,7 @@ func main() {
 	r.Handle("/teammatches", GetTeamMatches).Methods("GET")
 	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")
 	r.Handle("/addMessage", AddMessage).Methods("POST")
-
+	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")
 
 	r.Handle("/getTeams", GetTeams).Methods("GET")
 	r.Handle("/getInvitations", GetInvitations).Methods("GET")

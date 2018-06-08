@@ -12,7 +12,7 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 
-import './Matchmaking/Forms.css';
+import './Stylesheets/Forms.css';
 
 const defaultPosition = {
     lat: 51.509865,
