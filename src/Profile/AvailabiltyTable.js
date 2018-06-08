@@ -43,8 +43,6 @@ export default class AvailabiltyTable extends React.Component {
          .then(function(response) {
            var fstBitmap = 0 + Number(parseInt(response.data.FstHalf, 10));
            var sndBitmap = 0 + Number(parseInt(response.data.SndHalf, 10));
-           console.log("fst: " + fstBitmap + "| type: " + fstBitmap.type)
-           console.log("snd: " + sndBitmap + "| type: " + sndBitmap.type)
            var avail = _this.bitmapToMatrix(fstBitmap, sndBitmap);
            _this.setState({
              availability: avail

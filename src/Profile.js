@@ -12,7 +12,8 @@ class Profile extends Component {
     age: -1,
     location: "",
     score: -1,
-    fixtures: []
+    fixtures: [],
+    upcoming: []
   };
 
   loadUserInformation() {
@@ -31,18 +32,31 @@ class Profile extends Component {
   }
 
   loadUserFixtures() {
+    var _this = this;
     var username = UserProfile.getName();
     axios.get('/getuserfixtures?username='+username)
          .then(function(response) {
-           this.setState({
+           _this.setState({
              fixtures: response.data
            });
          });
   }
 
+  loadUpcoming() {
+        var _this = this;
+        var username = UserProfile.getName();
+        axios.get('/getuserupcoming?username=' + username)
+            .then(function (response) {
+                _this.setState({
+                    fixtures: response.data
+                });
+            });
+    }
+
   componentDidMount() {
     this.loadUserInformation();
     this.loadUserFixtures();
+    // this.loadUpcoming();
   }
 
   getResult(item) {
@@ -91,17 +105,20 @@ class Profile extends Component {
           </div>
 
           <div id='resultsbox'>
-          {
-            this.state.fixtures.map(item =>
-              <div class={"resultcard " + this.getResult(item)}>
-              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
-              {this.getForTeam(item)} in {item.Sport}</p>
-              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
-              <p class='centertext'>{item.Date}, {item.Location}</p>
 
-              </div>
-            )
-          }
+                  {
+                      this.state.fixtures.map(item =>
+                          <div class={"resultcard " + this.getResult(item)}>
+                              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
+                                  {this.getForTeam(item)} in {item.Sport}</p>
+                              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
+                              <p class='centertext'>{item.Date}, {item.Location}</p>
+
+                          </div>
+                      )
+                  }
+
+
           </div>
 
 

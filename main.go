@@ -26,6 +26,7 @@ func main() {
 	r.Handle("/getuserfixtures", GetUserFixtures).Methods("GET")
 	r.Handle("/getuseravail", GetUserAvailability).Methods("GET")
 	r.Handle("/updateuseravail", UpdateUserAvailability).Methods("GET")
+	r.Handle("/getuserupcoming", GetUserUpcoming).Methods("GET")
 
 	r.Handle("/teammatches", GetTeamMatches).Methods("GET")
 	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")

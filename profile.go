@@ -73,6 +73,158 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 })
 
 // Get the fixtures for the user specified in the url
+var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	checkErr(err)
+
+	// Obtain username (query is of the form ?username=name)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	username := strings.Split(getquery, "=")[1]
+
+	fmt.Println(username)
+
+	ordering := "ORDER BY date DESC"
+	commonQueryFields :=  "sport, location, date, home_score, away_score"
+	var jsonText = []byte(`[]`)
+
+	// ------------------------- QUERY ALL SINGLE GAMES --------------------------
+	homeQuery := fmt.Sprintf("SELECT away_name AS opp, %s FROM fixtures WHERE home_name='%s' AND home_score IS NULL",
+		commonQueryFields, username)
+	awayQuery := fmt.Sprintf("SELECT home_name AS opp, %s FROM fixtures WHERE away_name='%s' AND home_score IS NULL",
+		commonQueryFields, username)
+
+	query := fmt.Sprintf("%s %s;", homeQuery, ordering)
+	rows, err := db.Query(query)
+	checkErr(err)
+
+	// Initialise the json response
+	var singleHome []Fixture
+	err = json.Unmarshal([]byte(jsonText), &singleHome)
+
+	// Add every database hit to the result
+	for rows.Next() {
+		data := Fixture{}
+		err = rows.Scan(
+			&data.Opposition,
+			&data.Sport,
+			&data.Location,
+			&data.Date,
+			&data.ScoreHome,
+			&data.ScoreAway)
+
+		data.IsHome = true
+		singleHome = append(singleHome, data)
+	}
+
+	query = fmt.Sprintf("%s %s;", awayQuery, ordering)
+	rows, err = db.Query(query)
+	checkErr(err)
+
+	// Initialise the json response
+	var singleAway []Fixture
+	err = json.Unmarshal([]byte(jsonText), &singleAway)
+
+	// Add every database hit to the result
+	for rows.Next() {
+		data := Fixture{}
+		err = rows.Scan(
+			&data.Opposition,
+			&data.Sport,
+			&data.Location,
+			&data.Date,
+			&data.ScoreHome,
+			&data.ScoreAway)
+
+		data.IsHome = false
+		singleAway = append(singleAway, data)
+	}
+
+	var singleFixtures []Fixture
+	err = json.Unmarshal([]byte(jsonText), &singleFixtures)
+
+	merge(&singleHome, &singleAway, &singleFixtures)
+
+	// j,_ := json.Marshal(singleFixtures) // Convert the list of DB hits to a JSON
+	// fmt.Println(string(j))             // Write the result to the console
+
+
+	// -------------------------- QEURY ALL TEAM GAMES --------------------------
+	homeQuery = fmt.Sprintf("SELECT away_name AS opp, home_name AS for, %s FROM fixtures JOIN team_members ON home_name=team_name WHERE username='%s' AND home_score IS NULL",
+		commonQueryFields, username)
+	awayQuery = fmt.Sprintf("SELECT home_name AS opp, away_name AS for, %s FROM fixtures JOIN team_members ON away_name=team_name WHERE username='%s' AND home_score IS NULL",
+		commonQueryFields, username)
+
+	query = fmt.Sprintf("%s %s;\n", homeQuery, ordering)
+	rows, err = db.Query(query)
+	checkErr(err)
+
+	// Initialise the json response for all team games
+	var teamHome []Fixture
+	err = json.Unmarshal([]byte(jsonText), &teamHome)
+
+	// Add every database hit to the result
+	for rows.Next() {
+		data := Fixture{}
+		err = rows.Scan(
+			&data.Opposition,
+			&data.ForTeam,
+			&data.Sport,
+			&data.Location,
+			&data.Date,
+			&data.ScoreHome,
+			&data.ScoreAway)
+
+		data.IsHome = true
+
+		teamHome = append(teamHome, data)
+	}
+
+	query = fmt.Sprintf("%s %s;\n", awayQuery, ordering)
+	rows, err = db.Query(query)
+	checkErr(err)
+
+	// Initialise the json response for all team games
+	var teamAway []Fixture
+	err = json.Unmarshal([]byte(jsonText), &teamAway)
+
+	// Add every database hit to the result
+	for rows.Next() {
+		data := Fixture{}
+		err = rows.Scan(
+			&data.Opposition,
+			&data.ForTeam,
+			&data.Sport,
+			&data.Location,
+			&data.Date,
+			&data.ScoreHome,
+			&data.ScoreAway)
+
+		data.IsHome = false
+
+		teamAway = append(teamAway, data)
+	}
+
+	// Initialise the json response for the result
+	var teamFixtures []Fixture
+	err = json.Unmarshal([]byte(jsonText), &teamFixtures)
+	merge(&teamHome, &teamAway, &teamFixtures)
+
+
+	// Initialise the json response for the result
+	var result []Fixture
+	err = json.Unmarshal([]byte(jsonText), &result)
+
+	merge(&singleFixtures, &teamFixtures, &result)
+
+	j,_ := json.Marshal(result)        // Convert the list of DB hits to a JSON
+	// fmt.Println(string(j))           // Write the result to the console
+	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+})
+
+// Get the fixtures for the user specified in the url
 var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
