@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import './Stylesheets/FixtureCard.css';
 
+var axios = require('axios');
+
 class FixtureCard extends Component {
   state = {
+    location: "Failed to Find",
     upvotes: 3,
     downvotes: 0,
     upvoted: false,
     downvoted: false
+  }
+
+  componentDidMount() {
+    var venue_latlng = this.props.data.Location.split("(")[1].split(")")[0];
+    var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+                      + venue_latlng
+
+    var _this = this
+    _this.serverRequest = axios.get(request_url)
+          .then(function(result) {
+            console.log(result);
+            _this.setState({location: result.data.results[0].formatted_address});
+          })
   }
 
   toggle_upvote() {
@@ -54,11 +70,25 @@ class FixtureCard extends Component {
     }
   }
 
+  fixture_time(start, end){
+    var start = (start.split("Z"))[0].split("T");
+    var start_date = start[0];
+    var start_time = start[1];
+    var end = (end.split("Z"))[0].split("T");
+    var end_date = end[0];
+    var end_time = end[1];
+    if (start_date === end_date) {
+      return start_date + ":  " + start_time + " - " + end_time;
+    } else {
+      return start + " to " + end
+    }
+  }
+
   render() {
     return <div class="card">
         <div class="team"> {this.props.data.Name} </div>
-        <div class="venue">{this.props.data.Location}</div>
-        <div class="date"> {this.props.data.StartTime + " to " + this.props.data.EndTime}</div>
+        <div class="venue">{this.state.location}</div>
+        <div class="date"> {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
         <div class="sport">{this.props.data.Sport}</div>
         <div class="upvote">
           <div class={this.state.upvoted ? 'arrow-up-selected': 'arrow-up'}

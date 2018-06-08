@@ -1,3 +1,21 @@
+.message_text_received {
+  background: #e0ebeb;
+  color: black;
+  border: 1px solid #e0ebeb;
+}
+
+.message_text_sent {
+  background: #4CAF50;
+  border: 1px solid #4CAF50;
+  color: white;
+}
+
+.message_text_sent, .message_text_received {
+  border-radius: 5px;
+  padding: 5px;
+  display: inline-block;
+}
+
 .message_sender_received {
   text-align: left;
   grid-area: sd;
@@ -21,14 +39,7 @@
 }
 
 .message_sent, .message_received {
-  font-size: 1.2vh;
-}
-
-.message_sent, .message_received {
   font-size: 1.7vh;
-  border-radius: 2px;
-  border: 1px solid #ccc;
-  padding-bottom: 0.05vh;
 }
 
 .venue {
@@ -39,7 +50,7 @@
 .sent {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(20px, auto);
+    grid-auto-rows: minmax(10px, auto);
     grid-template-areas:
       ". .  .  .  .  .  sd sd sd"
       ". .  ms ms ms ms ms ms ms"
@@ -49,7 +60,7 @@
 .received {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(20px, auto);
+    grid-auto-rows: minmax(10px, auto);
     grid-template-areas:
       "sd sd sd .  .  .  .  . . "
       "ms ms ms ms ms ms ms . . "
@@ -57,8 +68,9 @@
 * {box-sizing: border-box;}
 
 .sent, .received {
-  padding: 10px;
-  margin: 0 0 10px 0;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 5px;
   text-decoration: none;
   color: black;
 }

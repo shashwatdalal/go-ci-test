@@ -28,7 +28,6 @@ type Message struct {
 
 func getChatMessages(writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
-	fmt.Println("getChatMessages")
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
@@ -57,8 +56,7 @@ func getChatMessages(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Println(string(j))
-	fmt.Println("getChatMessages")
+	// fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 }
 
@@ -164,6 +162,6 @@ func getTeamMatches(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Println(string(j))
+	// fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 }

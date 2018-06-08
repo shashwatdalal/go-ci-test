@@ -56,7 +56,7 @@ class OpenChat extends Component {
         .get("getChatMessages?team=team1")
         .then(function(result) {
           _this.setState({
-            chat_name: "\"Testing\"",
+            chat_name: "Toms Tanks",
             messages: result.data
           });
             var messageBox = document.getElementById("MessageBox");
