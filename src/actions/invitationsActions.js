@@ -20,7 +20,7 @@ export const acceptInvitation = invitation => dispatch => {
         type: ADD_TEAM,
         payload: invitation
     });
-    invitation.players.map(p => dispatch(fetchPins(p,invitation.name)));
+    invitation.players.map(p => dispatch(fetchPins(p, invitation)));
 };
 
 export const declineInvitation = invitation => dispatch => {

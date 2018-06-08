@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import LocationPicker from 'react-location-picker';
-import TimeDurationPicker from 'rc-time-duration-picker';
 import DateTimePicker from 'react-datetime-picker';
-import * as Datetime from 'react-datetime';
 import moment from 'moment';
 
 import './Matchmaking/Stylesheets/datetime.css';

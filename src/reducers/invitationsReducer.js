@@ -1,5 +1,4 @@
 import {ACCEPT_INVITATION, DECLINE_INVITATION, FETCH_INVITATIONS} from "../actions/types";
-import {addTeam} from "../actions/teamsActions";
 
 const initialState = [];
 

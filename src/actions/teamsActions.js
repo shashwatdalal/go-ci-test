@@ -7,11 +7,14 @@ export const fetchTeams = () => dispatch => {
     fetch(serverDomain + "/getTeams")
         .then(res => res.json())
         .then(teams => {
-            teams.map(team => team.players.map(p => dispatch(fetchPins(p,team))));
             dispatch({
                 type: FETCH_TEAMS,
                 payload: teams
             });
+            return teams;
+        })
+        .then(teams => {
+            teams.map(team => team.players.map(p => dispatch(fetchPins(p, team))));
         });
 };
 
@@ -19,5 +22,5 @@ export const addTeam = (team) => dispatch => {
     dispatch({
         type: ADD_TEAM,
         payload: team
-    })
+    });
 };

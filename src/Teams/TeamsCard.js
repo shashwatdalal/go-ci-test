@@ -3,7 +3,8 @@ import {Tab, Tabs} from "react-bootstrap";
 import {connect} from "react-redux";
 import {fetchTeams} from "../actions/teamsActions";
 import "./Stylesheets/TeamCardsGrid.css";
-import SimpleMap from "./SimpleMap";
+import SimpleMap from "./MiniMap";
+import {fetchPins} from "../actions/pinsActions";
 
 class TeamsCard extends Component {
 
@@ -14,7 +15,8 @@ class TeamsCard extends Component {
     render() {
         return (
             <Tabs defaultActiveKey={1}>
-                {this.props.teams.map((t, index) =>
+                {this.props.teams.map((t, index) => {
+                    return (
                     <Tab eventKey={index + 1} title={t.name}>
                         <div class="TeamCardsGrid">
                             <div class="teamname">
@@ -38,19 +40,19 @@ class TeamsCard extends Component {
                             <div class="map">
                                <h2>Map</h2>
                                 <SimpleMap
-                                    players={t.players}
-                                 />
+                                team = {t}/>
                             </div>
                             <br/><br/>
                         </div>
-                    </Tab>
+                    </Tab>)}
                 )}
             </Tabs>
         );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps,
     teams: state.teams
 });
 

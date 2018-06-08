@@ -1,4 +1,5 @@
-import {ADD_TEAM, FETCH_PINS, FETCH_TEAMS} from "../actions/types";
+import {ADD_TEAM, FETCH_PIN, FETCH_TEAMS} from "../actions/types";
+import {fetchPins} from "../actions/pinsActions";
 
 const initialState = [];
 
@@ -6,15 +7,15 @@ export default function (state = initialState, action) {
     switch (action.type) {
         case FETCH_TEAMS:
             return action.payload;
-        case FETCH_PINS:
-            console.log("team reducer", state);
+        case FETCH_PIN:
             const teamIndex = state.indexOf(action.payload.team);
-            const playerIndex = state[teamIndex].players.indexOf(action.payload.player);
-            state[teamIndex].players[playerIndex] = {
-                ...state[teamIndex].players[playerIndex],
+            const newState = state.slice();
+            const playerIndex = newState[teamIndex].players.indexOf(action.payload.player);
+            newState[teamIndex].players[playerIndex] = {
+                ...newState[teamIndex].players[playerIndex],
                 latlng: action.payload.latlng
             };
-            return state;
+            return newState;
         case ADD_TEAM:
             return [...state, action.payload];
         default:
