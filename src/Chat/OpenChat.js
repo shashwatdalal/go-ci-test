@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MessageCard from './MessageCard';
+import UserProfile from '../UserProfile';
 import './Stylesheets/OpenChat.css';
 
 var axios = require('axios');
@@ -27,7 +28,7 @@ class OpenChat extends Component {
     var d = new Date();
     var time = d.getTime();
     var new_message = {
-      Sender:"Marcel",
+      Sender:UserProfile.getName(),
       Message:this.state.message,
       Time: time
     }
