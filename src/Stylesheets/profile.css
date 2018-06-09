@@ -28,7 +28,7 @@ a {
     text-decoration: underline;
 }
 
-a:hover {
+.overline a:hover {
     text-decoration: overline;
 }
 

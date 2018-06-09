@@ -72,7 +72,7 @@ export default class AvailabiltyTable extends React.Component {
       // Add day
       row.push(<td>{this.numToDay(i)}</td>)
       for (let j = 0; j < 16; j++) {
-        row.push(<td onClick={e => this.toggle(i, j, e)} id={"av" + i + "_" + j} class={this.state.availability[i][j] ? "checked" : "unchecked"}></td>)
+        row.push(<td onClick={e => this.toggle(i, j, e)} id={"av" + i + "_" + j} class={"avBox " + (this.state.availability[i][j] ? "checked" : "unchecked")}></td>)
       }
       rows.push(<tr>{row}</tr>)
     }
@@ -181,10 +181,7 @@ export default class AvailabiltyTable extends React.Component {
         <table>
           {this.createTable()}
         </table>
-          <Button bsStyle="primary" bsSize="large"
-                  onClick={e => this.update(e)}>
-            Submit
-          </Button>
+          <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!</h3></a>
       </div>
     )
   }

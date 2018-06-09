@@ -13,7 +13,8 @@ class Profile extends Component {
     location: "",
     score: -1,
     fixtures: [],
-    upcoming: []
+    upcoming: [],
+    isEditting: false
   };
 
   loadUserInformation() {
@@ -85,13 +86,23 @@ class Profile extends Component {
     }
   }
 
+  showEditBox(e) {
+    e.preventDefault();
+
+    var _this = this;
+    _this.setState({
+      isEditting: true
+    })
+  }
+
   render() {
     return (
       <div id='contentpanel'>
         <div id='contentcontainer'>
           <p class='thintext centertext'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
-          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location}</span></h3>
+          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
+          {this.state.isEditting ? <input type='text' /> : ""}
           <div class="AvTable">
             <AvailabiltyTable />
           </div>
