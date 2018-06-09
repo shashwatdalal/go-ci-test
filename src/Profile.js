@@ -34,7 +34,7 @@ class Profile extends Component {
   loadUserFixtures() {
     var _this = this;
     var username = UserProfile.getName();
-    axios.get('/getuserfixtures?username='+username)
+    axios.get('/getuserfixtures?username=' + username)
          .then(function(response) {
            _this.setState({
              fixtures: response.data
@@ -56,7 +56,7 @@ class Profile extends Component {
   componentDidMount() {
     this.loadUserInformation();
     this.loadUserFixtures();
-    // this.loadUpcoming();
+    this.loadUpcoming();
   }
 
   getResult(item) {
@@ -85,43 +85,61 @@ class Profile extends Component {
     }
   }
 
-  getForTeam(item) {
-    if (item.ForTeam != "") {
-      return "for " + item.ForTeam;
-    }
-  }
-
   render() {
     return (
       <div id='contentpanel'>
         <div id='contentcontainer'>
-          <h1 id='username' class='centertext'>{this.state.username.toUpperCase()}</h1>
-          <h3 class='centertext'>Name: <span class='thintext'>{this.state.name}</span></h3>
-          <h3 class='centertext'>Age: <span class='thintext'>{this.state.age}</span></h3>
+          <p class='thintext centertext'>Welcome back</p>
+          <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location}</span></h3>
-          <h3 class='centertext'>Score: <span class='thintext'>{this.state.score}</span></h3>
           <div class="AvTable">
             <AvailabiltyTable />
           </div>
 
-          <div id='resultsbox'>
+          <div id='fixturesbox'>
+            <table>
+              <thead>
+                <td>
+                  Previous
+                </td>
+                <td>
+                  Upcoming
+                </td>
+              </thead>
+              <tr>
+                <td>
+                {
+                  this.state.fixtures.length == 0 ? <b>(empty)</b> :
+                  this.state.fixtures.map(item =>
+                    <div class={"resultcard " + this.getResult(item)}>
+                    <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
+                    playing for {item.ForTeam} in {item.Sport}</p>
+                    <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
+                    <p class='centertext'>{item.Date}, {item.Location}</p>
+                    </div>
+                  )
+                }
+                </td>
+                <td>
+                {
+                  this.state.upcoming.length == 0 ? <b>(empty)</b> :
+                  this.state.upcoming.map(item =>
+                    <div class={"resultcard unplayed"}>
+                    <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
+                    playing for {item.ForTeam} in {item.Sport}</p>
+                    <p class='centertext'>{item.Date}, {item.Location}</p>
+                    </div>
+                  )
+                }
+                </td>
+              </tr>
+            </table>
+            <div id='prevbox'>
+            </div>
 
-                  {
-                      this.state.fixtures.map(item =>
-                          <div class={"resultcard " + this.getResult(item)}>
-                              <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
-                                  {this.getForTeam(item)} in {item.Sport}</p>
-                              <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
-                              <p class='centertext'>{item.Date}, {item.Location}</p>
-
-                          </div>
-                      )
-                  }
-
-
+            <div id='upcbox'>
+            </div>
           </div>
-
-
 
         </div>
       </div>
