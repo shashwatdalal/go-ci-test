@@ -23,26 +23,12 @@ class Login extends Component {
 
   render() { return (
     <div class="login_wrapper">
-      <h2>Enter Username</h2>
+      <h2>Returning User Login</h2>
       <LoginForm />
       <h2>Or create a new user</h2>
       <NewUserForm />
     </div>
   )}
 }
-
-// <div class="UsernameEntry">
-//   <input
-//     id="usernameEntry"
-//     type="text"
-//     value={this.state.username}
-//     onChange={e => this.inputChange(e)}
-//     onKeyPress={event => {
-//         if (event.key === 'Enter') {
-//           this.login()
-//         }
-//       }}/>
-//     <button class="SendButton" onClick={() => this.login()}>Sign in</button>
-// </div>
 
 export default Login;
