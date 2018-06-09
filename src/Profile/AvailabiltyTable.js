@@ -42,20 +42,16 @@ export default class AvailabiltyTable extends React.Component {
     var _this = this;
     axios.get("/getuseravail?username=" + username)
          .then(function(response) {
-           var fstBitmap = 0 + Number(parseInt(response.data.FstHalf, 10));
-           var sndBitmap = 0 + Number(parseInt(response.data.SndHalf, 10));
-           var avail = _this.bitmapToMatrix(fstBitmap, sndBitmap);
+           var bitmaps = new Array[7];
+           for (var i = 0; i < 7; i++) {
+             bitmaps[i] = parseInt(response.data[i]);
+           }
+
+           var avail = _this.bitmapToMatrix(bitmaps);
            _this.setState({
              availability: avail
            })
          });
-       // console.log(this.state.fstHalf)
-       //     console.log(this.state.sndHalf)
-       //     var avail = this.bitmapToMatrix(this.state.fstHalf, this.state.sndHalf);
-       //     this.setState({
-       //       availability: avail
-       //     })
-
   }
 
   createTable = () => {
@@ -98,52 +94,30 @@ export default class AvailabiltyTable extends React.Component {
     }
   }
 
-  // Convert the state availability matrix to a pair of bitmaps
+  // Convert the state availability matrix to a bitmap for each day
   matrixToBitmap() {
     var av = this.state.availability;
-    var res = new Array(2);
+    var res = new Array(7);
 
-    // First bitmap (rows 0, 1, 2 and 3)
-    var bitmap = 0;
+    for (var day = 0; day < 7; day++) {
+      var bitmap = 0;
 
-    // Set and shift
-    for (var row = 0; row < 4; row++) {
-      for (var col = 0; col < 16; col++) {
-        if (av[row][col]) {
-          // Set to one
+      for (var time = 0; time < 16; time++) {
+        if (av[day][time]) {
           bitmap = bitmap | 0x1;
-          bitmap = bitmap << 1;
         }
+
+        bitmap = bitmap << 1;
       }
+
+      res[day] = bitmap >> 1;
     }
-    // Undo extra shift
-    bitmap = bitmap >> 1;
-
-    res[0] = bitmap;
-
-    // Second bitmap (rows 4, 5 and 6)
-    bitmap = 0;
-
-    // Set and shift
-    for (var row = 4; row < 7; row++) {
-      for (var col = 0; col < 16; col++) {
-        if (av[row][col]) {
-          // Set to one
-          bitmap = bitmap | 0x1;
-          bitmap = bitmap << 1;
-        }
-      }
-    }
-    // Undo extra shift
-    bitmap = bitmap >> 1;
-
-    res[1] = bitmap;
 
     return res;
   }
 
   // Convert bitmaps into the state availability matrix
-  bitmapToMatrix(fst, snd) {
+  bitmapToMatrix(bitmaps) {
     // Create new matrix
     var matrix = new Array(7) // 7 rows for the days
     for (var row = 0; row < 7; row++) {
@@ -152,19 +126,12 @@ export default class AvailabiltyTable extends React.Component {
 
     // Process first bitmap (rows 0, 1, 2 and 3)
     // Read and shift
-    for (var row = 3; row >= 0; row--) {
-      for (var col = 15; col >= 0; col--) {
-        matrix[row][col] = fst & 0x1;
-        fst = fst >> 1;
-      }
-    }
+    for (var row = 6; row >= 0; row--) {
+      var bitmap = bitmaps[row];
 
-    // Process second bitmap (rows 4, 5 and 6)
-    // Read and shift
-    for (var row = 6; row >= 4; row--) {
       for (var col = 15; col >= 0; col--) {
-        matrix[row][col] = snd & 0x1;
-        snd = snd >> 1;
+        matrix[row][col] = bitmap & 0x1;
+        bitmap = bitmap >> 1;
       }
     }
 

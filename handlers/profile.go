@@ -27,8 +27,13 @@ type UserInfo struct {
 }
 
 type Availability struct {
-	FstHalf int64
-	SndHalf int64
+	Mon  int64
+	Tues int64
+	Wed  int64
+	Thur int64
+	Fri  int64
+	Sat  int64
+	Sun  int64
 }
 
 type Fixture struct {
@@ -410,19 +415,28 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	username := (strings.Split(getquery, "=")[1])
 
   // Run query
-	query := fmt.Sprintf("SELECT fst_half, snd_half FROM availabilities WHERE username='%s';", username)
+	query := fmt.Sprintf("SELECT mon, tues, weds, thur, fri, sat, sun FROM availabilities WHERE username='%s';", username)
 	rows, err := db.Query(query)
 	CheckErr(err)
+
+	// Initialise the json response for the result
+	var result []int
+	err = json.Unmarshal([]byte(jsonText), &result)
 
 	// Add the *only* database hit to the result
 	rows.Next()
 	data := Availability{}
 	err = rows.Scan(
-		&data.FstHalf,
-		&data.SndHalf)
+		&result[0],
+		&result[1],
+		&result[2],
+		&result[3],
+		&result[4],
+		&result[5],
+		&result[6])
 
 
-	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
