@@ -23,12 +23,10 @@ class Profile extends Component {
     var username = UserProfile.getName();
     axios.get('/getuserinfo?username='+username)
          .then(function(response) {
+           var loc = _this.coordsToLoc(response.data)
            _this.setState({
-             name: response.data.Name,
-             age: response.data.Age,
-             location: response.data.Location,
-             score: response.data.Score
-           });
+             location: loc
+           })
          });
   }
 
@@ -44,15 +42,28 @@ class Profile extends Component {
   }
 
   loadUpcoming() {
-        var _this = this;
-        var username = UserProfile.getName();
-        axios.get('/getuserupcoming?username=' + username)
-            .then(function (response) {
-                _this.setState({
-                    fixtures: response.data
-                });
+    var _this = this;
+    var username = UserProfile.getName();
+    axios.get('/getuserupcoming?username=' + username)
+        .then(function (response) {
+            _this.setState({
+                upcoming: response.data
             });
-    }
+        });
+  }
+
+  coordsToLoc(c) {
+    console.log(c.Location)
+    var venue_latlng = c.Location.split("(")[1].split(")")[0];
+    var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+                      + venue_latlng
+
+    var _this = this
+    _this.serverRequest = axios.get(request_url)
+          .then(function(result) {
+            _this.setState({location: result.data.results[0].formatted_address});
+          })
+  }
 
   componentDidMount() {
     this.loadUserInformation();
@@ -121,14 +132,14 @@ class Profile extends Component {
                 <td>
                 {
                   this.state.fixtures.length == 0 ? <b>(empty)</b> :
-                  this.state.fixtures.map(item =>
+                  (this.state.fixtures.map(item =>
                     <div class={"resultcard " + this.getResult(item)}>
                     <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
-                    playing for {item.ForTeam} in {item.Sport}</p>
+                    playing for <b>{item.ForTeam}</b> in <b>{item.Sport}</b></p>
                     <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
                     <p class='centertext'>{item.Date}, {item.Location}</p>
                     </div>
-                  )
+                  ))
                 }
                 </td>
                 <td>
@@ -145,11 +156,6 @@ class Profile extends Component {
                 </td>
               </tr>
             </table>
-            <div id='prevbox'>
-            </div>
-
-            <div id='upcbox'>
-            </div>
           </div>
 
         </div>

@@ -19,11 +19,7 @@ import (
  */
 
 type UserInfo struct {
-	Username  string
-	Name      string
-	Age       int
 	Location  string
-	Score     int
 }
 
 type Availability struct {
@@ -60,19 +56,14 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 	username := (strings.Split(getquery, "=")[1])
 
 	// Run query
-  query := fmt.Sprintf("SELECT * FROM users WHERE username='%s';", username)
+  query := fmt.Sprintf("SELECT location FROM users WHERE username='%s';", username)
   rows, err := db.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
 	if (rows.Next()) {
 		data := UserInfo{}
-		err = rows.Scan(
-			&data.Username,
-			&data.Name,
-			&data.Age,
-			&data.Location,
-			&data.Score)
+		err = rows.Scan(&data.Location)
 
 		j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
 		fmt.Fprintln(writer, string(j)) // Write the result to the sender
@@ -93,16 +84,14 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := strings.Split(getquery, "=")[1]
 
-	fmt.Println(username)
-
 	ordering := "ORDER BY date DESC"
 	commonQueryFields :=  "sport, location, date, home_score, away_score"
 	var jsonText = []byte(`[]`)
 
 	// -------------------------- QEURY ALL TEAM GAMES --------------------------
-	homeQuery := fmt.Sprintf("SELECT away_name AS opp, home_name AS for, %s FROM fixtures JOIN team_members ON home_name=team_name WHERE username='%s' AND home_score IS NULL",
+	homeQuery := fmt.Sprintf("SELECT away_name AS opp, home_name AS for, %s FROM fixtures JOIN team_members ON home_name=team_name WHERE username='%s' AND date >= current_date",
 		commonQueryFields, username)
-	awayQuery := fmt.Sprintf("SELECT home_name AS opp, away_name AS for, %s FROM fixtures JOIN team_members ON away_name=team_name WHERE username='%s' AND home_score IS NULL",
+	awayQuery := fmt.Sprintf("SELECT home_name AS opp, away_name AS for, %s FROM fixtures JOIN team_members ON away_name=team_name WHERE username='%s' AND date >= current_date",
 		commonQueryFields, username)
 
 	query := fmt.Sprintf("%s %s;\n", homeQuery, ordering)
@@ -165,6 +154,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
+
 // Get the fixtures for the user specified in the url
 var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
@@ -182,9 +172,9 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	var jsonText = []byte(`[]`)
 
 	// -------------------------- QEURY ALL TEAM GAMES --------------------------
-	homeQuery := fmt.Sprintf("SELECT away_name AS opp, home_name AS for, %s FROM fixtures JOIN team_members ON home_name=team_name WHERE username='%s'",
+	homeQuery := fmt.Sprintf("SELECT away_name AS opp, home_name AS for, %s FROM fixtures JOIN team_members ON home_name=team_name WHERE username='%s' AND date < current_date",
 													commonQueryFields, username)
-	awayQuery := fmt.Sprintf("SELECT home_name AS opp, away_name AS for, %s FROM fixtures JOIN team_members ON away_name=team_name WHERE username='%s'",
+	awayQuery := fmt.Sprintf("SELECT home_name AS opp, away_name AS for, %s FROM fixtures JOIN team_members ON away_name=team_name WHERE username='%s' AND date < current_date",
 													commonQueryFields, username)
 
 	query := fmt.Sprintf("%s %s;\n", homeQuery, ordering)
@@ -254,7 +244,7 @@ func merge(list1 *[]Fixture, list2 *[]Fixture, result *[]Fixture) {
 		if (i >= len(*list1)) {
 			*result = append(*result, (*list2)[k])
 			k++
-		} else if (k >= len(*list1)) {
+		} else if (k >= len(*list2)) {
 			*result = append(*result, (*list1)[i])
 			i++
 		} else {
@@ -306,7 +296,7 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Println(string(j))
+	// fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
