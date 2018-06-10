@@ -3,9 +3,7 @@ import axios from 'axios';
 
 
 import LocationPicker from 'react-location-picker';
-import TimeDurationPicker from 'rc-time-duration-picker';
 import DateTimePicker from 'react-datetime-picker';
-import * as Datetime from 'react-datetime';
 import moment from 'moment';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import Select from 'react-select';
