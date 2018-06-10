@@ -4,14 +4,13 @@ import './Stylesheets/profile.css';
 import AvailabiltyTable from './Profile/AvailabiltyTable';
 import axios from 'axios';
 import UserProfile from './Profile/UserProfile';
+import PreviousFixtureCard from './Profile/PreviousFixtureCard';
+import UpcomingFixtureCard from './Profile/UpcomingFixtureCard';
 
 class Profile extends Component {
   state = {
     username: "",
-    name: "",
-    age: -1,
     location: "",
-    score: -1,
     fixtures: [],
     upcoming: [],
     isEditting: false
@@ -23,16 +22,23 @@ class Profile extends Component {
     var username = UserProfile.getName();
     axios.get('/getuserinfo?username='+username)
          .then(function(response) {
-           var loc = _this.coordsToLoc(response.data.Location)
-           _this.setState({
-             location: loc
-           })
+           var venue_latlng = response.data.Location.split("(")[1].split(")")[0];
+           var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
+                             + venue_latlng
+
+           var _this = this
+           _this.serverRequest = axios.get(request_url)
+                 .then(function(result) {
+                   console.log(result);
+                   _this.setState({location: result.data.results[0].formatted_address});
+                 })
          });
   }
 
   loadUserFixtures() {
     var _this = this;
     var username = UserProfile.getName();
+    // axios.get('/prevfix.json')
     axios.get('/getuserfixtures?username=' + username)
          .then(function(response) {
            _this.setState({
@@ -44,6 +50,7 @@ class Profile extends Component {
   loadUpcoming() {
     var _this = this;
     var username = UserProfile.getName();
+    // axios.get('/upfix.json')
     axios.get('/getuserupcoming?username=' + username)
         .then(function (response) {
             _this.setState({
@@ -52,54 +59,10 @@ class Profile extends Component {
         });
   }
 
-  coordsToLoc(c) {
-    var venue_latlng = c.split("(")[1].split(")")[0];
-    var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
-                      + venue_latlng
-
-    var _this = this
-    _this.serverRequest = axios.get(request_url)
-          .then(function(result) {
-            return result.data.results[0].formatted_address;
-          })
-  }
-
   componentDidMount() {
     this.loadUserInformation();
     this.loadUserFixtures();
     this.loadUpcoming();
-  }
-
-  getResult(item) {
-    if (item.scoreFor == "") {
-      return "unplayed";
-    }
-
-    if (item.ScoreHome == item.ScoreAway) {
-      return "draw";
-    }
-
-    if (item.IsHome) {
-      if (item.ScoreHome > item.ScoreAway) {
-        return "win";
-      }
-      if (item.ScoreHome < item.ScoreAway) {
-        return "lose";
-      }
-    } else {
-      if (item.ScoreHome < item.ScoreAway) {
-        return "win";
-      }
-      if (item.ScoreHome > item.ScoreAway) {
-        return "lose";
-      }
-    }
-  }
-
-  formatDate(date) {
-    var start = (date.split("Z"))[0].split("T");
-
-    return start[0] + " " + start[1]
   }
 
   showEditBox(e) {
@@ -137,26 +100,13 @@ class Profile extends Component {
                 <td>
                 {
                   this.state.fixtures.length == 0 ? <b>(empty)</b> :
-                  (this.state.fixtures.map(item =>
-                    <div class={"resultcard " + this.getResult(item)}>
-                    <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
-                    playing for <b>{item.ForTeam}</b> in <b>{item.Sport}</b></p>
-                    <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
-                    <p class='centertext'>{this.formatDate(item.Date)}, {this.coordsToLoc(item.Location)}</p>
-                    </div>
-                  ))
+                  this.state.fixtures.map(item => (<PreviousFixtureCard data={item} />))
                 }
                 </td>
                 <td>
                 {
                   this.state.upcoming.length == 0 ? <b>(empty)</b> :
-                  this.state.upcoming.map(item =>
-                    <div class={"resultcard unplayed"}>
-                    <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
-                    playing for {item.ForTeam} in {item.Sport}</p>
-                    <p class='centertext'>{this.formatDate(item.Date)}, {this.coordsToLoc(item.Location)}</p>
-                    </div>
-                  )
+                  this.state.upcoming.map(item => (<UpcomingFixtureCard data={item} />))
                 }
                 </td>
               </tr>

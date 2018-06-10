@@ -1,0 +1,22 @@
+.win {
+    background-color: #c1ffd1;
+}
+
+.lose {
+    background-color: #ffbaba;
+}
+
+.draw {
+    background-color: #fffac1;
+}
+
+.resultcard {
+    height: auto;
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    /* border: 2px solid black; */
+}
