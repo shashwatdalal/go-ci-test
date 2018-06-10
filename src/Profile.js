@@ -96,6 +96,12 @@ class Profile extends Component {
     }
   }
 
+  formatDate(date) {
+    var start = (date.split("Z"))[0].split("T");
+
+    return start[0] + " " + start[1]
+  }
+
   showEditBox(e) {
     e.preventDefault();
 
@@ -136,7 +142,7 @@ class Profile extends Component {
                     <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
                     playing for <b>{item.ForTeam}</b> in <b>{item.Sport}</b></p>
                     <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
-                    <p class='centertext'>{item.Date}, {this.coordsToLoc(item.Location)}</p>
+                    <p class='centertext'>{this.formatDate(item.Date)}, {this.coordsToLoc(item.Location)}</p>
                     </div>
                   ))
                 }
@@ -148,7 +154,7 @@ class Profile extends Component {
                     <div class={"resultcard unplayed"}>
                     <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
                     playing for {item.ForTeam} in {item.Sport}</p>
-                    <p class='centertext'>{item.Date}, {this.coordsToLoc(item.Location)}</p>
+                    <p class='centertext'>{this.formatDate(item.Date)}, {this.coordsToLoc(item.Location)}</p>
                     </div>
                   )
                 }
