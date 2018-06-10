@@ -33,6 +33,7 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+  defer db.close()
   CheckErr(err)
 
 	decoder := json.NewDecoder(request.Body)
@@ -57,6 +58,7 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
   dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
     DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+  defer db.close()
   CheckErr(err)
 
   decoder := json.NewDecoder(request.Body)
@@ -94,6 +96,7 @@ var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, r
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+  defer db.close()
   CheckErr(err)
 
 	// Obtain username (query is of the form ?username)
