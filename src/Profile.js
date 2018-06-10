@@ -6,15 +6,42 @@ import axios from 'axios';
 import UserProfile from './Profile/UserProfile';
 import PreviousFixtureCard from './Profile/PreviousFixtureCard';
 import UpcomingFixtureCard from './Profile/UpcomingFixtureCard';
+import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
+
+const refs = {}
 
 class Profile extends Component {
   state = {
     username: "",
     location: "",
+    position:{
+      lat: 0.0,
+      lng: 0.0,
+    },
+    places: [],
     fixtures: [],
     upcoming: [],
-    isEditting: false
+    isEditing: false
   };
+
+  // Searchbox init
+  onSearchBoxMounted(ref) {
+      refs.searchBox = ref;
+  }
+
+  // On searchbox edited
+  onPlacesChanged(){
+      const places = refs.searchBox.getPlaces();
+      this.setState({ places,})
+      var lastvisited = places[places.length - 1];
+      this.setState({
+          location: lastvisited.formatted_address
+      });
+      axios.get(
+        '/updateuserloc?username=' + UserProfile.getName()
+        + '&lat=' + lastvisited.geometry.location.lat()
+        + '&lng=' + lastvisited.geometry.location.lng())
+  }
 
   loadUserInformation() {
     // Query DB
@@ -69,7 +96,7 @@ class Profile extends Component {
 
     var _this = this;
     _this.setState({
-      isEditting: true
+      isEditing: true
     })
   }
 
@@ -80,7 +107,19 @@ class Profile extends Component {
           <p class='thintext centertext'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
-          {this.state.isEditting ? <input type='text' /> : ""}
+          {this.state.isEditing ?
+            <StandaloneSearchBox
+              ref={this.onSearchBoxMounted}
+              bounds={this.bounds}
+              onPlacesChanged={this.onPlacesChanged}
+            >
+            <input
+              type='text'
+              placeholder="Search for your location"
+              id = "searchBox"
+              />
+            </StandaloneSearchBox>
+            : ""}
           <div class="AvTable">
             <AvailabiltyTable />
           </div>

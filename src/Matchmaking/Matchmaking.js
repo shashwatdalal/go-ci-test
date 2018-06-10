@@ -11,6 +11,7 @@ import 'react-select/dist/react-select.css';
 
 
 import './Stylesheets/Forms.css';
+import '../Stylesheets/Searchbox.css';
 
 const defaultPosition = {
     lat: 51.509865,
@@ -168,18 +169,7 @@ class Matchmaking extends Component {
                         <input
                           type="text"
                           placeholder="Search for your location"
-                          style={{
-                            boxSizing: `border-box`,
-                            border: `1px solid transparent`,
-                            width: `99%`,
-                            height: `32px`,
-                            padding: `0 12px`,
-                            borderRadius: `3px`,
-                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                            fontSize: `14px`,
-                            outline: `none`,
-                            textOverflow: `ellipses`,
-                          }}
+                          id = "searchBox"
                         />
                         </StandaloneSearchBox>
 
@@ -194,10 +184,11 @@ class Matchmaking extends Component {
                             radius={parseInt(this.state.Radius)}
                             onChange={this.handleLocationChange}
                         />
-                        <br />
 
+                        <br />
                         Radius
                         <br />
+
                         <input
                             value={parseInt(this.state.Radius)}
                             min="2000"
@@ -207,9 +198,8 @@ class Matchmaking extends Component {
                             name='Radius'
                             id='input4'
                             onChange={this.setValue.bind(this, 'Radius')}/>
+
                         <br />
-
-
                         Duration
                         <br />
 
@@ -218,10 +208,11 @@ class Matchmaking extends Component {
                           value={this.state.Duration}
                           onChange={this.handleDurationChange}
                           options={durationOptions}/>
-                        <br />
 
+                        <br />
                         Availability
                         <br />
+                        
                         <div id='datetime'>
                             <DateTimePicker
                                 value={this.state.date}
