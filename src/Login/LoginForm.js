@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormGroup, FormControl, HelpBlock, ControlLabel, Col, Button, Form} from 'react-bootstrap';
 import UserProfile from '../Profile/UserProfile';
+import {Link} from 'react-router-dom';
 
 var axios = require('axios');
 
@@ -27,10 +28,13 @@ class LoginForm extends React.Component {
   login() {
     alert("Called Login");
     var _this = this
-    var req = "checkLogin?username=" + this.state.username + "&pwd=" + this.state.pwd
+    var body = {
+      Username: this.state.username,
+      Password: this.state.pwd
+    }
     this.serverRequest =
       axios
-        .get(req).then(function(result) {
+        .post('checkLogin', body).then(function(result) {
           if (result.data === "SUCCESS") {
             UserProfile.setName(_this.state.username)
             _this.props.history.push('/profile')
@@ -75,11 +79,15 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Form horizontal onSubmit={(e) => {this.login(); e.preventDefault();}}>
-        {this.usernameGroup()}
-        {this.passwordGroup()}
-        {this.submitGroup()}
-      </Form>
+      <div>
+        <h2> Enter your details below to log in. </h2>
+        <Form horizontal onSubmit={(e) => {this.login(); e.preventDefault();}}>
+          {this.usernameGroup()}
+          {this.passwordGroup()}
+          {this.submitGroup()}
+        </Form>
+        <Link to="/newUser">Or create a new account here</Link>
+      </div>
       );
   }
 }

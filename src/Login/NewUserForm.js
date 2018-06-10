@@ -3,6 +3,7 @@ import {FormGroup, FormControl, HelpBlock, ControlLabel, Col, Button, Form} from
 import UserProfile from '../Profile/UserProfile';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import LocationPicker from 'react-location-picker';
+import {Link} from 'react-router-dom';
 
 const defaultPosition = {
     lat: 51.509865,
@@ -41,33 +42,34 @@ class NewUserForm extends Component {
 
   //Map
   handleLocationChange({position, address}) {
-      this.setState({position, address});
+    this.setState({position, address});
   }
   onSearchBoxMounted(ref) {
-      refs.searchBox = ref;
+    refs.searchBox = ref;
   }
   onPlacesChanged(){
-      const places = refs.searchBox.getPlaces();
-      this.setState({ places,});
-      var lastvisited = places[places.length - 1];
+    const places = refs.searchBox.getPlaces();
+    this.setState({ places,});
+    var lastvisited = places[places.length - 1];
 
-      var object = {
-          position: {
-              lat: lastvisited.geometry.location.lat(),
-              lng: lastvisited.geometry.location.lng(),
-          },
-          address: lastvisited.formatted_address
-      };
-      this.setState(object);
+    var object = {
+        position: {
+            lat: lastvisited.geometry.location.lat(),
+            lng: lastvisited.geometry.location.lng(),
+        },
+        address: lastvisited.formatted_address
+    };
+    this.setState(object);
   }
 
 
   //Text entry validation
   getUsernameValidationState() {
+    var _error = null
     const length = this.state.username.length;
-    if (length > 0 && length < 30) return 'success';
-    else if (length > 0) return 'error';
-    return null;
+    if (length >= 30) {
+      return 'error'
+    }
   }
   getFullNameValidationState() {
     const length = this.state.full_name.length;
@@ -137,7 +139,7 @@ class NewUserForm extends Component {
         <FormControl type="text" placeholder="Username" value={this.state.username}
           onChange={e => this.usernameChange(e)}/>
             <FormControl.Feedback />
-            <HelpBlock>Validation is based on whether username is unique.</HelpBlock>
+            <HelpBlock>Validation is based on username length and whether it is unique.</HelpBlock>
       </Col>
     </FormGroup>
   }
@@ -255,9 +257,7 @@ class NewUserForm extends Component {
 
   // Form Submission
   create() {
-    alert("Create Called");
-    var _this = this;
-    if (this.getUsernameValidationState() !== 'success') {
+    if (this.state.username.length > 30 || this.state.username.length == 0) {
       alert("Resolve issue with username.")
     } else if (this.getFullNameValidationState() !== 'success') {
       alert("Resolve issue with name.")
@@ -265,42 +265,62 @@ class NewUserForm extends Component {
       alert("Resolve issue with date of birth.")
     } else if (this.getPasswordValidationState() !== 'success') {
       alert("Resolve issue with password.")
-    } else if (this.getUsernameValidationState() !== 'success') {
+    } else if (this.getPasswordResubmitValidationState() !== 'success') {
       alert("Ensure passwords match.")
-    } else {
-      alert("All states valid")
-      var body = {
-        username: this.state.username,
-        full_name: this.state.full_name,
-        dob: this.state.dob,
-        position: this.state.position,
-        pwd: this.state.pwd
-      }
-      var req = "adduser?username=" + this.state.username + "&pwd=" + this.state.pwd
+    } else {var _this = this
+      const req = "doesMatchingUserExist?username=" + this.state.username
       this.serverRequest =
         axios
-          .post(req, body).then(function(result) {
-            if (result.data === "SUCCESS") {
-              UserProfile.setName(_this.state.username)
-              _this.props.history.push('/profile')
+          .get(req)
+          .then(function(result) {
+            console.log(result.data);
+            if (result.data === false) {
+              _this.finishCreation()
             } else {
-              alert(result.data)
+              alert("Username is already in use")
             }
           })
-      }
+    }
+  }
+
+  finishCreation() {
+    var _this = this
+    var loc_string = "(" + this.state.position.lat + ", " +
+            this.state.position.lng + ")"
+    var body = {
+      Username: this.state.username,
+      Name: this.state.full_name,
+      Dob: this.state.dob,
+      Location: loc_string,
+      PwdPos: this.state.pwd
+    }
+    alert("Username validation succeeded")
+    this.serverRequest =
+      axios
+        .post("addUserInfo", body).then(function(result) {
+          UserProfile.setName(_this.state.username)
+          this.props.history.push('/profile')
+        })
+  }
+
+  proceedToProfile() {
   }
 
   render() {
     return (
-      <Form horizontal onSubmit={(e) => {this.create(); e.preventDefault();}}>
-        {this.fullNameGroup()}
-        {this.usernameGroup()}
-        {this.dobGroup()}
-        {this.locationGroup()}
-        {this.passwordGroup()}
-        {this.resubmitPasswordGroup()}
-        {this.submitGroup()}
-      </Form>
+      <div>
+        <h2> Enter Your Details Below </h2>
+        <Form horizontal onSubmit={(e) => {this.create(); e.preventDefault();}}>
+          {this.fullNameGroup()}
+          {this.usernameGroup()}
+          {this.dobGroup()}
+          {this.locationGroup()}
+          {this.passwordGroup()}
+          {this.resubmitPasswordGroup()}
+          {this.submitGroup()}
+        </Form>
+        <Link to="/">Or login to an existing account here</Link>
+      </div>
       );
   }
 }

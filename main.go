@@ -29,7 +29,8 @@ func main() {
 
 	// Login
 	r.Handle("/addUserInfo", AddUserInfo).Methods("POST")
-	r.Handle("/checkLogin", GetLoginSuccess).Methods("GET")
+	r.Handle("/checkLogin", GetLoginSuccess).Methods("POST")
+	r.Handle("/doesMatchingUserExist", DoesMatchingUserExist).Methods("GET")
 
 	// Root
 	http.Handle("/", r)
