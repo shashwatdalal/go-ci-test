@@ -33,6 +33,7 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+  defer db.Close()
   CheckErr(err)
 
 	decoder := json.NewDecoder(request.Body)
@@ -43,11 +44,16 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 			defer request.Body.Close()
   }
   var hashed_pwd = HashPassword([]byte(userInfo.Pwd))
-	// Run query
+	// Run query to add user to DB
   query := fmt.Sprintf("INSERT INTO users VALUES('%s', '%s', '%s', '%s', '%s', '%s');",
 							userInfo.Username, userInfo.Name, userInfo.Dob,
               userInfo.Location, hashed_pwd, "100")
-	fmt.Println(query)
+	// fmt.Println(query)
+  _, err = db.Query(query)
+  CheckErr(err)
+
+  availInfo := fmt.Sprintf("('%s', 0, 0, 0, 0, 0, 0, 0)", userInfo.Username)
+  query = fmt.Sprintf("INSERT INTO availabilities VALUES %s;", availInfo)
   _, err = db.Query(query)
   CheckErr(err)
 })
