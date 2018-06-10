@@ -13,7 +13,8 @@ export default class AvailabiltyTable extends React.Component {
                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+    isSubmitted: false
   }
 
   numToDay(i) {
@@ -141,6 +142,7 @@ export default class AvailabiltyTable extends React.Component {
   // Submit the modified availability to the server
   update(e) {
     e.preventDefault();
+    var _this = this;
 
     // Create new availability matrix
     var newAvails = new Array(7) // 7 rows for the days
@@ -175,8 +177,14 @@ export default class AvailabiltyTable extends React.Component {
               "&sat="  + bitmaps[5] +
               "&sun="  + bitmaps[6])
          .then(function(response) {
-           if (response.data == "fail") {
+           if (response.data == "fail\n") {
              alert("Failed to update availability, please try again.")
+           } else {
+             var tick = document.getElementById('tick');
+             tick.innerHTML = "✓";
+             setTimeout(function() {
+               tick.innerHTML = "";
+             }, 2500);
            }
          });
   }
@@ -187,7 +195,7 @@ export default class AvailabiltyTable extends React.Component {
         <table>
           {this.createTable()}
         </table>
-          <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!</h3></a>
+          <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tick'></span></h3></a>
       </div>
     )
   }
