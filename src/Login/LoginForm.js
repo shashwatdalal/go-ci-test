@@ -26,7 +26,6 @@ class LoginForm extends React.Component {
   }
 
   login() {
-    alert("Called Login");
     var _this = this
     var body = {
       Username: this.state.username,
@@ -35,14 +34,19 @@ class LoginForm extends React.Component {
     this.serverRequest =
       axios
         .post('checkLogin', body).then(function(result) {
-          if (result.data === "SUCCESS") {
-            UserProfile.setName(_this.state.username)
-            _this.props.history.push('/profile')
+          var res = result.data.trim()
+          console.log(res)
+          if (res == "SUCCESS") {
+            _this.proceedToProfile()
           } else {
-            alert(result.data)
+            alert(res)
           }
         })
+  }
 
+  proceedToProfile() {
+    UserProfile.setName(this.state.username)
+    this.props.history.push('/profile')
   }
 
   usernameGroup() {

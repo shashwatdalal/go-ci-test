@@ -292,18 +292,18 @@ class NewUserForm extends Component {
       Name: this.state.full_name,
       Dob: this.state.dob,
       Location: loc_string,
-      PwdPos: this.state.pwd
+      Pwd: this.state.pwd
     }
-    alert("Username validation succeeded")
     this.serverRequest =
       axios
         .post("addUserInfo", body).then(function(result) {
-          UserProfile.setName(_this.state.username)
-          this.props.history.push('/profile')
+          _this.proceedToProfile()
         })
   }
 
   proceedToProfile() {
+    UserProfile.setName(this.state.username)
+    this.props.history.push('/profile')
   }
 
   render() {

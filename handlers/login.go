@@ -42,8 +42,7 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
       panic(err)
 			defer request.Body.Close()
   }
-  var hashed_pwd = HashPassword(userInfo.Pwd)
-
+  var hashed_pwd = HashPassword([]byte(userInfo.Pwd))
 	// Run query
   query := fmt.Sprintf("INSERT INTO users VALUES('%s', '%s', '%s', '%s', '%s', '%s');",
 							userInfo.Username, userInfo.Name, userInfo.Dob,
@@ -81,7 +80,7 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
   if (err != nil) {
     // If error then no entry was found in the database for the username given
     fmt.Fprintln(writer, "User Not Found")
-  } else if (!ComparePasswords(userLoginAttempt.Password, []byte(pwd_hash))) {
+  } else if (!ComparePasswords(pwd_hash, []byte(userLoginAttempt.Password))) {
     // If compare passwords returns false then we have an incorrect password attempt
     fmt.Fprintln(writer, "Incorrect Password")
   } else {
@@ -91,8 +90,6 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
 })
 
 var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-  fmt.Println("In DoesMatchingUserExist")
-
   // Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
@@ -123,8 +120,8 @@ var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, r
 })
 
 
-func HashPassword(password string) string {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 12)
+func HashPassword(password []byte) string {
+	bytes, err := bcrypt.GenerateFromPassword(password, 12)
   CheckErr(err)
 	return string(bytes)
 }
