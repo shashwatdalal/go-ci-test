@@ -23,7 +23,7 @@ class Profile extends Component {
     var username = UserProfile.getName();
     axios.get('/getuserinfo?username='+username)
          .then(function(response) {
-           var loc = _this.coordsToLoc(response.data)
+           var loc = _this.coordsToLoc(response.data.Location)
            _this.setState({
              location: loc
            })
@@ -53,8 +53,7 @@ class Profile extends Component {
   }
 
   coordsToLoc(c) {
-    console.log(c.Location)
-    var venue_latlng = c.Location.split("(")[1].split(")")[0];
+    var venue_latlng = c.split("(")[1].split(")")[0];
     var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                       + venue_latlng
 
@@ -137,7 +136,7 @@ class Profile extends Component {
                     <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
                     playing for <b>{item.ForTeam}</b> in <b>{item.Sport}</b></p>
                     <h2 class='centertext'>{item.ScoreHome} - {item.ScoreAway}</h2>
-                    <p class='centertext'>{item.Date}, {item.Location}</p>
+                    <p class='centertext'>{item.Date}, {this.coordsToLoc(item.Location)}</p>
                     </div>
                   ))
                 }
@@ -149,7 +148,7 @@ class Profile extends Component {
                     <div class={"resultcard unplayed"}>
                     <p class='centertext'>versus <a><span class='oppname'>{item.Opposition} ({item.IsHome ? "H" : "A"})</span></a><br />
                     playing for {item.ForTeam} in {item.Sport}</p>
-                    <p class='centertext'>{item.Date}, {item.Location}</p>
+                    <p class='centertext'>{item.Date}, {this.coordsToLoc(item.Location)}</p>
                     </div>
                   )
                 }
