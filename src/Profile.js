@@ -26,8 +26,7 @@ class Profile extends Component {
            var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                              + venue_latlng
 
-           var _this = this
-           _this.serverRequest = axios.get(request_url)
+           axios.get(request_url)
                  .then(function(result) {
                    console.log(result);
                    _this.setState({location: result.data.results[0].formatted_address});

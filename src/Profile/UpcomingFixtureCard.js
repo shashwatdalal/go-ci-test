@@ -17,7 +17,7 @@ class UpcomingFixtureCard extends Component {
     _this.serverRequest = axios.get(request_url)
           .then(function(result) {
             console.log(result);
-            _this.setState({location: result.data.results[0].formatted_address});
+            _this.setState({Location: result.data.results[0].formatted_address});
           })
   }
 
