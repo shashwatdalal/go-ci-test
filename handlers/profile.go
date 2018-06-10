@@ -30,7 +30,7 @@ type Availability struct {
 	Mon  int64
 	Tues int64
 	Wed  int64
-	Thur int64
+	Thurs int64
 	Fri  int64
 	Sat  int64
 	Sun  int64
@@ -65,17 +65,20 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
   CheckErr(err)
 
 	// Add the only database hit to the result
-	rows.Next()
-	data := UserInfo{}
-	err = rows.Scan(
-		&data.Username,
-		&data.Name,
-		&data.Age,
-		&data.Location,
-		&data.Score)
+	if (rows.Next()) {
+		data := UserInfo{}
+		err = rows.Scan(
+			&data.Username,
+			&data.Name,
+			&data.Age,
+			&data.Location,
+			&data.Score)
 
-	j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
-	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+		j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+		fmt.Fprintln(writer, string(j)) // Write the result to the sender
+	} else {
+		fmt.Println("No user info DB hit for ", username)
+	}
 })
 
 // Get the fixtures for the user specified in the url
@@ -280,28 +283,30 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	username := (strings.Split(getquery, "=")[1])
 
   // Run query
-	query := fmt.Sprintf("SELECT mon, tues, weds, thur, fri, sat, sun FROM availabilities WHERE username='%s';", username)
+	query := fmt.Sprintf("SELECT mon, tues, weds, thurs, fri, sat, sun FROM availabilities WHERE username='%s';", username)
 	rows, err := db.Query(query)
 	CheckErr(err)
 
 	// Initialise the json response for the result
-	var result []int
+	var result [7]int
 	err = json.Unmarshal([]byte(jsonText), &result)
 
 	// Add the *only* database hit to the result
-	rows.Next()
-	// data := Availability{}
-	err = rows.Scan(
-		&result[0],
-		&result[1],
-		&result[2],
-		&result[3],
-		&result[4],
-		&result[5],
-		&result[6])
-
+	if (rows.Next()) {
+		err = rows.Scan(
+			&result[0],
+			&result[1],
+			&result[2],
+			&result[3],
+			&result[4],
+			&result[5],
+			&result[6])
+	} else {
+		fmt.Println("Error no avail DB hit for ", username)
+	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
+	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -319,18 +324,34 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 
 	username := strings.Split((strings.Split(getquery, "=")[1]), "&")[0]
 
-	fstString := strings.Split((strings.Split(getquery, "=")[2]), "&")[0]
-	fstBitmap, _ := strconv.ParseInt(fstString, 10, 64)
+	monString := strings.Split((strings.Split(getquery, "=")[2]), "&")[0]
+	monBitmap, _ := strconv.ParseInt(monString, 10, 64)
 
-	sndString := (strings.Split(getquery, "=")[3])
-	sndBitmap, _ := strconv.ParseInt(sndString, 10, 64)
+	tuesString := strings.Split((strings.Split(getquery, "=")[3]), "&")[0]
+	tuesBitmap, _ := strconv.ParseInt(tuesString, 10, 64)
+
+	wedsString := strings.Split((strings.Split(getquery, "=")[4]), "&")[0]
+	wedsBitmap, _ := strconv.ParseInt(wedsString, 10, 64)
+
+	thursString := strings.Split((strings.Split(getquery, "=")[5]), "&")[0]
+	thursBitmap, _ := strconv.ParseInt(thursString, 10, 64)
+
+	friString := strings.Split((strings.Split(getquery, "=")[6]), "&")[0]
+	friBitmap, _ := strconv.ParseInt(friString, 10, 64)
+
+	satString := strings.Split((strings.Split(getquery, "=")[7]), "&")[0]
+	satBitmap, _ := strconv.ParseInt(satString, 10, 64)
+
+	sunString := (strings.Split(getquery, "=")[8])
+	sunBitmap, _ := strconv.ParseInt(sunString, 10, 64)
 
 	// Run query
-	query := fmt.Sprintf("UPDATE availabilities SET fst_half=%d, snd_half=%d WHERE username='%s'",
-											 fstBitmap, sndBitmap, username)
-	rows, err := db.Query(query)
-	rows.Next()
-	fmt.Println(query)
+	fields := fmt.Sprintf("mon=%d, tues=%d, weds=%d, thurs=%d, fri=%d, sat=%d, sun=%d",
+		                     monBitmap, tuesBitmap, wedsBitmap, thursBitmap, friBitmap, satBitmap, sunBitmap)
+	query := fmt.Sprintf("UPDATE availabilities SET %s WHERE username='%s'",
+											  fields, username)
+
+	_, err = db.Query(query)
 	CheckErr(err)
 
 	if err == nil {

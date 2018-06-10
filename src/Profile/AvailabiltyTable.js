@@ -42,7 +42,7 @@ export default class AvailabiltyTable extends React.Component {
     var _this = this;
     axios.get("/getuseravail?username=" + username)
          .then(function(response) {
-           var bitmaps = new Array[7];
+           var bitmaps = new Array(7);
            for (var i = 0; i < 7; i++) {
              bitmaps[i] = parseInt(response.data[i]);
            }
@@ -166,8 +166,14 @@ export default class AvailabiltyTable extends React.Component {
     var username = UserProfile.getName();
 
     // Send the bitmap values to the server
-    axios.get("/updateuseravail?username=" +
-              username + "&fst=" + bitmaps[0] + "&snd=" + bitmaps[1])
+    axios.get("/updateuseravail?username=" + username +
+              "&mon="  + bitmaps[0] +
+              "&tues=" + bitmaps[1] +
+              "&weds=" + bitmaps[2] +
+              "&thurs=" + bitmaps[3] +
+              "&fri="  + bitmaps[4] +
+              "&sat="  + bitmaps[5] +
+              "&sun="  + bitmaps[6])
          .then(function(response) {
            if (response.data == "fail") {
              alert("Failed to update availability, please try again.")
