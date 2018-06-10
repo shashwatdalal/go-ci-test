@@ -49,6 +49,7 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 	// Obtain username (query is of the form ?username)
@@ -78,6 +79,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
 	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
 	CheckErr(err)
 
 	// Obtain username (query is of the form ?username=name)
@@ -161,6 +163,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
 	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
 	CheckErr(err)
 
 	// Obtain username (query is of the form ?username=name)
@@ -265,6 +268,7 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 	var jsonText = []byte(`[]`)
 
@@ -306,6 +310,7 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
 	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
 	CheckErr(err)
 
 	// Obtain the bitmaps (query is of the form ?username=name&fst=x&snd=y)

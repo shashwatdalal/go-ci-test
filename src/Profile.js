@@ -60,7 +60,7 @@ class Profile extends Component {
     var _this = this
     _this.serverRequest = axios.get(request_url)
           .then(function(result) {
-            _this.setState({location: result.data.results[0].formatted_address});
+            return result.data.results[0].formatted_address;
           })
   }
 
