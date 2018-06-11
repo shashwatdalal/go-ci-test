@@ -279,16 +279,16 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 		data.IsHome = false
 
 		teamAway = append(teamAway, data)
-}
+	}
 
-// Initialise the json response for the end result
-var teamFixtures []Fixture
-err = json.Unmarshal([]byte(jsonText), &teamFixtures)
-merge(&teamHome, &teamAway, &teamFixtures)
+	// Initialise the json response for the end result
+	var teamFixtures []Fixture
+	err = json.Unmarshal([]byte(jsonText), &teamFixtures)
+	merge(&teamHome, &teamAway, &teamFixtures)
 
-j,_ := json.Marshal(teamFixtures)        // Convert the list of DB hits to a JSON
-// fmt.Println(string(j))           // Write the result to the console
-fmt.Fprintln(writer, string(j)) // Write the result to the sender})
+	j,_ := json.Marshal(teamFixtures)        // Convert the list of DB hits to a JSON
+	// fmt.Println(string(j))           // Write the result to the console
+	fmt.Fprintln(writer, string(j)) // Write the result to the sender})
 })
 
 
