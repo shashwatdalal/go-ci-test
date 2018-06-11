@@ -18,14 +18,14 @@ class SimpleMap extends Component {
                         lng: -0.1
                     }}
                     defaultZoom={11}>
-                    {this.props.team.players.map((p, index) => p.latlng ?
+                    {this.props.team.players.map((p) => p.location ?
                         <Popover
                             id="popover-basic"
-                            placement={["right", "left", "up", "down"][index % 4]}
+                            placement="right"
                             title={p.name}
                             positionTop={-70}
-                            lat={p.latlng.lat}
-                            lng={p.latlng.lng}>
+                            lat={p.location.lat}
+                            lng={p.location.lng}>
                             <img src={p.image}/>
                         </Popover>
                         : null)}
