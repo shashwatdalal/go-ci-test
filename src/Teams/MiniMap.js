@@ -18,7 +18,7 @@ class SimpleMap extends Component {
                         lng: -0.1
                     }}
                     defaultZoom={11}>
-                    {this.props.team.players.map((p, index) => p.location ?
+                    {this.props.team.players.map((p) => p.location ?
                         <Popover
                             id="popover-basic"
                             placement="right"

@@ -25,7 +25,9 @@ func main() {
 
 	// Team Page
 	r.Handle("/getTeams/{username}", GetTeams).Methods("GET")
-	r.Handle("/getInvitations//{username}", GetInvitations).Methods("GET")
+	r.Handle("/getInvitations/{username}", GetInvitations).Methods("GET")
+	//todo use userid and teamid
+	r.Handle("/addUserToTeam/{username}/{teamname}",AddPlayerToTeam).Methods("POST")
 
 	//Create Team Page
 	r.Handle("/getUsernameMatches", GetUsernameMatches).Methods("GET")

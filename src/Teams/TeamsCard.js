@@ -12,7 +12,6 @@ class TeamsCard extends Component {
     }
 
     render() {
-        {console.log(this.props.teams)}
         return (
             <Tabs defaultActiveKey={1}>
                 {this.props.teams.map((t, index) => {

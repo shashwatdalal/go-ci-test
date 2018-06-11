@@ -1,5 +1,5 @@
 import {serverDomain} from "../ipconfig"
-import {FETCH_TEAMS, ADD_TEAM} from "./types";
+import {FETCH_TEAMS} from "./types";
 import UserProfile from "../Profile/UserProfile";
 
 export const fetchTeams = () => dispatch => {
@@ -13,11 +13,4 @@ export const fetchTeams = () => dispatch => {
             });
             return teams;
         });
-};
-
-export const addTeam = (team) => dispatch => {
-    dispatch({
-        type: ADD_TEAM,
-        payload: team
-    });
 };
