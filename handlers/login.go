@@ -53,20 +53,10 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
   row, err = db.Query(query)
   CheckErr(err)
 
-  var userID int
-
-  if (row.Next()) {
-    // There is a max
-    row.Scan(&userID)
-    userID++
-  } else {
-    // This is the first user
-    userID = 1
-  }
-
   // Run query to add user to DB
-  query = fmt.Sprintf("INSERT INTO users VALUES(%d, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-							userID, userInfo.Username, userInfo.Name, userInfo.Dob,
+  fields := "username, name, dob, loc_lat, loc_lng, pwd_hash, core"
+  query = fmt.Sprintf("INSERT INTO users (%s) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+							fields, userInfo.Username, userInfo.Name, userInfo.Dob,
               userInfo.LocLat, userInfo.LocLng, hashed_pwd, "100")
   _, err = db.Query(query)
   CheckErr(err) //TODO: try and enter an ID that is already in the DB, error is thrown but not handled

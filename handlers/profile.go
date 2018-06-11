@@ -56,7 +56,7 @@ func getUserIDFromUsername(username string) (userID int) {
 
 	// Obtain userID
 	query := fmt.Sprintf("SELECT user_id FROM users WHERE username='%s'", username)
-  row, err = db.Query(query)
+  row, err := db.Query(query)
   CheckErr(err)
 
   if (row.Next()) {
@@ -66,6 +66,8 @@ func getUserIDFromUsername(username string) (userID int) {
 		userID = -1; // Failure value TODO: make front end handle this
 		fmt.Println("Unrecognised username (GetUserUpcoming), ", username)
 	}
+
+	return userID
 }
 
 // Get the user information for the user specified in the url
@@ -92,6 +94,7 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 		err = rows.Scan(&data.LocLat, &data.LocLng)
 
 		j,_ := json.Marshal(data) // Convert the list of DB hits to a JSON
+		// fmt.Println(string(j))
 		fmt.Fprintln(writer, string(j)) // Write the result to the sender
 	} else {
 		fmt.Println("No user info DB hit for ", username)
@@ -120,10 +123,10 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 	commonQueryFields :=  "sport, loc_lat, loc_lng, date"
   tables := "upcoming_fixtures JOIN team_members"
 
-	homeFields := fmt.Sprintf("away_name, home_name, %s", commonQueryFields)
+	homeFields := fmt.Sprintf("away_id, home_id, %s", commonQueryFields)
 	homeTableJoinCond := "home_id=team_id"
 
-	awayFields := fmt.Sprintf("home_name, away_name, %s", commonQueryFields)
+	awayFields := fmt.Sprintf("home_id, away_id, %s", commonQueryFields)
 	awayTableJoinCond := "away_id=team_id"
 
 	// Common text used in initialising JSON responses
@@ -151,9 +154,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Sport,
 			&data.LocLat,
 			&data.LocLng,
-			&data.Date,
-			&data.ScoreHome,
-			&data.ScoreAway)
+			&data.Date)
 
 		data.IsHome = true
 
@@ -174,10 +175,9 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Opposition,
 			&data.ForTeam,
 			&data.Sport,
-			&data.Location,
-			&data.Date,
-			&data.ScoreHome,
-			&data.ScoreAway)
+			&data.LocLat,
+			&data.LocLng,
+			&data.Date)
 
 		data.IsHome = false
 
@@ -209,28 +209,28 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	username := strings.Split(getquery, "=")[1]
 
 	// Obtain userID
-  userID := getUserIDFromUsername(username)
+	userID := getUserIDFromUsername(username)
 
-  // Build queries
+	// Build queries
 	ordering := "ORDER BY date DESC"
 	commonQueryFields := "sport, loc_lat, loc_lng, date, score_home, score_away"
-  tables := "previous_fixtures JOIN team_members"
+	tables := "previous_fixtures JOIN team_members"
 
-	homeFields := fmt.Sprintf("away_name, home_name, %s", commonQueryFields)
+	homeFields := fmt.Sprintf("away_id, home_id, %s", commonQueryFields)
 	homeTableJoinCond := "home_id=team_id"
 
-	awayFields := fmt.Sprintf("home_name, away_name, %s", commonQueryFields)
+	awayFields := fmt.Sprintf("home_id, away_id, %s", commonQueryFields)
 	awayTableJoinCond := "away_id=team_id"
 
 	// Common text used in initialising JSON responses
 	var jsonText = []byte(`[]`)
 
 	homeQuery := fmt.Sprintf("SELECT %s FROM %s ON %s WHERE user_id=%d %s",
-		                        homeFields, tables, homeTableJoinCond, userID, ordering)
+														homeFields, tables, homeTableJoinCond, userID, ordering)
 	awayQuery := fmt.Sprintf("SELECT %s FROM %s ON %s WHERE user_id=%d %s",
-		                        awayFields, tables, awayTableJoinCond, userID, ordering)
+														awayFields, tables, awayTableJoinCond, userID, ordering)
 
-  // Run the query for home games
+	// Run the query for home games
 	rows, err := db.Query(homeQuery)
 	CheckErr(err)
 
@@ -270,7 +270,8 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Opposition,
 			&data.ForTeam,
 			&data.Sport,
-			&data.Location,
+			&data.LocLat,
+			&data.LocLng,
 			&data.Date,
 			&data.ScoreHome,
 			&data.ScoreAway)
@@ -278,16 +279,16 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 		data.IsHome = false
 
 		teamAway = append(teamAway, data)
-	}
+}
 
-	// Initialise the json response for the end result
-	var teamFixtures []Fixture
-	err = json.Unmarshal([]byte(jsonText), &teamFixtures)
-	merge(&teamHome, &teamAway, &teamFixtures)
+// Initialise the json response for the end result
+var teamFixtures []Fixture
+err = json.Unmarshal([]byte(jsonText), &teamFixtures)
+merge(&teamHome, &teamAway, &teamFixtures)
 
-	j,_ := json.Marshal(teamFixtures)        // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))           // Write the result to the console
-	fmt.Fprintln(writer, string(j)) // Write the result to the sender})
+j,_ := json.Marshal(teamFixtures)        // Convert the list of DB hits to a JSON
+// fmt.Println(string(j))           // Write the result to the console
+fmt.Fprintln(writer, string(j)) // Write the result to the sender})
 })
 
 
@@ -333,7 +334,7 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 
   // Run query
 	daysFields := "mon, tues, weds, thurs, fri, sat, sun"
-	query := fmt.Sprintf("SELECT %s FROM availabilities WHERE user_id=%s;",
+	query := fmt.Sprintf("SELECT %s FROM user_avail WHERE user_id=%d;",
 		                    daysFields, userID)
 	rows, err := db.Query(query)
 	CheckErr(err)
@@ -400,9 +401,9 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 
 	// Run query
 	fields := fmt.Sprintf("mon=%d, tues=%d, weds=%d, thurs=%d, fri=%d, sat=%d, sun=%d",
-		                     monBitmap, tuesBitmap, wedsBitmap, thursBitmap, friBitmap, satBitmap, sunBitmap)
-	query := fmt.Sprintf("UPDATE availabilities SET %s WHERE user_id=%d",
-											  fields, userID)
+												 monBitmap, tuesBitmap, wedsBitmap, thursBitmap, friBitmap, satBitmap, sunBitmap)
+	query := fmt.Sprintf("UPDATE user_avail SET %s WHERE user_id=%d",
+												fields, userID)
 
 	_, err = db.Query(query)
 	CheckErr(err)
