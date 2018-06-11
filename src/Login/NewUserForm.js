@@ -274,7 +274,7 @@ class NewUserForm extends Component {
           .get(req)
           .then(function(result) {
             console.log(result.data);
-            if (result.data === false) {
+            if (!result.data) {
               _this.finishCreation()
             } else {
               alert("Username is already in use")
