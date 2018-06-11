@@ -107,19 +107,21 @@ class Profile extends Component {
           <p class='thintext centertext'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
-          {this.state.isEditing ?
-            <StandaloneSearchBox
-              ref={this.onSearchBoxMounted}
-              bounds={this.bounds}
-              onPlacesChanged={this.onPlacesChanged}
-            >
-            <input
-              type='text'
-              placeholder="Search for your location"
-              id = "searchBox"
-              />
-            </StandaloneSearchBox>
-            : ""}
+          <div id="changelocbox">
+            {this.state.isEditing ?
+              <StandaloneSearchBox
+                ref={this.onSearchBoxMounted}
+                bounds={this.bounds}
+                onPlacesChanged={this.onPlacesChanged}
+              >
+              <input
+                type='text'
+                placeholder="Search for your location"
+                id = "searchBox"
+                />
+              </StandaloneSearchBox>
+              : ""}
+          </div>
           <div class="AvTable">
             <AvailabiltyTable />
           </div>

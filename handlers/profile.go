@@ -73,6 +73,7 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 	}
 })
 
+
 // Get the fixtures for the user specified in the url
 var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
@@ -240,6 +241,8 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
+
+// Merge two lists of fixtures
 func merge(list1 *[]Fixture, list2 *[]Fixture, result *[]Fixture) {
 	var i, k int // Track positions in arrays
 
@@ -261,6 +264,7 @@ func merge(list1 *[]Fixture, list2 *[]Fixture, result *[]Fixture) {
 		}
 	}
 }
+
 
 // Get the availability for the user specified in the url
 var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
@@ -355,6 +359,8 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	}
 })
 
+
+// Update the user location for the user and values specified in the url
 var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -376,8 +382,8 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 	username := fields[0]
 	lat := fields[1]
 	lng := fields[2]
-	loc := '(' + lat + ',' + lng + ')'
-	
+	loc := "(" + lat + "," + lng + ")"
+
 	// Run query
 
 	dbfields := fmt.Sprintf("location=%d", loc)
