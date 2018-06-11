@@ -72,3 +72,9 @@ td {
 .unplayed {
   background-color: #c4c4c4;
 }
+
+#changelocbox {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}

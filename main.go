@@ -16,6 +16,7 @@ func main() {
 	r.Handle("/getuseravail", GetUserAvailability).Methods("GET")
 	r.Handle("/updateuseravail", UpdateUserAvailability).Methods("GET")
 	r.Handle("/getuserupcoming", GetUserUpcoming).Methods("GET")
+	r.Handle("/updateuserloc", UpdateUserLocation).Methods("GET")
 
 	// Chat Page
 	r.Handle("/getTeamMatches", GetTeamMatches).Methods("GET")

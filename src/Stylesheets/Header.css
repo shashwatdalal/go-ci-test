@@ -2,12 +2,15 @@
     background-color: #333333;
     color: white;
     align-content: center;
+    height: 10%;
 }
 
 #menupanel h1 {
     padding-top: 10px;
     text-align: center;
     margin: auto;
+    font-size: 6vmin;
+    padding-bottom: 0;
 }
 
 #menuwrapper {
@@ -34,7 +37,8 @@
     display: block;
     color: white;
     text-align: center;
-    padding: 16px;
+    padding-left: 15%;
+    padding-right: 15%;
     text-decoration: none;
 }
 

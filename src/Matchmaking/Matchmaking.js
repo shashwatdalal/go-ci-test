@@ -10,7 +10,6 @@ import 'react-select/dist/react-select.css';
 import './Stylesheets/Forms.css';
 import '../Stylesheets/Searchbox.css';
 
-
 const defaultPosition = {
     lat: 51.509865,
     lng: -0.118092
@@ -221,10 +220,11 @@ class Matchmaking extends Component {
                             radius={parseInt(this.state.Radius)}
                             onChange={this.handleLocationChange}
                         />
-                        <br />
 
+                        <br />
                         Radius
                         <br />
+
                         <input
                             value={this.state.Radius}
                             min="2000"
@@ -234,9 +234,8 @@ class Matchmaking extends Component {
                             name='Radius'
                             id='input4'
                             onChange={this.setValue.bind(this, 'Radius')}/>
+
                         <br />
-
-
                         Duration
                         <br />
 
@@ -245,10 +244,11 @@ class Matchmaking extends Component {
                           value={this.state.Duration}
                           onChange={this.handleDurationChange}
                           options={durationOptions}/>
-                        <br />
 
+                        <br />
                         Availability
                         <br />
+
                         <div id='datetime'>
                             <DateTimePicker
                                 value={this.state.date}

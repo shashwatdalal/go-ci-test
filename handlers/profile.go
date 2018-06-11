@@ -292,6 +292,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 })
 
 
+// Merge two lists of fixtures
 func merge(list1 *[]Fixture, list2 *[]Fixture, result *[]Fixture) {
 	var i, k int // Track positions in arrays
 
@@ -406,6 +407,47 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 												fields, userID)
 
 	_, err = db.Query(query)
+	CheckErr(err)
+
+	if err == nil {
+		fmt.Fprintln(writer, "success") // Write the result to the sender
+	} else {
+		fmt.Fprintln(writer, "fail") // Write the result to the sender
+	}
+})
+
+
+// Update the user location for the user and values specified in the url
+var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	// Obtain the new location (query is of the form ?username=name&lat=x&lng=y)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+
+	query := strings.Split(getquery, "&")
+
+	fields := make([]string, len(query))
+	for index, element:= range query{
+		fields[index] = strings.Split(element, "=")[1]
+	}
+
+	username := fields[0]
+	lat := fields[1]
+	lng := fields[2]
+	loc := "(" + lat + "," + lng + ")"
+
+	// Run query
+
+	dbfields := fmt.Sprintf("location=%d", loc)
+	dbquery := fmt.Sprintf("UPDATE users SET %s WHERE username='%s'",
+											  dbfields, username)
+
+	_, err = db.Query(dbquery)
 	CheckErr(err)
 
 	if err == nil {
