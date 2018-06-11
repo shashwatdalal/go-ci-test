@@ -189,7 +189,8 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	pattern := strings.Split(getquery, "=")[1]
 
-	query := fmt.Sprintf("SELECT (username, full_name) FROM users WHERE UPPER(username) LIKE '%s%';", strings.ToUpper(pattern))
+	query := fmt.Sprintf("SELECT username, name FROM users WHERE UPPER(username) LIKE '%s%s'", strings.ToUpper(pattern), "%")
+	fmt.Println(query)
 	rows, err := db.Query(query)
   CheckErr(err)
 
