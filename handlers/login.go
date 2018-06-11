@@ -19,8 +19,8 @@ type UserInfoInput struct {
 	Username  string
 	Name      string
 	Dob       string
-  LocLat    string
-	LocLng    string
+  LocLat    float64
+	LocLng    float64
   Pwd       string
 }
 
@@ -48,18 +48,16 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
   var hashed_pwd = HashPassword([]byte(userInfo.Pwd))
 
-  // Find highest user_id and increment it for this new user
-  query := "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1"
-  row, err = db.Query(query)
-  CheckErr(err)
-
   // Run query to add user to DB
-  fields := "username, name, dob, loc_lat, loc_lng, pwd_hash, core"
-  query = fmt.Sprintf("INSERT INTO users (%s) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+  fields := "username, name, dob, loc_lat, loc_lng, pwd_hash, score"
+  query := fmt.Sprintf("INSERT INTO users (%s) VALUES('%s', '%s', '%s', %f, %f, '%s', '%s');",
 							fields, userInfo.Username, userInfo.Name, userInfo.Dob,
               userInfo.LocLat, userInfo.LocLng, hashed_pwd, "100")
+  fmt.Print(query)
   _, err = db.Query(query)
-  CheckErr(err) //TODO: try and enter an ID that is already in the DB, error is thrown but not handled
+  CheckErr(err)
+
+  var userID = getUserIDFromUsername(userInfo.Username)
 
   query = fmt.Sprintf("INSERT INTO availabilities (user_id) VALUES (%d);",
                        userID)

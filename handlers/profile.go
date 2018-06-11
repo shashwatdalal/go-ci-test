@@ -19,8 +19,8 @@ import (
  */
 
 type UserInfo struct {
-	LocLat  string
-	LocLng  string
+	LocLat  float64
+	LocLng  float64
 }
 
 type Availability struct {
