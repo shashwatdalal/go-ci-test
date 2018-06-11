@@ -6,14 +6,33 @@ import OpenChat from './OpenChat';
 import '../Stylesheets/Chat.css';
 
 class Chat extends Component {
-    render() {
-        return (
-            <div class="chat_wrapper">
-                <div id="chatlist" class="sidemenu"><ChatList/></div>
-                <div id="body" class="body"><OpenChat/></div>
-                <div id="fixtures" class="fixtures"><FixtureList/></div>
-            </div>
-        )
+  state = {
+    active_chat: "No open chats"
+  }
+
+
+  setActiveChat(chat) {
+    this.setState({
+      active_chat: chat
+    })
+  }
+
+  render() {
+      var _this = this
+      return (
+          <div class="chat_wrapper">
+              <div id="chatlist" class="sidemenu">
+                <ChatList active_chat={this.state.active_chat}
+                          setActiveChat={(chat) => _this.setState({active_chat: chat})}/>
+              </div>
+              <div id="body" class="body">
+                <OpenChat active_chat={this.state.active_chat}/>
+              </div>
+              <div id="fixtures" class="fixtures">
+                <FixtureList active_chat={this.state.active_chat}/>
+              </div>
+          </div>
+      )
     }
 }
 

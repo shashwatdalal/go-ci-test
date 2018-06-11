@@ -76,7 +76,7 @@ class OpenChat extends Component {
     return (
       <div class="ChatPanel">
         <div class="ChatHeader">
-          <h1>{this.state.chat_name}</h1>
+          <h1>{this.props.active_chat}</h1>
         </div>
         <div id="MessageBox" class="MessageBox">
           {
