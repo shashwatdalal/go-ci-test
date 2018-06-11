@@ -60,7 +60,7 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
 	// Run query
   query := fmt.Sprintf("SELECT loc_lat, loc_lng FROM users WHERE username='%s';", username)
-  rows, err := db.Query(query)
+  rows, _ := db.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -90,7 +90,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 
 	// Obtain userID
 	query := fmt.Sprintf("SELECT user_id FROM users WHERE username='%s'", username)
-  row, err = db.Query(query)
+  row, err := db.Query(query)
   CheckErr(err)
 
   var userID int
@@ -161,7 +161,8 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Opposition,
 			&data.ForTeam,
 			&data.Sport,
-			&data.Location,
+			&data.LocLat,
+
 			&data.Date,
 			&data.ScoreHome,
 			&data.ScoreAway)

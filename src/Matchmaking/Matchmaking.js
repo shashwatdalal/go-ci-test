@@ -46,7 +46,7 @@ const sportOptions = [
   { value: 'Archery', label: 'Archery' },
 ]
 
-const teamOptions = []
+var teamOptions = []
 
 class Matchmaking extends Component {
 

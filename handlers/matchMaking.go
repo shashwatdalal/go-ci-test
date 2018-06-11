@@ -7,9 +7,10 @@ import (
 	"net/url"
 	"strings"
 	. "../utils"
+	"encoding/json"
 )
 
-type TeamInfo struct {
+type TeamMap struct {
 	value int // teamID
   label int // teamName
 }
@@ -28,7 +29,7 @@ var GetCaptainedTeams = http.HandlerFunc(func (writer http.ResponseWriter, reque
 
 	// Obtain userID
 	query := fmt.Sprintf("SELECT user_id FROM users WHERE username='%s'", username)
-  row, err = db.Query(query)
+  row, err := db.Query(query)
   CheckErr(err)
 
 	var userID int
@@ -41,16 +42,19 @@ var GetCaptainedTeams = http.HandlerFunc(func (writer http.ResponseWriter, reque
 		fmt.Println("Unrecognised username (GetUserUpcoming), ", username)
 	}
 
-	query := fmt.Sprintf("SELECT team_id, team_name FROM
-		team_captains NATURAL INNER JOIN team_names where user_id='%s'", userID)
+	query = fmt.Sprintf("SELECT team_id, team_name FROM team_captains NATURAL INNER JOIN team_names where user_id='%s'", userID)
 
 	var jsonText = []byte(`[]`)
-	var teamInfos []TeamInfo
+	var teamInfos []TeamMap
 	err = json.Unmarshal([]byte(jsonText), &teamInfos)
 	CheckErr(err)
+	rows, err := db.Query(query)
+	CheckErr(err)
+
+
 
 	for rows.Next() {
-		data := TeamInfo{}
+		data := TeamMap{}
 		err = rows.Scan(
 			&data.value,
 			&data.label)
@@ -59,7 +63,7 @@ var GetCaptainedTeams = http.HandlerFunc(func (writer http.ResponseWriter, reque
 
 	j,_ := json.Marshal(teamInfos)  // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j))	// Write the result to the sender
-}
+})
 
 var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -78,7 +82,7 @@ var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request 
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	query := strings.Split(getquery, "&")
 
-	fields := {}
+	fields := make([]string, len(query))
 	for index, element:= range query{
 		fields[index] = strings.Split(element, "=")[1]
 	}
