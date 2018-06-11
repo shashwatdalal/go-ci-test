@@ -50,7 +50,7 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
   // Find highest user_id and increment it for this new user
   query := "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1"
-  row, err = db.Query(query)
+  row, err := db.Query(query)
   CheckErr(err)
 
   // Run query to add user to DB

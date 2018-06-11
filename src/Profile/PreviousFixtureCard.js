@@ -9,7 +9,7 @@ class PreviousFixtureCard extends Component {
   }
 
   componentDidMount() {
-    var venue_latlng = response.data.LocLat + "," + response.data.LocLng;
+    var venue_latlng = this.props.data.LocLat + "," + this.props.data.LocLng;
     var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                       + venue_latlng
 
