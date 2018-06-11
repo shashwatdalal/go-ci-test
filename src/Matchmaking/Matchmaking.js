@@ -5,7 +5,7 @@ import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import Select from 'react-select';
-import UserProfile from './Profile/UserProfile';
+import UserProfile from '../Profile/UserProfile';
 import 'react-select/dist/react-select.css';
 import './Stylesheets/Forms.css';
 import '../Stylesheets/Searchbox.css';
@@ -46,14 +46,14 @@ const sportOptions = [
   { value: 'Archery', label: 'Archery' },
 ]
 
-var teamOptions = []
+
 
 class Matchmaking extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          Team: '',
+          Team: -1,
           Sport: '',
           Radius: 2000,
           address: 'London',
@@ -64,6 +64,7 @@ class Matchmaking extends Component {
           date: new Date(),
           Duration: 60,
           places: [],
+          teamOptions: []
         }
 
         this.setValue = this.setValue.bind(this);
@@ -73,6 +74,7 @@ class Matchmaking extends Component {
         this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this);
         this.handleSportChange = this.handleSportChange.bind(this);
         this.handleDurationChange = this.handleDurationChange.bind(this);
+        this.handleTeamChange = this.handleTeamChange.bind(this);
     }
 
     onSearchBoxMounted(ref) {
@@ -108,7 +110,7 @@ class Matchmaking extends Component {
         var StartDate = moment.utc(this.state.Date);
         var EndDate = StartDate.clone().add(this.state.Duration.value, 'minutes');
 
-        url += "teamid=" + this.state.team + "&";
+        url += "teamid=" + this.state.Team + "&";
         url += "startdate=" + StartDate.format() + "&";
         url += "enddate=" + EndDate.format() + "&";
         url += "lat=" + this.state.position.lat + "&";
@@ -130,7 +132,8 @@ class Matchmaking extends Component {
       var username = UserProfile.getName();
       axios.get('/getcaptainedteams?username=' + username)
            .then(function(response) {
-             teamOptions = response.data;
+             console.log(response.data)
+             _this.setState({teamOptions : response.data});
            });
     }
 
@@ -140,7 +143,6 @@ class Matchmaking extends Component {
 
     handleSportChange(Sport) {
         this.setState({Sport});
-    		// selectedOption can be null when the `x` (close) button is clicked
     		if (Sport) {
         	 console.log(`Selected: ${Sport.label}`);
          }
@@ -148,7 +150,6 @@ class Matchmaking extends Component {
 
     handleDurationChange(Duration) {
         this.setState({Duration});
-    		// selectedOption can be null when the `x` (close) button is clicked
     		if (Duration) {
         	 console.log(`Selected: ${Duration.label}`);
     		}
@@ -156,11 +157,15 @@ class Matchmaking extends Component {
 
 
     handleTeamChange(Team) {
-        this.setState({Team});
-    		// selectedOption can be null when the `x` (close) button is clicked
-    		if (Team) {
-        	 console.log(`Selected: ${Team.label}`);
-    		}
+      //
+      var object = {};
+      object['Team'] = Team.value;
+      this.setState(object);
+
+  		// selectedOption can be null when the `x` (close) button is clicked
+  		if (Team) {
+    	 console.log(`Selected: ${Team.label}`);
+  		}
     }
 
 
@@ -177,7 +182,7 @@ class Matchmaking extends Component {
                           name="Team"
                           value={this.state.Team}
                           onChange={this.handleTeamChange}
-                          options={teamOptions}/>
+                          options={this.state.teamOptions}/>
 
                         <br />
                         Sport

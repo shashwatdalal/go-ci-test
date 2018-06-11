@@ -11,8 +11,8 @@ import (
 )
 
 type TeamMap struct {
-	value int // teamID
-  label int // teamName
+	TEAMID int     `json:"value"`
+  TEAMNAME string  `json:"label"`
 }
 
 // Query the database for teamIDs corresponding to a username
@@ -28,6 +28,7 @@ var GetCaptainedTeams = http.HandlerFunc(func (writer http.ResponseWriter, reque
 	username := (strings.Split(getquery, "=")[1])
 
 	// Obtain userID
+	fmt.Println(username)
 	query := fmt.Sprintf("SELECT user_id FROM users WHERE username='%s'", username)
   row, err := db.Query(query)
   CheckErr(err)
@@ -41,13 +42,16 @@ var GetCaptainedTeams = http.HandlerFunc(func (writer http.ResponseWriter, reque
 		userID = -1; // Failure value TODO: make front end handle this
 		fmt.Println("Unrecognised username (GetUserUpcoming), ", username)
 	}
+	fmt.Println(userID)
 
-	query = fmt.Sprintf("SELECT team_id, team_name FROM team_captains NATURAL INNER JOIN team_names where user_id='%s'", userID)
 
 	var jsonText = []byte(`[]`)
 	var teamInfos []TeamMap
 	err = json.Unmarshal([]byte(jsonText), &teamInfos)
 	CheckErr(err)
+
+	query = fmt.Sprintf("SELECT team_id, team_name FROM team_captains NATURAL INNER JOIN team_names where user_id=%d;", userID)
+	fmt.Println(query)
 	rows, err := db.Query(query)
 	CheckErr(err)
 
@@ -56,13 +60,15 @@ var GetCaptainedTeams = http.HandlerFunc(func (writer http.ResponseWriter, reque
 	for rows.Next() {
 		data := TeamMap{}
 		err = rows.Scan(
-			&data.value,
-			&data.label)
+			&data.TEAMID,
+			&data.TEAMNAME)
 		teamInfos = append(teamInfos, data)
 	}
 
 	j,_ := json.Marshal(teamInfos)  // Convert the list of DB hits to a JSON
+	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j))	// Write the result to the sender
+
 })
 
 var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
@@ -99,7 +105,7 @@ var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request 
 
 	sqlStatement := `
 	INSERT INTO advertisements (team_id, start_time, end_time, loc_lat, loc_lng, radius, sport)
-	VALUES ($1, $2, $3, $4, $5, $6)`
+	VALUES ($1, $2, $3, $4, $5, $6, $7)`
 	_,err = db.Query(sqlStatement,
 		fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6])
 	CheckErr(err)

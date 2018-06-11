@@ -1,13 +1,6 @@
 {
-<<<<<<< HEAD
-  "main.css": "static/css/main.0bc7e726.css",
-  "main.css.map": "static/css/main.0bc7e726.css.map",
-  "main.js": "static/js/main.9576b13d.js",
-  "main.js.map": "static/js/main.9576b13d.js.map"
-=======
-  "main.css": "static/css/main.8b2b69c6.css",
-  "main.css.map": "static/css/main.8b2b69c6.css.map",
-  "main.js": "static/js/main.a3076425.js",
-  "main.js.map": "static/js/main.a3076425.js.map"
->>>>>>> db_overhaul
+  "main.css": "static/css/main.30184c16.css",
+  "main.css.map": "static/css/main.30184c16.css.map",
+  "main.js": "static/js/main.a5d4e533.js",
+  "main.js.map": "static/js/main.a5d4e533.js.map"
 }
