@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-
-
 import LocationPicker from 'react-location-picker';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import Select from 'react-select';
+import UserProfile from './Profile/UserProfile';
 import 'react-select/dist/react-select.css';
-
-
 import './Stylesheets/Forms.css';
+import '../Stylesheets/Searchbox.css';
+
 
 const defaultPosition = {
     lat: 51.509865,
@@ -47,21 +46,24 @@ const sportOptions = [
   { value: 'Archery', label: 'Archery' },
 ]
 
+const teamOptions = []
+
 class Matchmaking extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            Sport: '',
-            Radius: 2000,
-            address: 'London',
-            position: {
-                lat: 51.509865,
-                lng: -0.118092
-            },
-            date: new Date(),
-            Duration: 60,
-            places: []
+          Team: '',
+          Sport: '',
+          Radius: 2000,
+          address: 'London',
+          position: {
+              lat: 51.509865,
+              lng: -0.118092
+          },
+          date: new Date(),
+          Duration: 60,
+          places: [],
         }
 
         this.setValue = this.setValue.bind(this);
@@ -105,17 +107,31 @@ class Matchmaking extends Component {
         var url = "/matchmaking?";
         var StartDate = moment.utc(this.state.Date);
         var EndDate = StartDate.clone().add(this.state.Duration.value, 'minutes');
-        console.log(StartDate.format())
-        console.log(EndDate.format())
 
-        url += "StartDate=" + StartDate.format() + "&";
-        url += "EndDate=" + EndDate.format() + "&";
-        url += "Location=(" + this.state.position.lat + "," + this.state.position.lng + ')&';
-        url += "Radius=" + this.state.Radius + "&";
-        url += "Sport=" + this.state.Sport.value ;
+        url += "teamid=" + this.state.team + "&";
+        url += "startdate=" + StartDate.format() + "&";
+        url += "enddate=" + EndDate.format() + "&";
+        url += "lat=" + this.state.position.lat + "&";
+        url += "lng=" + this.state.position.lng + "&";
+        url += "radius=" + this.state.Radius + "&";
+        url += "sport=" + this.state.Sport.value ;
 
         axios.get(url).then(response => console.log(response));
 
+    }
+
+
+    componentDidMount() {
+      this.loadTeamInfo();
+    }
+
+    loadTeamInfo() {
+      var _this = this;
+      var username = UserProfile.getName();
+      axios.get('/getcaptainedteams?username=' + username)
+           .then(function(response) {
+             teamOptions = response.data;
+           });
     }
 
     handleLocationChange({position, address}) {
@@ -130,7 +146,6 @@ class Matchmaking extends Component {
          }
     }
 
-
     handleDurationChange(Duration) {
         this.setState({Duration});
     		// selectedOption can be null when the `x` (close) button is clicked
@@ -140,11 +155,29 @@ class Matchmaking extends Component {
     }
 
 
+    handleTeamChange(Team) {
+        this.setState({Team});
+    		// selectedOption can be null when the `x` (close) button is clicked
+    		if (Team) {
+        	 console.log(`Selected: ${Team.label}`);
+    		}
+    }
+
+
     render() {
         return (
             <div class="form_wrapper">
                 <div id="request_form">
                     <form onSubmit={this.handleSubmit}>
+                        <br />
+                        Team
+                        <br />
+
+                        <Select
+                          name="Team"
+                          value={this.state.Team}
+                          onChange={this.handleTeamChange}
+                          options={teamOptions}/>
 
                         <br />
                         Sport
@@ -168,18 +201,7 @@ class Matchmaking extends Component {
                         <input
                           type="text"
                           placeholder="Search for your location"
-                          style={{
-                            boxSizing: `border-box`,
-                            border: `1px solid transparent`,
-                            width: `99%`,
-                            height: `32px`,
-                            padding: `0 12px`,
-                            borderRadius: `3px`,
-                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                            fontSize: `14px`,
-                            outline: `none`,
-                            textOverflow: `ellipses`,
-                          }}
+                          id = "searchBox"
                         />
                         </StandaloneSearchBox>
 
@@ -199,7 +221,7 @@ class Matchmaking extends Component {
                         Radius
                         <br />
                         <input
-                            value={parseInt(this.state.Radius)}
+                            value={this.state.Radius}
                             min="2000"
                             max="50000"
                             step="1000"
