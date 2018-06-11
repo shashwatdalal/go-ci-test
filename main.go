@@ -27,6 +27,10 @@ func main() {
 	r.Handle("/getTeams/{username}", GetTeams).Methods("GET")
 	r.Handle("/getInvitations//{username}", GetInvitations).Methods("GET")
 
+	//Create Team Page
+	r.Handle("/getUsernameMatches", GetUsernameMatches).Methods("GET")
+	r.Handle("/createTeam", AddTeam).Methods("POST")
+
 	// Login
 	r.Handle("/addUserInfo", AddUserInfo).Methods("POST")
 	r.Handle("/checkLogin", GetLoginSuccess).Methods("POST")

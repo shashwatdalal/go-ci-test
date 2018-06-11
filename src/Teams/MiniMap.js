@@ -21,7 +21,7 @@ class SimpleMap extends Component {
                     {this.props.team.players.map((p, index) => p.location ?
                         <Popover
                             id="popover-basic"
-                            placement="left"
+                            placement="right"
                             title={p.name}
                             positionTop={-70}
                             lat={p.location.lat}

@@ -10,6 +10,7 @@ class Invitations extends Component {
     }
 
     render() {
+        console.log("rendering");
         return (
             <div>
                 <ListGroup>

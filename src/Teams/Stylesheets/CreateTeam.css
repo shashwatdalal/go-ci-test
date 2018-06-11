@@ -1,0 +1,36 @@
+.CreateTeam {
+  width: 90%;
+  margin: auto;
+}
+
+#SearchBox, #TeamNameBox {
+  width: 100%;
+  font-size: 1.5vw;
+}
+
+#teamNameSection {
+  padding: 1vh;
+  border-bottom: 3px solid #e0ebeb;
+}
+
+#invitationSection {
+  padding: 1vh;
+  border-bottom: 3px solid #e0ebeb;
+}
+
+#searchSection {
+  padding: 1vh;
+}
+
+.inviteeComponent {
+  width: 100%;
+  padding-bottom: 1vh;
+  border-bottom: 2px solid #e0ebeb;
+}
+
+.inviteeUsername, .inviteeName {
+  font-size: 1.5vw;
+  min-width: 30%;
+  display: inline;
+  padding-right: 3vw;
+}
