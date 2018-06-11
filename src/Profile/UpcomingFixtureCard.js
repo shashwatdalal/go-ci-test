@@ -9,7 +9,7 @@ class UpcomingFixtureCard extends Component {
   }
 
   componentDidMount() {
-    var venue_latlng = this.props.data.Location.split("(")[1].split(")")[0];
+    var venue_latlng = response.data.LocLat + "," + response.data.LocLng;
     var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                       + venue_latlng
 

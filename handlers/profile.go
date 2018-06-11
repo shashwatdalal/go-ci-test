@@ -313,6 +313,7 @@ func merge(list1 *[]Fixture, list2 *[]Fixture, result *[]Fixture) {
 	}
 }
 
+
 // Get the availability for the user specified in the url
 var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
@@ -327,8 +328,13 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := (strings.Split(getquery, "=")[1])
 
+	// Obtain userID
+	userID := getUserIDFromUsername(username)
+
   // Run query
-	query := fmt.Sprintf("SELECT mon, tues, weds, thurs, fri, sat, sun FROM availabilities WHERE username='%s';", username)
+	daysFields := "mon, tues, weds, thurs, fri, sat, sun"
+	query := fmt.Sprintf("SELECT %s FROM availabilities WHERE user_id=%s;",
+		                    daysFields, userID)
 	rows, err := db.Query(query)
 	CheckErr(err)
 
@@ -366,7 +372,6 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 
 	// Obtain the bitmaps (query is of the form ?username=name&fst=x&snd=y)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-
 	username := strings.Split((strings.Split(getquery, "=")[1]), "&")[0]
 
 	monString := strings.Split((strings.Split(getquery, "=")[2]), "&")[0]
@@ -390,11 +395,14 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	sunString := (strings.Split(getquery, "=")[8])
 	sunBitmap, _ := strconv.ParseInt(sunString, 10, 64)
 
+	// Obtain userID
+	userID := getUserIDFromUsername(username)
+
 	// Run query
 	fields := fmt.Sprintf("mon=%d, tues=%d, weds=%d, thurs=%d, fri=%d, sat=%d, sun=%d",
 		                     monBitmap, tuesBitmap, wedsBitmap, thursBitmap, friBitmap, satBitmap, sunBitmap)
-	query := fmt.Sprintf("UPDATE availabilities SET %s WHERE username='%s'",
-											  fields, username)
+	query := fmt.Sprintf("UPDATE availabilities SET %s WHERE user_id=%d",
+											  fields, userID)
 
 	_, err = db.Query(query)
 	CheckErr(err)
