@@ -22,7 +22,7 @@ class Profile extends Component {
     var username = UserProfile.getName();
     axios.get('/getuserinfo?username='+username)
          .then(function(response) {
-           var venue_latlng = response.data.Location.split("(")[1].split(")")[0];
+           var venue_latlng = response.data.LocLat + "," + response.data.LocLng;
            var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                              + venue_latlng
 
