@@ -41,9 +41,15 @@ class OpenChat extends Component {
     }, () => {
       this.scrollChat();
     });
+    var message_info = {
+      Team:"team1",
+      Sender:UserProfile.getName(),
+      Message:this.state.message,
+      Time: time
+    }
     var team_name = "team1"
-    var request = '/addMessage?team=' + team_name
-    axios.post(request, new_message)
+    var request = '/addMessage'
+    axios.post(request, message_info)
       .then(function(response){
         console.log(response)
       });

@@ -22,6 +22,7 @@ type PromotedAdvertisement struct {
 }
 
 type Message struct {
+	Team 			string
 	Sender		string
 	Message		string
 	Date      string
@@ -68,11 +69,6 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
   db, err := sql.Open("postgres", dbinfo)
   CheckErr(err)
 
-	// Obtain team_name (query is of the form ?username)
-	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	team_name := (strings.Split(getquery, "=")[1])
-	chat_name := team_name + "_messages"
-
 	decoder := json.NewDecoder(request.Body)
   var message Message
   err = decoder.Decode(&message)
@@ -80,6 +76,7 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
       panic(err)
 			defer request.Body.Close()
   }
+	chat_name := message.Team + "_messages"
 
 	// Run query
   query := fmt.Sprintf("INSERT INTO %s VALUES('%s', '%s', LOCALTIMESTAMP);",

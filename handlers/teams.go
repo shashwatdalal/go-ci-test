@@ -206,3 +206,56 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	// fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
+
+
+type TeamInfo struct {
+	TeamName  string
+	Captain		string
+	Invitees	[]string
+}
+
+var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
+
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+  db, err := sql.Open("postgres", dbinfo)
+  CheckErr(err)
+
+	decoder := json.NewDecoder(request.Body)
+  var teamInfo TeamInfo
+  err = decoder.Decode(&teamInfo)
+  if err != nil {
+      panic(err)
+			defer request.Body.Close()
+  }
+
+	// Add Team Captain
+  query := fmt.Sprintf("INSERT INTO team_captains VALUES('%s', '%s');",
+							teamInfo.TeamName, teamInfo.Captain)
+	_, err = db.Query(query)
+	CheckErr(err)
+
+	// Add captain as team member
+  query = fmt.Sprintf("INSERT INTO team_members VALUES('%s', '%s');",
+							teamInfo.TeamName, teamInfo.Captain)
+	_, err = db.Query(query)
+	CheckErr(err)
+
+	//Add invitations
+	for _, invitee := range teamInfo.Invitees {
+	  query = fmt.Sprintf("INSERT INTO team_invites VALUES('%s', '%s');",
+								teamInfo.TeamName, invitee)
+		_, err = db.Query(query)
+		CheckErr(err)
+	}
+
+	//Create message table for team
+	query = fmt.Sprintf("CREATE TABLE ", teamInfo.TeamName, "_messages (",
+		"sender varchar(30) NOT NULL, message varchar(200) NOT NULL,",
+		"Time_sent timestamp without time zone NOT NULL);")
+	_, err = db.Query(query)
+	CheckErr(err)
+
+	fmt.Fprintln(writer, "true") // Write the result to the sender
+})
