@@ -18,7 +18,7 @@ func main() {
 	r.Handle("/getuserupcoming", GetUserUpcoming).Methods("GET")
 
 	// Chat Page
-	r.Handle("/teammatches", GetTeamMatches).Methods("GET")
+	r.Handle("/getTeamMatches", GetTeamMatches).Methods("GET")
 	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")
 	r.Handle("/addMessage", AddMessage).Methods("POST")
 

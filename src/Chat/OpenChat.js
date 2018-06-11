@@ -7,7 +7,6 @@ var axios = require('axios');
 
 class OpenChat extends Component {
   state = {
-      chat_name: "Chat",
       messages: [],
       message: ""
   }
@@ -42,7 +41,7 @@ class OpenChat extends Component {
       this.scrollChat();
     });
     var message_info = {
-      Team:"team1",
+      Team:this.props.active_chat,
       Sender:UserProfile.getName(),
       Message:this.state.message,
       Time: time
@@ -58,12 +57,12 @@ class OpenChat extends Component {
 
   componentDidMount() {
     var _this = this;
+    var req = "getChatMessages?team=" + this.props.active_chat
     this.serverRequest =
       axios
-        .get("getChatMessages?team=team1")
+        .get(req)
         .then(function(result) {
           _this.setState({
-            chat_name: "Toms Tanks",
             messages: result.data
           });
             var messageBox = document.getElementById("MessageBox");
@@ -76,7 +75,7 @@ class OpenChat extends Component {
     return (
       <div class="ChatPanel">
         <div class="ChatHeader">
-          <h1>{this.state.chat_name}</h1>
+          <h1>{this.props.active_chat}</h1>
         </div>
         <div id="MessageBox" class="MessageBox">
           {

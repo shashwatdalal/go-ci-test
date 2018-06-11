@@ -11,7 +11,8 @@ class FixtureList extends Component {
 
     componentDidMount() {
         var _this = this;
-        this.serverRequest = axios.get("/teammatches")
+        var req = "getTeamMatches?team=" + this.props.active_chat
+        this.serverRequest = axios.get("/getTeamMatches")
             .then(function (result) {
                 _this.setState({fixtures: result.data});
             })
