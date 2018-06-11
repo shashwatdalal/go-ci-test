@@ -19,7 +19,8 @@ type UserInfoInput struct {
 	Username  string
 	Name      string
 	Dob       string
-	Location  string
+  LocLat    string
+	LocLng    string
   Pwd       string
 }
 
@@ -39,21 +40,39 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 	decoder := json.NewDecoder(request.Body)
   var userInfo UserInfoInput
   err = decoder.Decode(&userInfo)
+
   if err != nil {
       panic(err)
 			defer request.Body.Close()
   }
+
   var hashed_pwd = HashPassword([]byte(userInfo.Pwd))
-	// Run query to add user to DB
-  query := fmt.Sprintf("INSERT INTO users VALUES('%s', '%s', '%s', '%s', '%s', '%s');",
-							userInfo.Username, userInfo.Name, userInfo.Dob,
-              userInfo.Location, hashed_pwd, "100")
-	// fmt.Println(query)
-  _, err = db.Query(query)
+
+  // Find highest user_id and increment it for this new user
+  query := "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1"
+  row, err = db.Query(query)
   CheckErr(err)
 
-  availInfo := fmt.Sprintf("('%s', 0, 0, 0, 0, 0, 0, 0)", userInfo.Username)
-  query = fmt.Sprintf("INSERT INTO availabilities VALUES %s;", availInfo)
+  var userID int
+
+  if (row.Next()) {
+    // There is a max
+    row.Scan(&userID)
+    userID++
+  } else {
+    // This is the first user
+    userID = 1
+  }
+
+  // Run query to add user to DB
+  query = fmt.Sprintf("INSERT INTO users VALUES(%d, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+							userID, userInfo.Username, userInfo.Name, userInfo.Dob,
+              userInfo.LocLat, userInfo.LocLng, hashed_pwd, "100")
+  _, err = db.Query(query)
+  CheckErr(err) //TODO: try and enter an ID that is already in the DB, error is thrown but not handled
+
+  query = fmt.Sprintf("INSERT INTO availabilities (user_id) VALUES (%d);",
+                       userID)
   _, err = db.Query(query)
   CheckErr(err)
 })
@@ -84,7 +103,7 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
 	err = rows.Scan(
 		&pwd_hash)
 
-  if (err != nil) {
+  if (err != nil) { //TODO: make the error impact frontend rather than print to backend
     // If error then no entry was found in the database for the username given
     fmt.Fprintln(writer, "User Not Found")
   } else if (!ComparePasswords(pwd_hash, []byte(userLoginAttempt.Password))) {
@@ -124,7 +143,6 @@ var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, r
   num, err := strconv.Atoi(count)
   match_exists := num > 0
   fmt.Fprintln(writer, match_exists)
-
 })
 
 

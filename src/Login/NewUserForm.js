@@ -285,13 +285,13 @@ class NewUserForm extends Component {
 
   finishCreation() {
     var _this = this
-    var loc_string = "(" + this.state.position.lat + ", " +
-            this.state.position.lng + ")"
+
     var body = {
       Username: this.state.username,
       Name: this.state.full_name,
       Dob: this.state.dob,
-      Location: loc_string,
+      LocLat: this.state.position.lat,
+      LocLng: this.state.position.lng,
       Pwd: this.state.pwd
     }
     this.serverRequest =
