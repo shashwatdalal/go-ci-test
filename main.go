@@ -29,7 +29,7 @@ func main() {
 
 	//Create Team Page
 	r.Handle("/getUsernameMatches", GetUsernameMatches).Methods("GET")
-	r.Handle("/createTeam", AddTeam).Methods("GET")
+	r.Handle("/createTeam", AddTeam).Methods("POST")
 
 	// Login
 	r.Handle("/addUserInfo", AddUserInfo).Methods("POST")

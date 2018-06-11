@@ -9,6 +9,7 @@ import (
 	"database/sql"
 	. "../utils"
 	_ "github.com/lib/pq"
+	"strconv"
 )
 
 
@@ -184,7 +185,6 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	defer db.Close()
 	CheckErr(err)
 
-
 	// Obtain pattern to match (query is of the form ?pattern=)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	pattern := strings.Split(getquery, "=")[1]
@@ -220,6 +220,7 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 	decoder := json.NewDecoder(request.Body)
@@ -230,8 +231,26 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 			defer request.Body.Close()
   }
 
+	// Check that team name is unique
+	query := fmt.Sprintf("SELECT COUNT(*) FROM team_captains WHERE UPPER(team_name)='%s';",
+									strings.ToUpper(teamInfo.TeamName))
+  fmt.Println(query)
+  rows, err := db.Query(query)
+  CheckErr(err)
+
+	// Parse count
+	rows.Next()
+	var count string
+	err = rows.Scan(
+		&count)
+  num, err := strconv.Atoi(count)
+  if (num > 0) {
+		fmt.Fprintln(writer, false) // Write whether successful to the sender
+		return
+	}
+
 	// Add Team Captain
-  query := fmt.Sprintf("INSERT INTO team_captains VALUES('%s', '%s');",
+  query = fmt.Sprintf("INSERT INTO team_captains VALUES('%s', '%s');",
 							teamInfo.TeamName, teamInfo.Captain)
 	_, err = db.Query(query)
 	CheckErr(err)
@@ -246,16 +265,17 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 	for _, invitee := range teamInfo.Invitees {
 	  query = fmt.Sprintf("INSERT INTO team_invites VALUES('%s', '%s');",
 								teamInfo.TeamName, invitee)
+		fmt.Println(query)
 		_, err = db.Query(query)
 		CheckErr(err)
 	}
 
 	//Create message table for team
-	query = fmt.Sprintf("CREATE TABLE ", teamInfo.TeamName, "_messages (",
-		"sender varchar(30) NOT NULL, message varchar(200) NOT NULL,",
-		"Time_sent timestamp without time zone NOT NULL);")
-	_, err = db.Query(query)
-	CheckErr(err)
+	// query = fmt.Sprintf("CREATE TABLE ", teamInfo.TeamName, "_messages (",
+	// 	"sender varchar(30) NOT NULL, message varchar(200) NOT NULL,",
+	// 	"Time_sent timestamp without time zone NOT NULL);")
+	// _, err = db.Query(query)
+	// CheckErr(err)
 
-	fmt.Fprintln(writer, "true") // Write the result to the sender
+	fmt.Fprintln(writer, "true") // Write whethersuccessful to the sender
 })

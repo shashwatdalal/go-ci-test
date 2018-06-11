@@ -92,6 +92,24 @@ class CreateTeam extends Component {
     )
   }
 
+  create() {
+    var _this = this
+    var invitees = this.state.invitees.map(inv => inv.Username)
+    var teamInfo = {
+      TeamName:this.state.team_name,
+      Captain:UserProfile.getName(),
+      Invitees:invitees
+    }
+    axios.post("/createTeam", teamInfo)
+      .then(function(response){
+        if (response.data) {
+          _this.props.history.push("/chat")
+        } else {
+          alert("Team name not unique")
+        }
+      });
+  }
+
   render() {
     var _this = this
     return (
@@ -127,6 +145,8 @@ class CreateTeam extends Component {
                   .map(res => _this.queryListItem(res))}
               </ListGroup>
             </div>
+
+            <Button onClick={() => this.create()}>Create Team and Send Invites</Button>
           </div>
         </div>
     );
