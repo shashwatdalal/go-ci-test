@@ -7,9 +7,8 @@ import '../Stylesheets/Chat.css';
 
 class Chat extends Component {
   state = {
-    active_chat: "No Chats Available, Join a team"
+    active_chat: null
   }
-
 
   setActiveChat(chat) {
     this.setState({
@@ -26,7 +25,9 @@ class Chat extends Component {
                           setActiveChat={(chat) => _this.setState({active_chat: chat})}/>
               </div>
               <div id="body" class="body">
+                {(this.state.active_chat != null) ?
                 <OpenChat active_chat={this.state.active_chat}/>
+                : (<h2>No Chats available, please join a team first</h2>)}
               </div>
               <div id="fixtures" class="fixtures">
                 <FixtureList active_chat={this.state.active_chat}/>

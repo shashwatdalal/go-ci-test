@@ -132,7 +132,11 @@ var GetTeamMatches = http.HandlerFunc(func (writer http.ResponseWriter, request 
   db, err := sql.Open("postgres", dbinfo)
   CheckErr(err)
 
-	team_name := "Toms Tanks"
+
+	// Obtain username (query is of the form ?username)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	team_name := strings.Split(getquery, "=")[1]
+
 	fields := "advertisements.advert_id, advertisements.name, advertisements.start_time, advertisements.end_time, advertisements.location, advertisements.sport";
 
 	// Run query
