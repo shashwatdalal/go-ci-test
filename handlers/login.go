@@ -56,9 +56,6 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
   fmt.Print(query)
   _, err = db.Query(query)
   CheckErr(err)
-
-  var userID = getUserIDFromUsername(userInfo.Username)
-
 })
 
 var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
