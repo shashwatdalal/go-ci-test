@@ -7,7 +7,7 @@ import '../Stylesheets/Chat.css';
 
 class Chat extends Component {
   state = {
-    active_chat: "No open chats"
+    active_chat: "No Chats Available, Join a team"
   }
 
 
