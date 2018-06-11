@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {fetchTeams} from "../actions/teamsActions";
 import "./Stylesheets/TeamCardsGrid.css";
 import SimpleMap from "./MiniMap";
-import {fetchPins} from "../actions/pinsActions";
 
 class TeamsCard extends Component {
 
@@ -13,6 +12,7 @@ class TeamsCard extends Component {
     }
 
     render() {
+        {console.log(this.props.teams)}
         return (
             <Tabs defaultActiveKey={1}>
                 {this.props.teams.map((t, index) => {

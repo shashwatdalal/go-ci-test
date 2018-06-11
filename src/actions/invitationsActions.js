@@ -1,9 +1,10 @@
 import {FETCH_INVITATIONS, DECLINE_INVITATION, ACCEPT_INVITATION, ADD_TEAM} from "./types";
 import {serverDomain} from "../ipconfig"
 import {fetchPins} from "./pinsActions";
+import UserProfile from "../Profile/UserProfile";
 
 export const fetchInvitations = () => dispatch => {
-    fetch(serverDomain + "/getInvitations")
+    fetch(serverDomain + "/getInvitations/" + UserProfile.getName())
         .then(res => res.json())
         .then(invitations => dispatch({
             type: FETCH_INVITATIONS,

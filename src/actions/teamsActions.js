@@ -1,10 +1,10 @@
 import {serverDomain} from "../ipconfig"
 import {FETCH_TEAMS, ADD_TEAM} from "./types";
-import {fetchPins} from "./pinsActions";
+import UserProfile from "../Profile/UserProfile";
 
 export const fetchTeams = () => dispatch => {
     //get team
-    fetch(serverDomain + "/getTeams")
+    fetch(serverDomain + "/getTeams/" + UserProfile.getName())
         .then(res => res.json())
         .then(teams => {
             dispatch({
@@ -12,9 +12,6 @@ export const fetchTeams = () => dispatch => {
                 payload: teams
             });
             return teams;
-        })
-        .then(teams => {
-            teams.map(team => team.players.map(p => dispatch(fetchPins(p, team))));
         });
 };
 

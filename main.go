@@ -24,8 +24,8 @@ func main() {
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")
 
 	// Team Page
-	r.Handle("/getTeams", GetTeams).Methods("GET")
-	r.Handle("/getInvitations", GetInvitations).Methods("GET")
+	r.Handle("/getTeams/{username}", GetTeams).Methods("GET")
+	r.Handle("/getInvitations//{username}", GetInvitations).Methods("GET")
 
 	// Login
 	r.Handle("/addUserInfo", AddUserInfo).Methods("POST")
