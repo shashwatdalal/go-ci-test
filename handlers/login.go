@@ -59,10 +59,6 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
   var userID = getUserIDFromUsername(userInfo.Username)
 
-  query = fmt.Sprintf("INSERT INTO availabilities (user_id) VALUES (%d);",
-                       userID)
-  _, err = db.Query(query)
-  CheckErr(err)
 })
 
 var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {

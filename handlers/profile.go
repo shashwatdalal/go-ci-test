@@ -85,7 +85,7 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
 	// Run query
   query := fmt.Sprintf("SELECT loc_lat, loc_lng FROM users WHERE username='%s';", username)
-  rows, err := db.Query(query)
+  rows, _ := db.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
