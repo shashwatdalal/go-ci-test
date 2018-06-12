@@ -1,9 +1,6 @@
-h1 {
+.ChatHeader {
     margin: 0;
     border: 0;
-}
-
-.ChatHeader {
     height: 4vh;
 }
 
@@ -11,8 +8,6 @@ h1 {
     height: 78vh;
     overflow-y: auto;
     scroll-behavior: smooth;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
 }
 
 .MessageBuilder {
@@ -45,7 +40,6 @@ h1 {
 
 .ChatPanel {
     height: 100%;
-    border-bottom: 2px solid black;
     display: block;
 }
 

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import FixtureList from './FixtureList';
 import ChatList from './ChatList';
 import OpenChat from './OpenChat';
+import ChatRightPanel from './ChatRightPanel';
 import '../Stylesheets/Chat.css';
 
 class Chat extends Component {
@@ -27,11 +27,14 @@ class Chat extends Component {
               <div id="body" class="body">
                 {(this.state.active_chat != null) ?
                 <OpenChat active_chat={this.state.active_chat}/>
-                : (<h2>No Chats available, please join a team first</h2>)}
+                : (<h2>No Chats available</h2>)}
               </div>
-              <div id="fixtures" class="fixtures">
-                <FixtureList active_chat={this.state.active_chat}/>
+              <div id="right_panel" class="right_panel">
+                {(this.state.active_chat != null) ?
+                  <ChatRightPanel/>
+                  :<h2>Please join a team first</h2> }
               </div>
+
           </div>
       )
     }
