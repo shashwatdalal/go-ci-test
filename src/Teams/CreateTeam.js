@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import QueryResultCard from './QueryResultCard'
 import UserProfile from '../Profile/UserProfile'
+import ActiveUserID from '../Profile/ActiveUserID'
 import './Stylesheets/CreateTeam.css'
 import {FormControl, ListGroup, ListGroupItem, Button, CustomComponent} from 'react-bootstrap';
 
 var axios = require('axios');
 
 class CreateTeam extends Component {
+
   state = {
     invitees: [],
     query: "",
@@ -26,6 +28,7 @@ class CreateTeam extends Component {
     this.serverRequest = axios.get(req)
         .then(function (result) {
           if (result.data != null) {
+            var relevant_results = result.data.filter((res) => res.UserID !== ActiveUserID.getID())
             _this.setState({query_results: result.data});
           } else {
             _this.setState({query_results: []});
@@ -49,16 +52,16 @@ class CreateTeam extends Component {
    })
   }
 
-  removeChild(username) {
+  removeChild(user_id) {
     var _this = this
     this.setState({
-      query_results : _this.state.filter(item => item.username != username)
+      query_results : _this.state.filter(item => item.UserID != user_id)
     })
   }
 
   addInvitee(inv){
     var _this = this
-    var matches = this.state.invitees.filter(_inv => _inv.Username === inv.Username)
+    var matches = this.state.invitees.filter(_inv => _inv.UserID === inv.UserID)
     if (matches.length > 0) {
       return
     }
@@ -94,12 +97,13 @@ class CreateTeam extends Component {
 
   create() {
     var _this = this
-    var invitees = this.state.invitees.map(inv => inv.Username)
+    var invitees = this.state.invitees.map(inv => inv.UserID)
     var teamInfo = {
       TeamName:this.state.team_name,
-      Captain:UserProfile.getName(),
+      CaptainID:ActiveUserID.getID(),
       Invitees:invitees
     }
+
     axios.post("/createTeam", teamInfo)
       .then(function(response){
         if (response.data) {

@@ -37,8 +37,8 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	team_name := (strings.Split(getquery, "=")[1])
-	chat_name := team_name + "_messages"
+	team_id := (strings.Split(getquery, "=")[1])
+	chat_name := "team" + team_id + "_messages"
 
 	// Run query
   query := fmt.Sprintf("SELECT * FROM %s;", chat_name)

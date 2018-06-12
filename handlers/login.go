@@ -29,6 +29,11 @@ type UserLoginAttempt struct {
   Password  string
 }
 
+type UserLoginReturn struct {
+  Error   string
+  UserID  int
+}
+
 var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
   // Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -56,7 +61,12 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
   fmt.Print(query)
   _, err = db.Query(query)
   CheckErr(err)
+
+  var userID = getUserIDFromUsername(userInfo.Username)
+  fmt.Fprintln(writer, userID)
 })
+
+
 
 var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
   // Set up connection
@@ -74,26 +84,35 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
       defer request.Body.Close()
   }
 	// Run query
-  query := fmt.Sprintf("SELECT pwd_hash FROM users WHERE username='%s';", userLoginAttempt.Username)
+  query := fmt.Sprintf("SELECT user_id, pwd_hash FROM users WHERE username='%s';", userLoginAttempt.Username)
   rows, err := db.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
 	rows.Next()
-	var pwd_hash string
+	var userLoginReturn UserLoginReturn
+  var pwd_hash string
 	err = rows.Scan(
+    &userLoginReturn.UserID,
 		&pwd_hash)
+  CheckErr(err)
 
-  if (err != nil) { //TODO: make the error impact frontend rather than print to backend
+  if (err != nil) {
     // If error then no entry was found in the database for the username given
-    fmt.Fprintln(writer, "User Not Found")
+    userLoginReturn.UserID = -1
+    userLoginReturn.Error = "User Not Found"
   } else if (!ComparePasswords(pwd_hash, []byte(userLoginAttempt.Password))) {
     // If compare passwords returns false then we have an incorrect password attempt
-    fmt.Fprintln(writer, "Incorrect Password")
+    userLoginReturn.UserID = -1
+    userLoginReturn.Error = "Incorrect Password"
   } else {
     // ComparePasswords returned true, username and password therefore valid
-    fmt.Fprintln(writer, "SUCCESS")
+    userLoginReturn.Error = "none"
   }
+
+  result, err := json.Marshal(userLoginReturn)
+  CheckErr(err)
+  fmt.Fprintln(writer, string(result))
 })
 
 var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
