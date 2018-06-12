@@ -258,7 +258,8 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 
 	// Get ID for Team
 	query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_name='%s';",
-									teamInfo.TeamName);
+									teamInfo.TeamName)
+	fmt.Println(query)
 	rows, err = db.Query(query)
 	rows.Next()
 	var team_id int
@@ -267,14 +268,16 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 
 
 	// Add Team Captain
-  query = fmt.Sprintf("INSERT INTO team_captains VALUES(%d, %d);",
-							team_id, teamInfo.CaptainID)
+  query = fmt.Sprintf("INSERT INTO team_captains (user_id, team_id) VALUES(%d, %d);",
+							teamInfo.CaptainID, team_id)
+	fmt.Println(query)
 	_, err = db.Query(query)
 	CheckErr(err)
 
 	// Add captain as team member
-  query = fmt.Sprintf("INSERT INTO team_members VALUES(%d, %d);",
-							team_id, teamInfo.CaptainID)
+  query = fmt.Sprintf("INSERT INTO team_members (user_id, team_id) VALUES(%d, %d);",
+							teamInfo.CaptainID, team_id)
+	fmt.Println(query)
 	_, err = db.Query(query)
 	CheckErr(err)
 
@@ -288,11 +291,14 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 	}
 
 	//Create message table for team
-	query = fmt.Sprintf("CREATE TABLE team", team_id, "_messages (",
-		"sender varchar(30) NOT NULL, message varchar(200) NOT NULL,",
-		"Time_sent timestamp without time zone NOT NULL);")
+	team_name := fmt.Sprintf("_team%d_messages", team_id)
+	columns := "sender varchar(30) NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
+	query = fmt.Sprintf("CREATE TABLE %s (%s);", team_name, columns)
+	fmt.Println(query)
 	_, err = db.Query(query)
 	CheckErr(err)
+
+	fmt.Println("TEAM CREATION COMPLETED")
 
 	fmt.Fprintln(writer, "true") // Write whethersuccessful to the sender
 })

@@ -100,9 +100,10 @@ class CreateTeam extends Component {
     var invitees = this.state.invitees.map(inv => inv.UserID)
     var teamInfo = {
       TeamName:this.state.team_name,
-      Captain:ActiveUserID.getID(),
+      CaptainID:ActiveUserID.getID(),
       Invitees:invitees
     }
+
     axios.post("/createTeam", teamInfo)
       .then(function(response){
         if (response.data) {
