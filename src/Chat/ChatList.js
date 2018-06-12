@@ -40,11 +40,11 @@ class ChatList extends Component {
         return (
             <div class="ChatList">
                 <h1>Chats</h1>
-                <ListGroup>
-                {
+                {(this.state.chats.length > 0) ?
+                  (<ListGroup>{
                     this.state.chats.map(chat => this.generateChatCard(chat))
-                }
-                </ListGroup>
+                  }</ListGroup>)
+                  : (<h3> No chats available, Join/Create a team first </h3>)}
             </div>
         );
     }
