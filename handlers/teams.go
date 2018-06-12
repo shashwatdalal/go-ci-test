@@ -210,7 +210,7 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 
 type TeamInfo struct {
 	TeamName  string
-	Captain		string
+	CaptainID	int
 	Invitees	[]string
 }
 
@@ -234,7 +234,6 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 	// Check that team name is unique
 	query := fmt.Sprintf("SELECT COUNT(*) FROM team_captains WHERE UPPER(team_name)='%s';",
 									strings.ToUpper(teamInfo.TeamName))
-  fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -249,15 +248,29 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 		return
 	}
 
+	// Add Team Name Record
+	query = fmt.Sprintf("INSERT INTO team_names (team_name) VALUES('%s');",
+							teamInfo.TeamName);
+	rows, err = db.Query(query)
+	CheckErr(err)
+
+	// Get ID for Team
+	query = fmt.Sprintf("SELECT team_id FROM team_captains WHERE team_name='%s';",
+									teamInfo.TeamName);
+	rows.Next()
+	var team_id string
+	err = rows.Scan(&team_id)
+
 	// Add Team Captain
-  query = fmt.Sprintf("INSERT INTO team_captains VALUES('%s', '%s');",
-							teamInfo.TeamName, teamInfo.Captain)
+  query = fmt.Sprintf("INSERT INTO team_captains VALUES(%s, %s);",
+							team_id, teamInfo.CaptainID)
 	_, err = db.Query(query)
 	CheckErr(err)
 
+
 	// Add captain as team member
-  query = fmt.Sprintf("INSERT INTO team_members VALUES('%s', '%s');",
-							teamInfo.TeamName, teamInfo.Captain)
+  query = fmt.Sprintf("INSERT INTO team_members VALUES(%s, %s);",
+							team_id, teamInfo.CaptainID)
 	_, err = db.Query(query)
 	CheckErr(err)
 

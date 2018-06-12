@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormGroup, FormControl, HelpBlock, ControlLabel, Col, Button, Form} from 'react-bootstrap';
 import UserProfile from '../Profile/UserProfile';
+import ActiveUserID from '../Profile/ActiveUserID';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import LocationPicker from 'react-location-picker';
 import {Link} from 'react-router-dom';
@@ -297,6 +298,7 @@ class NewUserForm extends Component {
     this.serverRequest =
       axios
         .post("addUserInfo", body).then(function(result) {
+          ActiveUserID.setID(result.data)
           _this.proceedToProfile()
         })
   }

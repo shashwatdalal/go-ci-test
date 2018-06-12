@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormGroup, FormControl, HelpBlock, ControlLabel, Col, Button, Form} from 'react-bootstrap';
 import UserProfile from '../Profile/UserProfile';
+import ActiveUserID from '../Profile/ActiveUserID';
 import {Link} from 'react-router-dom';
 
 var axios = require('axios');
@@ -34,12 +35,12 @@ class LoginForm extends React.Component {
     this.serverRequest =
       axios
         .post('checkLogin', body).then(function(result) {
-          var res = result.data.trim()
-          console.log(res)
-          if (res == "SUCCESS") {
+          console.log(result.data)
+          if (result.data.Error == "none") {
+            ActiveUserID.setID(result.data.UserID)
             _this.proceedToProfile()
           } else {
-            alert(res)
+            alert(result.data.Error)
           }
         })
   }
