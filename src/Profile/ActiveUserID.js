@@ -6,7 +6,7 @@ var ActiveUserID = (function() {
   };
 
   var setID = function(new_id) {
-    alert("Setting Active")
+    alert(new_id)
     id = new_id;
   };
 

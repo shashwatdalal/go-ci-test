@@ -173,6 +173,7 @@ var GetInvitations = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reques
 
 
 type QueryMatch struct {
+	UserID		int
 	Username	string
 	FullName	string
 }
@@ -189,7 +190,7 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	pattern := strings.Split(getquery, "=")[1]
 
-	query := fmt.Sprintf("SELECT username, name FROM users WHERE UPPER(username) LIKE '%s%s'", strings.ToUpper(pattern), "%")
+	query := fmt.Sprintf("SELECT user_id, username, name FROM users WHERE UPPER(username) LIKE '%s%s';", strings.ToUpper(pattern), "%")
 	fmt.Println(query)
 	rows, err := db.Query(query)
   CheckErr(err)
@@ -197,7 +198,7 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	var result []QueryMatch
 	for rows.Next() {
 		data := QueryMatch{}
-		err = rows.Scan(&data.Username, &data.FullName)
+		err = rows.Scan(&data.UserID, &data.Username, &data.FullName)
 		CheckErr(err)
 		result = append(result, data)
 	}
@@ -211,7 +212,7 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 type TeamInfo struct {
 	TeamName  string
 	CaptainID	int
-	Invitees	[]string
+	Invitees	[]int
 }
 
 var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
@@ -232,7 +233,7 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
   }
 
 	// Check that team name is unique
-	query := fmt.Sprintf("SELECT COUNT(*) FROM team_captains WHERE UPPER(team_name)='%s';",
+	query := fmt.Sprintf("SELECT COUNT(*) FROM team_names WHERE UPPER(team_name)='%s';",
 									strings.ToUpper(teamInfo.TeamName))
   rows, err := db.Query(query)
   CheckErr(err)
@@ -251,44 +252,47 @@ var AddTeam = http.HandlerFunc(func (writer http.ResponseWriter, request *http.R
 	// Add Team Name Record
 	query = fmt.Sprintf("INSERT INTO team_names (team_name) VALUES('%s');",
 							teamInfo.TeamName);
+	fmt.Println(query)
 	rows, err = db.Query(query)
 	CheckErr(err)
 
 	// Get ID for Team
-	query = fmt.Sprintf("SELECT team_id FROM team_captains WHERE team_name='%s';",
+	query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_name='%s';",
 									teamInfo.TeamName);
+	rows, err = db.Query(query)
 	rows.Next()
-	var team_id string
+	var team_id int
 	err = rows.Scan(&team_id)
+	CheckErr(err)
+
 
 	// Add Team Captain
-  query = fmt.Sprintf("INSERT INTO team_captains VALUES(%s, %s);",
+  query = fmt.Sprintf("INSERT INTO team_captains VALUES(%d, %d);",
 							team_id, teamInfo.CaptainID)
 	_, err = db.Query(query)
 	CheckErr(err)
 
-
 	// Add captain as team member
-  query = fmt.Sprintf("INSERT INTO team_members VALUES(%s, %s);",
+  query = fmt.Sprintf("INSERT INTO team_members VALUES(%d, %d);",
 							team_id, teamInfo.CaptainID)
 	_, err = db.Query(query)
 	CheckErr(err)
 
 	//Add invitations
 	for _, invitee := range teamInfo.Invitees {
-	  query = fmt.Sprintf("INSERT INTO team_invites VALUES('%s', '%s');",
-								teamInfo.TeamName, invitee)
+	  query = fmt.Sprintf("INSERT INTO team_invitations VALUES(%d, %d);",
+								team_id, invitee)
 		fmt.Println(query)
 		_, err = db.Query(query)
 		CheckErr(err)
 	}
 
 	//Create message table for team
-	// query = fmt.Sprintf("CREATE TABLE ", teamInfo.TeamName, "_messages (",
-	// 	"sender varchar(30) NOT NULL, message varchar(200) NOT NULL,",
-	// 	"Time_sent timestamp without time zone NOT NULL);")
-	// _, err = db.Query(query)
-	// CheckErr(err)
+	query = fmt.Sprintf("CREATE TABLE team", team_id, "_messages (",
+		"sender varchar(30) NOT NULL, message varchar(200) NOT NULL,",
+		"Time_sent timestamp without time zone NOT NULL);")
+	_, err = db.Query(query)
+	CheckErr(err)
 
 	fmt.Fprintln(writer, "true") // Write whethersuccessful to the sender
 })
