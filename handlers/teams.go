@@ -438,3 +438,34 @@ var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request 
 	team.NAME = vars["teamname"]
 	json.NewEncoder(writer).Encode(team)
 })
+
+
+var DeleteInvitation = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+	vars := mux.Vars(request)
+
+	//get user-id and team-id
+	var userId, teamId int
+	query := fmt.Sprintf("select user_id "+
+		"FROM users where username='%s'", vars["username"])
+	err = db.QueryRow(query).Scan(&userId)
+	CheckErr(err)
+	query = fmt.Sprintf("select team_id "+
+		"FROM team_names where team_name='%s'", vars["teamname"])
+	err = db.QueryRow(query).Scan(&teamId)
+	CheckErr(err)
+
+	//remove team from team_invitations
+	query = fmt.Sprintf(
+		"DELETE FROM team_invitations " +
+			"WHERE team_id=%d AND player_id=%d",
+		teamId, userId)
+	_,err = db.Query(query)
+	CheckErr(err)
+	writer.WriteHeader(http.StatusOK)
+})

@@ -1,4 +1,4 @@
-const domain = "http://35.177.16.42";
+const domain = "http://localhost:8080";
 const portNumber = "80";
 
 export const serverDomain = `${domain}`;

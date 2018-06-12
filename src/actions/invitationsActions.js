@@ -18,17 +18,20 @@ export const acceptInvitation = invitation => dispatch => {
     }).then(
         fetch(serverDomain + "/addUserToTeam/" + UserProfile.getName() + "/" + invitation.name,
             {method: "POST"})
-        .then(res => res.json())
-        .then(updatedteam => dispatch({
-            type: ADD_TEAM,
-            payload: updatedteam
-        }))
+            .then(res => res.json())
+            .then(updatedteam => dispatch({
+                type: ADD_TEAM,
+                payload: updatedteam
+            }))
     );
 };
 
 export const declineInvitation = invitation => dispatch => {
-    dispatch({
-        type: DECLINE_INVITATION,
-        payload: invitation
-    });
+    fetch(serverDomain + "/deleteInvitation/" + UserProfile.getName() + "/" + invitation.name,
+        {method: "DELETE"})
+        .then(
+            dispatch({
+                type: DECLINE_INVITATION,
+                payload: invitation
+            }));
 };
