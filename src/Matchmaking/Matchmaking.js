@@ -147,21 +147,6 @@ class Matchmaking extends Component {
 
     }
 
-
-    componentDidMount() {
-      this.loadTeamInfo();
-    }
-
-    loadTeamInfo() {
-      var _this = this;
-      var username = UserProfile.getName();
-      axios.get('/getcaptainedteams?username=' + username)
-           .then(function(response) {
-             console.log(response.data)
-             _this.setState({teamOptions : response.data});
-           });
-    }
-
     handlePlayersChange(Players) {
         this.setState({Players});
         if (Players) {
@@ -205,16 +190,6 @@ class Matchmaking extends Component {
             <div class="form_wrapper">
                 <div id="request_form">
                     <form onSubmit={this.handleSubmit}>
-                        <br />
-                        Team
-                        <br />
-
-                        <Select
-                          name="Team"
-                          value={this.state.Team}
-                          onChange={this.handleTeamChange}
-                          options={this.state.teamOptions}/>
-
 
                         <br />
                         Players
