@@ -57,7 +57,17 @@ class Profile extends Component {
       axios.get(
         '/updateuserloc?username=' + UserProfile.getName()
         + '&lat=' + newlat
-        + '&lng=' + newlng)
+        + '&lng=' + newlng).then(function(response) {
+          if (response.data == "fail\n") {
+            alert("Failed to update availability, please try again.")
+          } else {
+            var tick = document.getElementById('tick');
+            tick.innerHTML = "✓";
+            setTimeout(function() {
+              tick.innerHTML = "";
+            }, 2500);
+          }
+        });
   }
 
   loadUserInformation() {
@@ -126,7 +136,7 @@ class Profile extends Component {
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
           <div id="changelocbox">
             {this.state.isEditing ?
-              <StandaloneSearchBox
+              <div><span id='tick'></span><StandaloneSearchBox
                 ref={this.onSearchBoxMounted}
                 bounds={this.bounds}
                 onPlacesChanged={this.onPlacesChanged}
@@ -136,7 +146,7 @@ class Profile extends Component {
                 placeholder="Search for your location"
                 id = "searchBox"
                 />
-              </StandaloneSearchBox>
+              </StandaloneSearchBox></div>
               : ""}
           </div>
           <div class="AvTable">
