@@ -1,50 +1,59 @@
-.message_text_received {
+.received_team .message_text {
   background: #e0ebeb;
   color: black;
   border: 1px solid #e0ebeb;
 }
 
-.message_text_sent {
+.received_fixture_team .message_text {
+  background: #000066;
+  color: white;
+  border: 1px solid #000066;
+}
+
+.received_fixture_opp .message_text {
+  background: #b30000;
+  color: white;
+  border: 1px solid #b30000;
+}
+
+.sent .message_text {
   background: #4CAF50;
   border: 1px solid #4CAF50;
   color: white;
 }
 
-.message_text_sent, .message_text_received {
+.message_text {
   border-radius: 5px;
   padding: 5px;
   display: inline-block;
 }
 
-.message_sender_received {
+.received_fixture_opp .sender, .received_fixture_opp .sender,
+  .received_fixture_opp .sender {
     text-align: left;
     grid-area: sd;
 }
 
-.message_sender_sent {
+.sent .sender {
     text-align: right;
     grid-area: sd;
 }
 
-.message_sent {
-    text-align: right;
-    float: right;
-    grid-area: ms;
+.sent .message_text {
+  grid-area: ms;
+  text-align: right;
+  float: right;
 }
 
-.message_received {
+.received_fixture_opp .received, .received_fixture_opp .received,
+  .received_fixture_opp .received  {
     grid-area: ms;
     float: right;
     text-align: left;
 }
 
-.message_sent, .message_received {
+.message {
   font-size: 1.7vh;
-}
-
-.venue {
-    grid-area: vn;
-    text-align: left;
 }
 
 .sent {
@@ -56,7 +65,7 @@
       ". .  ms ms ms ms ms ms ms"
 }
 
-.received {
+.received_team, .received_fixture_team, .received_fixture_opp {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-auto-rows: minmax(10px, auto);

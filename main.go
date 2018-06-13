@@ -19,9 +19,11 @@ func main() {
 	r.Handle("/updateuserloc", UpdateUserLocation).Methods("GET")
 
 	// Chat Page
-	r.Handle("/getTeamMatches", GetTeamMatches).Methods("GET")
+	r.Handle("/getPromotedFixtures", GetPromotedFixtures).Methods("GET")
+	r.Handle("/getChats",GetChats).Methods("GET")
 	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")
 	r.Handle("/addMessage", AddMessage).Methods("POST")
+	r.Handle("/getTeamMembers", GetTeamMembers).Methods("GET")
 
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")
