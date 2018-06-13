@@ -72,7 +72,7 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 	for _, team_id := range team_ids {
 		// Obtain fixtures for team
 		columns := "f.fixture_id, f.home_id, f.away_id, h.team_name, a.team_name"
-		fix_table := "fixtures f"
+		fix_table := "upcoming_fixtures f"
 		first_join := "INNER JOIN team_names h ON f.home_id=h.team_id"
 		second_join := "INNER JOIN team_names a ON f.away_id=a.team_id"
   	query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE home_id=%d OR away_id=%d;",

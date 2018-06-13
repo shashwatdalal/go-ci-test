@@ -16,7 +16,7 @@ class ChatList extends Component {
       var query = "getChats?userID=" + ActiveUserID.getID()
       this.serverRequest =
           axios
-              .get("chats.json")
+              .get(query)
               .then(function (result) {
                   _this.setState({
                       chats: result.data

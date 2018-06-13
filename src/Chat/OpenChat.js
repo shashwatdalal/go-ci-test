@@ -61,8 +61,9 @@ class OpenChat extends Component {
     // Calculate name of chat
     var chat_name = (this.props.is_fixture) ?
                         ("_fixture" + this.props.active_chat.FixtureID)
-                        : ("_team" + this.props.active_chat.HomeID)
-    var get_team_req = "getTeamMembers?team=" + this.props.active_chat.HomeID
+                        : ("_team" + this.props.active_chat.UserTeamID)
+    console.log(this.props.active_chat)
+    var get_team_req = "getTeamMembers?team=" + this.props.active_chat.UserTeamID
     var get_chat_req = "getChatMessages?name=" + chat_name
     // Get Team Members
     axios.get(get_team_req)

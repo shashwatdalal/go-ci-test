@@ -6,7 +6,7 @@ import {Nav, NavItem} from 'react-bootstrap';
 class TeamRightPanel extends Component {
 
   state = {
-    active_key: "1"
+    active_key: "2"
   }
 
   handleSelect(key) {

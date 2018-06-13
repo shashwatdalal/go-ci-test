@@ -11,7 +11,7 @@ class FixtureList extends Component {
 
     componentDidMount() {
         var _this = this;
-        var req = "getTeamMatches?team=" + this.props.active_chat
+        var req = "getPromotedFixtures?team=" + this.props.team_id
         this.serverRequest = axios.get("/getTeamMatches")
             .then(function (result) {
                 _this.setState({fixtures: result.data});
@@ -23,7 +23,7 @@ class FixtureList extends Component {
             <div class="FixtureList">
                 <h1>Fixtures</h1>
                 {
-                    this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.id}`} data={fixture}/>))
+                    this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.AdID}`} data={fixture}/>))
                 }
             </div>
         );
