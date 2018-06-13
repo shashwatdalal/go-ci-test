@@ -7,7 +7,6 @@ import (
 	"net/url"
 	"strings"
 	. "../utils"
-	"encoding/json"
 )
 
 type TeamMap struct {

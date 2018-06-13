@@ -27,7 +27,6 @@ func main() {
 
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")
-	r.HandleFunc("/getcaptainedteams", GetCaptainedTeams).Methods("GET")
 
 
 	// Team Page
