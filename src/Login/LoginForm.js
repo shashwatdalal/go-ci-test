@@ -4,9 +4,14 @@ import UserProfile from '../Profile/UserProfile';
 import ActiveUserID from '../Profile/ActiveUserID';
 import {Link} from 'react-router-dom';
 
+import './Stylesheets/Login.css';
+import '../Stylesheets/master.css';
+
+
 var axios = require('axios');
 
 class LoginForm extends React.Component {
+
   state = {
     username: "",
     pwd: ""
@@ -76,7 +81,7 @@ class LoginForm extends React.Component {
 
   submitGroup() {
     return (<FormGroup>
-        <Col smOffset={2} sm={10}>
+        <Col sm={12}>
           <Button type="submit">Sign in</Button>
         </Col>
     </FormGroup>)
@@ -84,15 +89,29 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2> Enter your details below to log in. </h2>
-        <Form horizontal onSubmit={(e) => {this.login(); e.preventDefault();}}>
-          {this.usernameGroup()}
-          {this.passwordGroup()}
-          {this.submitGroup()}
-        </Form>
-        <Link to="/newUser">Or create a new account here</Link>
+
+      <div id='pagewrapper'>
+        <div id='splashwrapper'>
+
+          <div id="titlewrapper">
+            // <div id="topbar"></div>
+            <h1>MatchUps</h1>
+            // <div id="bottombar"></div>
+          </div>
+
+          <h3> Enter your details below to log in. </h3>
+          <Form horizontal onSubmit={(e) => {this.login(); e.preventDefault();}}>
+            {this.usernameGroup()}
+            {this.passwordGroup()}
+            {this.submitGroup()}
+          </Form>
+          <Link id="newuserlink" to="/newUser">Or create a new account here</Link>
+        </div>
       </div>
+
+
+
+
       );
   }
 }

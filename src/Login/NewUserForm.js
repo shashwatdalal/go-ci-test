@@ -6,6 +6,10 @@ import StandaloneSearchBox from "react-google-maps/lib/components/places/Standal
 import LocationPicker from 'react-location-picker';
 import {Link} from 'react-router-dom';
 
+import './Stylesheets/NewUserForm.css';
+import '../Stylesheets/master.css';
+
+
 const defaultPosition = {
     lat: 51.509865,
     lng: -0.118092
@@ -45,9 +49,11 @@ class NewUserForm extends Component {
   handleLocationChange({position, address}) {
     this.setState({position, address});
   }
+
   onSearchBoxMounted(ref) {
     refs.searchBox = ref;
   }
+
   onPlacesChanged(){
     const places = refs.searchBox.getPlaces();
     this.setState({ places,});
@@ -72,24 +78,28 @@ class NewUserForm extends Component {
       return 'error'
     }
   }
+
   getFullNameValidationState() {
     const length = this.state.full_name.length;
     if (length > 0 && length < 30) return 'success';
     else if (length > 0) return 'error';
     return null;
   }
+
   getDobValidationState() {
     const length = this.state.dob.length;
     if (length === 10) return 'success';
     else if (length > 0) return 'error';
     return null;
   }
+
   getPasswordValidationState() {
     const length = this.state.pwd.length;
     if (length >= 8 && length < 30) return 'success';
     else if (length > 0) return 'error';
     return null;
   }
+
   getPasswordResubmitValidationState() {
     const length = this.state.pwd2.length;
     if (length > 0 && (this.state.pwd === this.state.pwd2)) return 'success';
@@ -104,24 +114,28 @@ class NewUserForm extends Component {
         username: value
     })
   }
+
   fullNameChange(e) {
     const value = e.target.value;
     this.setState({
         full_name: value
     })
   }
+
   dobChange(e) {
     const value = e.target.value;
     this.setState({
         dob: value
     })
   }
+
   pwdChange(e) {
     const value = e.target.value;
     this.setState({
         pwd: value
     })
   }
+
   pwd2Change(e) {
       const value = e.target.value;
       this.setState({
@@ -144,6 +158,7 @@ class NewUserForm extends Component {
       </Col>
     </FormGroup>
   }
+
   fullNameGroup() {
     return <FormGroup controlId="formHorizontalFullName"
             validationState={this.getFullNameValidationState()}>
@@ -158,6 +173,7 @@ class NewUserForm extends Component {
       </Col>
     </FormGroup>
   }
+
   dobGroup() {
     return <FormGroup controlId="formHorizontalDOB"
             validationState={this.getDobValidationState()}>
@@ -172,6 +188,7 @@ class NewUserForm extends Component {
       </Col>
     </FormGroup>
   }
+
   locationGroup() {
     return <FormGroup controlId="formHorizontalLocation">
       <Col componentClass={ControlLabel} sm={2}>
@@ -183,7 +200,9 @@ class NewUserForm extends Component {
         bounds={this.bounds}
         onPlacesChanged={this.onPlacesChanged}
       >
+
       <input
+        id="newuserloctext"
         type="text"
         placeholder="Search for your location"
         onKeyPress={event => {
@@ -220,6 +239,7 @@ class NewUserForm extends Component {
       </Col>
     </FormGroup>
   }
+
   passwordGroup() {
     return (<FormGroup controlId="formHorizontalPassword"
             validationState={this.getPasswordValidationState()}>
@@ -234,6 +254,7 @@ class NewUserForm extends Component {
       </Col>
     </FormGroup>);
   }
+
   resubmitPasswordGroup() {
     return (<FormGroup controlId="formHorizontalPassword2"
             validationState={this.getPasswordResubmitValidationState()}>
@@ -248,6 +269,7 @@ class NewUserForm extends Component {
       </Col>
     </FormGroup>);
   }
+
   submitGroup() {
     return (<FormGroup>
         <Col smOffset={2} sm={10}>
@@ -310,8 +332,8 @@ class NewUserForm extends Component {
 
   render() {
     return (
-      <div>
-        <h2> Enter Your Details Below </h2>
+      <div id="contentcontainer">
+        <h2 id="newusertitle"> Enter Your Details Below </h2>
         <Form horizontal onSubmit={(e) => {this.create(); e.preventDefault();}}>
           {this.fullNameGroup()}
           {this.usernameGroup()}

@@ -1,0 +1,96 @@
+#pagewrapper {
+  /* Sizing */
+  display: table-cell;
+  vertical-align: middle;
+  position:fixed;
+
+  /* Aesthetics */
+}
+
+#splashwrapper {
+  /* Sizing */
+  width: 50%;
+  height: 50%;
+  margin: 0;
+  padding: 2%;
+  position: fixed;
+  top: 25%;
+
+  vertical-align: middle;
+  margin-left: 25%;
+  margin-right: 25%;
+
+  /* Aesthetics */
+  text-align: center;
+}
+
+#titlewrapper {
+  background-color: #333333;
+
+}
+
+#splashwrapper h1 {
+  width: 100%;
+  font-size: 12.5vmin;
+  margin-bottom: 0;
+  padding-bottom: 0px;
+  color:white;
+
+  /* animation-name: boxcolour;
+  animation-duration: 2s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite; */
+}
+
+/* #topbar {
+  width: 100%;
+  border-bottom: 5px solid white;
+  position: relative;
+
+  animation-name: expand;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+#bottombar {
+  width: 100%;
+  border-bottom: 5px solid white;
+
+  animation-name: expand;
+  animation-duration: 3s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes expand {
+  from {width: 100%;}
+  to {width: 0%;}
+} */
+
+/* @keyframes boxcolour {
+  from {background-color: #333333; color: white;}
+  to   {background-color: white; color: #333333;}
+} */
+
+#splashwrapper h3 {
+  margin-top: 10px;
+  font-size: 4vmin;
+
+  animation-name: fade;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+
+@keyframes fade {
+  from {color: #333}
+  to   {color: #EEE}
+}
+
+#newuserlink {
+  color: #333333;
+  font-size: 2vmin;
+}

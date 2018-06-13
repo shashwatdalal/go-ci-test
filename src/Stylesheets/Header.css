@@ -7,10 +7,10 @@
 
 #menupanel h1 {
   padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   margin: auto;
   font-size: 6vmin;
-  padding-bottom: 0;
 }
 
 
