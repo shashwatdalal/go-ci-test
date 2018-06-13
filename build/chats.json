@@ -1,4 +1,4 @@
 [
-    {"Fixture_ID":1, "User_Team_ID":3,"Opp_ID":4, "User_Team_Name":"Marcel FC", "Opp_Name":"The Opps"},
-    {"Fixture_ID":-1, "User_Team_ID":3,"Opp_ID":4, "User_Team_Name":"Marcel FC", "Opp_Name":"The Opps"}
+    {"FixtureID":1, "UserTeamID":3,"OppID":4, "UserTeamName":"Marcel FC", "OppName":"The Opps"},
+    {"FixtureID":-1, "UserTeamID":3,"OppID":4, "UserTeamName":"Marcel FC", "OppName":"The Opps"}
   ]

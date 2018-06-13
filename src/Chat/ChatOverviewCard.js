@@ -18,22 +18,22 @@ class ChatOverviewCard extends Component {
 
   chatAbbreviation(chat){
     var _this = this;
-    if (chat.Fixture_ID == -1) {
+    if (chat.FixtureID == -1) {
       return (<div class="chat_abbreviation"><div class="chat_abbreviation_bold">
-          <strong>{_this.abbreviateName(chat.User_Team_Name)}</strong></div>
+          <strong>{_this.abbreviateName(chat.UserTeamName)}</strong></div>
       </div>)
     } else {
       return (<div class="chat_abbreviation">vs<div class="chat_abbreviation_bold">
-          <strong>{_this.abbreviateName(chat.Opp_Name)}</strong></div>
+          <strong>{_this.abbreviateName(chat.OppName)}</strong></div>
       </div>)
     }
   }
 
   chatName(chat) {
-    if (chat.Fixture_ID == -1) {
-      return chat.User_Team_Name
+    if (chat.FixtureID == -1) {
+      return chat.UserTeamName
     } else {
-      return chat.User_Team_Name + " vs " + chat.Opp_Name
+      return chat.UserTeamName + " vs " + chat.OppName
     }
   }
 

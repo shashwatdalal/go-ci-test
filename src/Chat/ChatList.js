@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ChatOverviewCard from './ChatOverviewCard';
 import {ListGroup} from 'react-bootstrap';
+import ActiveUserID from '../Profile/ActiveUserID'
 import './Stylesheets/ChatList.css';
 
 var axios = require('axios');
@@ -11,16 +12,16 @@ class ChatList extends Component {
     }
 
     componentDidMount() {
-        var _this = this;
-        // var query = "getChats?userID=" + ActiveUserID.getID()
-        this.serverRequest =
-            axios
-                .get("/chats.json")
-                .then(function (result) {
-                    _this.setState({
-                        chats: result.data
-                    }, _this.initialiseActiveChat())
-                })
+      var _this = this;
+      var query = "getChats?userID=" + ActiveUserID.getID()
+      this.serverRequest =
+          axios
+              .get("chats.json")
+              .then(function (result) {
+                  _this.setState({
+                      chats: result.data
+                  }, _this.initialiseActiveChat())
+              })
     }
 
     initialiseActiveChat() {
