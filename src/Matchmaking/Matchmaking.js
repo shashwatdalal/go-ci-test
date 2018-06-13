@@ -18,7 +18,7 @@ const defaultPosition = {
 const refs = {}
 
 const durationOptions = [
-  { value : 60, label: '1 hour'},
+  { value : 60,  label: '1 hour'},
   { value : 120, label: '2 hours'},
   { value : 180, label: '3 hours'},
   { value : 240, label: '4 hours'},
@@ -36,6 +36,30 @@ const durationOptions = [
   { value : 960, label: '16 hours'},
 ]
 
+const playersOptions = [
+  { value : 1,    label: 'One player'},
+  { value : 2,    label: 'Two players'},
+  { value : 3,    label: 'Three players'},
+  { value : 4,    label: 'Four players'},
+  { value : 5,    label: 'Five players'},
+  { value : 6,    label: 'Six players'},
+  { value : 7,    label: 'Seven players'},
+  { value : 8,    label: 'Eight players'},
+  { value : 9,    label: 'Nine players'},
+  { value : 10,   label: 'Ten players'},
+  { value : 11,   label: 'Eleven players'},
+  { value : 12,   label: 'Twelve players'},
+  { value : 13,   label: 'Thirteen players'},
+  { value : 14,   label: 'Fourteen players'},
+  { value : 15,   label: 'Fifteen players'},
+  { value : 16,   label: 'Sixteen players'},
+  { value : 17,   label: 'Seventeen players'},
+  { value : 18,   label: 'Eighteen players'},
+  { value : 19,   label: 'Nineteen players'},
+  { value : 20,   label: 'Twenty players'},
+
+]
+
 const sportOptions = [
   { value: 'Football', label: 'Football' },
   { value: 'Basketball', label: 'Basketball' },
@@ -46,14 +70,14 @@ const sportOptions = [
 ]
 
 
-
 class Matchmaking extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
           Team: -1,
-          Sport: '',
+          Sport: "Football",
+          Players: 1,
           Radius: 2000,
           address: 'London',
           position: {
@@ -74,6 +98,7 @@ class Matchmaking extends Component {
         this.handleSportChange = this.handleSportChange.bind(this);
         this.handleDurationChange = this.handleDurationChange.bind(this);
         this.handleTeamChange = this.handleTeamChange.bind(this);
+        this.handlePlayersChange = this.handlePlayersChange.bind(this);
     }
 
     onSearchBoxMounted(ref) {
@@ -115,25 +140,18 @@ class Matchmaking extends Component {
         url += "lat=" + this.state.position.lat + "&";
         url += "lng=" + this.state.position.lng + "&";
         url += "radius=" + this.state.Radius + "&";
-        url += "sport=" + this.state.Sport.value ;
+        url += "sport=" + this.state.Sport.value + "&";
+        url += "players=" + this.state.Players;
 
         axios.get(url).then(response => console.log(response));
 
     }
 
-
-    componentDidMount() {
-      this.loadTeamInfo();
-    }
-
-    loadTeamInfo() {
-      var _this = this;
-      var username = UserProfile.getName();
-      axios.get('/getcaptainedteams?username=' + username)
-           .then(function(response) {
-             console.log(response.data)
-             _this.setState({teamOptions : response.data});
-           });
+    handlePlayersChange(Players) {
+        this.setState({Players});
+        if (Players) {
+           console.log(`Selected: ${Players.label}`);
+        }
     }
 
     handleLocationChange({position, address}) {
@@ -144,7 +162,7 @@ class Matchmaking extends Component {
         this.setState({Sport});
     		if (Sport) {
         	 console.log(`Selected: ${Sport.label}`);
-         }
+        }
     }
 
     handleDurationChange(Duration) {
@@ -153,7 +171,6 @@ class Matchmaking extends Component {
         	 console.log(`Selected: ${Duration.label}`);
     		}
     }
-
 
     handleTeamChange(Team) {
       //
@@ -173,15 +190,16 @@ class Matchmaking extends Component {
             <div class="form_wrapper">
                 <div id="request_form">
                     <form onSubmit={this.handleSubmit}>
+
                         <br />
-                        Team
+                        Players
                         <br />
 
                         <Select
-                          name="Team"
-                          value={this.state.Team}
-                          onChange={this.handleTeamChange}
-                          options={this.state.teamOptions}/>
+                          name="Players"
+                          value={this.state.Players}
+                          onChange={this.handlePlayersChange}
+                          options={playersOptions}/>
 
                         <br />
                         Sport
@@ -193,71 +211,79 @@ class Matchmaking extends Component {
                           onChange={this.handleSportChange}
                           options={sportOptions}/>
 
-                        <br />
-                        Location
-                        <br />
+                        <div class="form_container">
+                          <div id = "duration">
+                            <br />
+                            Duration
+                            <br />
 
-                        <StandaloneSearchBox
-                          ref={this.onSearchBoxMounted}
-                          bounds={this.bounds}
-                          onPlacesChanged={this.onPlacesChanged}
-                        >
-                        <input
-                          type="text"
-                          placeholder="Search for your location"
-                          id = "searchBox"
-                        />
-                        </StandaloneSearchBox>
+                            <Select
+                              name="Duration"
+                              value={this.state.Duration}
+                              onChange={this.handleDurationChange}
+                              options={durationOptions}/>
+                          </div>
+                          <div id= "datetime">
+                            <br />
+                            Time
+                            <br />
 
-                        <br />
-                        <LocationPicker
-                            name='Location'
-                            id='input2'
-                            value={this.state.position}
-                            containerElement={ <div style={ {height: '100%'} }/> }
-                            mapElement={ <div style={ {height: '400px'} }/> }
-                            defaultPosition={this.state.position}
-                            radius={parseInt(this.state.Radius)}
-                            onChange={this.handleLocationChange}
-                        />
-
-                        <br />
-                        Radius
-                        <br />
-
-                        <input
-                            value={this.state.Radius}
-                            min="2000"
-                            max="50000"
-                            step="1000"
-                            type='range'
-                            name='Radius'
-                            id='input4'
-                            onChange={this.setValue.bind(this, 'Radius')}/>
-
-                        <br />
-                        Duration
-                        <br />
-
-                        <Select
-                          name="Duration"
-                          value={this.state.Duration}
-                          onChange={this.handleDurationChange}
-                          options={durationOptions}/>
-
-                        <br />
-                        Availability
-                        <br />
-
-                        <div id='datetime'>
                             <DateTimePicker
                                 value={this.state.date}
                                 onChange={date => this.setState({date:date})}
                                 autocomplete='organization'/>
-                        </div>
-                        <br />
 
-                        <input type="submit" value="Submit"/>
+                            <br />
+                          </div>
+                        </div>
+
+                        <div class="form_container">
+                          <br />
+                          Location
+                          <br />
+
+                          <StandaloneSearchBox
+                            ref={this.onSearchBoxMounted}
+                            bounds={this.bounds}
+                            onPlacesChanged={this.onPlacesChanged}
+                          >
+                          <input
+                            type="text"
+                            placeholder="Search for your location"
+                            id = "searchBox"
+                            required
+                          />
+                          </StandaloneSearchBox>
+
+                          <br />
+                          <LocationPicker
+                              name='Location'
+                              id='input2'
+                              value={this.state.position}
+                              containerElement={ <div style={ {height: '100%'} }/> }
+                              mapElement={ <div style={ {height: '320px'} }/> }
+                              defaultPosition={this.state.position}
+                              radius={parseInt(this.state.Radius)}
+                              onChange={this.handleLocationChange}
+                          />
+
+                          <br />
+                          Radius
+                          <br />
+
+                          <input
+                              value={this.state.Radius}
+                              min="2000"
+                              max="50000"
+                              step="1000"
+                              type='range'
+                              name='Radius'
+                              id='input4'
+                              onChange={this.setValue.bind(this, 'Radius')}/>
+
+                          <input type="submit" value="Submit" />
+                        </div>
+
                     </form>
                 </div>
             </div>
