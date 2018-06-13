@@ -49,6 +49,7 @@ export default class AvailabiltyTable extends React.Component {
            }
 
            var avail = _this.bitmapToMatrix(bitmaps);
+
            _this.setState({
              availability: avail
            })
@@ -75,6 +76,10 @@ export default class AvailabiltyTable extends React.Component {
       for (let j = 0; j < 16; j++) {
         row.push(<td onClick={e => this.toggle(i, j, e)} id={"av" + i + "_" + j} class={"avBox " + (this.state.availability[i][j] ? "checked" : "unchecked")}></td>)
       }
+
+      // Add 'clearRow option'
+      row.push(<td onClick={e => this.toggleDay(i, false)} id={"clrRw_" + i} class="avBox toggleDay">clear day</td>)
+      row.push(<td onClick={e => this.toggleDay(i, true)} id={"clrRw_" + i} class="avBox toggleDay">fill day</td>)
       rows.push(<tr>{row}</tr>)
     }
     return rows
@@ -82,6 +87,8 @@ export default class AvailabiltyTable extends React.Component {
 
   // Toggle selection of an availability slot
   toggle(i, j, e) {
+    e.preventDefault();
+
     if (this.state.availability[i][j]) {
       // Deselect
       document.getElementById("av" + i + "_" + j).classList.remove("checked");
@@ -93,6 +100,8 @@ export default class AvailabiltyTable extends React.Component {
       document.getElementById("av" + i + "_" + j).classList.add("checked");
       this.state.availability[i][j] = 1;
     }
+
+    this.setRowToggleText();
   }
 
   // Convert the state availability matrix to a bitmap for each day
@@ -189,13 +198,31 @@ export default class AvailabiltyTable extends React.Component {
          });
   }
 
+  toggleDay(day, toOn) {
+    for (var time = 0; time < 16; time++) {
+      if (toOn) {
+        // Select
+        document.getElementById("av" + day + "_" + time).classList.remove("unchecked");
+        document.getElementById("av" + day + "_" + time).classList.add("checked");
+        this.state.availability[day][time] = 1;
+      } else {
+        // Deselect
+        document.getElementById("av" + day + "_" + time).classList.remove("checked");
+        document.getElementById("av" + day + "_" + time).classList.add("unchecked");
+        this.state.availability[day][time] = 0;
+      }
+    }
+  }
+
   render() {
     return (
       <div>
         <table>
           {this.createTable()}
         </table>
-          <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tick'></span></h3></a>
+        <p>Click a box to toggle availability between <span class='selectedtext'>selected</span> and <span class='unselectedtext'>unselected</span></p>
+
+        <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tick'></span></h3></a>
       </div>
     )
   }
