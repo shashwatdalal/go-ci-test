@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import './Stylesheets/master.css';
-import './Stylesheets/profile.css';
 import AvailabiltyTable from './Profile/AvailabiltyTable';
 import axios from 'axios';
 import UserProfile from './Profile/UserProfile';
 import PreviousFixtureCard from './Profile/PreviousFixtureCard';
 import UpcomingFixtureCard from './Profile/UpcomingFixtureCard';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
+
+import './Stylesheets/master.css';
+import './Stylesheets/profile.css';
 
 const refs = {}
 
@@ -106,7 +107,7 @@ class Profile extends Component {
         <div id='contentcontainer'>
           <p class='thintext centertext'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
-          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
+          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
           <div id="changelocbox">
             {this.state.isEditing ?
               <StandaloneSearchBox

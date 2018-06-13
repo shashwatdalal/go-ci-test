@@ -8,13 +8,14 @@ class Header extends Component {
             <div id='menupanel'>
                 <h1>MatchUps</h1>
                 <div id="menuwrapper">
-                    <ul>
-                        <li><Link to="/profile">Profile</Link></li>
-                        <li><Link to="/matchmaking">Matchmaking</Link></li>
-                        <li><Link to="/leaderboards">Leaderboards</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/chat">Chat</Link></li>
-                    </ul>
+                    <table>
+                      <tr>
+                        <td><Link to="/profile">Profile</Link></td>
+                        <td><Link to="/matchmaking">Matchmaking</Link></td>
+                        <td><Link to="/teams">Teams</Link></td>
+                        <td><Link to="/chat">Chat</Link></td>
+                      </tr>
+                    </table>
                 </div>
             </div>
         );

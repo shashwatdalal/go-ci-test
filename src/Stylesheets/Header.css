@@ -1,47 +1,42 @@
 #menupanel {
-    background-color: #333333;
-    color: white;
-    align-content: center;
-    height: 10%;
+  background-color: #333333;
+  color: white;
+  align-content: center;
+  height: 10%;
 }
 
 #menupanel h1 {
-    padding-top: 10px;
-    text-align: center;
-    margin: auto;
-    font-size: 6vmin;
-    padding-bottom: 0;
+  padding-top: 10px;
+  text-align: center;
+  margin: auto;
+  font-size: 6vmin;
+  padding-bottom: 0;
 }
+
+
 
 #menuwrapper {
-    margin: auto;
-    text-align: center;
+  margin: auto;
+  text-align: center;
 }
 
-#menupanel ul {
-    align-self: center;
-    margin: auto;
-    border: 0;
-    list-style-type: none;
-    padding: 0;
-    display: inline block;
-    overflow: hidden;
-    background-color: #333333;
+#menuwrapper table {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
 }
 
-#menupanel li {
-    display: inline-block;
+#menuwrapper a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-size: 2vmin;
+  text-decoration: none;
 }
 
-#menupanel li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding-left: 15%;
-    padding-right: 15%;
-    text-decoration: none;
-}
-
-#menupanel li a:hover {
-    background-color: #111111;
+#menuwrapper td:hover {
+  background-color: #111111;
 }
