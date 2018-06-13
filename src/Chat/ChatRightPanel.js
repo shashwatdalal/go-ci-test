@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import FixtureList from './FixtureList';
-import Matchmaking from '../Matchmaking/Matchmaking';
+import FixtureRightPanel from './FixtureRightPanel';
+import TeamRightPanel from './TeamRightPanel';
 import {Nav, NavItem} from 'react-bootstrap';
 
 class ChatRightPanel extends Component {
-
-  state = {
-    active_key: "1"
-  }
 
   handleSelect(key) {
     this.setState({
@@ -16,22 +12,13 @@ class ChatRightPanel extends Component {
   }
 
 
-    render() {
-      var _this = this
-      return (
-        <div>
-          <Nav bsStyle="tabs" activeKey={this.state.active_key} onSelect={k => this.handleSelect(k)}>
-            <NavItem eventKey="1" title="Matchmaking">
-              Create A Fixture
-            </NavItem>
-            <NavItem eventKey="2" title="Fixtures">
-              View Fixtures
-            </NavItem>
-            </Nav>
-             {(_this.state.active_key === "1") ? <Matchmaking teamID={_this.props.active_chat}/>
-                                  : <FixtureList teamID={_this.props.active_chat}/>}
-          </div>
-        );
+  render() {
+    var _this = this
+    console.log(this.props.active_chat.FixtureID);
+    console.log(this.props.active_chat.FixtureID);
+    return (<div>{(this.props.active_chat.FixtureID !== -1) ? (<FixtureRightPanel fixture_id={this.props.active_chat.FixtureID}/>)
+                                : (<TeamRightPanel team_id={this.props.active_chat.UserTeamID}/>)}</div>
+      );
     }
 }
 

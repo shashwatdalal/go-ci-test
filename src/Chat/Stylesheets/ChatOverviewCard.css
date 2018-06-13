@@ -1,9 +1,13 @@
 .chat_abbreviation {
     grid-area: ab;
-    font-size: 1.5vw;
+    font-size: 0.5vw;
     padding:0.3vw;
     padding-top: 0.5vw;
     text-align: center;
+}
+
+.chat_abbreviation_bold {
+    font-size: 1.5vw;
 }
 
 .chat_name {

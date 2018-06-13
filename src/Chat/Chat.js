@@ -26,15 +26,15 @@ class Chat extends Component {
               </div>
               <div id="body" class="body">
                 {(this.state.active_chat != null) ?
-                <OpenChat active_chat={this.state.active_chat}/>
+                (<OpenChat active_chat={this.state.active_chat}
+                is_fixture={this.state.active_chat.FixtureID != -1}/>)
                 : (<h3>Select a chat in the left panel to view it</h3>)}
               </div>
               <div id="right_panel" class="right_panel">
                 {(this.state.active_chat != null) ?
-                  <ChatRightPanel/>
+                  <ChatRightPanel active_chat={this.state.active_chat}/>
                   :<h3>Options relevant to chat will appear here</h3>}
               </div>
-
           </div>
       )
     }

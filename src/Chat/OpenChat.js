@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import MessageCard from './MessageCard';
+import ActiveUserID from '../Profile/ActiveUserID';
 import UserProfile from '../Profile/UserProfile';
 import './Stylesheets/OpenChat.css';
 
@@ -7,8 +8,9 @@ var axios = require('axios');
 
 class OpenChat extends Component {
   state = {
-      messages: [],
-      message: ""
+    team_members: [],
+    messages: [],
+    message: ""
   }
 
   inputChange(e) {
@@ -27,7 +29,8 @@ class OpenChat extends Component {
     var d = new Date();
     var time = d.getTime();
     var new_message = {
-      Sender:UserProfile.getName(),
+      SenderID:ActiveUserID.getID(),
+      SenderName:UserProfile.getName(),
       Message:this.state.message,
       Time: time
     }
@@ -42,13 +45,11 @@ class OpenChat extends Component {
     });
     var message_info = {
       Team:this.props.active_chat,
-      Sender:UserProfile.getName(),
+      SenderID:ActiveUserID.getID(),
       Message:this.state.message,
       Time: time
     }
-    var team_name = "team1"
-    var request = '/addMessage'
-    axios.post(request, message_info)
+    axios.post("/addMessage", message_info)
       .then(function(response){
         console.log(response)
       });
@@ -57,29 +58,52 @@ class OpenChat extends Component {
 
   componentDidMount() {
     var _this = this;
-    var req = "getChatMessages?team=" + this.props.active_chat
-    this.serverRequest =
-      axios
-        .get(req)
+    // Calculate name of chat
+    var chat_name = (this.props.is_fixture) ?
+                        ("_fixture" + this.props.active_chat.FixtureID)
+                        : ("_team" + this.props.active_chat.UserTeamID)
+    console.log(this.props.active_chat)
+    var get_team_req = "getTeamMembers?team=" + this.props.active_chat.UserTeamID
+    var get_chat_req = "getChatMessages?name=" + chat_name
+    // Get Team Members
+    axios.get(get_team_req)
         .then(function(result) {
           _this.setState({
-            messages: result.data
+            team_members: result.data
           });
-            var messageBox = document.getElementById("MessageBox");
-            messageBox.scrollTop = messageBox.scrollHeight;
+          // Once Team Members loaded can load messages
+          axios.get(get_chat_req)
+              .then(function(result) {
+                _this.setState({
+                  messages: result.data
+                });
+                var messageBox = document.getElementById("MessageBox");
+                messageBox.scrollTop = messageBox.scrollHeight;
+              })
         })
   }
 
+
+    chatName(chat) {
+      if (chat.FixtureID == -1) {
+        return chat.UserTeamName
+      } else {
+        return chat.UserTeamName + " vs " + chat.OppName
+      }
+    }
+
   render() {
-    console.log()
     return (
       <div class="ChatPanel">
         <div class="ChatHeader">
-          <h1>{this.props.active_chat}</h1>
+          <h1>{this.chatName(this.props.active_chat)}</h1>
         </div>
         <div id="MessageBox" class="MessageBox">
           {
-            this.state.messages.map(message => (<MessageCard data={message} />))
+            this.state.messages.map(message =>
+              (<MessageCard sender_id={message.SenderID} sender_name={message.SenderName}
+                   message={message.Message} is_fixture={this.props.is_fixture}
+                   team_members={this.state.team_members}/>))
           }
         </div>
         <div class="MessageEntry">
