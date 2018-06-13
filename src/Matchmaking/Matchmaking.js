@@ -193,71 +193,79 @@ class Matchmaking extends Component {
                           onChange={this.handleSportChange}
                           options={sportOptions}/>
 
-                        <br />
-                        Location
-                        <br />
+                        <div style = {{width: "100%", display: "inline"}}>
+                          <div style = {{width: "50%", float:"left", display: "inline"}}>
+                            <br />
+                            Duration
+                            <br />
 
-                        <StandaloneSearchBox
-                          ref={this.onSearchBoxMounted}
-                          bounds={this.bounds}
-                          onPlacesChanged={this.onPlacesChanged}
-                        >
-                        <input
-                          type="text"
-                          placeholder="Search for your location"
-                          id = "searchBox"
-                        />
-                        </StandaloneSearchBox>
+                            <Select
+                              name="Duration"
+                              value={this.state.Duration}
+                              onChange={this.handleDurationChange}
+                              options={durationOptions}/>
+                          </div>
+                          <div style = {{width: "50%", float:"right", display: "inline"}}>
+                            <br />
+                            Availability
+                            <br />
 
-                        <br />
-                        <LocationPicker
-                            name='Location'
-                            id='input2'
-                            value={this.state.position}
-                            containerElement={ <div style={ {height: '100%'} }/> }
-                            mapElement={ <div style={ {height: '400px'} }/> }
-                            defaultPosition={this.state.position}
-                            radius={parseInt(this.state.Radius)}
-                            onChange={this.handleLocationChange}
-                        />
+                                <DateTimePicker
+                                    value={this.state.date}
+                                    onChange={date => this.setState({date:date})}
+                                    autocomplete='organization'/>
 
-                        <br />
-                        Radius
-                        <br />
-
-                        <input
-                            value={this.state.Radius}
-                            min="2000"
-                            max="50000"
-                            step="1000"
-                            type='range'
-                            name='Radius'
-                            id='input4'
-                            onChange={this.setValue.bind(this, 'Radius')}/>
-
-                        <br />
-                        Duration
-                        <br />
-
-                        <Select
-                          name="Duration"
-                          value={this.state.Duration}
-                          onChange={this.handleDurationChange}
-                          options={durationOptions}/>
-
-                        <br />
-                        Availability
-                        <br />
-
-                        <div id='datetime'>
-                            <DateTimePicker
-                                value={this.state.date}
-                                onChange={date => this.setState({date:date})}
-                                autocomplete='organization'/>
+                            <br />
+                          </div>
                         </div>
-                        <br />
 
-                        <input type="submit" value="Submit"/>
+                        <div style = {{width: "100%", display: "inline", float:"left"}}>
+                          <br />
+                          Location
+                          <br />
+
+                          <StandaloneSearchBox
+                            ref={this.onSearchBoxMounted}
+                            bounds={this.bounds}
+                            onPlacesChanged={this.onPlacesChanged}
+                          >
+                          <input
+                            type="text"
+                            placeholder="Search for your location"
+                            id = "searchBox"
+                          />
+                          </StandaloneSearchBox>
+
+                          <br />
+                          <LocationPicker
+                              name='Location'
+                              id='input2'
+                              value={this.state.position}
+                              containerElement={ <div style={ {height: '100%'} }/> }
+                              mapElement={ <div style={ {height: '320px'} }/> }
+                              defaultPosition={this.state.position}
+                              radius={parseInt(this.state.Radius)}
+                              onChange={this.handleLocationChange}
+                          />
+
+                          <br />
+                          Radius
+                          <br />
+
+                          <input
+                              value={this.state.Radius}
+                              min="2000"
+                              max="50000"
+                              step="1000"
+                              type='range'
+                              name='Radius'
+                              id='input4'
+                              onChange={this.setValue.bind(this, 'Radius')}/>
+
+
+                          <input type="submit" value="Submit" />
+                        </div>
+
                     </form>
                 </div>
             </div>
