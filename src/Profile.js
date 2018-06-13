@@ -12,18 +12,25 @@ import './Stylesheets/profile.css';
 const refs = {}
 
 class Profile extends Component {
-  state = {
-    username: "",
-    location: "",
-    position:{
-      lat: 0.0,
-      lng: 0.0,
-    },
-    places: [],
-    fixtures: [],
-    upcoming: [],
-    isEditing: false
-  };
+
+  constructor(props){
+    super(props)
+    this.state = {
+      username: "",
+      location: "",
+      position:{
+        lat: 0.0,
+        lng: 0.0,
+      },
+      places: [],
+      fixtures: [],
+      upcoming: [],
+      isEditing: false
+    };
+
+    this.onPlacesChanged = this.onPlacesChanged.bind(this)
+  }
+
 
   // Searchbox init
   onSearchBoxMounted(ref) {
@@ -33,15 +40,34 @@ class Profile extends Component {
   // On searchbox edited
   onPlacesChanged(){
       const places = refs.searchBox.getPlaces();
-      this.setState({ places,})
+      this.setState({ places,});
       var lastvisited = places[places.length - 1];
-      this.setState({
+      var newlat = lastvisited.geometry.location.lat()
+      var newlng = lastvisited.geometry.location.lng()
+      console.log(lastvisited.formatted_address)
+      var object = {
+          position: {
+              lat: newlat,
+              lng: newlng,
+          },
           location: lastvisited.formatted_address
-      });
+      };
+      this.setState(object);
+      console.log(this.state)
       axios.get(
         '/updateuserloc?username=' + UserProfile.getName()
-        + '&lat=' + lastvisited.geometry.location.lat()
-        + '&lng=' + lastvisited.geometry.location.lng())
+        + '&lat=' + newlat
+        + '&lng=' + newlng).then(function(response) {
+          if (response.data == "fail\n") {
+            alert("Failed to update availability, please try again.")
+          } else {
+            var tick = document.getElementById('tick');
+            tick.innerHTML = "✓";
+            setTimeout(function() {
+              tick.innerHTML = "";
+            }, 2500);
+          }
+        });
   }
 
   loadUserInformation() {
@@ -110,7 +136,7 @@ class Profile extends Component {
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
           <div id="changelocbox">
             {this.state.isEditing ?
-              <StandaloneSearchBox
+              <div><span id='tick'></span><StandaloneSearchBox
                 ref={this.onSearchBoxMounted}
                 bounds={this.bounds}
                 onPlacesChanged={this.onPlacesChanged}
@@ -120,7 +146,7 @@ class Profile extends Component {
                 placeholder="Search for your location"
                 id = "searchBox"
                 />
-              </StandaloneSearchBox>
+              </StandaloneSearchBox></div>
               : ""}
           </div>
           <div class="AvTable">
