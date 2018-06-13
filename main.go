@@ -20,7 +20,7 @@ func main() {
 
 	// Chat Page
 	r.Handle("/getTeamMatches", GetTeamMatches).Methods("GET")
-	r.handle("/getChats",GetChats).Methods("GET")
+	r.Handle("/getChats",GetChats).Methods("GET")
 	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")
 	r.Handle("/addMessage", AddMessage).Methods("POST")
 

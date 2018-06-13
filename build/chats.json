@@ -1,6 +1,4 @@
-{"chats":[
-    {"name":"Webapps FC","image":"img/matchmakingbutton.jpg","recent_message":"I think the fixture against Toms Tanks looks good","recent_message_sender":"Andy"},
-    {"name":"Toms Tanks","image":"img/profilebutton.jpg","recent_message":"Just submitted the request, someone should accept soon","recent_message_sender":"Thomas"},
-    {"name":"team1","image":"img/profilebutton.jpg","recent_message":"Just submitted the request, someone should accept soon","recent_message_sender":"Thomas"}
+[
+    {"Fixture_ID":1, "User_Team_ID":3,"Opp_ID":4, "User_Team_Name":"Marcel FC", "Opp_Name":"The Opps"},
+    {"Fixture_ID":-1, "User_Team_ID":3,"Opp_ID":4, "User_Team_Name":"Marcel FC", "Opp_Name":"The Opps"}
   ]
-}

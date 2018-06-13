@@ -7,16 +7,15 @@ var axios = require('axios');
 
 class ChatList extends Component {
     state = {
-      active_chat: "none",
       chats: []
     }
 
     componentDidMount() {
         var _this = this;
-        var query = "getChats?userID=" + ActiveUserID.getID()
+        // var query = "getChats?userID=" + ActiveUserID.getID()
         this.serverRequest =
             axios
-                .get("getChats?userID=")
+                .get("/chats.json")
                 .then(function (result) {
                     _this.setState({
                         chats: result.data
@@ -32,7 +31,7 @@ class ChatList extends Component {
 
     generateChatCard(chat) {
       var _this = this
-      return (<div class={(this.props.isActiveChat(chat)) ? "activeChatCardHolder" : "chatCardHolder"}
+      return (<div class={(chat == this.props.active_chat) ? "activeChatCardHolder" : "chatCardHolder"}
                 onClick={() => this.props.setActiveChat(chat)}>
                   <ChatOverviewCard key={`li-${chat.id}`} data={chat}/>
               </div>)

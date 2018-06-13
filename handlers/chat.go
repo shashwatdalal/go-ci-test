@@ -36,11 +36,6 @@ type ChatInfo struct {
 	Opp_Name				string
 }
 
-type UserChats struct {
-	Team_Chats		[]TeamChatInfo
-	Fixture_Chats	[]FixtureChatInfo
-}
-
 var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -55,42 +50,42 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 	// Define struct to hold info on all chats to be returned
 	var chats []ChatInfo
 	// Define struct to hold info on all teams user belongs to
-	var team_ids []teams
+	var team_ids []int
 
 	// Obtain team information
 	columns := "team_names.team_id, team_names.team_name"
 	join := "team_members INNER JOIN team_names ON team_names.team_id=team_members.team_id"
-  query := fmt.Sprintf("SELECT %s FROM %s where user_id=%s;", columns, query, user_id)
+  query := fmt.Sprintf("SELECT %s FROM %s where user_id=%s;", columns, join, user_id)
   rows, err := db.Query(query)
   CheckErr(err)
 	for rows.Next() {
 		data := ChatInfo{}
 		data.Fixture_ID = -1
 		err = rows.Scan(
-			&data.Home_ID,
-			&data.Home_Name)
-		team_chats = append(chats, data)
-		team_ids = append(chats, data.Home_ID)
+			&data.User_Team_ID,
+			&data.User_Team_Name)
+		chats = append(chats, data)
+		team_ids = append(team_ids, data.User_Team_ID)
 	}
 
 	// Obtain fixture information
 	for _, team_id := range team_ids {
 		// Obtain fixtures for team
 		columns := "f.fixture_id, f.home_id, f.away_id, h.team_name, a.team_name"
-		fix_tabl := "fixtures f"
+		fix_table := "fixtures f"
 		first_join := "INNER JOIN team_names h ON f.home_id=h.team_id"
 		second_join := "INNER JOIN team_names a ON f.away_id=a.team_id"
-  	query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE home_id=%s OR away_id=%s;",
+  	query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE home_id=%d OR away_id=%d;",
 			 									columns, fix_table, first_join, second_join, team_id, team_id)
 		fmt.Println(query)
   	rows, err := db.Query(query)
   	CheckErr(err)
 		var home_id int
 		var away_id int
-		var home_name int
-		var away_name int
+		var home_name string
+		var away_name string
 		for rows.Next() {
-			data := FixtureChatInfo{}
+			data := ChatInfo{}
 			err = rows.Scan(
 				&data.Fixture_ID,
 				&home_id,
@@ -108,7 +103,7 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 				data.User_Team_Name = away_name;
 				data.Opp_Name = home_name;
 			}
-			fixture_Chats = append(fixture_chats, data)
+			chats = append(chats, data)
 		}
 
 	}
