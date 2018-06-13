@@ -12,18 +12,25 @@ import './Stylesheets/profile.css';
 const refs = {}
 
 class Profile extends Component {
-  state = {
-    username: "",
-    location: "",
-    position:{
-      lat: 0.0,
-      lng: 0.0,
-    },
-    places: [],
-    fixtures: [],
-    upcoming: [],
-    isEditing: false
-  };
+
+  constructor(props){
+    super(props)
+    this.state = {
+      username: "",
+      location: "",
+      position:{
+        lat: 0.0,
+        lng: 0.0,
+      },
+      places: [],
+      fixtures: [],
+      upcoming: [],
+      isEditing: false
+    };
+
+    this.onPlacesChanged = this.onPlacesChanged.bind(this)
+  }
+
 
   // Searchbox init
   onSearchBoxMounted(ref) {
@@ -33,15 +40,24 @@ class Profile extends Component {
   // On searchbox edited
   onPlacesChanged(){
       const places = refs.searchBox.getPlaces();
-      this.setState({ places,})
+      this.setState({ places,});
       var lastvisited = places[places.length - 1];
-      this.setState({
+      var newlat = lastvisited.geometry.location.lat()
+      var newlng = lastvisited.geometry.location.lng()
+      console.log(lastvisited.formatted_address)
+      var object = {
+          position: {
+              lat: newlat,
+              lng: newlng,
+          },
           location: lastvisited.formatted_address
-      });
+      };
+      this.setState(object);
+      console.log(this.state)
       axios.get(
         '/updateuserloc?username=' + UserProfile.getName()
-        + '&lat=' + lastvisited.geometry.location.lat()
-        + '&lng=' + lastvisited.geometry.location.lng())
+        + '&lat=' + newlat
+        + '&lng=' + newlng)
   }
 
   loadUserInformation() {

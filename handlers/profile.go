@@ -428,7 +428,6 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 
 	// Obtain the new location (query is of the form ?username=name&lat=x&lng=y)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-
 	query := strings.Split(getquery, "&")
 
 	fields := make([]string, len(query))
@@ -437,13 +436,14 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 	}
 
 	username := fields[0]
-	lat := fields[1]
-	lng := fields[2]
-	loc := "(" + lat + "," + lng + ")"
+	lat,err := strconv.ParseFloat(fields[1], 64)
+	CheckErr(err)
+	lng,err := strconv.ParseFloat(fields[2], 64)
+	CheckErr(err)
 
 	// Run query
 
-	dbfields := fmt.Sprintf("location=%d", loc)
+	dbfields := fmt.Sprintf("loc_lat=%f, loc_lng=%f", lat, lng)
 	dbquery := fmt.Sprintf("UPDATE users SET %s WHERE username='%s'",
 											  dbfields, username)
 
