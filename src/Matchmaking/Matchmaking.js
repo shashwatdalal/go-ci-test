@@ -211,8 +211,8 @@ class Matchmaking extends Component {
                           onChange={this.handleSportChange}
                           options={sportOptions}/>
 
-                        <div style = {{width: "100%", display: "inline"}}>
-                          <div style = {{width: "50%", float:"left", display: "inline"}}>
+                        <div class="form_container">
+                          <div id = "duration">
                             <br />
                             Duration
                             <br />
@@ -223,7 +223,7 @@ class Matchmaking extends Component {
                               onChange={this.handleDurationChange}
                               options={durationOptions}/>
                           </div>
-                          <div style = {{width: "50%", float:"right", display: "inline"}}>
+                          <div id= "datetime">
                             <br />
                             Time
                             <br />
@@ -237,7 +237,7 @@ class Matchmaking extends Component {
                           </div>
                         </div>
 
-                        <div style = {{width: "100%", display: "inline", float:"left"}}>
+                        <div class="form_container">
                           <br />
                           Location
                           <br />
