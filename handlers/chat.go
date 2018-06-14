@@ -12,16 +12,6 @@ import (
 	. "../utils"
 )
 
-type PromotedAdvertisement struct {
-	AdID			 string
-	Name       string
-	StartTime  string
-	EndTime  	 string
-	LocLat	 	 string
-	LocLng	 	 string
-	Sport   	 string
-}
-
 type Message struct {
 	Chat 			 string
 	SenderID	 int
@@ -181,93 +171,6 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
   CheckErr(err)
 })
 
-func tallyUpvotesDownvotes(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
-	// Obtain username (query is of the form ?username)
-	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	params := strings.Split((strings.Split(getquery, "?"))[1], "&")
-	team_name := strings.Split(params[0], "=")[1]
-	fixture_id := strings.Split(params[1], "=")[1]
-	upvote_name := team_name + "_upvotes"
-	downvote_name := team_name + "_downvotes"
-
-	// Run query
-  query := fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", upvote_name, fixture_id)
-  upvotes, err := db.Query(query)
-	CheckErr(err)
-	query = fmt.Sprintf("SELECT COUNT(*) FROM %s WHERE advert_id=%s;", downvote_name, fixture_id)
-  downvotes, err := db.Query(query)
-  CheckErr(err)
-	num_upvotes := 0
-	num_downvotes := 0
-
-	for upvotes.Next() {
-		err = upvotes.Scan(
-			&num_upvotes)
-	}
-	for downvotes.Next() {
-		err = downvotes.Scan(
-			&num_downvotes)
-	}
-	result := [2]int{num_upvotes, num_downvotes}
-
-	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Fprintln(writer, string(j)) // Write the result to the sender
-}
-
-var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
-
-	// Obtain username (query is of the form ?username)
-	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	team_id := strings.Split(getquery, "=")[1]
-
-	fields := "a.advert_id, a.team_id, a.start_time, a.end_time, a.loc_lat, a.loc_lng, a.sport";
-	advertisements := "advertisements AS a"
-	first_join := "INNER JOIN promoted_fixtures AS pf ON a.advert_id=pf.advert_id"
-	second_join := "INNER JOIN team_names AS tn ON a.team_id=tn.team_id"
-
-	// Run query
-  query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE pf.team_id=%s;",
-												fields, advertisements, first_join, second_join, team_id)
-  rows, err := db.Query(query)
-  CheckErr(err)
-
-	// Initialise the json response
-	var jsonText = []byte(`[]`)
-	var result []PromotedAdvertisement
-	err = json.Unmarshal([]byte(jsonText), &result)
-
-	// Add every database hit to the result
-	for rows.Next() {
-		data := PromotedAdvertisement{}
-		err = rows.Scan(
-			&data.AdID,
-			&data.Name,
-			&data.StartTime,
-			&data.EndTime,
-			&data.LocLat,
-			&data.LocLng,
-			&data.Sport)
-
-		result = append(result, data)
-	}
-
-	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Fprintln(writer, string(j)) // Write the result to the sender
-})
 
 var GetTeamMembers = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
