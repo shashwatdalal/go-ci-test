@@ -7,7 +7,6 @@ import StandaloneSearchBox from "react-google-maps/lib/components/places/Standal
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './Stylesheets/Forms.css';
-import '../Stylesheets/Searchbox.css';
 
 const defaultPosition = {
     lat: 51.509865,
@@ -68,6 +67,13 @@ const sportOptions = [
   { value: 'Archery', label: 'Archery' },
 ]
 
+function roundMinutes(date) {
+
+    date.setHours(date.getHours() + Math.round(date.getMinutes()/60));
+    date.setMinutes(0);
+
+    return date;
+}
 
 class Matchmaking extends Component {
 
@@ -83,7 +89,7 @@ class Matchmaking extends Component {
               lat: 51.509865,
               lng: -0.118092
           },
-          date: new Date(),
+          date: roundMinutes(new Date()),
           Duration: 60,
           places: [],
           teamOptions: []
@@ -235,8 +241,10 @@ class Matchmaking extends Component {
 
                             <DateTimePicker
                               value={this.state.date}
-                              onChange={date => this.setState({date:date})}
-                              autocomplete='organization'/>
+                              onChange={date => this.setState({date:roundMinutes(date)})}
+                              minDate={roundMinutes(new Date())}
+                              autocomplete='organization'
+                              required/>
                             <br />
                           </div>
 
@@ -256,7 +264,7 @@ class Matchmaking extends Component {
                           <input
                             type="text"
                             placeholder="Search for your location"
-                            id = "searchBox"
+                            id = "formSearchBox"
                             required
                           />
                           </StandaloneSearchBox>
