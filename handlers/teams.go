@@ -33,6 +33,7 @@ type Location struct {
 
 var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	//setup database connection
+	fmt.Println("GETTING TEAMS")
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
 	db, err := sql.Open("postgres", dbinfo)
@@ -44,8 +45,8 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	query := fmt.Sprintf(
 		"SELECT team_id, team_name "+
 			"FROM team_members "+
-			"INNER JOIN team_names on team_members.team_id=team_names.team_id "+
-			"WHERE team_members.user_id=%d;", user_id)
+			"NATURAL INNER JOIN team_names "+
+			"WHERE team_members.user_id=%s;", user_id)
 	fmt.Println(query)
 	rows, err := db.Query(query)
 	for rows.Next() {

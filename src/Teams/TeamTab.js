@@ -47,10 +47,6 @@ class TeamTab extends Component {
     })
   }
 
-  componentWillMount() {
-    this.props.fetchTeams();
-  }
-
   render() {
     return (
         <div class="TeamCardsGrid">
