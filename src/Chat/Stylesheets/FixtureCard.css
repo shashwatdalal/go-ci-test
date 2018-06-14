@@ -10,7 +10,7 @@
 
 .venue {
   grid-area: vn;
-  text-align: right;
+  text-align: left;
 }
 
 .upvote {
@@ -22,7 +22,7 @@
 }
 
 .sport {
-  text-align: left;
+  text-align: right;
   grid-area: sp;
 }
 
@@ -59,11 +59,11 @@ h1 {
 }
 
 .arrow-up {
-  border-bottom: 10px solid #e6ffe6;
+  border-bottom: 10px solid  #b3ffb3;
 }
 
 .arrow-up-selected {
-  border-bottom: 10px solid #00ff00;
+  border-bottom: 10px solid #009900;
 }
 
 .arrow-down, .arrow-down-selected {

@@ -206,7 +206,7 @@ var RemoveUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 		defer request.Body.Close()
 	}
 
-  // Insert into the upvote table
+  // Delete from the upvote table
   query := fmt.Sprintf("DELETE FROM upvotes WHERE user_id=%d AND team_id=%d AND advert_id=%d;",
               vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = db.Query(query)
@@ -231,7 +231,7 @@ var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *
 		defer request.Body.Close()
 	}
 
-  // Insert into the upvote table
+  // Delete from the downvote table
 	query := fmt.Sprintf("DELETE FROM downvotes WHERE user_id=%d AND team_id=%d AND advert_id=%d;",
               vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = db.Query(query)
