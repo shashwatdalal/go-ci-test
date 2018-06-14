@@ -32,6 +32,13 @@ func main() {
 	r.Handle("/addUpvote", AddUpvote).Methods("POST")
 	r.Handle("/AddDownvote", AddDownvote).Methods("POST")
 
+	// Chat Page -- Right Panel
+	r.Handle("/getupcominggame", GetFixtureDetails).Methods("GET")
+	r.Handle("/getsubmittedscore", GetSubmittedScore).Methods("GET")
+	r.Handle("/acceptsubmittedscore", AcceptSubmittedScore).Methods("GET")
+	r.Handle("/rejectsubmittedscore", RejectSubmittedScore).Methods("GET")
+
+
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")
 

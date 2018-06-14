@@ -38,7 +38,7 @@ var GetUpvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, request 
 
 	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE team_id=%s AND fixture_id=%s",
 		 						team_id, fixture_id)
-	fmt.Println(query)
+	// fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -67,7 +67,7 @@ var GetDownvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, reques
 
 	query := fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE team_id=%s AND fixture_id=%s",
 		 						team_id, fixture_id)
-	fmt.Println(query)
+	// fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -98,7 +98,7 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
   // Check for instance of an upvote
 	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE user_id=%s team_id=%s AND fixture_id",
 		 						user_id, team_id, fixture_id)
-	fmt.Println(query)
+	// fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -115,7 +115,7 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
   // Check for instance of a downvote
   query = fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE user_id=%s team_id=%s AND fixture_id",
 		 						team_id, fixture_id)
-	fmt.Println(query)
+	// fmt.Println(query)
   rows, err = db.Query(query)
   CheckErr(err)
 

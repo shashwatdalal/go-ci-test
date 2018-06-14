@@ -1,0 +1,29 @@
+#rightPanelWrapper {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+#rightPanelWrapper p {
+  font-size: 2vmin;
+  font-weight: 700;
+}
+
+#rightPanelWrapper input[type=text]{
+  width: 100px;
+  height: 40px;
+  font-size: 5vmin;
+  display: inline;
+  border: none;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+#recordScoreTable {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+  text-align: center;
+}

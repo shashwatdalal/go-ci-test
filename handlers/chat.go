@@ -124,7 +124,7 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 
   query := fmt.Sprintf("SELECT %s FROM %s AS m %s %s",
 		 						columns, chat_db_name, join, order)
-	fmt.Println(query)
+	// fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -166,7 +166,7 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
 	// Run query
   query := fmt.Sprintf("INSERT INTO %s (%s) VALUES('%d', '%s', LOCALTIMESTAMP);",
 							chat_name, columns, message.SenderID, message.Message)
-	fmt.Println(query)
+	// fmt.Println(query)
   _, err = db.Query(query)
   CheckErr(err)
 })
