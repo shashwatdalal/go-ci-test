@@ -37,7 +37,7 @@ var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request 
 		fields[index] = strings.Split(element, "=")[1]
 	}
 
-	// advert_id   SERIAL      NOT NULL,
+	// advertID   SERIAL      NOT NULL,
 	// team_id     int         NOT NULL,
 	// start_time  timestamp   NOT NULL,
 	// end_time    timestamp   NOT NULL,
@@ -49,28 +49,28 @@ var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request 
 
 	sqlStatement := `
 	INSERT INTO advertisements (team_id, start_time, end_time, loc_lat, loc_lng, radius, sport, num_players)
-	VALUES ($1, $2, $3, $4, $5, $6, $7)`
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 	_,err = db.Query(sqlStatement,
 	                        	fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7])
 	CheckErr(err)
 
-	// Get advert_id of advert just added (is highest)
+	// Get advertID of advert just added (is highest)
 	rows, err := db.Query("SELECT advert_id FROM advertisements ORDER BY advert_id DESC LIMIT 1;")
 	if (rows.Next()) {
-		var advert_id int
-		rows.Scan(&advert_id)
-		updatePromoted(advert_id, fields[0], fields[3], fields[4], fields[5])
+		var advertID int
+		rows.Scan(&advertID)
+		updatePromoted(advertID, fields[0], fields[3], fields[4], fields[5])
 	} else {
-		fmt.Println("Error in matchmaking.go:63")
+		fmt.Println("Error in matchmaking.go:59")
 	}
 })
 
-func updatePromoted(advert_id int, posterIDString string, latString string, longString string, radString string) {
+func updatePromoted(advertID int, posterIDString string, latString string, longString string, radString string) {
 	posterID, _ := strconv.ParseInt(posterIDString, 10, 64)
 
 	loc_lat, _ := strconv.ParseFloat(latString, 64)
 	loc_lng, _ := strconv.ParseFloat(longString, 64)
-	radius, _ := strconv.ParseFloat(radString, 64)
+	radius, _  := strconv.ParseFloat(radString, 64)
 
 	var minLng float64 = loc_lng - radius
 	var minLat float64 = loc_lat - radius
@@ -84,7 +84,7 @@ func updatePromoted(advert_id int, posterIDString string, latString string, long
 	CheckErr(err)
 
 	// Get the ad posting team's avail
-	query := fmt.Sprint("SELECT mon, tues, weds, thurs, fri, sat, sun FROM team_avail WHERE team_id=%d;",
+	query := fmt.Sprintf("SELECT mon, tues, weds, thurs, fri, sat, sun FROM team_avail WHERE team_id=%d;",
 					              posterID)
   rows, err := db.Query(query)
 	CheckErr(err)
@@ -121,6 +121,8 @@ func updatePromoted(advert_id int, posterIDString string, latString string, long
 	for (rows.Next()) {
 		var oppteamID int
 		rows.Scan(&oppteamID)
-		db.Query("INSERT INTO promoted_fixtures VALUES (%d, %d);", advert_id, oppteamID)
+		query = fmt.Sprintf("INSERT INTO promoted_fixtures VALUES (%d, %d);", advertID, oppteamID)
+		_, err = db.Query(query)
+		CheckErr(err)
 	}
 }
