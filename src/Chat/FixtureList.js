@@ -23,7 +23,7 @@ class FixtureList extends Component {
             <div class="FixtureList">
                 <h1>Fixtures</h1>
                 {
-                    this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.AdID}`} data={fixture}/>))
+                    this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.AdID}`} data={fixture} team_id={this.props.team_id}/>))
                 }
             </div>
         );
