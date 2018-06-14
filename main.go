@@ -30,7 +30,9 @@ func main() {
 	r.Handle("/GetDownvoteTally", GetDownvoteTally).Methods("GET")
 	r.Handle("/getVoteStatus", GetVoteStatus).Methods("GET")
 	r.Handle("/addUpvote", AddUpvote).Methods("POST")
-	r.Handle("/AddDownvote", AddDownvote).Methods("POST")
+	r.Handle("/addDownvote", AddDownvote).Methods("POST")
+	r.Handle("/removeUpvote", RemoveUpvote).Methods("POST")
+	r.Handle("/addDownvote", RemoveDownvote).Methods("POST")
 
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")

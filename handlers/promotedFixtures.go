@@ -189,6 +189,56 @@ var AddDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *htt
 })
 
 
+//todo set up MUX router to take url of user and team to add to database.
+var RemoveUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	decoder := json.NewDecoder(request.Body)
+	var vote Vote
+	err = decoder.Decode(&vote)
+	if err != nil {
+		panic(err)
+		defer request.Body.Close()
+	}
+
+  // Insert into the upvote table
+  query := fmt.Sprintf("DELETE FROM upvotes WHERE user_id=%d AND team_id=%d AND fixture_id=%d;",
+              vote.UserID, vote.TeamID, vote.FixtureID)
+  _, err = db.Query(query)
+  CheckErr(err)
+})
+
+
+//todo set up MUX router to take url of user and team to add to database.
+var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	decoder := json.NewDecoder(request.Body)
+	var vote Vote
+	err = decoder.Decode(&vote)
+	if err != nil {
+		panic(err)
+		defer request.Body.Close()
+	}
+
+  // Insert into the upvote table
+	query := fmt.Sprintf("DELETE FROM downvotes WHERE user_id=%d AND team_id=%d AND fixture_id=%d;",
+              vote.UserID, vote.TeamID, vote.FixtureID)
+  _, err = db.Query(query)
+  CheckErr(err)
+
+})
+
 var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
