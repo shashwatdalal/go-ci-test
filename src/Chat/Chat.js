@@ -11,6 +11,7 @@ class Chat extends Component {
   }
 
   setActiveChat(chat) {
+    alert(chat)
     this.setState({
       active_chat: chat
     })

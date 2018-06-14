@@ -17,14 +17,29 @@ class FixtureCard extends React.Component {
     }
   }
 
-
-  render() {
-    return <div class={this.get_message_type()}>
-      <div class="sender"> {this.props.sender_name} </div>
+  build_message_with_sender() {
+    var message_class = this.get_message_type()
+    return <div class={message_class} >
+      <div class="sender"> {(message_class == "sent") ? "You" : this.props.sender_name} </div>
       <div class="message">
         <div class="message_text">{this.props.message}</div>
       </div>
     </div>
+  }
+
+  build_message_without_sender() {
+    var message_class = this.get_message_type()
+    return <div class={message_class} >
+      <div class="message">
+        <div class="message_text">{this.props.message}</div>
+      </div>
+    </div>
+  }
+
+
+  render() {
+    return <div> {this.props.is_subsequent ? this.build_message_with_sender() :
+              this.build_message_without_sender()}</div>
   }
 }
 

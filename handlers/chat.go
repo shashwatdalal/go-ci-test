@@ -43,6 +43,7 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 	// Obtain user id (query is of the form ?username)
@@ -120,6 +121,7 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 	// Obtain username (query is of the form ?username)
@@ -130,8 +132,10 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 	// Run query
 	columns := "m.sender_id, u.name, m.message, m.time_sent"
 	join := "INNER JOIN users AS u ON m.sender_id=u.user_id"
-  query := fmt.Sprintf("SELECT %s FROM %s AS m %s",
-		 						columns, chat_db_name, join)
+	order:= "ORDER BY m.time_sent ASC"
+
+  query := fmt.Sprintf("SELECT %s FROM %s AS m %s %s",
+		 						columns, chat_db_name, join, order)
 	fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
@@ -159,6 +163,7 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 	decoder := json.NewDecoder(request.Body)
@@ -184,6 +189,7 @@ func tallyUpvotesDownvotes(writer http.ResponseWriter, request *http.Request) {
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 	// Obtain username (query is of the form ?username)
@@ -223,6 +229,7 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 
@@ -271,6 +278,7 @@ var GetTeamMembers = http.HandlerFunc(func (writer http.ResponseWriter, request 
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
   db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
   CheckErr(err)
 
 

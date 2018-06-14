@@ -59,8 +59,7 @@ class OpenChat extends Component {
       });
   }
 
-
-  componentDidMount() {
+  getChatMessages() {
     var _this = this;
     // Calculate name of chat
     var chat_name = (this.props.is_fixture) ?
@@ -78,9 +77,14 @@ class OpenChat extends Component {
           // Once Team Members loaded can load messages
           axios.get(get_chat_req)
               .then(function(result) {
+                console.log(result.data)
                 if (result.data != null) {
                   _this.setState({
                     messages: result.data
+                  });
+                } else {
+                  _this.setState({
+                    messages: []
                   });
                 }
                 var messageBox = document.getElementById("MessageBox");
@@ -90,26 +94,45 @@ class OpenChat extends Component {
   }
 
 
-    chatName(chat) {
-      if (chat.FixtureID == -1) {
-        return chat.UserTeamName
-      } else {
-        return chat.UserTeamName + " vs " + chat.OppName
-      }
+  componentDidUpdate(prevProps) {
+    if (prevProps.active_chat.UserTeamID !== this.props.active_chat.UserTeamID) {
+     this.getChatMessages();
     }
+  }
+
+  componentDidMount() {
+    this.getChatMessages()
+  }
+
+
+  chatName(chat) {
+    if (chat.FixtureID == -1) {
+      return chat.UserTeamName
+    } else {
+      return chat.UserTeamName + " vs " + chat.OppName
+    }
+  }
+
 
   render() {
+    var prev_sender = -1
     return (
       <div class="ChatPanel">
         <div class="ChatHeader">
           <h1>{this.chatName(this.props.active_chat)}</h1>
         </div>
         <div id="MessageBox" class="MessageBox">
-          {
-            this.state.messages.map(message =>
-              (<MessageCard sender_id={message.SenderID} sender_name={message.SenderName}
-                   message={message.Message} is_fixture={this.props.is_fixture}
-                   team_members={this.state.team_members}/>))
+          { (this.state.messages.length > 0) ?
+            this.state.messages.map((message) => {
+              var is_subequent = prev_sender != message.SenderID
+              console.log(">>" + message.SenderID)
+              console.log(prev_sender)
+              prev_sender = message.SenderID
+              return (<MessageCard is_subsequent={is_subequent} sender_id={message.SenderID} sender_name={message.SenderName}
+                  message={message.Message} is_fixture={this.props.is_fixture}
+                  team_members={this.state.team_members}/>)
+            })
+            : (<h3> No messages yet, send the first </h3>)
           }
         </div>
         <div class="MessageEntry">
