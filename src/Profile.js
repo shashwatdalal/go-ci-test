@@ -134,25 +134,6 @@ class Profile extends Component {
         <div id='contentcontainer'>
           <p class='thintext centertext'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
-          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
-          <div id="changelocbox">
-            {this.state.isEditing ?
-              <div><span id='searchtick'></span><StandaloneSearchBox
-                ref={this.onSearchBoxMounted}
-                bounds={this.bounds}
-                onPlacesChanged={this.onPlacesChanged}
-              >
-              <input
-                type='text'
-                placeholder="Search for your location"
-                id = "searchBox"
-                />
-              </StandaloneSearchBox></div>
-              : ""}
-          </div>
-          <div class="AvTable">
-            <AvailabiltyTable />
-          </div>
 
           <div id='fixturesbox'>
             <table>
@@ -180,6 +161,29 @@ class Profile extends Component {
               </tr>
             </table>
           </div>
+
+          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
+
+          <div id="changelocbox">
+            {this.state.isEditing ?
+              <div><span id='searchtick'></span><StandaloneSearchBox
+                ref={this.onSearchBoxMounted}
+                bounds={this.bounds}
+                onPlacesChanged={this.onPlacesChanged}
+              >
+              <input
+                type='text'
+                placeholder="Search for your location"
+                id = "searchBox"
+                />
+              </StandaloneSearchBox></div>
+              : ""}
+          </div>
+          <div class="AvTable">
+            <AvailabiltyTable />
+          </div>
+
+
 
         </div>
       </div>

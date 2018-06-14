@@ -242,7 +242,7 @@ class Matchmaking extends Component {
                             <DateTimePicker
                               value={this.state.date}
                               onChange={date => this.setState({date:roundMinutes(date)})}
-                              minDate=roundMinutes(new Date())
+                              minDate={roundMinutes(new Date())}
                               autocomplete='organization'
                               required/>
                             <br />
@@ -264,7 +264,7 @@ class Matchmaking extends Component {
                           <input
                             type="text"
                             placeholder="Search for your location"
-                            id = "searchBox"
+                            id = "formSearchBox"
                             required
                           />
                           </StandaloneSearchBox>

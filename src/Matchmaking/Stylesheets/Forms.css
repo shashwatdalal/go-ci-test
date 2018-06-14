@@ -12,7 +12,7 @@
 
 
 #players_container{
-    width:    50%;
+    width:    48%;
     display:  block;
     float:    left;
 
@@ -21,9 +21,9 @@
 }
 
 #sport_container{
-    width:    50%;
+    width:    48%;
     display:  block;
-    float:    left;
+    float:    right;
 
     z-index:  99998 !important;
     position: relative;
@@ -31,31 +31,16 @@
 
 
 #duration{
-    width:    50%;
+    width:    48%;
     float:    left;
     display:  inline;
     position: relative;
 }
 
 #datetime{
-    width:    47%;
+    width:    48%;
     float:    right;
     display:  inline;
     z-index:  50000;
     position: relative;
-}
-
-
-#searchBox {
-  boxSizing: border-box;
-  border: 1px solid;
-  border-color: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 32px;
-  padding: 0 12px;
-  borderRadius: 3px;
-  boxShadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  fontSize: 14px;
-  outline: none;
-  textOverflow: ellipses;
 }
