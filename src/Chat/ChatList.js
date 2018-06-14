@@ -18,9 +18,11 @@ class ChatList extends Component {
           axios
               .get(query)
               .then(function (result) {
-                  _this.setState({
-                      chats: result.data
-                  }, _this.initialiseActiveChat())
+                  if (result.data != null) {
+                    _this.setState({
+                        chats: result.data
+                    }, _this.initialiseActiveChat())
+                  }
               })
     }
 

@@ -17,15 +17,17 @@ type PromotedAdvertisement struct {
 	Name       string
 	StartTime  string
 	EndTime  	 string
-	Location	 string
+	LocLat	 	 string
+	LocLng	 	 string
 	Sport   	 string
 }
 
 type Message struct {
-	Team 			string
-	Sender		string
-	Message		string
-	Date      string
+	Chat 			 string
+	SenderID	 int
+	SenderName string
+	Message		 string
+	TimeSent   string
 }
 
 type ChatInfo struct {
@@ -122,11 +124,15 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	team_id := (strings.Split(getquery, "=")[1])
-	chat_name := "team" + team_id + "_messages"
+	chat_id := (strings.Split(getquery, "=")[1])
+	chat_db_name := chat_id + "_messages"
 
 	// Run query
-  query := fmt.Sprintf("SELECT * FROM %s;", chat_name)
+	columns := "m.sender_id, u.name, m.message, m.time_sent"
+	join := "INNER JOIN users AS u ON m.sender_id=u.user_id"
+  query := fmt.Sprintf("SELECT %s FROM %s AS m %s",
+		 						columns, chat_db_name, join)
+	fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -135,15 +141,16 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 	for rows.Next() {
 		data := Message{}
 		err = rows.Scan(
-			&data.Sender,
+			&data.SenderID,
+			&data.SenderName,
 			&data.Message,
-			&data.Date)
+			&data.TimeSent)
 
 		result = append(result, data)
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))
+	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -161,11 +168,12 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
       panic(err)
 			defer request.Body.Close()
   }
-	chat_name := message.Team + "_messages"
+	chat_name := message.Chat + "_messages"
 
+	columns := "sender_id, message, time_sent"
 	// Run query
-  query := fmt.Sprintf("INSERT INTO %s VALUES('%s', '%s', LOCALTIMESTAMP);",
-							chat_name, message.Sender, message.Message)
+  query := fmt.Sprintf("INSERT INTO %s (%s) VALUES('%d', '%s', LOCALTIMESTAMP);",
+							chat_name, columns, message.SenderID, message.Message)
 	fmt.Println(query)
   _, err = db.Query(query)
   CheckErr(err)
@@ -222,10 +230,14 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	team_id := strings.Split(getquery, "=")[1]
 
-	fields := "a.advert_id, a.name, a.start_time, a.end_time, a.location, a.sport";
+	fields := "a.advert_id, a.team_id, a.start_time, a.end_time, a.loc_lat, a.loc_lng, a.sport";
+	advertisements := "advertisements AS a"
+	first_join := "INNER JOIN promoted_fixtures AS pf ON a.advert_id=pf.advert_id"
+	second_join := "INNER JOIN team_names AS tn ON a.team_id=tn.team_id"
 
 	// Run query
-  query := fmt.Sprintf("SELECT %s FROM advertisements AS a JOIN promoted_fixtures AS pf ON a.advert_id=pf.advert_id WHERE pf.team_id='%s';", fields, team_id)
+  query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE pf.team_id=%s;",
+												fields, advertisements, first_join, second_join, team_id)
   rows, err := db.Query(query)
   CheckErr(err)
 
@@ -242,14 +254,15 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 			&data.Name,
 			&data.StartTime,
 			&data.EndTime,
-			&data.Location,
+			&data.LocLat,
+			&data.LocLng,
 			&data.Sport)
 
 		result = append(result, data)
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))
+	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -266,7 +279,7 @@ var GetTeamMembers = http.HandlerFunc(func (writer http.ResponseWriter, request 
 	team_id := strings.Split(getquery, "=")[1]
 
 	// Run query
-  query := fmt.Sprintf("SELECT team_members.user_id FROM team_members WHERE team_members.team_id='%s';", team_id)
+  query := fmt.Sprintf("SELECT team_members.user_id FROM team_members WHERE team_members.team_id=%s;", team_id)
   rows, err := db.Query(query)
   CheckErr(err)
 

@@ -43,12 +43,16 @@ class OpenChat extends Component {
     }, () => {
       this.scrollChat();
     });
+    var chat_name = (this.props.is_fixture) ?
+                        ("_fixture" + this.props.active_chat.FixtureID)
+                        : ("_team" + this.props.active_chat.UserTeamID)
     var message_info = {
-      Team:this.props.active_chat,
-      SenderID:ActiveUserID.getID(),
-      Message:this.state.message,
+      Chat: chat_name,
+      SenderID: ActiveUserID.getID(),
+      Message: this.state.message,
       Time: time
     }
+    console.log(message_info.Team)
     axios.post("/addMessage", message_info)
       .then(function(response){
         console.log(response)
@@ -74,9 +78,11 @@ class OpenChat extends Component {
           // Once Team Members loaded can load messages
           axios.get(get_chat_req)
               .then(function(result) {
-                _this.setState({
-                  messages: result.data
-                });
+                if (result.data != null) {
+                  _this.setState({
+                    messages: result.data
+                  });
+                }
                 var messageBox = document.getElementById("MessageBox");
                 messageBox.scrollTop = messageBox.scrollHeight;
               })

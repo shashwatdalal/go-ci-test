@@ -372,7 +372,7 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 
 	//Create message table for team
 	team_name := fmt.Sprintf("_team%d_messages", team_id)
-	columns := "sender varchar(30) NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
+	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
 	query = fmt.Sprintf("CREATE TABLE %s (%s);", team_name, columns)
 	fmt.Println(query)
 	_, err = db.Query(query)

@@ -13,9 +13,8 @@ class FixtureCard extends Component {
   }
 
   componentDidMount() {
-    var venue_latlng = this.props.data.Location.split("(")[1].split(")")[0];
     var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
-                      + venue_latlng
+                      + this.props.data.LocLat + "," + this.props.data.LocLng
 
     var _this = this
     _this.serverRequest = axios.get(request_url)

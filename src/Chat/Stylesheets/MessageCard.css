@@ -39,14 +39,14 @@
     grid-area: sd;
 }
 
-.sent .message_text {
+.sent .message {
   grid-area: ms;
   text-align: right;
   float: right;
 }
 
-.received_fixture_opp .received, .received_fixture_opp .received,
-  .received_fixture_opp .received  {
+.received_fixture_opp .message, .received_fixture_opp .message,
+  .received_fixture_opp .message  {
     grid-area: ms;
     float: right;
     text-align: left;
