@@ -39,6 +39,10 @@
     grid-area: sd;
 }
 
+.sender {
+  padding-top: 5px
+}
+
 .sent .message {
   grid-area: ms;
   text-align: right;
@@ -74,7 +78,7 @@
       "ms ms ms ms ms ms ms . . "
 }
 
-.sent, .received {
+.sent, .received_team, .received_fixture_team, .received_fixture_opp {
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 2px;

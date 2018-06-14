@@ -25,25 +25,26 @@ class FixtureCard extends Component {
           })
 
     var upvote_req = "getUpvoteTally?team_id=" + this.props.team_id
-                      + "&fixture_id=" + this.props.data.FixtureID
+                      + "&fixture_id=" + this.props.data.AdID
     axios.get(upvote_req)
           .then(function(result) {
-            _this.setState({upvotes: result.data})
+            _this.setState({upvotes: parseInt(result.data)})
           })
 
     var downvote_req = "getDownvoteTally?team_id=" + this.props.team_id
-                      + "&fixture_id=" + this.props.data.FixtureID
+                      + "&fixture_id=" + this.props.data.AdID
     axios.get(downvote_req)
           .then(function(result) {
-            _this.setState({downvotes: result.data})
+            _this.setState({downvotes: parseInt(result.data)})
           })
 
     var vote_status_req = "getVoteStatus?user_id=" + ActiveUserID.getID()
                       + "&team_id=" + this.props.team_id
-                      + "&fixture_id=" + this.props.data.FixtureID
-    axios.get(downvote_req)
+                      + "&fixture_id=" + this.props.data.AdID
+    axios.get(vote_status_req)
           .then(function(result) {
-            switch (result.data) {
+            console.log(result);
+            switch (result.data.trim()) {
               case "upvote":
                 _this.setState({
                   upvoted: true
@@ -61,9 +62,9 @@ class FixtureCard extends Component {
 
   toggle_upvote() {
     var vote = {
-      user_id: ActiveUserID.getID(),
-      team_id: this.props.team_id,
-      fixture_id: this.props.fixture_id
+      UserID:     ActiveUserID.getID(),
+      TeamID:     this.props.team_id,
+      AdvertID:   this.props.data.AdID
     }
 
     if (this.state.downvoted) {
@@ -92,9 +93,9 @@ class FixtureCard extends Component {
 
   toggle_downvote() {
     var vote = {
-      user_id: ActiveUserID.getID(),
-      team_id: this.props.team_id,
-      fixture_id: this.props.fixture_id
+      UserID:     ActiveUserID.getID(),
+      TeamID:     this.props.team_id,
+      AdvertID:   this.props.data.AdID
     }
 
     if (this.state.upvoted) {

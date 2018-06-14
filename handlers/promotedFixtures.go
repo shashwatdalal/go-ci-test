@@ -32,12 +32,12 @@ var GetUpvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, request 
 
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	params := strings.Split( strings.Split(getquery, "?")[1], "&" )
-	team_id := strings.Split(params[0], "=")
-	fixture_id := strings.Split(params[1], "=")
+	params := strings.Split( strings.Split(getquery, "?")[0], "&" )
+	team_id := strings.Split(params[0], "=")[1]
+	advert_id := strings.Split(params[1], "=")[1]
 
-	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE team_id=%s AND fixture_id=%s",
-		 						team_id, fixture_id)
+	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE team_id=%s AND advert_id=%s",
+		 						team_id, advert_id)
 	fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
@@ -61,12 +61,12 @@ var GetDownvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, reques
 
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	params := strings.Split( strings.Split(getquery, "?")[1], "&" )
-	team_id := strings.Split(params[0], "=")
-	fixture_id := strings.Split(params[1], "=")
+	params := strings.Split( strings.Split(getquery, "?")[0], "&" )
+	team_id := strings.Split(params[0], "=")[1]
+	advert_id := strings.Split(params[1], "=")[1]
 
-	query := fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE team_id=%s AND fixture_id=%s",
-		 						team_id, fixture_id)
+	query := fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE team_id=%s AND advert_id=%s",
+		 						team_id, advert_id)
 	fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
@@ -90,14 +90,14 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
 
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
-	params := strings.Split( strings.Split(getquery, "?")[1], "&" )
-	user_id := strings.Split(params[0], "=")
-	team_id := strings.Split(params[1], "=")
-	fixture_id := strings.Split(params[2], "=")
+	params := strings.Split( strings.Split(getquery, "?")[0], "&" )
+	user_id := strings.Split(params[0], "=")[1]
+	team_id := strings.Split(params[1], "=")[1]
+	advert_id := strings.Split(params[2], "=")[1]
 
   // Check for instance of an upvote
-	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE user_id=%s team_id=%s AND fixture_id",
-		 						user_id, team_id, fixture_id)
+	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE user_id=%s AND team_id=%s AND advert_id=%s",
+		 						user_id, team_id, advert_id)
 	fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
@@ -113,8 +113,8 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
   }
 
   // Check for instance of a downvote
-  query = fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE user_id=%s team_id=%s AND fixture_id",
-		 						team_id, fixture_id)
+  query = fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE user_id=%s AND team_id=%s AND advert_id=%s",
+		 						user_id, team_id, advert_id)
 	fmt.Println(query)
   rows, err = db.Query(query)
   CheckErr(err)
@@ -124,7 +124,7 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
 	err = rows.Scan(&count)
 
   if (count > 0) {
-    fmt.Fprint(writer, "upvote") // Write the result to the sender
+    fmt.Fprint(writer, "downvote") // Write the result to the sender
     return
   }
 
@@ -135,7 +135,7 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
 type Vote struct {
   UserID    int
   TeamID    int
-	FixtureID	int
+	AdvertID	int
 }
 
 //todo set up MUX router to take url of user and team to add to database.
@@ -156,8 +156,8 @@ var AddUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.
 	}
 
   // Insert into the upvote table
-  query := fmt.Sprintf("INSERT INTO upvotes (user_id, team_id, fixture_id) VALUES(%d, %d, %d);",
-              vote.UserID, vote.TeamID, vote.FixtureID)
+  query := fmt.Sprintf("INSERT INTO upvotes (user_id, team_id, advert_id) VALUES(%d, %d, %d);",
+              vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = db.Query(query)
   CheckErr(err)
 })
@@ -181,8 +181,8 @@ var AddDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *htt
 	}
 
   // Insert into the upvote table
-  query := fmt.Sprintf("INSERT INTO downvotes (user_id, team_id, fixture_id) VALUES(%d, %d, %d);",
-              vote.UserID, vote.TeamID, vote.FixtureID)
+  query := fmt.Sprintf("INSERT INTO downvotes (user_id, team_id, advert_id) VALUES(%d, %d, %d);",
+              vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = db.Query(query)
   CheckErr(err)
 
@@ -207,8 +207,8 @@ var RemoveUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 	}
 
   // Insert into the upvote table
-  query := fmt.Sprintf("DELETE FROM upvotes WHERE user_id=%d AND team_id=%d AND fixture_id=%d;",
-              vote.UserID, vote.TeamID, vote.FixtureID)
+  query := fmt.Sprintf("DELETE FROM upvotes WHERE user_id=%d AND team_id=%d AND advert_id=%d;",
+              vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = db.Query(query)
   CheckErr(err)
 })
@@ -232,8 +232,8 @@ var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *
 	}
 
   // Insert into the upvote table
-	query := fmt.Sprintf("DELETE FROM downvotes WHERE user_id=%d AND team_id=%d AND fixture_id=%d;",
-              vote.UserID, vote.TeamID, vote.FixtureID)
+	query := fmt.Sprintf("DELETE FROM downvotes WHERE user_id=%d AND team_id=%d AND advert_id=%d;",
+              vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = db.Query(query)
   CheckErr(err)
 

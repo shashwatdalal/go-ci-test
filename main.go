@@ -26,8 +26,8 @@ func main() {
 
 	// Chat Page -- Promoted fixtures
 	r.Handle("/getPromotedFixtures", GetPromotedFixtures).Methods("GET")
-	r.Handle("/GetUpvoteTally", GetUpvoteTally).Methods("GET")
-	r.Handle("/GetDownvoteTally", GetDownvoteTally).Methods("GET")
+	r.Handle("/getUpvoteTally", GetUpvoteTally).Methods("GET")
+	r.Handle("/getDownvoteTally", GetDownvoteTally).Methods("GET")
 	r.Handle("/getVoteStatus", GetVoteStatus).Methods("GET")
 	r.Handle("/addUpvote", AddUpvote).Methods("POST")
 	r.Handle("/addDownvote", AddDownvote).Methods("POST")
