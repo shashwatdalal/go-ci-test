@@ -442,6 +442,7 @@ func recalculateUsersTeamAvailabilities(userID int) {
 
 
 func RecalculateTeamAvailability(team_id int) {
+	fmt.Println("Recalculating availability for teamID: ", team_id)
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
@@ -566,6 +567,7 @@ func recalculateUsersTeamLocations(userID int) {
 
 
 func RecalculateTeamLocation(team_id int) {
+	fmt.Println("Recalculating location for teamID: ", team_id)
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
