@@ -33,7 +33,6 @@ type Location struct {
 
 var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	//setup database connection
-	fmt.Println("GETTING TEAMS")
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
 	db, err := sql.Open("postgres", dbinfo)
@@ -47,7 +46,6 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			"FROM team_members "+
 			"NATURAL INNER JOIN team_names "+
 			"WHERE team_members.user_id=%s;", user_id)
-	fmt.Println(query)
 	rows, err := db.Query(query)
 	for rows.Next() {
 		team := Team{}
@@ -57,7 +55,6 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			"FROM team_members "+
 			"JOIN users on team_members.user_id=users.user_id "+
 			"where team_members.team_id=%d;", team.ID)
-		fmt.Println(query)
 		users, err := db.Query(query)
 		players := []Player{}
 		//for each player retrieve location
@@ -153,7 +150,6 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	}
 
 	j, _ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -199,14 +195,12 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	// Add Team Name Record
 	query = fmt.Sprintf("INSERT INTO team_names (team_name) VALUES('%s');",
 							teamInfo.TeamName);
-	fmt.Println(query)
 	rows, err = db.Query(query)
 	CheckErr(err)
 
 	// Get ID for Team
 	query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_name='%s';",
 									teamInfo.TeamName)
-	fmt.Println(query)
 	rows, err = db.Query(query)
 	rows.Next()
 	var team_id int
@@ -217,14 +211,12 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	// Add Team Captain
   query = fmt.Sprintf("INSERT INTO team_captains (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
-	fmt.Println(query)
 	_, err = db.Query(query)
 	CheckErr(err)
 
 	// Add captain as team member
   query = fmt.Sprintf("INSERT INTO team_members (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
-	fmt.Println(query)
 	_, err = db.Query(query)
 	CheckErr(err)
 
@@ -232,7 +224,6 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	team_name := fmt.Sprintf("_team%d_messages", team_id)
 	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
 	query = fmt.Sprintf("CREATE TABLE %s (%s);", team_name, columns)
-	fmt.Println(query)
 	_, err = db.Query(query)
 	CheckErr(err)
 

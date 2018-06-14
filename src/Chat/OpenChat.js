@@ -52,7 +52,6 @@ class OpenChat extends Component {
       Message: this.state.message,
       Time: time
     }
-    console.log(message_info.Team)
     axios.post("/addMessage", message_info)
       .then(function(response){
         console.log(response)
@@ -65,7 +64,6 @@ class OpenChat extends Component {
     var chat_name = (this.props.is_fixture) ?
                         ("_fixture" + this.props.active_chat.FixtureID)
                         : ("_team" + this.props.active_chat.UserTeamID)
-    console.log(this.props.active_chat)
     var get_team_req = "getTeamMembers?team=" + this.props.active_chat.UserTeamID
     var get_chat_req = "getChatMessages?name=" + chat_name
     // Get Team Members
@@ -77,7 +75,6 @@ class OpenChat extends Component {
           // Once Team Members loaded can load messages
           axios.get(get_chat_req)
               .then(function(result) {
-                console.log(result.data)
                 if (result.data != null) {
                   _this.setState({
                     messages: result.data
@@ -95,7 +92,14 @@ class OpenChat extends Component {
 
 
   componentDidUpdate(prevProps) {
-    if (prevProps.active_chat.UserTeamID !== this.props.active_chat.UserTeamID) {
+    if (prevProps.active_chat.UserTeamID !== this.props.active_chat.UserTeamID
+        || prevProps.active_chat.OppID !== this.props.active_chat.OppID) {
+     this.setState({
+       messages: [{
+         sender_name: "...",
+         message: "..."
+       }]
+     })
      this.getChatMessages();
     }
   }
@@ -125,8 +129,6 @@ class OpenChat extends Component {
           { (this.state.messages.length > 0) ?
             this.state.messages.map((message) => {
               var is_subequent = prev_sender != message.SenderID
-              console.log(">>" + message.SenderID)
-              console.log(prev_sender)
               prev_sender = message.SenderID
               return (<MessageCard is_subsequent={is_subequent} sender_id={message.SenderID} sender_name={message.SenderName}
                   message={message.Message} is_fixture={this.props.is_fixture}

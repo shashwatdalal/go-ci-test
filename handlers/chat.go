@@ -80,7 +80,6 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 		second_join := "INNER JOIN team_names a ON f.away_id=a.team_id"
   	query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE home_id=%d OR away_id=%d;",
 			 									columns, fix_table, first_join, second_join, team_id, team_id)
-		fmt.Println(query)
   	rows, err := db.Query(query)
   	CheckErr(err)
 		var home_id int
@@ -112,7 +111,6 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 	}
 
 	j,_ := json.Marshal(chats) // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -154,7 +152,6 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -269,7 +266,6 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 	}
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
-	fmt.Println(string(j))
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 

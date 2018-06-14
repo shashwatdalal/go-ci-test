@@ -5,15 +5,15 @@
 }
 
 .received_fixture_team .message_text {
-  background: #000066;
-  color: white;
-  border: 1px solid #000066;
+  background: #e0ebeb;
+  color: black;
+  border: 2px solid #4CAF50;
 }
 
 .received_fixture_opp .message_text {
-  background: #b30000;
-  color: white;
-  border: 1px solid #b30000;
+  background: #e0ebeb;
+  color: black;
+  border: 2px solid #ff0000;
 }
 
 .sent .message_text {
