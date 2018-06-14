@@ -60,7 +60,7 @@ class Profile extends Component {
         + '&lat=' + newlat
         + '&lng=' + newlng).then(function(response) {
           if (response.data == "fail\n") {
-            alert("Failed to update availability, please try again.")
+            alert("Failed to find location, please try again.")
           } else {
             var tick = document.getElementById('searchtick');
             tick.innerHTML = "✓";

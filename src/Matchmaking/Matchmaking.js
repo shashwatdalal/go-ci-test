@@ -55,7 +55,6 @@ const playersOptions = [
   { value : 18,   label: 'Eighteen players'},
   { value : 19,   label: 'Nineteen players'},
   { value : 20,   label: 'Twenty players'},
-
 ]
 
 const sportOptions = [
@@ -75,6 +74,8 @@ function roundMinutes(date) {
     return date;
 }
 
+var defaultState = {}
+
 class Matchmaking extends Component {
 
     constructor(props) {
@@ -84,7 +85,7 @@ class Matchmaking extends Component {
           Sport: "Football",
           Players: 1,
           Radius: 2000,
-          address: 'London',
+          address: 'Search for your ideal location',
           position: {
               lat: 51.509865,
               lng: -0.118092
@@ -96,14 +97,24 @@ class Matchmaking extends Component {
         }
 
         this.setValue = this.setValue.bind(this);
-        this.handleLocationChange = this.handleLocationChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+
         this.onPlacesChanged = this.onPlacesChanged.bind(this);
         this.onSearchBoxMounted = this.onSearchBoxMounted.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+
         this.handleSportChange = this.handleSportChange.bind(this);
         this.handleDurationChange = this.handleDurationChange.bind(this);
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handlePlayersChange = this.handlePlayersChange.bind(this);
+        this.handleLocationChange = this.handleLocationChange.bind(this);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleResponse= this.handleResponse.bind(this);
+    }
+
+    componentDidMount() {
+        defaultState = this.state
     }
 
     onSearchBoxMounted(ref) {
@@ -133,6 +144,25 @@ class Matchmaking extends Component {
         this.setState(object);
     }
 
+    handleResponse(response){
+        console.log(response);
+        if (response.data == "fail\n") {
+          alert("Failed to submit advertisement, please try again.")
+        } else {
+          var tick = document.getElementById('submittick');
+          tick.innerHTML = "✓";
+          var confirmtext = document.getElementById('confirmtext');
+          confirmtext.innerHTML = "Advertisement successfully submitted!"
+          setTimeout(function() {
+            tick.innerHTML = "";
+            confirmtext.innerHTML = "";
+          }, 2500);
+
+          //Reset State and form
+          this.setState(defaultState);
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         var url = "/matchmaking?";
@@ -148,12 +178,15 @@ class Matchmaking extends Component {
         url += "sport=" + this.state.Sport.value + "&";
         url += "players=" + this.state.Players;
 
-        axios.get(url).then(response => console.log(response));
+        axios.get(url).then((response) => {this.handleResponse(response)});
 
     }
 
+
     handlePlayersChange(Players) {
-        this.setState({Players});
+        var object = {};
+        object['Players'] = Players.value;
+        this.setState(object);
         if (Players) {
            console.log(`Selected: ${Players.label}`);
         }
@@ -194,7 +227,6 @@ class Matchmaking extends Component {
         return (
             <div class="form_wrapper">
                 <div id="request_form">
-                    <form onSubmit={this.handleSubmit}>
                     <div class="form_container">
 
                         <div id="players_container">
@@ -223,6 +255,20 @@ class Matchmaking extends Component {
                       </div>
 
                         <div class="form_container">
+
+                          <div id= "datetime">
+                            <br />
+                            Time
+                            <br />
+
+                            <DateTimePicker
+                              value={this.state.date}
+                              onChange={date => this.setState({date:roundMinutes(date)})}
+                              minDate={roundMinutes(new Date())}
+                              />
+                            <br />
+                          </div>
+
                           <div id = "duration">
                             <br />
                             Duration
@@ -234,19 +280,7 @@ class Matchmaking extends Component {
                               onChange={this.handleDurationChange}
                               options={durationOptions}/>
                           </div>
-                          <div id= "datetime">
-                            <br />
-                            Time
-                            <br />
 
-                            <DateTimePicker
-                              value={this.state.date}
-                              onChange={date => this.setState({date:roundMinutes(date)})}
-                              minDate={roundMinutes(new Date())}
-                              autocomplete='organization'
-                              required/>
-                            <br />
-                          </div>
 
 
                         </div>
@@ -263,9 +297,8 @@ class Matchmaking extends Component {
                           >
                           <input
                             type="text"
-                            placeholder="Search for your location"
+                            placeholder= {this.state.address}
                             id = "formSearchBox"
-                            required
                           />
                           </StandaloneSearchBox>
 
@@ -295,10 +328,14 @@ class Matchmaking extends Component {
                               id='input4'
                               onChange={this.setValue.bind(this, 'Radius')}/>
 
-                          <input type="submit" value="Submit" />
-                        </div>
 
-                    </form>
+                        </div>
+                    <button onClick = {this.handleSubmit}>
+                        Submit
+                    </button>
+                    <span id='submittick'></span>
+                    <br />
+                    <span id='confirmtext'></span>
                 </div>
             </div>
 
