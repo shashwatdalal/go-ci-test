@@ -28,7 +28,7 @@
   display: inline-block;
 }
 
-.received_fixture_opp .sender, .received_fixture_opp .sender,
+.received_team .sender, .received_fixture_team .sender,
   .received_fixture_opp .sender {
     text-align: left;
     grid-area: sd;
@@ -45,7 +45,7 @@
   float: right;
 }
 
-.received_fixture_opp .message, .received_fixture_opp .message,
+.received_team .message, .received_fixture_team .message,
   .received_fixture_opp .message  {
     grid-area: ms;
     float: right;

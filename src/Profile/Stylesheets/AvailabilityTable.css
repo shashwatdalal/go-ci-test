@@ -24,6 +24,19 @@
 .avBox {
   border: solid 1px white;
   width: 50em;
+  text-decoration: underline;
+  font-size: 1.5vmin;
+}
+
+.selectedtext {
+  background-color: #004d99;
+  color: white;
+  padding: 2px;
+}
+
+.unselectedtext {
+  background-color: #e6f2ff;
+  padding: 2px;
 }
 
 @keyframes flash {
