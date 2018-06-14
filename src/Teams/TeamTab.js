@@ -12,58 +12,60 @@ var axios = require('axios');
 
 class TeamTab extends Component {
 
-  state = {
-    invitees: []
-  }
-
-  constructor(props) {
-    super(props)
-    this.addInvitee = this.addInvitee.bind(this)
-    this.removeInvitee = this.removeInvitee.bind(this)
-  }
-
-  addInvitee(inv) {
-    this.setState({
-      invitees: [...this.state.invitees, inv],
-    })
-  }
-
-  removeInvitee(inv) {
-    var _this = this
-    this.setState({
-      invitees: _this.state.invitees.filter(_inv => _inv.Username !== inv.Username)
-    })
-  }
-
-  send_invitations() {
-    var invitees = this.state.invitees.map(inv => inv.UserID)
-    var teamInvInfo = {
-      TeamID  : this.props.team.id,
-      Invitees: invitees
+    state = {
+        invitees: []
     }
-    axios.post("/sendInvitations", teamInvInfo)
-    this.setState({
-      invitees: []
-    })
-  }
 
-  render() {
-    return (
-        <div class="TeamCardsGrid">
-            <div class="teamname">
-              <h1>{this.props.team.name}</h1>
+    constructor(props) {
+        super(props)
+        this.addInvitee = this.addInvitee.bind(this)
+        this.removeInvitee = this.removeInvitee.bind(this)
+    }
+
+    addInvitee(inv) {
+        this.setState({
+            invitees: [...this.state.invitees, inv],
+        })
+    }
+
+    removeInvitee(inv) {
+        var _this = this
+        this.setState({
+            invitees: _this.state.invitees.filter(_inv => _inv.Username !== inv.Username)
+        })
+    }
+
+    send_invitations() {
+        var invitees = this.state.invitees.map(inv => inv.UserID)
+        var teamInvInfo = {
+            TeamID: this.props.team.id,
+            Invitees: invitees
+        }
+        axios.post("/sendInvitations", teamInvInfo)
+        this.setState({
+            invitees: []
+        })
+    }
+
+    render() {
+        return (
+            <div class="TeamCardsGrid">
+                <div class="teamname">
+                    <h1>{this.props.team.name}</h1>
+                </div>
+                <div class="map">
+                    <h2>Map</h2>
+                    <SimpleMap
+                        team={this.props.team}/>
+                </div>
+                <div class="AddPlayer">
+                    <h2> Invite more players </h2>
+                    <TeamInvitationSearch addInvitee={(this.addInvitee)}
+                                          removeInvitee={this.removeInvitee}
+                                          invitees={this.state.invitees}/>
+                    <Button onClick={() => this.send_invitations()}>Send Invitations</Button>
+                </div>
             </div>
-            <div class="map">
-              <h2>Map</h2>
-              <SimpleMap
-                    team = {this.props.team}/>
-            </div>
-            <h2> Invite more players </h2>
-            <TeamInvitationSearch addInvitee={(this.addInvitee)}
-                                  removeInvitee={this.removeInvitee}
-                                  invitees={this.state.invitees}/>
-            <Button onClick={() => this.send_invitations()}>Send Invitations</Button>
-        </div>
         );
     }
 }

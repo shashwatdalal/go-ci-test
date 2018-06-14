@@ -363,6 +363,7 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
+
 // Update the user availability for the user and values specified in the url
 var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
@@ -414,7 +415,89 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	} else {
 		fmt.Fprintln(writer, "fail") // Write the result to the sender
 	}
+
+	recalculateUsersTeamAvailabilities(userID)
 })
+
+
+func recalculateUsersTeamAvailabilities(userID int) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	query := fmt.Sprintf("SELECT team_id FROM team_members WHERE user_id=%d;", userID)
+
+	rows, err := db.Query(query)
+	CheckErr(err)
+
+	for (rows.Next()) {
+		var team_id int
+		rows.Scan(&team_id)
+		RecalculateTeamAvailability(team_id)
+	}
+}
+
+
+func RecalculateTeamAvailability(team_id int) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	fields := "mon, tues, weds, thurs, fri, sat, sun"
+		query := fmt.Sprintf("SELECT %s FROM user_avail NATURAL INNER JOIN team_members WHERE team_id=%d;", fields, team_id)
+
+	rows, err := db.Query(query)
+	CheckErr(err)
+
+	var totalMon   int64 = 0xFFFFFFFF
+	var totalTues  int64 = 0xFFFFFFFF
+	var totalWeds  int64 = 0xFFFFFFFF
+	var totalThurs int64 = 0xFFFFFFFF
+	var totalFri   int64 = 0xFFFFFFFF
+	var totalSat   int64 = 0xFFFFFFFF
+	var totalSun   int64 = 0xFFFFFFFF
+
+	for (rows.Next()) {
+		var holderMon   int64
+		var holderTues  int64
+		var holderWeds  int64
+		var holderThurs int64
+		var holderFri   int64
+		var holderSat   int64
+		var holderSun   int64
+
+		rows.Scan(
+			&holderMon,
+			&holderTues,
+			&holderWeds,
+			&holderThurs,
+			&holderFri,
+			&holderSat,
+			&holderSun)
+
+		totalMon   = totalMon   & holderMon
+		totalTues  = totalTues  & holderTues
+		totalWeds  = totalWeds  & holderWeds
+		totalThurs = totalThurs & holderThurs
+		totalFri   = totalFri   & holderFri
+		totalSat   = totalSat   & holderSat
+		totalSun   = totalSun   & holderSun
+	}
+
+	fields = fmt.Sprintf("mon=%d, tues=%d, weds=%d, thurs=%d, fri=%d, sat=%d, sun=%d",
+		                     totalMon, totalTues, totalWeds, totalThurs, totalFri, totalSat, totalSun)
+	query = fmt.Sprintf("UPDATE team_avail SET %s WHERE team_id=%d",
+											  fields, team_id)
+
+	_, err = db.Query(query)
+	CheckErr(err)
+}
 
 
 // Update the user location for the user and values specified in the url
@@ -441,11 +524,12 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 	lng,err := strconv.ParseFloat(fields[2], 64)
 	CheckErr(err)
 
-	// Run query
+	var userID int = getUserIDFromUsername(username)
 
+	// Run query
 	dbfields := fmt.Sprintf("loc_lat=%f, loc_lng=%f", lat, lng)
-	dbquery := fmt.Sprintf("UPDATE users SET %s WHERE username='%s'",
-											  dbfields, username)
+	dbquery := fmt.Sprintf("UPDATE users SET %s WHERE user_id=%d",
+											  dbfields, userID)
 
 	_, err = db.Query(dbquery)
 	CheckErr(err)
@@ -455,4 +539,62 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 	} else {
 		fmt.Fprintln(writer, "fail") // Write the result to the sender
 	}
+
+	recalculateUsersTeamLocations(userID);
 })
+
+
+func recalculateUsersTeamLocations(userID int) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	query := fmt.Sprintf("SELECT team_id FROM team_members WHERE user_id=%d;", userID)
+
+	rows, err := db.Query(query)
+	CheckErr(err)
+
+	for (rows.Next()) {
+		var team_id int
+		rows.Scan(&team_id)
+		RecalculateTeamLocation(team_id)
+	}
+}
+
+
+func RecalculateTeamLocation(team_id int) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	query := fmt.Sprintf("SELECT loc_lat, loc_lng FROM users NATURAL INNER JOIN team_members WHERE team_id=%d;", team_id)
+
+	rows, err := db.Query(query)
+	CheckErr(err)
+
+	var totalLat float64 = 0.0
+	var totalLong float64 = 0.0
+	var cnt float64 = 0
+
+	for (rows.Next()) {
+		var latHolder float64
+		var longHolder float64
+		rows.Scan(&latHolder, &longHolder)
+
+		totalLat = totalLat + latHolder
+		totalLong = totalLong + longHolder
+		cnt = cnt + 1.0
+	}
+
+	query = fmt.Sprintf("UPDATE team_locations SET loc_lat=%f, loc_lng=%f WHERE team_id=%d;",
+	                    (totalLat / cnt), (totalLong / cnt), team_id)
+
+	_, err = db.Query(query)
+	CheckErr(err)
+}

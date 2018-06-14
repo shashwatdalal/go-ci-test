@@ -73,7 +73,7 @@ class Matchmaking extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          Team: -1,
+          Team: this.props.team_id,
           Sport: "Football",
           Players: 1,
           Radius: 2000,
