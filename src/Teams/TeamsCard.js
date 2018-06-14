@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {fetchTeams} from "../actions/teamsActions";
 import "./Stylesheets/TeamCardsGrid.css";
 import SimpleMap from "./MiniMap";
+import TeamTab from "./TeamTab";
 
 class TeamsCard extends Component {
 
@@ -13,24 +14,17 @@ class TeamsCard extends Component {
 
     render() {
         return (
+          <div>
+            <h2> Team info</h2>
             <Tabs defaultActiveKey={1}>
                 {this.props.teams.map((t, index) => {
                     return (
                     <Tab eventKey={index + 1} title={t.name}>
-                        <div class="TeamCardsGrid">
-                            <div class="teamname">
-                                <h1>{t.name}</h1>
-                            </div>
-                            <div class="map">
-                               <h2>Map</h2>
-                                <SimpleMap
-                                team = {t}/>
-                            </div>
-                            <br/><br/>
-                        </div>
+                        <TeamTab team={t}/>
                     </Tab>)}
                 )}
             </Tabs>
+            </div>
         );
     }
 }
@@ -41,4 +35,3 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {fetchTeams})(TeamsCard)
-

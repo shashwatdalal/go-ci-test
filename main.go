@@ -30,7 +30,7 @@ func main() {
 
 
 	// Team Page
-	r.Handle("/getTeams/{username}", GetTeams).Methods("GET")
+	r.Handle("/getTeams/{user_id}", GetTeams).Methods("GET")
 	r.Handle("/getInvitations/{username}", GetInvitations).Methods("GET")
 	r.Handle("/addUserToTeam/{username}/{teamname}",AddPlayerToTeam).Methods("POST")
 	r.Handle("/deleteInvitation/{username}/{teamname}",DeleteInvitation).Methods("DELETE")
@@ -38,6 +38,7 @@ func main() {
 	//Create Team Page
 	r.Handle("/getUsernameMatches", GetUsernameMatches).Methods("GET")
 	r.Handle("/createTeam", AddTeam).Methods("POST")
+	r.Handle("/sendInvitations", SendInvitations).Methods("POST")
 
 	// Login
 	r.Handle("/addUserInfo", AddUserInfo).Methods("POST")

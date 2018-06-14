@@ -5,7 +5,6 @@ import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import Select from 'react-select';
-import UserProfile from '../Profile/UserProfile';
 import 'react-select/dist/react-select.css';
 import './Stylesheets/Forms.css';
 import '../Stylesheets/Searchbox.css';

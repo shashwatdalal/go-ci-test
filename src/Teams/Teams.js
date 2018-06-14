@@ -6,6 +6,7 @@ import {Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom';
 
 export default class Teams extends Component {
+
     render() {
         return (
             <div class="TeamGrid">
