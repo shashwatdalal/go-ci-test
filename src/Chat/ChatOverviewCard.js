@@ -4,12 +4,12 @@ import './Stylesheets/ChatOverviewCard.css';
 class ChatOverviewCard extends Component {
 
   isUpper(character) {
-    return character === character.toUpperCase() && character != " "
+    return character === character.toUpperCase() && character !== " "
   }
 
   abbreviateName(name) {
     var uppers = name.split('').filter(this.isUpper)
-    if (uppers.length == 2 || uppers.length == 3) {
+    if (uppers.length === 2 || uppers.length === 3) {
       return uppers;
     } else {
       return name.substring(0,2).toUpperCase()
@@ -18,7 +18,7 @@ class ChatOverviewCard extends Component {
 
   chatAbbreviation(chat){
     var _this = this;
-    if (chat.FixtureID == -1) {
+    if (chat.FixtureID === -1) {
       return (<div class="chat_abbreviation"><div class="chat_abbreviation_bold">
           <strong>{_this.abbreviateName(chat.UserTeamName)}</strong></div>
       </div>)
@@ -30,7 +30,7 @@ class ChatOverviewCard extends Component {
   }
 
   chatName(chat) {
-    if (chat.FixtureID == -1) {
+    if (chat.FixtureID === -1) {
       return chat.UserTeamName
     } else {
       return chat.UserTeamName + " vs " + chat.OppName
