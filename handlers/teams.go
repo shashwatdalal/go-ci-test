@@ -325,6 +325,10 @@ var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request 
 	team.PLAYERS = players
 	team.NAME = vars["teamname"]
 	json.NewEncoder(writer).Encode(team)
+
+	// Recalculate the team's location and availability
+	RecalculateTeamAvailability(teamId)
+	RecalculateTeamLocation(teamId)
 })
 
 

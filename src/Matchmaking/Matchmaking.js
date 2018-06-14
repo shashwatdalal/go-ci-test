@@ -74,7 +74,7 @@ class Matchmaking extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          Team: -1,
+          Team: this.props.team_id,
           Sport: "Football",
           Players: 1,
           Radius: 2000,
@@ -189,26 +189,32 @@ class Matchmaking extends Component {
             <div class="form_wrapper">
                 <div id="request_form">
                     <form onSubmit={this.handleSubmit}>
+                    <div class="form_container">
 
-                        <br />
-                        Players
-                        <br />
+                        <div id="players_container">
+                          <br />
+                          Players
+                          <br />
 
-                        <Select
-                          name="Players"
-                          value={this.state.Players}
-                          onChange={this.handlePlayersChange}
-                          options={playersOptions}/>
+                          <Select
+                            name="Players"
+                            value={this.state.Players}
+                            onChange={this.handlePlayersChange}
+                            options={playersOptions}/>
+                        </div>
+                        <div id="sport_container">
 
-                        <br />
-                        Sport
-                        <br />
+                          <br />
+                          Sport
+                          <br />
 
-                        <Select
-                          name="Sport"
-                          value={this.state.Sport}
-                          onChange={this.handleSportChange}
-                          options={sportOptions}/>
+                          <Select
+                            name="Sport"
+                            value={this.state.Sport}
+                            onChange={this.handleSportChange}
+                            options={sportOptions}/>
+                        </div>
+                      </div>
 
                         <div class="form_container">
                           <div id = "duration">
@@ -228,12 +234,13 @@ class Matchmaking extends Component {
                             <br />
 
                             <DateTimePicker
-                                value={this.state.date}
-                                onChange={date => this.setState({date:date})}
-                                autocomplete='organization'/>
-
+                              value={this.state.date}
+                              onChange={date => this.setState({date:date})}
+                              autocomplete='organization'/>
                             <br />
                           </div>
+
+
                         </div>
 
                         <div class="form_container">
