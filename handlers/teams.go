@@ -14,6 +14,7 @@ import (
 )
 
 type Team struct {
+	ID			int 		 `json:"id"`
 	NAME    string   `json:"name"`
 	IMAGE   string   `json:"image"`
 	PLAYERS []Player `json:"players"`
@@ -30,142 +31,9 @@ type Location struct {
 	LNG string `json:"lng"`
 }
 
-/**
-var greaterKudu = Team{
-	NAME:  "Greater kudu",
-	IMAGE: "https://robohash.org/estrepellendusdoloremque.png?size=100x100&set=set1",
-	PLAYERS: []Player{
-		{
-			NAME:     "Cloe Plover",
-			IMAGE:    "https://robohash.org/blanditiisquibeatae.png?size=100x100&set=set1",
-			LOCATION: "Canary Wharf"},
-		{
-			NAME:     "Celinka Pidgeley",
-			IMAGE:    "https://robohash.org/temporaestnesciunt.png?size=100x100&set=set1",
-			LOCATION: "South Kensington"},
-		{
-			NAME:     "Marven Clive",
-			IMAGE:    "https://robohash.org/voluptatumminimaeum.png?size=100x100&set=set1",
-			LOCATION: "Putney"},
-		{
-			NAME:     "Julienne Micheli",
-			IMAGE:    "https://robohash.org/mollitiavoluptatibusoptio.png?size=100x100&set=set1",
-			LOCATION: "Camden"},
-		{
-			NAME:     "Garvey Coiley",
-			IMAGE:    "https://robohash.org/eacommodinatus.png?size=100x100&set=set1",
-			LOCATION: "Dulwich"}},
-}
-
-var blackKangaroo = Team{
-	NAME:  "Black-faced kangaroo",
-	IMAGE: "https://robohash.org/eosautemlaudantium.png?size=100x100&set=set1",
-	PLAYERS: []Player{
-		{
-			NAME:     "Doe Wimmer",
-			IMAGE:    "https://robohash.org/explicabovelitqui.png?size=100x100&set=set1",
-			LOCATION: "Guozhai"},
-		{
-			NAME:     "Debby Overpool",
-			IMAGE:    "https://robohash.org/ipsamdoloremrepellendus.png?size=100x100&set=set1",
-			LOCATION: "Novo Hamburgo"},
-		{
-			NAME:     "Allissa Flemyng",
-			IMAGE:    "https://robohash.org/rerumrerumdolorum.png?size=100x100&set=set1",
-			LOCATION: "Alençon"},
-		{
-			NAME:     "Nona Langforth",
-			IMAGE:    "https://robohash.org/nesciuntquosaepe.png?size=100x100&set=set1",
-			LOCATION: "Ulricehamn"},
-		{
-			NAME:     "Prescott Mathevon",
-			IMAGE:    "https://robohash.org/quidemsequidolorum.png?size=100x100&set=set1",
-			LOCATION: "María la Baja"}},
-}
-
-var sexyPandas = Team{
-	NAME:  "Sexy Pandas",
-	IMAGE: "https://robohash.org/eosautemlaudantium.png?size=100x100&set=set1",
-	PLAYERS: []Player{
-		{
-			NAME:     "Doe Wimmer",
-			IMAGE:    "https://robohash.org/explicabovelitqui.png?size=100x100&set=set1",
-			LOCATION: "Guozhai"},
-		{
-			NAME:     "Debby Overpool",
-			IMAGE:    "https://robohash.org/ipsamdoloremrepellendus.png?size=100x100&set=set1",
-			LOCATION: "Novo Hamburgo"},
-		{
-			NAME:     "Allissa Flemyng",
-			IMAGE:    "https://robohash.org/rerumrerumdolorum.png?size=100x100&set=set1",
-			LOCATION: "Motomachi"},
-		{
-			NAME:     "Nona Langforth",
-			IMAGE:    "https://robohash.org/nesciuntquosaepe.png?size=100x100&set=set1",
-			LOCATION: "Yamate"},
-		{
-			NAME:     "Prescott Mathevon",
-			IMAGE:    "https://robohash.org/quidemsequidolorum.png?size=100x100&set=set1",
-			LOCATION: "Honmoku"}},
-}
-
-var MarcelFC = Team{
-	NAME:  "MarcelFC",
-	IMAGE: "https://robohash.org/eosautemlaudantium.png?size=100x100&set=set1",
-	PLAYERS: []Player{
-		{
-			NAME:     "Doe Wimmer",
-			IMAGE:    "https://robohash.org/explicabovelitqui.png?size=100x100&set=set1",
-			LOCATION: "Guozhai"},
-		{
-			NAME:     "Debby Overpool",
-			IMAGE:    "https://robohash.org/ipsamdoloremrepellendus.png?size=100x100&set=set1",
-			LOCATION: "Novo Hamburgo"},
-		{
-			NAME:     "Allissa Flemyng",
-			IMAGE:    "https://robohash.org/rerumrerumdolorum.png?size=100x100&set=set1",
-			LOCATION: "Alençon"},
-		{
-			NAME:     "Nona Langforth",
-			IMAGE:    "https://robohash.org/nesciuntquosaepe.png?size=100x100&set=set1",
-			LOCATION: "Ulricehamn"},
-		{
-			NAME:     "Prescott Mathevon",
-			IMAGE:    "https://robohash.org/quidemsequidolorum.png?size=100x100&set=set1",
-			LOCATION: "María la Baja"}},
-}
-
-var andyri = Team{
-	NAME:  "Andy Ris",
-	IMAGE: "https://robohash.org/eosautemlaudantium.png?size=100x100&set=set1",
-	PLAYERS: []Player{
-		{
-			NAME:     "Doe Wimmer",
-			IMAGE:    "https://robohash.org/explicabovelitqui.png?size=100x100&set=set1",
-			LOCATION: "Guozhai"},
-		{
-			NAME:     "Debby Overpool",
-			IMAGE:    "https://robohash.org/ipsamdoloremrepellendus.png?size=100x100&set=set1",
-			LOCATION: "Novo Hamburgo"},
-		{
-			NAME:     "Allissa Flemyng",
-			IMAGE:    "https://robohash.org/rerumrerumdolorum.png?size=100x100&set=set1",
-			LOCATION: "Alençon"},
-		{
-			NAME:     "Nona Langforth",
-			IMAGE:    "https://robohash.org/nesciuntquosaepe.png?size=100x100&set=set1",
-			LOCATION: "Ulricehamn"},
-		{
-			NAME:     "Prescott Mathevon",
-			IMAGE:    "https://robohash.org/quidemsequidolorum.png?size=100x100&set=set1",
-			LOCATION: "María la Baja"}},
-}
-
-var invitations = []Team{sexyPandas,MarcelFC,andyri}
-**/
-
 var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	//setup database connection
+	fmt.Println("GETTING TEAMS")
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
 	db, err := sql.Open("postgres", dbinfo)
@@ -173,23 +41,23 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	CheckErr(err)
 	//get username
 	teams := []Team{}
-	username := mux.Vars(r)["username"]
+	user_id := mux.Vars(r)["user_id"]
 	query := fmt.Sprintf(
-		"SELECT team_name "+
-			"FROM users "+
-			"JOIN team_members on team_members.user_id=users.user_id "+
-			"JOIN team_names on team_members.team_id=team_names.team_id "+
-			"WHERE username='%s';", username)
+		"SELECT team_id, team_name "+
+			"FROM team_members "+
+			"NATURAL INNER JOIN team_names "+
+			"WHERE team_members.user_id=%s;", user_id)
+	fmt.Println(query)
 	rows, err := db.Query(query)
 	for rows.Next() {
 		team := Team{}
-		err := rows.Scan(&team.NAME)
+		err := rows.Scan(&team.ID, &team.NAME)
 		CheckErr(err)
 		query = fmt.Sprintf("SELECT username,users.loc_lat,users.loc_lng "+
-			"from team_members "+
-			"JOIN team_names on team_members.team_id = team_names.team_id "+
+			"FROM team_members "+
 			"JOIN users on team_members.user_id=users.user_id "+
-			"where team_name='%s';", team.NAME)
+			"where team_members.team_id=%d;", team.ID)
+		fmt.Println(query)
 		users, err := db.Query(query)
 		players := []Player{}
 		//for each player retrieve location
@@ -292,7 +160,6 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 type TeamInfo struct {
 	TeamName  string
 	CaptainID	int
-	Invitees	[]int
 }
 
 //todo set up MUX router to take url of user and team to add to database.
@@ -325,7 +192,7 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 		&count)
 	num, err := strconv.Atoi(count)
 	if (num > 0) {
-		fmt.Fprintln(writer, false) // Write whether successful to the sender
+		fmt.Fprintln(writer, -1) // Write whether successful to the sender
 		return
 	}
 
@@ -361,15 +228,6 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	_, err = db.Query(query)
 	CheckErr(err)
 
-	//Add invitations
-	for _, invitee := range teamInfo.Invitees {
-	  query = fmt.Sprintf("INSERT INTO team_invitations VALUES(%d, %d);",
-								team_id, invitee)
-		fmt.Println(query)
-		_, err = db.Query(query)
-		CheckErr(err)
-	}
-
 	//Create message table for team
 	team_name := fmt.Sprintf("_team%d_messages", team_id)
 	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
@@ -378,9 +236,39 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	_, err = db.Query(query)
 	CheckErr(err)
 
-	fmt.Println("TEAM CREATION COMPLETED")
+	fmt.Fprintln(writer, team_id) // Write whethersuccessful to the sender
+})
 
-	fmt.Fprintln(writer, "true") // Write whethersuccessful to the sender
+type TeamInvInfo struct {
+	TeamID  	int
+	Invitees	[]int
+}
+
+var SendInvitations = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	decoder := json.NewDecoder(request.Body)
+	var teamInvInfo TeamInvInfo
+	err = decoder.Decode(&teamInvInfo)
+	if err != nil {
+		panic(err)
+		defer request.Body.Close()
+	}
+
+	//Add invitations
+	for _, invitee := range teamInvInfo.Invitees {
+	  query := fmt.Sprintf("INSERT INTO team_invitations VALUES(%d, %d);",
+								teamInvInfo.TeamID, invitee)
+		fmt.Println(query)
+		_, err = db.Query(query)
+		CheckErr(err)
+	}
+
 })
 
 var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {

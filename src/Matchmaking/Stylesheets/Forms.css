@@ -1,19 +1,41 @@
-#datetime{
-    width:    50%;
-    float:    right;
-    display:  inline;
-    position: relative;
-    z-index:  99999 !important;
-}
 
-#duration{
-    width:    45%;
-    float:    left;
-    display:  inline;
-}
 
 .form_container{
     width:    100%;
     display:  inline;
     float:    left;
+}
+
+#players_container{
+    width:    50%;
+    display:  block;
+    float:    left;
+
+    z-index:  99999 ;
+    position: relative;
+}
+
+#sport_container{
+    width:    50%;
+    display:  block;
+    float:    left;
+
+    z-index:  99998 !important;
+    position: relative;
+}
+
+
+#duration{
+    width:    50%;
+    float:    left;
+    display:  inline;
+    position: relative;
+}
+
+#datetime{
+    width:    47%;
+    float:    right;
+    display:  inline;
+    z-index:  50000;
+    position: relative;
 }

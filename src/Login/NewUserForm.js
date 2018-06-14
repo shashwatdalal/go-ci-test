@@ -19,6 +19,33 @@ const refs = {}
 
 var axios = require('axios');
 
+//Faster than regex
+function isAlphaNumeric(str) {
+  var code, i, len;
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) &&  // numeric (0-9)
+        !(code > 64 && code < 91) &&  // upper alpha (A-Z)
+        !(code > 95 && code < 123)) { // underscore and lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
+};
+
+function isNameValid(str) {
+  var code, i, len;
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (!(code == 32)             &&   // space
+        !(code > 64 && code < 91) &&   // upper alpha (A-Z)
+        !(code > 96 && code < 123) ) { // lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
+};
+
 class NewUserForm extends Component {
   state = {
      username: "",
@@ -74,16 +101,18 @@ class NewUserForm extends Component {
   getUsernameValidationState() {
     var _error = null
     const length = this.state.username.length;
-    if (length >= 30) {
+    if (length >= 30 || !isAlphaNumeric(this.state.username)) {
       return 'error'
     }
   }
 
   getFullNameValidationState() {
     const length = this.state.full_name.length;
-    if (length > 0 && length < 30) return 'success';
-    else if (length > 0) return 'error';
-    return null;
+    if (length > 0 && length < 30 && isNameValid(this.state.full_name)) {
+      return 'success';
+    } else if (length> 0 ) return 'error';
+    return 'error';
+
   }
 
   getDobValidationState() {
@@ -142,6 +171,7 @@ class NewUserForm extends Component {
           pwd2: value
       })
   }
+
 
   // Form components
   usernameGroup() {
