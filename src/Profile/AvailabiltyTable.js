@@ -189,7 +189,7 @@ export default class AvailabiltyTable extends React.Component {
            if (response.data == "fail\n") {
              alert("Failed to update availability, please try again.")
            } else {
-             var tick = document.getElementById('tick');
+             var tick = document.getElementById('tabletick');
              tick.innerHTML = "✓";
              setTimeout(function() {
                tick.innerHTML = "";
@@ -222,7 +222,7 @@ export default class AvailabiltyTable extends React.Component {
         </table>
         <p>Click a box to toggle availability between <span class='selectedtext'>selected</span> and <span class='unselectedtext'>unselected</span></p>
 
-        <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tick'></span></h3></a>
+        <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tabletick'></span></h3></a>
       </div>
     )
   }

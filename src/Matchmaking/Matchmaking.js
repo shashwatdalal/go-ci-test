@@ -7,7 +7,6 @@ import StandaloneSearchBox from "react-google-maps/lib/components/places/Standal
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './Stylesheets/Forms.css';
-import '../Stylesheets/Searchbox.css';
 
 const defaultPosition = {
     lat: 51.509865,
@@ -236,7 +235,8 @@ class Matchmaking extends Component {
                             <DateTimePicker
                               value={this.state.date}
                               onChange={date => this.setState({date:date})}
-                              autocomplete='organization'/>
+                              autocomplete='organization'
+                              required/>
                             <br />
                           </div>
 

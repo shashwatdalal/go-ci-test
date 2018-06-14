@@ -8,6 +8,7 @@ import StandaloneSearchBox from "react-google-maps/lib/components/places/Standal
 
 import './Stylesheets/master.css';
 import './Stylesheets/profile.css';
+import './Stylesheets/Searchbox.css'
 
 const refs = {}
 
@@ -61,7 +62,7 @@ class Profile extends Component {
           if (response.data == "fail\n") {
             alert("Failed to update availability, please try again.")
           } else {
-            var tick = document.getElementById('tick');
+            var tick = document.getElementById('searchtick');
             tick.innerHTML = "✓";
             setTimeout(function() {
               tick.innerHTML = "";
@@ -136,7 +137,7 @@ class Profile extends Component {
           <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
           <div id="changelocbox">
             {this.state.isEditing ?
-              <div><span id='tick'></span><StandaloneSearchBox
+              <div><span id='searchtick'></span><StandaloneSearchBox
                 ref={this.onSearchBoxMounted}
                 bounds={this.bounds}
                 onPlacesChanged={this.onPlacesChanged}
