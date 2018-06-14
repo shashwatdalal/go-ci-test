@@ -4,7 +4,15 @@
     grid-auto-rows: minmax(20px, auto);
     grid-template-areas:
             ".  tn tn tn tn tn tn tn tn "
-            ".  mp mp mp mp mp mp mp . ";
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  mp mp mp mp mp mp mp . "
+            ".  in in in in in in in . "
 }
 
 * {
@@ -32,4 +40,8 @@
 .teamcard {
     background-color: white;
     grid-area: tc;
+}
+
+.AddPlayer {
+    grid-area: in;
 }
