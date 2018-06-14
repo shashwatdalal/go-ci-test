@@ -67,6 +67,13 @@ const sportOptions = [
   { value: 'Archery', label: 'Archery' },
 ]
 
+function roundMinutes(date) {
+
+    date.setHours(date.getHours() + Math.round(date.getMinutes()/60));
+    date.setMinutes(0);
+
+    return date;
+}
 
 class Matchmaking extends Component {
 
@@ -82,7 +89,7 @@ class Matchmaking extends Component {
               lat: 51.509865,
               lng: -0.118092
           },
-          date: new Date(),
+          date: roundMinutes(new Date()),
           Duration: 60,
           places: [],
           teamOptions: []
@@ -234,7 +241,8 @@ class Matchmaking extends Component {
 
                             <DateTimePicker
                               value={this.state.date}
-                              onChange={date => this.setState({date:date})}
+                              onChange={date => this.setState({date:roundMinutes(date)})}
+                              minDate=roundMinutes(new Date())
                               autocomplete='organization'
                               required/>
                             <br />
