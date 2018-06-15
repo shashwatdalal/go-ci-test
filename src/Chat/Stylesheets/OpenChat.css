@@ -1,10 +1,8 @@
 .ChatHeader {
-    margin: 3px;
     height: 4vh;
     z-index: 200;
-    padding-bottom: 3px;
-
-    border-bottom: 3px solid #bfbfbf;
+    /* padding-bottom: 10px;
+    border-bottom: 3px solid #bfbfbf; */
 }
 
 .MessageBox {
@@ -14,7 +12,7 @@
     padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box;
     height: 78vh;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 .MessageBuilder {
@@ -50,6 +48,10 @@
     width: 100%;
     overflow: hidden;
     display: block;
+}
+
+.ChatHeader h1 {
+    margin: 3px;
 }
 
 * {
