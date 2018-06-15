@@ -26,36 +26,38 @@ class OpenChat extends Component {
   }
 
   sendMessage() {
-    var d = new Date();
-    var time = d.getTime();
-    var new_message = {
-      SenderID:ActiveUserID.getID(),
-      SenderName:UserProfile.getName(),
-      Message:this.state.message,
-      Time: time
-    }
-    this.setState({
-      messages: [
-        ...this.state.messages,
-        new_message
-      ],
-      message:""
-    }, () => {
-      this.scrollChat();
-    });
-    var chat_name = (this.props.is_fixture) ?
-                        ("_fixture" + this.props.active_chat.FixtureID)
-                        : ("_team" + this.props.active_chat.UserTeamID)
-    var message_info = {
-      Chat: chat_name,
-      SenderID: ActiveUserID.getID(),
-      Message: this.state.message,
-      Time: time
-    }
-    axios.post("/addMessage", message_info)
-      .then(function(response){
-        console.log(response)
+    if (this.state.message.replace(/\s/g, '').length){ // if not whitespace only
+      var d = new Date();
+      var time = d.getTime();
+      var new_message = {
+        SenderID:ActiveUserID.getID(),
+        SenderName:UserProfile.getName(),
+        Message:this.state.message,
+        Time: time
+      }
+      this.setState({
+        messages: [
+          ...this.state.messages,
+          new_message
+        ],
+        message:""
+      }, () => {
+        this.scrollChat();
       });
+      var chat_name = (this.props.is_fixture) ?
+                          ("_fixture" + this.props.active_chat.FixtureID)
+                          : ("_team" + this.props.active_chat.UserTeamID)
+      var message_info = {
+        Chat: chat_name,
+        SenderID: ActiveUserID.getID(),
+        Message: this.state.message,
+        Time: time
+      }
+      axios.post("/addMessage", message_info)
+        .then(function(response){
+          console.log(response)
+        });
+    }
   }
 
   getChatMessages() {
