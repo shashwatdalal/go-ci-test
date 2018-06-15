@@ -62,7 +62,7 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
   _, err = db.Query(query)
   CheckErr(err)
 
-  var userID = getUserIDFromUsername(userInfo.Username)
+  var userID = GetUserIDFromUsername(userInfo.Username)
 
   // Run query to add user's default availability to DB
   query = fmt.Sprintf("INSERT INTO user_avail VALUES (%d);", userID)
@@ -136,7 +136,7 @@ var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, r
 	// Run query
 
   query := fmt.Sprintf("SELECT COUNT(*) FROM users WHERE UPPER(username)='%s';", strings.ToUpper(username))
-  fmt.Println(query)
+  // fmt.Println(query)
   rows, err := db.Query(query)
   CheckErr(err)
 

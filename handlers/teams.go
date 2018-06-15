@@ -137,7 +137,7 @@ var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, reque
 	pattern := strings.Split(getquery, "=")[1]
 
 	query := fmt.Sprintf("SELECT user_id, username, name FROM users WHERE UPPER(username) LIKE '%s%s';", strings.ToUpper(pattern), "%")
-	fmt.Println(query)
+	// fmt.Println(query)
 	rows, err := db.Query(query)
 	CheckErr(err)
 
@@ -255,7 +255,7 @@ var SendInvitations = http.HandlerFunc(func(writer http.ResponseWriter, request 
 	for _, invitee := range teamInvInfo.Invitees {
 	  query := fmt.Sprintf("INSERT INTO team_invitations VALUES(%d, %d);",
 								teamInvInfo.TeamID, invitee)
-		fmt.Println(query)
+		// fmt.Println(query)
 		_, err = db.Query(query)
 		CheckErr(err)
 	}

@@ -46,7 +46,7 @@ type Fixture struct {
 }
 
 // Query the database for a userID corresponding to a username
-func getUserIDFromUsername(username string) (userID int) {
+func GetUserIDFromUsername(username string) (userID int) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
 		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
@@ -116,7 +116,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 	username := strings.Split(getquery, "=")[1]
 
 	// Obtain userID
-  userID := getUserIDFromUsername(username)
+  userID := GetUserIDFromUsername(username)
 
   // Build queries
 	ordering := "ORDER BY date DESC"
@@ -209,7 +209,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	username := strings.Split(getquery, "=")[1]
 
 	// Obtain userID
-	userID := getUserIDFromUsername(username)
+	userID := GetUserIDFromUsername(username)
 
 	// Build queries
 	ordering := "ORDER BY date DESC"
@@ -331,7 +331,7 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	username := (strings.Split(getquery, "=")[1])
 
 	// Obtain userID
-	userID := getUserIDFromUsername(username)
+	userID := GetUserIDFromUsername(username)
 
   // Run query
 	daysFields := "mon, tues, weds, thurs, fri, sat, sun"
@@ -399,7 +399,7 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	sunBitmap, _ := strconv.ParseInt(sunString, 10, 64)
 
 	// Obtain userID
-	userID := getUserIDFromUsername(username)
+	userID := GetUserIDFromUsername(username)
 
 	// Run query
 	fields := fmt.Sprintf("mon=%d, tues=%d, weds=%d, thurs=%d, fri=%d, sat=%d, sun=%d",
@@ -524,7 +524,7 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 	lng,err := strconv.ParseFloat(fields[2], 64)
 	CheckErr(err)
 
-	var userID int = getUserIDFromUsername(username)
+	var userID int = GetUserIDFromUsername(username)
 
 	// Run query
 	dbfields := fmt.Sprintf("loc_lat=%f, loc_lng=%f", lat, lng)

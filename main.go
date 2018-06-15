@@ -34,6 +34,16 @@ func main() {
 	r.Handle("/removeUpvote", RemoveUpvote).Methods("POST")
 	r.Handle("/removeDownvote", RemoveDownvote).Methods("POST")
 
+	// Chat Page -- Right Panel
+	r.Handle("/getupcominggame", GetFixtureDetails).Methods("GET")
+	r.Handle("/getsubmittedscore", GetSubmittedScore).Methods("GET")
+	r.Handle("/acceptsubmittedscore", AcceptSubmittedScore).Methods("GET")
+	r.Handle("/rejectsubmittedscore", RejectSubmittedScore).Methods("GET")
+	r.Handle("/submitscore", SubmitScore).Methods("GET")
+	r.Handle("/getprevgame", GetPreviousGame).Methods("GET")
+
+
+
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")
 
