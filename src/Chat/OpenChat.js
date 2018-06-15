@@ -68,12 +68,10 @@ class OpenChat extends Component {
         }
         axios.post("/addMessage", message_info)
           .then(function(response){
-    t            console.log(response)
+                console.log(response)
           });
-      }
     }
   }
-
   getChatMessages() {
     var _this = this;
     // Calculate name of chat
