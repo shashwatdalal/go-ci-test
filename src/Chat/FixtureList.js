@@ -31,7 +31,7 @@ class FixtureList extends Component {
     this.setState({
       fixtures: this.state.fixtures.filter(fixture => fixture.AdID != id)
     })
-    // this.props.update_chat_list()
+    this.props.get_chats()
   }
 
   componentDidUpdate(prevProps) {

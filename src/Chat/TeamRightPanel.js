@@ -29,7 +29,7 @@ class TeamRightPanel extends Component {
           </NavItem>
           </Nav>
            {(_this.state.active_key === "1") ? <Matchmaking team_id={_this.props.team_id}/>
-                                : <FixtureList team_id={_this.props.team_id}/>}
+                                : <FixtureList get_chats={() => _this.props.get_chats()} team_id={_this.props.team_id}/>}
         </div>
       );
     }
