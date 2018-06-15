@@ -1,13 +1,6 @@
 {
-<<<<<<< HEAD
-  "main.css": "static/css/main.2f6d6759.css",
-  "main.css.map": "static/css/main.2f6d6759.css.map",
-  "main.js": "static/js/main.1f076aa6.js",
-  "main.js.map": "static/js/main.1f076aa6.js.map"
-=======
-  "main.css": "static/css/main.5ebe359d.css",
-  "main.css.map": "static/css/main.5ebe359d.css.map",
-  "main.js": "static/js/main.83edb249.js",
-  "main.js.map": "static/js/main.83edb249.js.map"
->>>>>>> 804265cb1c8d8f88c0909350e14028d65760e338
+  "main.css": "static/css/main.c04658d5.css",
+  "main.css.map": "static/css/main.c04658d5.css.map",
+  "main.js": "static/js/main.5569a496.js",
+  "main.js.map": "static/js/main.5569a496.js.map"
 }
