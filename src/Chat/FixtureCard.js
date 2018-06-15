@@ -152,7 +152,11 @@ class FixtureCard extends Component {
     	LocLng	 	 : this.props.data.LocLng,
     	Sport   	 : this.props.data.Sport
     }
+    var _this = this;
     axios.post("/acceptAdvert", acceptance)
+          .then(function(result) {
+            _this.props.remove_fixture(_this.props.data.AdID)
+          })
   }
 
   render() {
