@@ -23,10 +23,10 @@
     grid-auto-rows: minmax(20px, auto);
     grid-row-gap: 1vh;
     grid-template-areas:
-      "gb gb gb gb gb gb gb gb gb"
-      "dt dt dt dt dt dt dt dt dt "
-      "vn vn vn vn vn vn  . ac ac "
+      "gb gb gb gb gb gb gb gb gb "
+      "dt dt dt dt vn vn vn vn vn "
       "vt vt vt vt vt vt vt vt vt "
+      "ac ac ac ac ac ac ac ac ac "
 }
 
 .card {
