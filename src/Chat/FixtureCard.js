@@ -143,14 +143,24 @@ class FixtureCard extends Component {
   }
 
   accept_fixture() {
-    alert("Implement accept")
+    var acceptance = {
+      AccepterID : this.props.team_id,
+    	AdID			 : this.props.data.AdID,
+      HostID     : this.props.data.TeamID,
+    	StartTime  : this.props.data.StartTime,
+    	LocLat	 	 : this.props.data.LocLat,
+    	LocLng	 	 : this.props.data.LocLng,
+    	Sport   	 : this.props.data.Sport
+    }
+    alert("test advert accepting")
+    // axios.post("/acceptAdvert", acceptance)
   }
 
   render() {
     return <div class="card">
         <div class="game-brief"> {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs <div class="team-name"> {this.props.data.Name} </div> </div>
-        <div class="venue">Venue: <a href={this.location_link()} target="_blank">{this.state.location}</a></div>
-        <div class="date"> Time:  {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
+        <div class="venue">Venue: <br/> <a href={this.location_link()} target="_blank">{this.state.location}</a></div>
+        <div class="date"> Time: <br/>  {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
         <Button class="accept" onClick={() => this.accept_fixture()}>Accept Ad and Chat to Opposition</Button>
         <div class="voting">
           <div class="voting-header"> {"Let your friends know if you're available by voting below"} </div>

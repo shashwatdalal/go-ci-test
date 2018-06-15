@@ -237,13 +237,10 @@ type Acceptance struct {
   AccepterID int
 	AdID			 int
 	HostID     string
-	Name       string
 	StartTime  string
-	EndTime  	 string
 	LocLat	 	 float64
 	LocLng	 	 float64
 	Sport   	 string
-	NumPlayers int
 }
 
 //todo set up MUX router to take url of user and team to add to database.

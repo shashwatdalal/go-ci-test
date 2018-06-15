@@ -10,11 +10,15 @@
 
 .venue {
   grid-area: vn;
-  text-align: left;
+  text-align: right;
 }
 
 .voting {
   grid-area: vt;
+}
+
+.accept {
+  grid-area: ac;
 }
 
 .card {
