@@ -211,7 +211,7 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	query = fmt.Sprintf("INSERT INTO team_locations (team_id, loc_lat, loc_lng) VALUES (%d, 0.0, 0.0);", team_id)
 	_, err = db.Query(query)
 	CheckErr(err)
-	
+
 	// Add Team Captain
   query = fmt.Sprintf("INSERT INTO team_captains (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
@@ -227,9 +227,9 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	CheckErr(err)
 
 	//Create message table for team
-	team_name := fmt.Sprintf("_team%d_messages", team_id)
+	table_name := fmt.Sprintf("_team%d_messages", team_id)
 	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
-	query = fmt.Sprintf("CREATE TABLE %s (%s);", team_name, columns)
+	query = fmt.Sprintf("CREATE TABLE %s (%s);", table_name, columns)
 	_, err = db.Query(query)
 	CheckErr(err)
 

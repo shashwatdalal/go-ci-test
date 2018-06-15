@@ -240,49 +240,6 @@ var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *
 
 })
 
-
-type Acceptance struct {
-  AccepterID int
-	AdID			 int
-	HostID     string
-	Name       string
-	StartTime  string
-	EndTime  	 string
-	LocLat	 	 float64
-	LocLng	 	 float64
-	Sport   	 string
-	NumPlayers int
-}
-
-//todo set up MUX router to take url of user and team to add to database.
-var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
-	decoder := json.NewDecoder(request.Body)
-	var acceptance Acceptance
-	err = decoder.Decode(&acceptance)
-	if err != nil {
-		panic(err)
-		defer request.Body.Close()
-	}
-
-  // Delete from the promoted_fixtures table
-	query := fmt.Sprintf("DELETE FROM promoted_fixtures WHERE advert_id=%d;", acceptance.AdID)
-
-	// Delete from the promoted_fixtures table
-	query = fmt.Sprintf("DELETE FROM advertisements WHERE advert_id=%d;", acceptance.AdID)
-
-
-  _, err = db.Query(query)
-  CheckErr(err)
-
-})
-
 var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -330,4 +287,65 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+})
+
+
+type Acceptance struct {
+  AccepterID int
+	AdID			 int
+	HostID     string
+	Name       string
+	StartTime  string
+	EndTime  	 string
+	LocLat	 	 float64
+	LocLng	 	 float64
+	Sport   	 string
+	NumPlayers int
+}
+
+//todo set up MUX router to take url of user and team to add to database.
+var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	decoder := json.NewDecoder(request.Body)
+	var acceptance Acceptance
+	err = decoder.Decode(&acceptance)
+	if err != nil {
+		panic(err)
+		defer request.Body.Close()
+	}
+
+  // Delete from the promoted_fixtures table
+	query := fmt.Sprintf("DELETE FROM promoted_fixtures WHERE advert_id=%d;", acceptance.AdID)
+	_, err = db.Query(query)
+  CheckErr(err)
+
+	// Delete from the promoted_fixtures table
+	query = fmt.Sprintf("DELETE FROM advertisements WHERE advert_id=%d;", acceptance.AdID)
+	_, err = db.Query(query)
+  CheckErr(err)
+
+	// Add new fixture
+	query = fmt.Sprintf("INSERT INTO upcoming_fixtures " +
+											"(fixture_id, home_id, away_id, sport, loc_lat, loc_lng, date" +
+											" VALUES(%d, %d, '%s', '%f', '%f');",
+											acceptance.AdID, acceptance.HostID, acceptance.AccepterID, acceptance.Sport,
+											acceptance.LocLat, acceptance.LocLng, acceptance.StartTime)
+	_, err = db.Query(query)
+	CheckErr(err)
+
+
+	//Create message table for team
+	table_name := fmt.Sprintf("_fixture%d_messages", acceptance.AdID)
+	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
+	query = fmt.Sprintf("CREATE TABLE %s (%s);", table_name, columns)
+	_, err = db.Query(query)
+	CheckErr(err)
+
+
 })
