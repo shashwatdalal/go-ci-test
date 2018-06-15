@@ -7,7 +7,11 @@ import (
 	"github.com/gorilla/mux"
 	. "./handlers"
 )
+
 func main() {
+	ConnectToDatabase()
+	defer Database.Close()
+
 	r := mux.NewRouter()
 
 	// Profile page
@@ -26,11 +30,24 @@ func main() {
 
 	// Chat Page -- Promoted fixtures
 	r.Handle("/getPromotedFixtures", GetPromotedFixtures).Methods("GET")
-	r.Handle("/GetUpvoteTally", GetUpvoteTally).Methods("GET")
-	r.Handle("/GetDownvoteTally", GetDownvoteTally).Methods("GET")
+	r.Handle("/getUpvoteTally", GetUpvoteTally).Methods("GET")
+	r.Handle("/getDownvoteTally", GetDownvoteTally).Methods("GET")
 	r.Handle("/getVoteStatus", GetVoteStatus).Methods("GET")
 	r.Handle("/addUpvote", AddUpvote).Methods("POST")
-	r.Handle("/AddDownvote", AddDownvote).Methods("POST")
+	r.Handle("/addDownvote", AddDownvote).Methods("POST")
+	r.Handle("/removeUpvote", RemoveUpvote).Methods("POST")
+	r.Handle("/removeDownvote", RemoveDownvote).Methods("POST")
+	r.Handle("/acceptAdvert", AcceptAdvert).Methods("POST")
+
+	// Chat Page -- Right Panel
+	r.Handle("/getupcominggame", GetFixtureDetails).Methods("GET")
+	r.Handle("/getsubmittedscore", GetSubmittedScore).Methods("GET")
+	r.Handle("/acceptsubmittedscore", AcceptSubmittedScore).Methods("GET")
+	r.Handle("/rejectsubmittedscore", RejectSubmittedScore).Methods("GET")
+	r.Handle("/submitscore", SubmitScore).Methods("GET")
+	r.Handle("/getprevgame", GetPreviousGame).Methods("GET")
+
+
 
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")

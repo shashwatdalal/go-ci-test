@@ -3,7 +3,6 @@ package handlers
 import (
 	"net/http"
 
-	"database/sql"
   _ "github.com/lib/pq"
 	"encoding/json"
 	"fmt"
@@ -29,13 +28,6 @@ type ChatInfo struct {
 }
 
 var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain user id (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	user_id := (strings.Split(getquery, "=")[1])
@@ -49,7 +41,7 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 	columns := "team_names.team_id, team_names.team_name"
 	join := "team_members INNER JOIN team_names ON team_names.team_id=team_members.team_id"
   query := fmt.Sprintf("SELECT %s FROM %s where user_id=%s;", columns, join, user_id)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 	for rows.Next() {
 		data := ChatInfo{}
@@ -70,7 +62,7 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 		second_join := "INNER JOIN team_names a ON f.away_id=a.team_id"
   	query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE home_id=%d OR away_id=%d;",
 			 									columns, fix_table, first_join, second_join, team_id, team_id)
-  	rows, err := db.Query(query)
+  	rows, err := Database.Query(query)
   	CheckErr(err)
 		var home_id int
 		var away_id int
@@ -105,13 +97,6 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 })
 
 var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	chat_id := (strings.Split(getquery, "=")[1])
@@ -124,8 +109,8 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 
   query := fmt.Sprintf("SELECT %s FROM %s AS m %s %s",
 		 						columns, chat_db_name, join, order)
-	fmt.Println(query)
-  rows, err := db.Query(query)
+	// fmt.Println(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	var result []Message
@@ -175,16 +160,9 @@ func escape(source string) string {
 }
 
 var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
   var message Message
-  err = decoder.Decode(&message)
+  err := decoder.Decode(&message)
   if err != nil {
       panic(err)
 			defer request.Body.Close()
@@ -194,28 +172,20 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
 	// Run query
   query := fmt.Sprintf("INSERT INTO %s (%s) VALUES('%d', '%s', LOCALTIMESTAMP);",
 							chat_name, columns, message.SenderID, escape(message.Message))
-	fmt.Println(query)
-  _, err = db.Query(query)
+	// fmt.Println(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 })
 
 
 var GetTeamMembers = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	team_id := strings.Split(getquery, "=")[1]
 
 	// Run query
   query := fmt.Sprintf("SELECT team_members.user_id FROM team_members WHERE team_members.team_id=%s;", team_id)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	var result []int

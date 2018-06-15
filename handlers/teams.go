@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/url"
 	"strings"
-	"database/sql"
 	. "../utils"
 	_ "github.com/lib/pq"
 	"strconv"
@@ -32,12 +31,6 @@ type Location struct {
 }
 
 var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	//setup database connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
 	//get username
 	teams := []Team{}
 	user_id := mux.Vars(r)["user_id"]
@@ -46,7 +39,9 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			"FROM team_members "+
 			"NATURAL INNER JOIN team_names "+
 			"WHERE team_members.user_id=%s;", user_id)
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
+	CheckErr(err)
+
 	for rows.Next() {
 		team := Team{}
 		err := rows.Scan(&team.ID, &team.NAME)
@@ -55,7 +50,7 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			"FROM team_members "+
 			"JOIN users on team_members.user_id=users.user_id "+
 			"where team_members.team_id=%d;", team.ID)
-		users, err := db.Query(query)
+		users, err := Database.Query(query)
 		players := []Player{}
 		//for each player retrieve location
 		for users.Next() {
@@ -75,12 +70,6 @@ var GetTeams = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 })
 
 var GetInvitations = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	//setup database connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
 	//get username
 	teams := []Team{}
 	username := mux.Vars(r)["username"]
@@ -89,7 +78,10 @@ var GetInvitations = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reques
 		"JOIN team_invitations on users.user_id=team_invitations.player_id "+
 		"JOIN team_names on team_names.team_id=team_invitations.team_id "+
 		"WHERE username='%s'", username)
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
+	CheckErr(err)
+
+
 	for rows.Next() {
 		team := Team{}
 		err := rows.Scan(&team.NAME)
@@ -99,7 +91,7 @@ var GetInvitations = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reques
 			"JOIN team_names on team_members.team_id = team_names.team_id "+
 			"JOIN users on team_members.user_id=users.user_id "+
 			"WHERE team_name='%s';", team.NAME)
-		users, err := db.Query(query)
+		users, err := Database.Query(query)
 		players := []Player{}
 		//for each player retrieve location
 		for users.Next() {
@@ -125,20 +117,13 @@ type QueryMatch struct {
 }
 
 var GetUsernameMatches = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain pattern to match (query is of the form ?pattern=)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	pattern := strings.Split(getquery, "=")[1]
 
 	query := fmt.Sprintf("SELECT user_id, username, name FROM users WHERE UPPER(username) LIKE '%s%s';", strings.ToUpper(pattern), "%")
-	fmt.Println(query)
-	rows, err := db.Query(query)
+	// fmt.Println(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	var result []QueryMatch
@@ -160,16 +145,9 @@ type TeamInfo struct {
 
 //todo set up MUX router to take url of user and team to add to database.
 var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var teamInfo TeamInfo
-	err = decoder.Decode(&teamInfo)
+	err := decoder.Decode(&teamInfo)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -178,7 +156,7 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	// Check that team name is unique
 	query := fmt.Sprintf("SELECT COUNT(*) FROM team_names WHERE UPPER(team_name)='%s';",
 									strings.ToUpper(teamInfo.TeamName))
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Parse count
@@ -195,37 +173,44 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	// Add Team Name Record
 	query = fmt.Sprintf("INSERT INTO team_names (team_name) VALUES('%s');",
 							teamInfo.TeamName);
-	rows, err = db.Query(query)
+	rows, err = Database.Query(query)
 	CheckErr(err)
 
 	// Get ID for Team
 	query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_name='%s';",
 									teamInfo.TeamName)
-	rows, err = db.Query(query)
+	rows, err = Database.Query(query)
 	rows.Next()
 	var team_id int
 	err = rows.Scan(&team_id)
 	CheckErr(err)
 
+	// Add team to team_locations
+	query = fmt.Sprintf("INSERT INTO team_locations (team_id, loc_lat, loc_lng) VALUES (%d, 0.0, 0.0);", team_id)
+	_, err = Database.Query(query)
+	CheckErr(err)
 
 	// Add Team Captain
   query = fmt.Sprintf("INSERT INTO team_captains (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
+
+	RecalculateTeamLocation(team_id)
 
 	// Add captain as team member
   query = fmt.Sprintf("INSERT INTO team_members (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 
 	//Create message table for team
-	team_name := fmt.Sprintf("_team%d_messages", team_id)
+	table_name := fmt.Sprintf("_team%d_messages", team_id)
 	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
-	query = fmt.Sprintf("CREATE TABLE %s (%s);", team_name, columns)
-	_, err = db.Query(query)
+	query = fmt.Sprintf("CREATE TABLE %s (%s);", table_name, columns)
+	_, err = Database.Query(query)
 	CheckErr(err)
+
 
 	fmt.Fprintln(writer, team_id) // Write whethersuccessful to the sender
 })
@@ -236,16 +221,9 @@ type TeamInvInfo struct {
 }
 
 var SendInvitations = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var teamInvInfo TeamInvInfo
-	err = decoder.Decode(&teamInvInfo)
+	err := decoder.Decode(&teamInvInfo)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -255,36 +233,30 @@ var SendInvitations = http.HandlerFunc(func(writer http.ResponseWriter, request 
 	for _, invitee := range teamInvInfo.Invitees {
 	  query := fmt.Sprintf("INSERT INTO team_invitations VALUES(%d, %d);",
 								teamInvInfo.TeamID, invitee)
-		fmt.Println(query)
-		_, err = db.Query(query)
+		// fmt.Println(query)
+		_, err = Database.Query(query)
 		CheckErr(err)
 	}
 
 })
 
 var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
 	vars := mux.Vars(request)
 
 	//get user-id and team-id
 	var userId, teamId int
 	query := fmt.Sprintf("select user_id " +
 		"FROM users where username='%s'",vars["username"])
-	err = db.QueryRow(query).Scan(&userId)
+	err := Database.QueryRow(query).Scan(&userId)
 	CheckErr(err)
 	query = fmt.Sprintf("select team_id " +
 		"FROM team_names where team_name='%s'",vars["teamname"])
-	err = db.QueryRow(query).Scan(&teamId)
+	err = Database.QueryRow(query).Scan(&teamId)
 	CheckErr(err)
 	//insert into team_members
 	query = fmt.Sprintf("INSERT INTO team_members VALUES('%d', '%d');",
 		teamId, userId)
-	_,err = db.Query(query)
+	_,err = Database.Query(query)
 	CheckErr(err)
 
 	//remove team from team_invitations
@@ -292,7 +264,7 @@ var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request 
 		"DELETE FROM team_invitations " +
 		"WHERE team_id=%d AND player_id=%d",
 		teamId, userId)
-	_,err = db.Query(query)
+	_,err = Database.Query(query)
 	CheckErr(err)
 
 	//send updated team
@@ -302,7 +274,7 @@ var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request 
 		"JOIN team_names on team_members.team_id = team_names.team_id "+
 		"JOIN users on team_members.user_id=users.user_id "+
 		"WHERE team_name='%s';", vars["teamname"])
-	users, err := db.Query(query)
+	users, err := Database.Query(query)
 	players := []Player{}
 	//for each player retrieve location
 	for users.Next() {
@@ -324,23 +296,17 @@ var AddPlayerToTeam = http.HandlerFunc(func(writer http.ResponseWriter, request 
 
 
 var DeleteInvitation = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
 	vars := mux.Vars(request)
 
 	//get user-id and team-id
 	var userId, teamId int
 	query := fmt.Sprintf("select user_id "+
 		"FROM users where username='%s'", vars["username"])
-	err = db.QueryRow(query).Scan(&userId)
+	err := Database.QueryRow(query).Scan(&userId)
 	CheckErr(err)
 	query = fmt.Sprintf("select team_id "+
 		"FROM team_names where team_name='%s'", vars["teamname"])
-	err = db.QueryRow(query).Scan(&teamId)
+	err = Database.QueryRow(query).Scan(&teamId)
 	CheckErr(err)
 
 	//remove team from team_invitations
@@ -348,7 +314,7 @@ var DeleteInvitation = http.HandlerFunc(func(writer http.ResponseWriter, request
 		"DELETE FROM team_invitations " +
 			"WHERE team_id=%d AND player_id=%d",
 		teamId, userId)
-	_,err = db.Query(query)
+	_,err = Database.Query(query)
 	CheckErr(err)
 	writer.WriteHeader(http.StatusOK)
 })

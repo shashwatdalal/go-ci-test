@@ -326,7 +326,7 @@ class NewUserForm extends Component {
         axios
           .get(req)
           .then(function(result) {
-            console.log(result.data);
+            // console.log(result.data);
             if (!result.data) {
               _this.finishCreation()
             } else {

@@ -11,7 +11,6 @@ class Header extends Component {
                     <table>
                       <tr>
                         <td><Link to="/profile">Profile</Link></td>
-                        <td><Link to="/matchmaking">Matchmaking</Link></td>
                         <td><Link to="/teams">Teams</Link></td>
                         <td><Link to="/chat">Chat</Link></td>
                       </tr>

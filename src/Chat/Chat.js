@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ChatList from './ChatList';
 import OpenChat from './OpenChat';
 import ChatRightPanel from './ChatRightPanel';
-import '../Stylesheets/Chat.css';
+import './Stylesheets/Chat.css';
 
 class Chat extends Component {
   state = {

@@ -7,7 +7,7 @@ export const fetchTeams = () => dispatch => {
     fetch(serverDomain + "/getTeams/" + ActiveUserID.getID())
         .then(res => res.json())
         .then(teams => {
-          console.log(teams)
+          // console.log(teams)
             dispatch({
                 type: FETCH_TEAMS,
                 payload: teams

@@ -26,7 +26,7 @@ class OpenChat extends Component {
   }
 
   sendMessage() {
-    if (this.state.message.replace(/\s/g, '').length){ // if not whitespace only
+    if (this.state.message.replace(/\s/g, '').length){
       var d = new Date();
       var time = d.getTime();
       var new_message = {
@@ -55,8 +55,22 @@ class OpenChat extends Component {
       }
       axios.post("/addMessage", message_info)
         .then(function(response){
-          console.log(response)
+          // console.log(response)
         });
+        var chat_name = (this.props.is_fixture) ?
+                            ("_fixture" + this.props.active_chat.FixtureID)
+                            : ("_team" + this.props.active_chat.UserTeamID)
+        var message_info = {
+          Chat: chat_name,
+          SenderID: ActiveUserID.getID(),
+          Message: this.state.message,
+          Time: time
+        }
+        axios.post("/addMessage", message_info)
+          .then(function(response){
+            console.log(response)
+          });
+      }
     }
   }
 

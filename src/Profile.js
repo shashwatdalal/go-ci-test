@@ -45,7 +45,7 @@ class Profile extends Component {
       var lastvisited = places[places.length - 1];
       var newlat = lastvisited.geometry.location.lat()
       var newlng = lastvisited.geometry.location.lng()
-      console.log(lastvisited.formatted_address)
+      // console.log(lastvisited.formatted_address)
       var object = {
           position: {
               lat: newlat,
@@ -54,7 +54,7 @@ class Profile extends Component {
           location: lastvisited.formatted_address
       };
       this.setState(object);
-      console.log(this.state)
+      // console.log(this.state)
       axios.get(
         '/updateuserloc?username=' + UserProfile.getName()
         + '&lat=' + newlat
@@ -83,7 +83,7 @@ class Profile extends Component {
 
            axios.get(request_url)
                  .then(function(result) {
-                   console.log(result);
+                   // console.log(result);
                    _this.setState({location: result.data.results[0].formatted_address});
                  })
          });

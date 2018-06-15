@@ -1,6 +1,6 @@
-.team {
+.game-brief {
   text-align: left;
-  grid-area: tm;
+  grid-area: gb;
 }
 
 .date {
@@ -13,17 +13,12 @@
   text-align: right;
 }
 
-.upvote {
-  grid-area: uv;
+.voting {
+  grid-area: vt;
 }
 
-.downvote {
-  grid-area: dv;
-}
-
-.sport {
-  text-align: left;
-  grid-area: sp;
+.accept {
+  grid-area: ac;
 }
 
 .card {
@@ -32,56 +27,67 @@
     grid-auto-rows: minmax(20px, auto);
     grid-row-gap: 1vh;
     grid-template-areas:
-      "tm tm tm tm tm .  sp sp sp"
-      "dt dt dt dt dt dt dt dt dt"
-      "vn vn vn vn vn .  .  uv dv"
+      "gb gb gb gb gb gb gb gb gb "
+      "dt dt dt dt vn vn vn vn vn "
+      "vt vt vt vt vt vt vt vt vt "
+      "ac ac ac ac ac ac ac ac ac "
 }
 
 .card {
     padding: 10px;
-    border: 1px solid #ccc;
-    margin: 0 0 10px 0;
+    border-top: 3px solid #bfbfbf;
+    border-bottom: 3px solid #bfbfbf;
+    margin: 0;
     text-decoration: none;
     color: black;
 }
 
-h1 {
-    padding-bottom: 0.3em;
-    margin: 0;
-    border: 0;
+.game-brief {
+  font-size: 1.4vw;
 }
 
-.arrow-up, .arrow-up-selected {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+.team-name {
+  font-size: 1.4vw;
+  display: inline;
+  font-weight: bold;
 }
 
-.arrow-up {
-  border-bottom: 10px solid #e6ffe6;
+.voting-header {
+  font-size: 0.9vw;
+  width: 100%;
+  border-bottom: 3px solid  #cccccc;
 }
 
-.arrow-up-selected {
-  border-bottom: 10px solid #00ff00;
+.vote-up {
+  border-bottom: 3px solid  #cccccc;
+  font-size: 1.4vw
 }
 
-.arrow-down, .arrow-down-selected {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+.vote-up-selected {
+  border-bottom: 3px solid #009900;
+  font-size: 1.4vw;
+  font-weight: bold;
 }
 
-.arrow-down {
-  border-top: 10px solid #ffcccc;
+.vote-down {
+  border-bottom: 3px solid #cccccc;
+  font-size: 1.4vw;
 }
 
-.arrow-down-selected {
-  border-top: 10px solid #ff0000;
+.vote-down:hover, .vote-down-selected:hover, .vote-up:hover, .vote-up-selected:hover {
+  background-color: #d9d9d9
 }
 
-.arrow-up, .arrow-down, .arrow-up-selected, .arrow-down-selected {
+.vote-down-selected {
+  border-bottom: 3px solid #ff0000;
+  font-size: 1.4vw;
+  font-weight: bold
+}
+
+.vote-up, .vote-down, .vote-up-selected, .vote-down-selected {
+  margin-left: 1vw;
+  padding-left: 0.3vw;
+  padding-right: 0.3vw;
   cursor: pointer;
   display: inline-block;
 }

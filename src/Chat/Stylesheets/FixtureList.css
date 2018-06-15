@@ -2,3 +2,9 @@
     border-left: 1px solid #ccc;
     height: 100%
 }
+
+h3.FixtureList {
+  padding-top: 0;
+  padding-bottom: 0.1vh;
+  font-size: 2vh;
+}
