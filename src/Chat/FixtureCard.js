@@ -141,11 +141,16 @@ class FixtureCard extends Component {
     return "http://maps.google.com/maps?q=" + this.props.data.LocLat + "," + this.props.data.LocLng
   }
 
+  accept_fixture() {
+    alert("Implement accept")
+  }
+
   render() {
     return <div class="card">
         <div class="game-brief"> {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs <div class="team-name"> {this.props.data.Name} </div> </div>
         <div class="venue">Venue: <a href={this.location_link()} target="_blank">{this.state.location}</a></div>
         <div class="date"> Time:  {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
+        <Button class="accept" onClick={() => this.accept_fixture()}>Accept Ad and Chat to Opposition</Button>
         <div class="voting">
           <div class="voting-header"> {"Let your friends know if you're available by voting below"} </div>
           <div class={this.state.upvoted ? 'vote-up-selected': 'vote-up'}

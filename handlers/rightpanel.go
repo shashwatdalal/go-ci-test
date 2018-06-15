@@ -182,6 +182,11 @@ var AcceptSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, re
 		query = fmt.Sprintf("INSERT INTO previous_fixtures VALUES (%s);", value)
 		_, err = db.Query(query)
 		CheckErr(err)
+
+		// Remove entry from upcoming fixtures
+		query = fmt.Sprintf("DELETE FROM upcoming_fixtures WHERE fixture_id=%s;", fixtureID)
+		_, err = db.Query(query)
+		CheckErr(err)
 	} else {
 		//Something has gone very wrong
 		fmt.Println("chat.go cant find fixture, ", fixtureID)
