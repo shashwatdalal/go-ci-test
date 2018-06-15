@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Stylesheets/FixtureCard.css';
 import ActiveUserID from '../Profile/ActiveUserID'
-import {Button} from 'react-bootstrap' 
+import {Button} from 'react-bootstrap'
 
 var axios = require('axios');
 
@@ -149,8 +149,8 @@ class FixtureCard extends Component {
   render() {
     return <div class="card">
         <div class="game-brief"> {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs <div class="team-name"> {this.props.data.Name} </div> </div>
-        <div class="venue">Venue: <a href={this.location_link()} target="_blank">{this.state.location}</a></div>
-        <div class="date"> Time:  {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
+        <div class="venue">Venue: <br/> <a href={this.location_link()} target="_blank">{this.state.location}</a></div>
+        <div class="date"> Time: <br/>  {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
         <Button class="accept" onClick={() => this.accept_fixture()}>Accept Ad and Chat to Opposition</Button>
         <div class="voting">
           <div class="voting-header"> {"Let your friends know if you're available by voting below"} </div>
