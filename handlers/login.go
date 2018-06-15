@@ -8,7 +8,6 @@ import (
     "net/url"
     "strings"
     "net/http"
-    "database/sql"
     _ "github.com/lib/pq"
     "encoding/json"
     . "../utils"
@@ -35,16 +34,9 @@ type UserLoginReturn struct {
 }
 
 var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-  // Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-  defer db.Close()
-  CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
   var userInfo UserInfoInput
-  err = decoder.Decode(&userInfo)
+  err := decoder.Decode(&userInfo)
 
   if err != nil {
       panic(err)
@@ -59,14 +51,14 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 							fields, userInfo.Username, userInfo.Name, userInfo.Dob,
               userInfo.LocLat, userInfo.LocLng, hashed_pwd, "100")
   fmt.Print(query)
-  _, err = db.Query(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 
   var userID = GetUserIDFromUsername(userInfo.Username)
 
   // Run query to add user's default availability to DB
   query = fmt.Sprintf("INSERT INTO user_avail VALUES (%d);", userID)
-  _, err = db.Query(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 
   fmt.Fprintln(writer, userID)
@@ -75,23 +67,16 @@ var AddUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
 
 var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-  // Set up connection
-  dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-    DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-  defer db.Close()
-  CheckErr(err)
-
   decoder := json.NewDecoder(request.Body)
   var userLoginAttempt UserLoginAttempt
-  err = decoder.Decode(&userLoginAttempt)
+  err := decoder.Decode(&userLoginAttempt)
   if err != nil {
       panic(err)
       defer request.Body.Close()
   }
 	// Run query
   query := fmt.Sprintf("SELECT user_id, pwd_hash FROM users WHERE username='%s';", userLoginAttempt.Username)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -122,13 +107,6 @@ var GetLoginSuccess = http.HandlerFunc(func (writer http.ResponseWriter, request
 })
 
 var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-  // Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-  defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := strings.Split(getquery, "=")[1]
@@ -137,7 +115,7 @@ var DoesMatchingUserExist = http.HandlerFunc(func (writer http.ResponseWriter, r
 
   query := fmt.Sprintf("SELECT COUNT(*) FROM users WHERE UPPER(username)='%s';", strings.ToUpper(username))
   // fmt.Println(query)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result

@@ -3,7 +3,6 @@ package handlers
 import (
 	"net/http"
 
-	"database/sql"
   _ "github.com/lib/pq"
 	"encoding/json"
 	"fmt"
@@ -12,11 +11,6 @@ import (
 	"strconv"
 	. "../utils"
 )
-
-/*
- * TODO: Refactor merging for GetUserFixtures
- * TODO: Refactor common database behaviour
- */
 
 type UserInfo struct {
 	LocLat  float64
@@ -47,16 +41,9 @@ type Fixture struct {
 
 // Query the database for a userID corresponding to a username
 func GetUserIDFromUsername(username string) (userID int) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain userID
 	query := fmt.Sprintf("SELECT user_id FROM users WHERE username='%s'", username)
-  row, err := db.Query(query)
+  row, err := Database.Query(query)
   CheckErr(err)
 
   if (row.Next()) {
@@ -72,20 +59,13 @@ func GetUserIDFromUsername(username string) (userID int) {
 
 // Get the user information for the user specified in the url
 var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := (strings.Split(getquery, "=")[1])
 
 	// Run query
   query := fmt.Sprintf("SELECT loc_lat, loc_lng FROM users WHERE username='%s';", username)
-  rows, _ := db.Query(query)
+  rows, _ := Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -104,13 +84,6 @@ var GetUserInfo = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
 // Get the fixtures for the user specified in the url
 var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain username (query is of the form ?username=name)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := strings.Split(getquery, "=")[1]
@@ -138,7 +111,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 		                        awayFields, tables, awayTableJoinCond, userID, ordering)
 
   // Run the query for home games
-	rows, err := db.Query(homeQuery)
+	rows, err := Database.Query(homeQuery)
 	CheckErr(err)
 
 	// Initialise the json response for all home games
@@ -166,7 +139,7 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 		teamHome = append(teamHome, data)
 	}
 
-	rows, err = db.Query(awayQuery)
+	rows, err = Database.Query(awayQuery)
 	CheckErr(err)
 
 	// Initialise the json response for all away games
@@ -207,13 +180,6 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 
 // Get the fixtures for the user specified in the url
 var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain username (query is of the form ?username=name)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := strings.Split(getquery, "=")[1]
@@ -241,7 +207,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 														awayFields, tables, awayTableJoinCond, userID, ordering)
 
 	// Run the query for home games
-	rows, err := db.Query(homeQuery)
+	rows, err := Database.Query(homeQuery)
 	CheckErr(err)
 
 	// Initialise the json response for all home games
@@ -271,7 +237,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 		teamHome = append(teamHome, data)
 	}
 
-	rows, err = db.Query(awayQuery)
+	rows, err = Database.Query(awayQuery)
 	CheckErr(err)
 
 	// Initialise the json response for all away games
@@ -338,14 +304,6 @@ func merge(list1 *[]Fixture, list2 *[]Fixture, result *[]Fixture) {
 
 // Get the availability for the user specified in the url
 var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-	var jsonText = []byte(`[]`)
-
 	// Obtain username (query is of the form ?username=name)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := (strings.Split(getquery, "=")[1])
@@ -357,11 +315,12 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 	daysFields := "mon, tues, weds, thurs, fri, sat, sun"
 	query := fmt.Sprintf("SELECT %s FROM user_avail WHERE user_id=%d;",
 		                    daysFields, userID)
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	// Initialise the json response for the result
 	var result [7]int
+	var jsonText = []byte(`[]`)
 	err = json.Unmarshal([]byte(jsonText), &result)
 
 	// Add the *only* database hit to the result
@@ -386,13 +345,6 @@ var GetUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, req
 
 // Update the user availability for the user and values specified in the url
 var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain the bitmaps (query is of the form ?username=name&fst=x&snd=y)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	username := strings.Split((strings.Split(getquery, "=")[1]), "&")[0]
@@ -427,7 +379,7 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 	query := fmt.Sprintf("UPDATE user_avail SET %s WHERE user_id=%d",
 												fields, userID)
 
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 
 	if err == nil {
@@ -441,16 +393,9 @@ var UpdateUserAvailability = http.HandlerFunc(func (writer http.ResponseWriter, 
 
 
 func recalculateUsersTeamAvailabilities(userID int) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	query := fmt.Sprintf("SELECT team_id FROM team_members WHERE user_id=%d;", userID)
 
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	for (rows.Next()) {
@@ -462,17 +407,10 @@ func recalculateUsersTeamAvailabilities(userID int) {
 
 
 func RecalculateTeamAvailability(team_id int) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	fields := "mon, tues, weds, thurs, fri, sat, sun"
 		query := fmt.Sprintf("SELECT %s FROM user_avail NATURAL INNER JOIN team_members WHERE team_id=%d;", fields, team_id)
 
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	var totalMon   int64 = 0xFFFFFFFF
@@ -515,20 +453,13 @@ func RecalculateTeamAvailability(team_id int) {
 	query = fmt.Sprintf("UPDATE team_avail SET %s WHERE team_id=%d",
 											  fields, team_id)
 
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 }
 
 
 // Update the user location for the user and values specified in the url
 var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain the new location (query is of the form ?username=name&lat=x&lng=y)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	query := strings.Split(getquery, "&")
@@ -551,7 +482,7 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 	dbquery := fmt.Sprintf("UPDATE users SET %s WHERE user_id=%d",
 											  dbfields, userID)
 
-	_, err = db.Query(dbquery)
+	_, err = Database.Query(dbquery)
 	CheckErr(err)
 
 	if err == nil {
@@ -565,16 +496,9 @@ var UpdateUserLocation = http.HandlerFunc(func (writer http.ResponseWriter, requ
 
 
 func recalculateUsersTeamLocations(userID int) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	query := fmt.Sprintf("SELECT team_id FROM team_members WHERE user_id=%d;", userID)
 
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	for (rows.Next()) {
@@ -586,16 +510,9 @@ func recalculateUsersTeamLocations(userID int) {
 
 
 func RecalculateTeamLocation(team_id int) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	query := fmt.Sprintf("SELECT loc_lat, loc_lng FROM users NATURAL INNER JOIN team_members WHERE team_id=%d;", team_id)
 
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	var totalLat float64 = 0.0
@@ -615,6 +532,6 @@ func RecalculateTeamLocation(team_id int) {
 	query = fmt.Sprintf("UPDATE team_locations SET loc_lat=%f, loc_lng=%f WHERE team_id=%d;",
 	                    (totalLat / cnt), (totalLong / cnt), team_id)
 
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 }

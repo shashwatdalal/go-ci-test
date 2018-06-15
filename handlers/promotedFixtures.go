@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"database/sql"
   _ "github.com/lib/pq"
 	"encoding/json"
 	"fmt"
@@ -24,13 +23,6 @@ type PromotedAdvertisement struct {
 }
 
 var GetUpvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	params := strings.Split( strings.Split(getquery, "?")[0], "&" )
@@ -40,7 +32,7 @@ var GetUpvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, request 
 	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE team_id=%s AND advert_id=%s",
 		 						team_id, advert_id)
 	fmt.Println(query)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -53,13 +45,6 @@ var GetUpvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, request 
 })
 
 var GetDownvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	params := strings.Split( strings.Split(getquery, "?")[0], "&" )
@@ -69,7 +54,7 @@ var GetDownvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, reques
 	query := fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE team_id=%s AND advert_id=%s",
 		 						team_id, advert_id)
 	fmt.Println(query)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -82,13 +67,6 @@ var GetDownvoteTally = http.HandlerFunc(func (writer http.ResponseWriter, reques
 })
 
 var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	params := strings.Split( strings.Split(getquery, "?")[0], "&" )
@@ -100,7 +78,7 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
 	query := fmt.Sprintf("SELECT COUNT(*) FROM upvotes WHERE user_id=%s AND team_id=%s AND advert_id=%s",
 		 						user_id, team_id, advert_id)
 	fmt.Println(query)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -117,7 +95,7 @@ var GetVoteStatus = http.HandlerFunc(func (writer http.ResponseWriter, request *
   query = fmt.Sprintf("SELECT COUNT(*) FROM downvotes WHERE user_id=%s AND team_id=%s AND advert_id=%s",
 		 						user_id, team_id, advert_id)
 	fmt.Println(query)
-  rows, err = db.Query(query)
+  rows, err = Database.Query(query)
   CheckErr(err)
 
 	// Add the only database hit to the result
@@ -141,16 +119,9 @@ type Vote struct {
 
 //todo set up MUX router to take url of user and team to add to database.
 var AddUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var vote Vote
-	err = decoder.Decode(&vote)
+	err := decoder.Decode(&vote)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -159,23 +130,16 @@ var AddUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.
   // Insert into the upvote table
   query := fmt.Sprintf("INSERT INTO upvotes (user_id, team_id, advert_id) VALUES(%d, %d, %d);",
               vote.UserID, vote.TeamID, vote.AdvertID)
-  _, err = db.Query(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 })
 
 
 //todo set up MUX router to take url of user and team to add to database.
 var AddDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var vote Vote
-	err = decoder.Decode(&vote)
+	err := decoder.Decode(&vote)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -184,7 +148,7 @@ var AddDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *htt
   // Insert into the upvote table
   query := fmt.Sprintf("INSERT INTO downvotes (user_id, team_id, advert_id) VALUES(%d, %d, %d);",
               vote.UserID, vote.TeamID, vote.AdvertID)
-  _, err = db.Query(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 
 })
@@ -192,16 +156,9 @@ var AddDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *htt
 
 //todo set up MUX router to take url of user and team to add to database.
 var RemoveUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var vote Vote
-	err = decoder.Decode(&vote)
+	err := decoder.Decode(&vote)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -210,23 +167,16 @@ var RemoveUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
   // Delete from the upvote table
   query := fmt.Sprintf("DELETE FROM upvotes WHERE user_id=%d AND team_id=%d AND advert_id=%d;",
               vote.UserID, vote.TeamID, vote.AdvertID)
-  _, err = db.Query(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 })
 
 
 //todo set up MUX router to take url of user and team to add to database.
 var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var vote Vote
-	err = decoder.Decode(&vote)
+	err := decoder.Decode(&vote)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -235,19 +185,12 @@ var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *
   // Delete from the downvote table
 	query := fmt.Sprintf("DELETE FROM downvotes WHERE user_id=%d AND team_id=%d AND advert_id=%d;",
               vote.UserID, vote.TeamID, vote.AdvertID)
-  _, err = db.Query(query)
+  _, err = Database.Query(query)
   CheckErr(err)
 
 })
 
 var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-  db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-  CheckErr(err)
-
 	// Obtain username (query is of the form ?username)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	team_id := strings.Split(getquery, "=")[1]
@@ -260,7 +203,7 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 	// Run query
   query := fmt.Sprintf("SELECT %s FROM %s %s %s WHERE pf.team_id=%s;",
 												fields, advertisements, first_join, second_join, team_id)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
 	// Initialise the json response
@@ -305,16 +248,9 @@ type Acceptance struct {
 
 //todo set up MUX router to take url of user and team to add to database.
 var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	decoder := json.NewDecoder(request.Body)
 	var acceptance Acceptance
-	err = decoder.Decode(&acceptance)
+	err := decoder.Decode(&acceptance)
 	if err != nil {
 		panic(err)
 		defer request.Body.Close()
@@ -322,12 +258,12 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 
   // Delete from the promoted_fixtures table
 	query := fmt.Sprintf("DELETE FROM promoted_fixtures WHERE advert_id=%d;", acceptance.AdID)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
   CheckErr(err)
 
 	// Delete from the promoted_fixtures table
 	query = fmt.Sprintf("DELETE FROM advertisements WHERE advert_id=%d;", acceptance.AdID)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
   CheckErr(err)
 
 	// Add new fixture
@@ -336,7 +272,7 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 											" VALUES(%d, %d, '%s', '%f', '%f');",
 											acceptance.AdID, acceptance.HostID, acceptance.AccepterID, acceptance.Sport,
 											acceptance.LocLat, acceptance.LocLng, acceptance.StartTime)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 
 
@@ -344,8 +280,6 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 	table_name := fmt.Sprintf("_fixture%d_messages", acceptance.AdID)
 	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
 	query = fmt.Sprintf("CREATE TABLE %s (%s);", table_name, columns)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
-
-
 })

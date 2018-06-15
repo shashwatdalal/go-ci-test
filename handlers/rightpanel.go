@@ -2,8 +2,6 @@ package handlers
 
 import (
 	"net/http"
-
-	"database/sql"
   _ "github.com/lib/pq"
 	"encoding/json"
 	"fmt"
@@ -37,13 +35,6 @@ type PreviousFixture struct {
 }
 
 var GetFixtureDetails = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain username (query is of the form ?fixture_id=x)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	fixtureID := (strings.Split(getquery, "=")[1])
@@ -53,7 +44,7 @@ var GetFixtureDetails = http.HandlerFunc(func (writer http.ResponseWriter, reque
 
 	query := fmt.Sprintf("SELECT %s FROM %s WHERE fixture_id=%s;", fields, tables, fixtureID)
 
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	// Add the only database hit to the result
@@ -76,20 +67,13 @@ var GetFixtureDetails = http.HandlerFunc(func (writer http.ResponseWriter, reque
 })
 
 var GetSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain fixtureID (query is of the form ?fixture_id=x)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	fixtureID := (strings.Split(getquery, "=")[1])
 
   // Check if the result has beeen recorded
   query := fmt.Sprintf("SELECT * FROM previous_fixtures WHERE fixture_id=%s;", fixtureID)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
   if (rows.Next()) {
@@ -99,7 +83,7 @@ var GetSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, reque
 
 	query = fmt.Sprintf("SELECT submitting_team_id, home_score, away_score FROM submitted_results WHERE fixture_id=%s;", fixtureID)
 
-	rows, err = db.Query(query)
+	rows, err = Database.Query(query)
 	CheckErr(err)
 
 	// Add the only database hit to the result
@@ -123,20 +107,13 @@ var GetSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, reque
 })
 
 var AcceptSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-  // Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain username (query is of the form ?fixture_id=x)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	fixtureID := (strings.Split(getquery, "=")[1])
 
 	// Get the score from the submitted results
 	query := fmt.Sprintf("SELECT home_score, away_score FROM submitted_results WHERE fixture_id=%s;", fixtureID)
-	rows, err := db.Query(query)
+	rows, err := Database.Query(query)
 	CheckErr(err)
 
 	var home_score int
@@ -152,13 +129,13 @@ var AcceptSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, re
 
 	// Remove entry from submitted results
 	query = fmt.Sprintf("DELETE FROM submitted_results WHERE fixture_id=%s;", fixtureID)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 
 	// Get details of fixture from upcoming_fixtures
   fields := "home_id, away_id, sport, loc_lat, loc_lng, date"
 	query = fmt.Sprintf("SELECT %s FROM upcoming_fixtures WHERE fixture_id=%s;", fields, fixtureID)
-	rows, err = db.Query(query)
+	rows, err = Database.Query(query)
 	CheckErr(err)
 
 	if (rows.Next()) {
@@ -180,12 +157,12 @@ var AcceptSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, re
 		value := fmt.Sprintf("%s, %d, %d, '%s', '%s', %d, %d, %f, %f",
 			                    fixtureID, home_id, away_id, sport, date, home_score, away_score, loc_lat, loc_lng)
 		query = fmt.Sprintf("INSERT INTO previous_fixtures VALUES (%s);", value)
-		_, err = db.Query(query)
+		_, err = Database.Query(query)
 		CheckErr(err)
 
 		// Remove entry from upcoming fixtures
 		query = fmt.Sprintf("DELETE FROM upcoming_fixtures WHERE fixture_id=%s;", fixtureID)
-		_, err = db.Query(query)
+		_, err = Database.Query(query)
 		CheckErr(err)
 	} else {
 		//Something has gone very wrong
@@ -195,31 +172,17 @@ var AcceptSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, re
 })
 
 var RejectSubmittedScore = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain username (query is of the form ?fixture_id=x)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	fixtureID := (strings.Split(getquery, "=")[1])
 
 	// Remove entry from submitted results
 	query := fmt.Sprintf("DELETE FROM submitted_results WHERE fixture_id=%s;", fixtureID)
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 	CheckErr(err)
 })
 
 var SubmitScore = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain info (query is of the form ?fixture_id=x&scH=y&scA=z)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 
@@ -230,7 +193,7 @@ var SubmitScore = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 
 	query := fmt.Sprintf("INSERT INTO submitted_results VALUES (%s, 200, %s, %s);", fixtureID, homeScoreString, awayScoreString)
 
-	_, err = db.Query(query)
+	_, err = Database.Query(query)
 
   if (err != nil) {
     fmt.Fprintln(writer, "fail") // Write the result to the sender
@@ -238,13 +201,6 @@ var SubmitScore = http.HandlerFunc(func (writer http.ResponseWriter, request *ht
 })
 
 var GetPreviousGame = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
-	// Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain fixtureID (query is of the form ?curr=x&opp=y)
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 
@@ -257,7 +213,7 @@ var GetPreviousGame = http.HandlerFunc(func (writer http.ResponseWriter, request
   cond := fmt.Sprintf("(home_id=%s AND away_id=%s) OR (home_id=%s AND away_id=%s)",
                         currTeamString, oppoTeamString, oppoTeamString, currTeamString)
   query := fmt.Sprintf("SELECT %s FROM previous_fixtures WHERE %s ORDER BY date DESC LIMIT 1;", fields, cond)
-  rows, err := db.Query(query)
+  rows, err := Database.Query(query)
   CheckErr(err)
 
   if (rows.Next()) {
@@ -284,16 +240,9 @@ var GetPreviousGame = http.HandlerFunc(func (writer http.ResponseWriter, request
 })
 
 func GetTeamNameFromTeamID(teamID int64) (teamname string) {
-  // Set up connection
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
-		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
-	db, err := sql.Open("postgres", dbinfo)
-	defer db.Close()
-	CheckErr(err)
-
 	// Obtain userID
 	query := fmt.Sprintf("SELECT team_name FROM team_names WHERE team_id=%d", teamID)
-  row, err := db.Query(query)
+  row, err := Database.Query(query)
   CheckErr(err)
 
   if (row.Next()) {

@@ -7,7 +7,11 @@ import (
 	"github.com/gorilla/mux"
 	. "./handlers"
 )
+
 func main() {
+	ConnectToDatabase()
+	defer Database.Close()
+
 	r := mux.NewRouter()
 
 	// Profile page
