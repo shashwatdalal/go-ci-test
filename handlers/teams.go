@@ -318,3 +318,27 @@ var DeleteInvitation = http.HandlerFunc(func(writer http.ResponseWriter, request
 	CheckErr(err)
 	writer.WriteHeader(http.StatusOK)
 })
+
+var GetTeamNames = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
+	// Obtain username (query is of the form ?username)
+	getquery, err := url.QueryUnescape(request.URL.RawQuery)
+	team_id := strings.Split(getquery, "=")[1]
+
+	// Run query
+  query := fmt.Sprintf("SELECT users.name FROM team_members " +
+												"NATURAL INNER JOIN users " +
+												" WHERE team_members.team_id=%s;", team_id)
+  rows, err := Database.Query(query)
+  CheckErr(err)
+
+	var result []string
+	// Add every database hit to the result
+	for rows.Next() {
+		var member string
+		err = rows.Scan(&member)
+		result = append(result, member)
+	}
+
+	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
+	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+})

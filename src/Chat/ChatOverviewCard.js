@@ -1,7 +1,34 @@
 import React, {Component} from 'react';
 import './Stylesheets/ChatOverviewCard.css';
 
+var axios = require('axios')
+
 class ChatOverviewCard extends Component {
+
+  state = {
+    home_members: [],
+    away_members: []
+  }
+
+  componentDidMount() {
+    var _this = this
+    axios.get("/getTeamNames?team_id=" + this.props.data.UserTeamID)
+        .then(function(result) {
+          console.log(result);
+          _this.setState({
+            home_members: result.data
+          })
+        })
+    if (this.props.data.FixtureID != -1) {
+      axios.get("/getTeamNames?team_id=" + this.props.data.OppID)
+          .then(function(result) {
+            console.log(result);
+            _this.setState({
+              away_members: result.data
+            })
+          })
+    }
+  }
 
   isUpper(character) {
     return character === character.toUpperCase() && character !== " "
@@ -37,11 +64,32 @@ class ChatOverviewCard extends Component {
     }
   }
 
+  chatMembers() {
+    var members = ""
+    var i = 1;
+    if (this.state.home_members.length > 0) {
+      members += this.state.home_members[0].split(' ')[0]
+      for (i = 1; i < this.state.home_members.length; i++) {
+          members += ", " +  this.state.home_members[i].split(' ')[0];
+      }
+      if (this.state.away_members.length > 0) {
+        members += ", "
+      }
+    }
+    if (this.state.away_members.length > 0) {
+      members += this.state.away_members[0]
+      for (i = 1; i < this.state.away_members.length; i++) {
+          members += ", " +  this.state.away_members[i].split(' ')[0];
+      }
+    }
+    return members
+  }
+
   render() {
     return <div class="ChatCard">
           {this.chatAbbreviation(this.props.data)}
           <div class="chat_name"> {this.chatName(this.props.data)} </div>
-          <div class="recent_message"><strong>Needs to be implemented</strong></div>
+          <div class="chat_members"> {this.chatMembers()}</div>
       </div>
   }
 }

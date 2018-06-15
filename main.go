@@ -27,6 +27,7 @@ func main() {
 	r.Handle("/getChatMessages", GetChatMessages).Methods("GET")
 	r.Handle("/addMessage", AddMessage).Methods("POST")
 	r.Handle("/getTeamMembers", GetTeamMembers).Methods("GET")
+	r.Handle("/getTeamNames", GetTeamNames).Methods("GET")
 
 	// Chat Page -- Promoted fixtures
 	r.Handle("/getPromotedFixtures", GetPromotedFixtures).Methods("GET")
