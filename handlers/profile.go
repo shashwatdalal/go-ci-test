@@ -156,6 +156,11 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.LocLng,
 			&data.Date)
 
+		oppID, _ := strconv.ParseInt(data.Opposition, 10, 64)
+		forID, _ := strconv.ParseInt(data.ForTeam, 10, 64)
+		data.Opposition = GetTeamNameFromTeamID(oppID)
+		data.ForTeam = GetTeamNameFromTeamID(forID)
+
 		data.IsHome = true
 
 		teamHome = append(teamHome, data)
@@ -178,6 +183,11 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.LocLat,
 			&data.LocLng,
 			&data.Date)
+
+		oppID, _ := strconv.ParseInt(data.Opposition, 10, 64)
+		forID, _ := strconv.ParseInt(data.ForTeam, 10, 64)
+		data.Opposition = GetTeamNameFromTeamID(oppID)
+		data.ForTeam = GetTeamNameFromTeamID(forID)
 
 		data.IsHome = false
 
@@ -251,6 +261,11 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.ScoreHome,
 			&data.ScoreAway)
 
+		oppID, _ := strconv.ParseInt(data.Opposition, 10, 64)
+		forID, _ := strconv.ParseInt(data.ForTeam, 10, 64)
+		data.Opposition = GetTeamNameFromTeamID(oppID)
+		data.ForTeam = GetTeamNameFromTeamID(forID)
+
 		data.IsHome = true
 
 		teamHome = append(teamHome, data)
@@ -275,6 +290,11 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 			&data.Date,
 			&data.ScoreHome,
 			&data.ScoreAway)
+
+		oppID, _ := strconv.ParseInt(data.Opposition, 10, 64)
+		forID, _ := strconv.ParseInt(data.ForTeam, 10, 64)
+		data.Opposition = GetTeamNameFromTeamID(oppID)
+		data.ForTeam = GetTeamNameFromTeamID(forID)
 
 		data.IsHome = false
 
