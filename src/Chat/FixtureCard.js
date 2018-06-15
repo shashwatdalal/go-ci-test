@@ -4,6 +4,7 @@ import ActiveUserID from '../Profile/ActiveUserID'
 import {Button} from 'react-bootstrap'
 
 var axios = require('axios');
+var moment = require('moment');
 
 class FixtureCard extends Component {
   state = {
@@ -124,18 +125,14 @@ class FixtureCard extends Component {
     }
   }
 
+  pretty_date(date) {
+    var day = moment(date)
+    console.log(day)
+    return day.format("dddd, MMMM Do YYYY, H:mm")
+  }
+
   fixture_time(start, end){
-    var start = (start.split("Z"))[0].split("T");
-    var start_date = start[0];
-    var start_time = start[1];
-    var end = (end.split("Z"))[0].split("T");
-    var end_date = end[0];
-    var end_time = end[1];
-    if (start_date === end_date) {
-      return start_date + ":  " + start_time + " - " + end_time;
-    } else {
-      return start + " to " + end
-    }
+    return <div><strong> {this.pretty_date(start)} </strong></div>;
   }
 
   location_link() {

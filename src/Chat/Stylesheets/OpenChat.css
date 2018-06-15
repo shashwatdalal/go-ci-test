@@ -1,8 +1,11 @@
 .ChatHeader {
     height: 4vh;
     z-index: 200;
-    /* padding-bottom: 10px;
-    border-bottom: 3px solid #bfbfbf; */
+}
+
+.ChatHeader h3 {
+  margin: 0;
+  padding: 0;
 }
 
 .MessageBox {
