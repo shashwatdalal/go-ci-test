@@ -7,6 +7,7 @@ import (
 	"strings"
 	. "../utils"
 	"strconv"
+	"math"
 )
 
 type TeamMap struct {
@@ -41,17 +42,30 @@ var GetMatchmaking = http.HandlerFunc(func (writer http.ResponseWriter, request 
 	}
 })
 
+func meterToOffset(lat float64, lng float64, radius float64) (float64, float64){
+	var lat_factor float64 = 110574
+	rlat := lat * math.Pi/180
+	var lng_factor float64 = 111320 * math.Cos(rlat)
+  lat_offset := radius / lat_factor
+	lng_offset := radius / lng_factor
+	return lat_offset, lng_offset
+}
+
 func updatePromoted(advertID int, posterIDString string, latString string, longString string, radString string) {
 	posterID, _ := strconv.ParseInt(posterIDString, 10, 64)
 
 	loc_lat, _ := strconv.ParseFloat(latString, 64)
 	loc_lng, _ := strconv.ParseFloat(longString, 64)
 	radius, _  := strconv.ParseFloat(radString, 64)
+	lat_off, lng_off := meterToOffset(loc_lat, loc_lng, radius)
 
-	var minLng float64 = loc_lng - radius
-	var minLat float64 = loc_lat - radius
-	var maxLng float64 = loc_lng + radius
-	var maxLat float64 = loc_lat + radius
+	var minLng float64 = loc_lng - lng_off
+	var minLat float64 = loc_lat - lat_off
+	var maxLng float64 = loc_lng + lng_off
+	var maxLat float64 = loc_lat + lat_off
+
+	fmt.Println(minLng,maxLng)
+	fmt.Println(minLat,maxLat)
 
 	// Get the ad posting team's avail
 	query := fmt.Sprintf("SELECT mon, tues, weds, thurs, fri, sat, sun FROM team_avail WHERE team_id=%d;",
