@@ -26,11 +26,13 @@ func main() {
 
 	// Chat Page -- Promoted fixtures
 	r.Handle("/getPromotedFixtures", GetPromotedFixtures).Methods("GET")
-	r.Handle("/GetUpvoteTally", GetUpvoteTally).Methods("GET")
-	r.Handle("/GetDownvoteTally", GetDownvoteTally).Methods("GET")
+	r.Handle("/getUpvoteTally", GetUpvoteTally).Methods("GET")
+	r.Handle("/getDownvoteTally", GetDownvoteTally).Methods("GET")
 	r.Handle("/getVoteStatus", GetVoteStatus).Methods("GET")
 	r.Handle("/addUpvote", AddUpvote).Methods("POST")
-	r.Handle("/AddDownvote", AddDownvote).Methods("POST")
+	r.Handle("/addDownvote", AddDownvote).Methods("POST")
+	r.Handle("/removeUpvote", RemoveUpvote).Methods("POST")
+	r.Handle("/removeDownvote", RemoveDownvote).Methods("POST")
 
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")

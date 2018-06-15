@@ -13,7 +13,7 @@
 .received_fixture_opp .message_text {
   background: #e0ebeb;
   color: black;
-  border: 2px solid #ff0000;
+  border: 2px solid #ff4d4d;
 }
 
 .sent .message_text {
@@ -37,6 +37,10 @@
 .sent .sender {
     text-align: right;
     grid-area: sd;
+}
+
+.sender {
+  padding-top: 5px
 }
 
 .sent .message {
@@ -74,7 +78,7 @@
       "ms ms ms ms ms ms ms . . "
 }
 
-.sent, .received {
+.sent, .received_team, .received_fixture_team, .received_fixture_opp {
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 2px;
