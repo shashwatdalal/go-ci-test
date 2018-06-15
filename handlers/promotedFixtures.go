@@ -13,6 +13,7 @@ import (
 
 type PromotedAdvertisement struct {
 	AdID			 int
+	TeamID     string
 	Name       string
 	StartTime  string
 	EndTime  	 string
@@ -239,6 +240,49 @@ var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *
 
 })
 
+
+type Acceptance struct {
+  AccepterID int
+	AdID			 int
+	HostID     string
+	Name       string
+	StartTime  string
+	EndTime  	 string
+	LocLat	 	 float64
+	LocLng	 	 float64
+	Sport   	 string
+	NumPlayers int
+}
+
+//todo set up MUX router to take url of user and team to add to database.
+var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	// Set up connection
+	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
+		DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT)
+	db, err := sql.Open("postgres", dbinfo)
+	defer db.Close()
+	CheckErr(err)
+
+	decoder := json.NewDecoder(request.Body)
+	var acceptance Acceptance
+	err = decoder.Decode(&acceptance)
+	if err != nil {
+		panic(err)
+		defer request.Body.Close()
+	}
+
+  // Delete from the promoted_fixtures table
+	query := fmt.Sprintf("DELETE FROM promoted_fixtures WHERE advert_id=%d;", acceptance.AdID)
+
+	// Delete from the promoted_fixtures table
+	query = fmt.Sprintf("DELETE FROM advertisements WHERE advert_id=%d;", acceptance.AdID)
+
+
+  _, err = db.Query(query)
+  CheckErr(err)
+
+})
+
 var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	// Set up connection
 	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s sslmode=disable",
@@ -251,7 +295,7 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 	getquery, err := url.QueryUnescape(request.URL.RawQuery)
 	team_id := strings.Split(getquery, "=")[1]
 
-	fields := "a.advert_id, a.team_id, a.start_time, a.end_time, a.loc_lat, a.loc_lng, a.sport, a.num_players";
+	fields := "a.advert_id, a.team_id, tn.team_name, a.start_time, a.end_time, a.loc_lat, a.loc_lng, a.sport, a.num_players";
 	advertisements := "advertisements AS a"
 	first_join := "INNER JOIN promoted_fixtures AS pf ON a.advert_id=pf.advert_id"
 	second_join := "INNER JOIN team_names AS tn ON a.team_id=tn.team_id"
@@ -272,6 +316,7 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 		data := PromotedAdvertisement{}
 		err = rows.Scan(
 			&data.AdID,
+			&data.TeamID,
 			&data.Name,
 			&data.StartTime,
 			&data.EndTime,
