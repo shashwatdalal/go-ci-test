@@ -23,7 +23,7 @@ class FixtureCard extends Component {
     axios.get(request_url)
           .then(function(result) {
             // console.log(result);
-            _this.setState({location: result.data.results[0].formatted_address});
+            _this.setState({location: result.data.results[result.data.results.length / 2].formatted_address});
           })
 
     var upvote_req = "getUpvoteTally?team_id=" + this.props.team_id
