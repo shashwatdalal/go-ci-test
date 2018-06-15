@@ -164,6 +164,7 @@ class Matchmaking extends Component {
     }
 
     handleSubmit(event) {
+      console.log(this.state)
         event.preventDefault();
         var url = "/matchmaking?";
         var StartDate = moment.utc(this.state.Date);
@@ -197,14 +198,19 @@ class Matchmaking extends Component {
     }
 
     handleSportChange(Sport) {
-        this.setState({Sport});
+        var object = {};
+        object['Sport'] = Sport.value;
+        this.setState(object);
     		if (Sport) {
         	 // console.log(`Selected: ${Sport.label}`);
         }
     }
 
     handleDurationChange(Duration) {
-        this.setState({Duration});
+        var object = {};
+        object['Duration'] = Duration.value;
+        this.setState(object);
+
     		if (Duration) {
         	 // console.log(`Selected: ${Duration.label}`);
     		}
