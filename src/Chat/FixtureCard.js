@@ -23,7 +23,7 @@ class FixtureCard extends Component {
     axios.get(request_url)
           .then(function(result) {
             // console.log(result);
-            _this.setState({location: result.data.results[result.data.results.length / 2].formatted_address});
+            _this.setState({location: result.data.results[0].formatted_address});
           })
 
     var upvote_req = "getUpvoteTally?team_id=" + this.props.team_id
@@ -132,7 +132,7 @@ class FixtureCard extends Component {
     var end_date = end[0];
     var end_time = end[1];
     if (start_date === end_date) {
-      return start_date + ":  " + start_time + " - " + end_time;
+      return <div><strong> {start_date} </strong> {start_time} - {end_time} </div>;
     } else {
       return start + " to " + end
     }

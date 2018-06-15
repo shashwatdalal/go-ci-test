@@ -176,7 +176,7 @@ class Matchmaking extends Component {
         url += "lat=" + this.state.position.lat + "&";
         url += "lng=" + this.state.position.lng + "&";
         url += "radius=" + this.state.Radius + "&";
-        url += "sport=" + this.state.Sport.value + "&";
+        url += "sport=" + this.state.Sport + "&";
         url += "players=" + this.state.Players;
 
         axios.get(url).then((response) => {this.handleResponse(response)});
