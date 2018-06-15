@@ -69,10 +69,6 @@ class FixtureRightPanel extends Component {
 
            _this.setState({upcoming: newupcoming});
 
-           console.log("next")
-           console.log(request_url)
-
-
            axios.get(request_url)
                  .then(function(result) {
 

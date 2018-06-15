@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Stylesheets/FixtureCard.css';
 import ActiveUserID from '../Profile/ActiveUserID'
-import {Button} from 'react-bootstrap' 
+import {Button} from 'react-bootstrap'
 
 var axios = require('axios');
 
@@ -22,7 +22,7 @@ class FixtureCard extends Component {
     var _this = this
     axios.get(request_url)
           .then(function(result) {
-            console.log(result);
+            // console.log(result);
             _this.setState({location: result.data.results[0].formatted_address});
           })
 
@@ -45,7 +45,7 @@ class FixtureCard extends Component {
                       + "&fixture_id=" + this.props.data.AdID
     axios.get(vote_status_req)
           .then(function(result) {
-            console.log(result);
+            // console.log(result);
             switch (result.data.trim()) {
               case "upvote":
                 _this.setState({

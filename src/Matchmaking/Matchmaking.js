@@ -145,7 +145,7 @@ class Matchmaking extends Component {
     }
 
     handleResponse(response){
-        console.log(response);
+        // console.log(response);
         if (response.data == "fail\n") {
           alert("Failed to submit advertisement, please try again.")
         } else {
@@ -188,7 +188,7 @@ class Matchmaking extends Component {
         object['Players'] = Players.value;
         this.setState(object);
         if (Players) {
-           console.log(`Selected: ${Players.label}`);
+           // console.log(`Selected: ${Players.label}`);
         }
     }
 
@@ -199,14 +199,14 @@ class Matchmaking extends Component {
     handleSportChange(Sport) {
         this.setState({Sport});
     		if (Sport) {
-        	 console.log(`Selected: ${Sport.label}`);
+        	 // console.log(`Selected: ${Sport.label}`);
         }
     }
 
     handleDurationChange(Duration) {
         this.setState({Duration});
     		if (Duration) {
-        	 console.log(`Selected: ${Duration.label}`);
+        	 // console.log(`Selected: ${Duration.label}`);
     		}
     }
 
@@ -218,7 +218,7 @@ class Matchmaking extends Component {
 
   		// selectedOption can be null when the `x` (close) button is clicked
   		if (Team) {
-    	 console.log(`Selected: ${Team.label}`);
+    	 // console.log(`Selected: ${Team.label}`);
   		}
     }
 

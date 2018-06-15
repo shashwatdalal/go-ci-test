@@ -16,7 +16,7 @@ class PreviousFixtureCard extends Component {
     var _this = this
     _this.serverRequest = axios.get(request_url)
           .then(function(result) {
-            console.log(result);
+            // console.log(result);
             _this.setState({Location: result.data.results[0].formatted_address});
           })
   }

@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
     this.serverRequest =
       axios
         .post('checkLogin', body).then(function(result) {
-          console.log(result.data)
+          // console.log(result.data)
           if (result.data.Error == "none") {
             ActiveUserID.setID(result.data.UserID)
             _this.proceedToProfile()

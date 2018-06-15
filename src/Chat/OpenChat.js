@@ -54,7 +54,7 @@ class OpenChat extends Component {
     }
     axios.post("/addMessage", message_info)
       .then(function(response){
-        console.log(response)
+        // console.log(response)
       });
   }
 
