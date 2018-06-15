@@ -130,6 +130,35 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
+func escape(source string) string {
+	var j int = 0
+	if len(source) == 0 {
+		return ""
+	}
+	tempStr := source[:]
+	desc := make([]byte, len(tempStr)*2)
+	for i := 0; i < len(tempStr); i++ {
+		flag := false
+		var escape byte
+		switch tempStr[i] {
+		case '\'':
+			flag = true
+			escape = '\''
+			break
+		default:
+		}
+		if flag {
+			desc[j] = '\''
+			desc[j+1] = escape
+			j = j + 2
+		} else {
+			desc[j] = tempStr[i]
+			j = j + 1
+		}
+	}
+	return string(desc[0:j])
+}
+
 var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	decoder := json.NewDecoder(request.Body)
   var message Message
@@ -139,11 +168,10 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
 			defer request.Body.Close()
   }
 	chat_name := message.Chat + "_messages"
-
 	columns := "sender_id, message, time_sent"
 	// Run query
   query := fmt.Sprintf("INSERT INTO %s (%s) VALUES('%d', '%s', LOCALTIMESTAMP);",
-							chat_name, columns, message.SenderID, message.Message)
+							chat_name, columns, message.SenderID, escape(message.Message))
 	// fmt.Println(query)
   _, err = Database.Query(query)
   CheckErr(err)
