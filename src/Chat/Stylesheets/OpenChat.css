@@ -1,12 +1,19 @@
 .ChatHeader {
-    margin: 0;
-    border: 0;
+    margin: 3px;
     height: 4vh;
+    z-index: 200;
+    padding-bottom: 3px;
+
+    border-bottom: 3px solid #bfbfbf;
 }
 
 .MessageBox {
+
+    width: 100%;
+    overflow-y: scroll;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box;
     height: 78vh;
-    overflow-y: auto;
     scroll-behavior: smooth;
 }
 
@@ -40,13 +47,9 @@
 
 .ChatPanel {
     height: 100%;
+    width: 100%;
+    overflow: hidden;
     display: block;
-}
-
-.ChatHeader h1 {
-  margin: 3px;
-  padding: 0;
-  border-bottom: 3px solid #bfbfbf;
 }
 
 * {
