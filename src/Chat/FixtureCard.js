@@ -146,13 +146,12 @@ class FixtureCard extends Component {
     var acceptance = {
       AccepterID : this.props.team_id,
     	AdID			 : this.props.data.AdID,
-      HostID     : this.props.data.TeamID,
+      HostID     : Number(this.props.data.TeamID),
     	StartTime  : this.props.data.StartTime,
     	LocLat	 	 : this.props.data.LocLat,
     	LocLng	 	 : this.props.data.LocLng,
     	Sport   	 : this.props.data.Sport
     }
-    alert("test advert accepting")
     axios.post("/acceptAdvert", acceptance)
   }
 

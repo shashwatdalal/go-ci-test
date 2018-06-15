@@ -236,7 +236,7 @@ var GetPromotedFixtures = http.HandlerFunc(func (writer http.ResponseWriter, req
 type Acceptance struct {
   AccepterID int
 	AdID			 int
-	HostID     string
+	HostID     int
 	StartTime  string
 	LocLat	 	 float64
 	LocLng	 	 float64
@@ -266,9 +266,10 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 	// Add new fixture
 	query = fmt.Sprintf("INSERT INTO upcoming_fixtures " +
 											"(fixture_id, home_id, away_id, sport, loc_lat, loc_lng, date)" +
-											" VALUES(%d, %d, '%s', '%f', '%f');",
+											" VALUES(%d, %d, %d, '%s', %f, %f, '%s');",
 											acceptance.AdID, acceptance.HostID, acceptance.AccepterID, acceptance.Sport,
 											acceptance.LocLat, acceptance.LocLng, acceptance.StartTime)
+	fmt.Println(query)
 	_, err = Database.Query(query)
 	CheckErr(err)
 
@@ -277,6 +278,7 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 	table_name := fmt.Sprintf("_fixture%d_messages", acceptance.AdID)
 	columns := "sender_id integer NOT NULL, message varchar(200) NOT NULL, Time_sent timestamp without time zone NOT NULL"
 	query = fmt.Sprintf("CREATE TABLE %s (%s);", table_name, columns)
+	fmt.Println(query)
 	_, err = Database.Query(query)
 	CheckErr(err)
 })

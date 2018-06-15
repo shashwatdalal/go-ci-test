@@ -9,19 +9,30 @@ class FixtureList extends Component {
       fixtures: []
   }
 
+  constructor(props) {
+    super(props)
+    // this.removeFixture = this.removeFixture.bind(this)
+  }
+
   componentDidMount() {
     this.getPromotedFixtures()
   }
 
   getPromotedFixtures() {
-      var _this = this;
-      var req = "getPromotedFixtures?team=" + this.props.team_id
-      this.serverRequest = axios.get(req)
-          .then(function (result) {
-              _this.setState({fixtures: result.data});
-          })
+    var _this = this;
+    var req = "getPromotedFixtures?team=" + this.props.team_id
+    this.serverRequest = axios.get(req)
+        .then(function (result) {
+            _this.setState({fixtures: result.data});
+        })
   }
-
+  //
+  // removeFixture(id) {
+  //   this.setState({
+  //     fixtures: this.state.fixtures.filter(fixture.AdID != id)
+  //   })
+  //   this.props.updateChatList()
+  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps.team_id !== this.props.team_id) {
