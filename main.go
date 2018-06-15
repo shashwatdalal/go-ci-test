@@ -37,6 +37,9 @@ func main() {
 	r.Handle("/getsubmittedscore", GetSubmittedScore).Methods("GET")
 	r.Handle("/acceptsubmittedscore", AcceptSubmittedScore).Methods("GET")
 	r.Handle("/rejectsubmittedscore", RejectSubmittedScore).Methods("GET")
+	r.Handle("/submitscore", SubmitScore).Methods("GET")
+	r.Handle("/getprevgame", GetPreviousGame).Methods("GET")
+
 
 
 	// Matchmaking
