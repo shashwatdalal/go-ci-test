@@ -153,7 +153,7 @@ class FixtureCard extends Component {
     	Sport   	 : this.props.data.Sport
     }
     alert("test advert accepting")
-    // axios.post("/acceptAdvert", acceptance)
+    axios.post("/acceptAdvert", acceptance)
   }
 
   render() {

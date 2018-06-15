@@ -37,6 +37,7 @@ func main() {
 	r.Handle("/addDownvote", AddDownvote).Methods("POST")
 	r.Handle("/removeUpvote", RemoveUpvote).Methods("POST")
 	r.Handle("/removeDownvote", RemoveDownvote).Methods("POST")
+	r.Handle("/acceptAdvert", AcceptAdvert).Methods("POST")
 
 	// Chat Page -- Right Panel
 	r.Handle("/getupcominggame", GetFixtureDetails).Methods("GET")

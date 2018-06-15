@@ -265,7 +265,7 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 
 	// Add new fixture
 	query = fmt.Sprintf("INSERT INTO upcoming_fixtures " +
-											"(fixture_id, home_id, away_id, sport, loc_lat, loc_lng, date" +
+											"(fixture_id, home_id, away_id, sport, loc_lat, loc_lng, date)" +
 											" VALUES(%d, %d, '%s', '%f', '%f');",
 											acceptance.AdID, acceptance.HostID, acceptance.AccepterID, acceptance.Sport,
 											acceptance.LocLat, acceptance.LocLng, acceptance.StartTime)
