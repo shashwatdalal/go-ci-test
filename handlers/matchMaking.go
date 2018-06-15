@@ -85,7 +85,10 @@ func updatePromoted(advertID int, posterIDString string, latString string, longS
 	query = fmt.Sprintf("SELECT team_id FROM team_locations NATURAL INNER JOIN team_avail %s %s;",
 											 locCond, timeCond)
 
-	// fmt.Println(">", query)
+	fmt.Println(">", query)
+	fmt.Println("^Not sent (promoting to all instead)")
+
+	query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_id != %d;", posterID)
 
 	rows, err = Database.Query(query)
 	CheckErr(err)
