@@ -54,7 +54,6 @@ class TeamTab extends Component {
                     <h1>{this.props.team.name}</h1>
                 </div>
                 <div class="map">
-                    <h2>Map</h2>
                     <SimpleMap
                         team={this.props.team}/>
                 </div>
