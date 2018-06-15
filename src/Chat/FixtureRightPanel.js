@@ -57,10 +57,23 @@ class FixtureRightPanel extends Component {
            var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                              + venue_latlng
 
+
+           var newupcoming = {
+             homeTeam: response.data.HomeTeam,
+             awayTeam: response.data.AwayTeam,
+             sport:    response.data.Sport,
+             date:     datesplit[0],
+             time:     datesplit[1],
+             location: ""
+           }
+
+           _this.setState({upcoming: newupcoming});
+
+
            axios.get(request_url)
                  .then(function(result) {
 
-                   var newupcoming = {
+                   newupcoming = {
                      homeTeam: response.data.HomeTeam,
                      awayTeam: response.data.AwayTeam,
                      sport:    response.data.Sport,
