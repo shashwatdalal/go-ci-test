@@ -207,12 +207,18 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	err = rows.Scan(&team_id)
 	CheckErr(err)
 
-
+	// Add team to team_locations
+	query = fmt.Sprintf("INSERT INTO team_locations (team_id, loc_lat, loc_lng) VALUES (%d, 0.0, 0.0);", team_id)
+	_, err = db.Query(query)
+	CheckErr(err)
+	
 	// Add Team Captain
   query = fmt.Sprintf("INSERT INTO team_captains (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
 	_, err = db.Query(query)
 	CheckErr(err)
+
+	RecalculateTeamLocation(team_id)
 
 	// Add captain as team member
   query = fmt.Sprintf("INSERT INTO team_members (user_id, team_id) VALUES(%d, %d);",
@@ -226,6 +232,7 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 	query = fmt.Sprintf("CREATE TABLE %s (%s);", team_name, columns)
 	_, err = db.Query(query)
 	CheckErr(err)
+
 
 	fmt.Fprintln(writer, team_id) // Write whethersuccessful to the sender
 })

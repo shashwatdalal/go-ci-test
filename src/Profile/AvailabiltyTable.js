@@ -101,7 +101,6 @@ export default class AvailabiltyTable extends React.Component {
       this.state.availability[i][j] = 1;
     }
 
-    this.setRowToggleText();
   }
 
   // Convert the state availability matrix to a bitmap for each day
