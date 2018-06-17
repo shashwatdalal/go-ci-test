@@ -11,8 +11,7 @@ class OpenChat extends Component {
   state = {
     team_members: [],
     messages: [],
-    message: "",
-    pusher: null
+    message: ""
   }
 
   handleTextChange(e) {
@@ -86,12 +85,6 @@ class OpenChat extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.active_chat.UserTeamID !== this.props.active_chat.UserTeamID
         || prevProps.active_chat.OppID !== this.props.active_chat.OppID) {
-     if (this.state.pusher !== null) {
-       var channelName = (prevProps.active_chat.is_fixture) ?
-                          ("_fixture" + prevProps.active_chat.FixtureID)
-                          : ("_team" + prevProps.active_chat.UserTeamID)
-       this.state.pusher.unsubscribe(channelName);
-     }
      this.setState({
        messages: [{
          sender_name: "...",
@@ -109,20 +102,8 @@ class OpenChat extends Component {
   }
 
   setUpChannel() {
-    alert("Setting up pusher channel")
-    // Calculate name of chat
-    var chat_name = (this.props.is_fixture) ?
-                        ("_fixture" + this.props.active_chat.FixtureID)
-                        : ("_team" + this.props.active_chat.UserTeamID)
-    const pusher = new Pusher('112f8743d26528cd9b7e', {
-        cluster: 'eu',
-        encrypted: true
-      });
-    this.setState({
-      pusher: pusher
-    })
-    const channel = pusher.subscribe(chat_name);
-    channel.bind('message', data => {
+    console.log("Setting up pusher channel")
+    this.props.channel.bind('message', data => {
       console.log("Received message");
       this.setState({
         messages: [...this.state.messages, data]
