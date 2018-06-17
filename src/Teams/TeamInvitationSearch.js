@@ -40,7 +40,7 @@ class TeamInvitationSearch extends Component {
    var _this = this;
    this.setState({
      query: value
-   }, _this.getQueryResults())
+   }, () => {_this.getQueryResults()})
   }
 
   addInvitee(inv){
