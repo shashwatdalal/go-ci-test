@@ -28,7 +28,7 @@ class TeamInvitationSearch extends Component {
         .then(function (result) {
           if (result.data != null) {
             var relevant_results = result.data.filter((res) => res.UserID !== ActiveUserID.getID())
-            _this.setState({query_results: result.data});
+            _this.setState({query_results: relevant_results});
           } else {
             _this.setState({query_results: []});
           }
@@ -40,7 +40,7 @@ class TeamInvitationSearch extends Component {
    var _this = this;
    this.setState({
      query: value
-   }, _this.getQueryResults())
+   }, () => {_this.getQueryResults()})
   }
 
   addInvitee(inv){

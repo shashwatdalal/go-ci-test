@@ -1,15 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from 'react';
 import Header from './Header';
 import Main from './Main';
+import ActiveUserID from './Profile/ActiveUserID'
 import './Stylesheets/App.css';
 
-// this component will be rendered by our <___Router>
-const App = () => (
-    <div class="wrapper">
-        <div class="header"><Header/></div>
-        <div class="main"><Main/></div>
-    </div>
-)
-
+class App extends Component {
+    render() {
+      if (ActiveUserID.getID() == -1) {
+        this.props.history.push('/')
+      }
+      return (
+        <div class="wrapper">
+            <div class="header"><Header/></div>
+            <div class="main"><Main/></div>
+        </div>
+      );
+    }
+}
 export default App;
