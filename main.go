@@ -12,6 +12,8 @@ func main() {
 	ConnectToDatabase()
 	defer Database.Close()
 
+	SetUpPusher()
+
 	r := mux.NewRouter()
 
 	// Profile page

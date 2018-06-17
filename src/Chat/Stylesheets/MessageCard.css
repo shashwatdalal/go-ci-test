@@ -35,11 +35,12 @@
 }
 
 .sent .sender {
-    text-align: right;
-    grid-area: sd;
+  text-align: right;
+  grid-area: sd;
 }
 
 .sender {
+  color: white;
   padding-top: 5px
 }
 
