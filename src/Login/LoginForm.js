@@ -57,10 +57,8 @@ class LoginForm extends React.Component {
 
   usernameGroup() {
     return <FormGroup controlId="formHorizontal">
-      <Col componentClass={ControlLabel} sm={2}>
-        Username
-      </Col>
-      <Col sm={10}>
+
+      <Col>
         <FormControl type="text" placeholder="Username" value={this.state.username}
           onChange={e => this.usernameChange(e)}/>
       </Col>
@@ -69,10 +67,8 @@ class LoginForm extends React.Component {
 
   passwordGroup() {
     return (<FormGroup controlId="formHorizontalPassword">
-      <Col componentClass={ControlLabel} sm={2}>
-        Password
-      </Col>
-      <Col sm={10}>
+
+      <Col>
         <FormControl type="password" placeholder="Password" value={this.state.pwd}
           onChange={e => this.pwdChange(e)}/>
       </Col>
@@ -81,7 +77,7 @@ class LoginForm extends React.Component {
 
   submitGroup() {
     return (<FormGroup>
-        <Col sm={12}>
+        <Col>
           <Button type="submit">Sign in</Button>
         </Col>
     </FormGroup>)
@@ -94,9 +90,7 @@ class LoginForm extends React.Component {
         <div id='splashwrapper'>
 
           <div id="titlewrapper">
-            // <div id="topbar"></div>
             <h1>MatchUps</h1>
-            // <div id="bottombar"></div>
           </div>
 
           <h3> Enter your details below to log in. </h3>
@@ -105,7 +99,7 @@ class LoginForm extends React.Component {
             {this.passwordGroup()}
             {this.submitGroup()}
           </Form>
-          <Link id="newuserlink" to="/newUser">Or create a new account here</Link>
+          <Link id="newuserlink" to="/newUser">or create a new account here</Link>
         </div>
       </div>
 

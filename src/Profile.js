@@ -94,8 +94,8 @@ class Profile extends Component {
   loadUserFixtures() {
     var _this = this;
     var username = UserProfile.getName();
-    // axios.get("prevfix.json")
-    axios.get('/getuserfixtures?username=' + username)
+    axios.get("prevfix.json")
+    // axios.get('/getuserfixtures?username=' + username)
          .then(function(response) {
            _this.setState({
              fixtures: response.data
@@ -107,8 +107,8 @@ class Profile extends Component {
   loadUpcoming() {
     var _this = this;
     var username = UserProfile.getName();
-    // axios.get('/upfix.json')
-    axios.get('/getuserupcoming?username=' + username)
+    axios.get('/upfix.json')
+    // axios.get('/getuserupcoming?username=' + username)
         .then(function (response) {
             _this.setState({
                 upcoming: response.data
@@ -172,19 +172,22 @@ class Profile extends Component {
     return (
       <div id='contentpanel'>
         <div id='contentcontainer'>
-          <p class='thintext centertext'>Welcome back</p>
+          <p class='thintext centertext textbackground'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
 
           <WDLShow data={this.state.wdl} />
 
+          <hr />
+
           <div id='fixturesbox'>
+            <h3 class='centertext subheading'>Your Matches</h3>
             <table>
               <thead>
                 <td>
-                  <h3>Previous</h3>
+                  <h3 class="notopmargin centertext">Previous</h3>
                 </td>
                 <td>
-                  <h3>Upcoming</h3>
+                  <h3 class="notopmargin centertext">Upcoming</h3>
                 </td>
               </thead>
               <tr>
@@ -204,7 +207,12 @@ class Profile extends Component {
             </table>
           </div>
 
-          <h3 class='centertext'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
+          <hr />
+
+          <h3 class='centertext subheading'>Your Details</h3>
+
+
+          <h3 class='centertext notopmargin'>Location: <span class='thintext'>{this.state.location} <a id='locChangeLink' onClick={e => this.showEditBox(e)}>(change)</a></span></h3>
 
           <div id="changelocbox">
             {this.state.isEditing ?

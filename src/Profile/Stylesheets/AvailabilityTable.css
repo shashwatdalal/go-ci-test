@@ -1,15 +1,15 @@
 .checked {
-    background-color: #004d99;
+    background-color: #4CAF50;
 }
 
 .unchecked {
-  background-color: #e6f2ff;
+  background-color: white;
 }
 
 .flasher {
   width: auto;
   text-decoration: underline;
-  color: black;
+  color: white;
 
   animation-name: flash;
   animation-duration: 1s;
@@ -22,20 +22,24 @@
 }
 
 .avBox {
-  border: solid 1px white;
+  border: solid 2px black;
+  width: 50em;
+  text-decoration: underline;
+  font-size: 1.5vmin;
+}
+
+.toggleDay {
   width: 50em;
   text-decoration: underline;
   font-size: 1.5vmin;
 }
 
 .selectedtext {
-  background-color: #004d99;
-  color: white;
   padding: 2px;
 }
 
 .unselectedtext {
-  background-color: #e6f2ff;
+  color: black;
   padding: 2px;
 }
 
@@ -43,5 +47,5 @@
   /* from {border-bottom: 1px solid white; border-top: 1px solid white; }
   to {border-bottom: 1px solid black; border-top: 1px solid black;} */
   from{text-decoration-color: white;}
-  to{text-decoration-color: black;}
+  to{text-decoration-color: transparent;}
 }

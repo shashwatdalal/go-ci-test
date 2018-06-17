@@ -4,6 +4,7 @@
     margin-left: auto;
     margin-right: auto;
     font-size: 5vmin;
+
 }
 
 #locChangeLink {
@@ -11,20 +12,15 @@
     text-decoration: underline;
 }
 
-/* Text formatting */
-
-
-
 #fixturesbox {
     width: 80%;
-    height: 20em;
+    height: 15vmin;
     margin-left: auto;
     margin-right: auto;
     overflow-y: auto;
     scroll-behavior: smooth;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
-    padding-top: 15px;
     padding-bottom: 15px;
 }
 
@@ -37,15 +33,25 @@ td {
 }
 
 .AvTable table {
+  width: 80%;
     margin: 0 auto; /* or margin: 0 auto 0 auto */
 }
 
 #fixturesbox table {
   width: 100%;
+  table-layout: fixed;
 }
 
 #changelocbox {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.subheading {
+  margin-bottom: 0;
+}
+
+.notopmargin {
+  margin-top: 5px;
 }

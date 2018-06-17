@@ -29,7 +29,7 @@ class UpcomingFixtureCard extends Component {
   render() {
     return (
       <div class={"resultcard unplayed"}>
-      <p class='centertext'>versus <a><span class='oppname'>{this.props.data.Opposition} ({this.props.data.IsHome ? "H" : "A"})</span></a><br />
+      <p class='centertext'>versus <span class='oppname'>{this.props.data.Opposition} <span class="subtext">({this.props.data.IsHome ? "Home" : "Away"})</span></span><br />
       playing for <b>{this.props.data.ForTeam}</b> in <b>{this.props.data.Sport}</b></p>
       <p class='centertext'>{this.formatDate(this.props.data.Date)}, {this.state.Location}</p>
       </div>

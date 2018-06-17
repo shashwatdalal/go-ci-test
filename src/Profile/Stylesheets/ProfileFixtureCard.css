@@ -1,18 +1,23 @@
 /* Match result colours */
 .win {
-    background-color: #c1ffd1;
+  border: 2px solid green;
+    /* background-color: #c1ffd1; */
 }
 
 .lose {
-    background-color: #ffbaba;
+  border: 2px solid red;
+    /* background-color: #ffbaba; */
 }
 
 .draw {
-    background-color: #fffac1;
+  border: 2px solid yellow;
+    /* background-color: #fffac1; */
 }
 
 .unplayed {
-  background-color: #c4c4c4;
+  border: 2px solid white;
+  border: 2px solid white;
+  /* background-color: #c4c4c4; */
 }
 
 
@@ -23,15 +28,19 @@
 
 .resultcard {
     height: auto;
-    width: 90%;
+    width: 70%;
     padding-top: 5px;
     padding-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 15px;
-    /* border: 2px solid black; */
+    /* display: inline-block; */
 }
 
 .resultcard h2 {
     font-size: 5vmin;
+}
+
+.subtext {
+  font-size:1.5vmin;
 }

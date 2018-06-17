@@ -1,8 +1,10 @@
 #menupanel {
-  background-color: #333333;
+  background-color: black;
   color: white;
   align-content: center;
   height: 10%;
+
+  border-bottom: solid 2px white;
 }
 
 #menupanel h1 {
@@ -25,6 +27,7 @@
   margin-left: auto;
   margin-right: auto;
   table-layout: fixed;
+  margin-bottom: 10px;
 }
 
 #menuwrapper a {

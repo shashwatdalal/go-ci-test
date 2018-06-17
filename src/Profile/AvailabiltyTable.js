@@ -78,8 +78,8 @@ export default class AvailabiltyTable extends React.Component {
       }
 
       // Add 'clearRow option'
-      row.push(<td onClick={e => this.toggleDay(i, false)} id={"clrRw_" + i} class="avBox toggleDay">clear day</td>)
-      row.push(<td onClick={e => this.toggleDay(i, true)} id={"clrRw_" + i} class="avBox toggleDay">fill day</td>)
+      row.push(<td onClick={e => this.toggleDay(i, false)} id={"clrRw_" + i} class="toggleDay">clear day</td>)
+      row.push(<td onClick={e => this.toggleDay(i, true)} id={"clrRw_" + i} class="toggleDay">fill day</td>)
       rows.push(<tr>{row}</tr>)
     }
     return rows
@@ -220,7 +220,7 @@ export default class AvailabiltyTable extends React.Component {
           {this.createTable()}
         </table>
         <br />
-        <p>Click a box to toggle availability between <span class='selectedtext'>selected</span> and <span class='unselectedtext'>unselected</span></p>
+        <p>Click a box to toggle availability between <span class='selectedtext checked'>selected</span> and <span class='unselectedtext unchecked'>unselected</span></p>
 
         <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tabletick'></span></h3></a>
       </div>

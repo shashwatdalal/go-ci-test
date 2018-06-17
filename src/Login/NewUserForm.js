@@ -214,7 +214,7 @@ class NewUserForm extends Component {
         <FormControl type="date" value={this.state.dob}
           onChange={e => this.dobChange(e)}/>
             <FormControl.Feedback />
-            <HelpBlock>Date must be of from DD/MM/YYYY.</HelpBlock>
+            <HelpBlock class='helptext'>Date must be of from DD/MM/YYYY.</HelpBlock>
       </Col>
     </FormGroup>
   }
@@ -261,7 +261,7 @@ class NewUserForm extends Component {
           name='Location'
           id='input2'
           value={this.state.position}
-          containerElement={ <div style={ {height: '100%'} }/> }
+          containerElement={ <div style={ {height: '70%'} }/> }
           mapElement={ <div style={ {height: '400px'} }/> }
           defaultPosition={this.state.position}
           onChange={this.handleLocationChange} />
@@ -373,7 +373,7 @@ class NewUserForm extends Component {
           {this.resubmitPasswordGroup()}
           {this.submitGroup()}
         </Form>
-        <Link to="/">Or login to an existing account here</Link>
+        <h3 id='backtosplash' class='centertext'><Link to="/">or login to an existing account here</Link></h3>
       </div>
       );
   }
