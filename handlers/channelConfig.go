@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
   "github.com/pusher/pusher-http-go"
