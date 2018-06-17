@@ -95,7 +95,8 @@ class Profile extends Component {
     var _this = this;
     var username = UserProfile.getName();
     // axios.get('/prevfix.json')
-    axios.get('/getuserfixtures?username=' + username)
+    axios.get("prevfix.json")
+    // axios.get('/getuserfixtures?username=' + username)
          .then(function(response) {
            _this.setState({
              fixtures: response.data
@@ -132,8 +133,9 @@ class Profile extends Component {
 
       if (fixture.ScoreHome == fixture.ScoreAway) {
         d++;
+        continue;
       }
-      
+
       if (fixture.IsHome) {
         if (fixture.ScoreHome > fixture.ScoreAway) {
           w++;
@@ -180,10 +182,10 @@ class Profile extends Component {
             <table>
               <thead>
                 <td>
-                  Previous
+                  <h3>Previous</h3>
                 </td>
                 <td>
-                  Upcoming
+                  <h3>Upcoming</h3>
                 </td>
               </thead>
               <tr>

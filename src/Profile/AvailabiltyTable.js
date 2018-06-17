@@ -219,6 +219,7 @@ export default class AvailabiltyTable extends React.Component {
         <table>
           {this.createTable()}
         </table>
+        <br />
         <p>Click a box to toggle availability between <span class='selectedtext'>selected</span> and <span class='unselectedtext'>unselected</span></p>
 
         <a><h3 class='flasher' onClick={e => this.update(e)}>Click to Save!<span id='tabletick'></span></h3></a>

@@ -7,6 +7,10 @@
   table-layout: fixed;
 }
 
+#wdl td {
+  font-size: 2vmin;
+}
+
 #wdl h1 {
   font-size: 7vmin;
   margin: 0;
