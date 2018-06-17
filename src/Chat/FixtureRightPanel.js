@@ -180,7 +180,7 @@ class FixtureRightPanel extends Component {
     return (
       <div>
         <p>
-          The upcoming game between <span class="thintext bigtext">{this.state.upcoming.homeTeam}</span> and <span class="thintext bigtext">{this.state.upcoming.awayTeam}</span> is at <span class="thintext bigtext">{this.state.upcoming.location}</span> on <span class="thintext bigtext">{this.state.upcoming.date}</span> at <span class="thintext bigtext">{this.state.upcoming.time}</span>.
+          The upcoming <span class="thintext bigtext">{this.state.upcoming.sport}</span> match between <span class="thintext bigtext">{this.state.upcoming.homeTeam}</span> and <span class="thintext bigtext">{this.state.upcoming.awayTeam}</span> is at <span class="thintext bigtext">{this.state.upcoming.location}</span> on <span class="thintext bigtext">{this.state.upcoming.date}</span> at <span class="thintext bigtext">{this.state.upcoming.time}</span>.
         </p>
 
         <hr />

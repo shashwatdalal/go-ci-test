@@ -94,9 +94,8 @@ class Profile extends Component {
   loadUserFixtures() {
     var _this = this;
     var username = UserProfile.getName();
-    // axios.get('/prevfix.json')
-    axios.get("prevfix.json")
-    // axios.get('/getuserfixtures?username=' + username)
+    // axios.get("prevfix.json")
+    axios.get('/getuserfixtures?username=' + username)
          .then(function(response) {
            _this.setState({
              fixtures: response.data
