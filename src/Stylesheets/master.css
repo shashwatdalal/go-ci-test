@@ -33,3 +33,12 @@ body {
 
     /* Aesthetics */
 }
+
+.centertext {
+    text-align: center;
+}
+
+.thintext {
+    font-size: 3vmin;
+    font-weight: 400;
+}

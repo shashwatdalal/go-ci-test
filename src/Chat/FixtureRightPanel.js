@@ -161,7 +161,7 @@ class FixtureRightPanel extends Component {
 
     var time = splitAtT[1];
 
-    res[1] = "" + time.split(":")[0] + "hrs";
+    res[1] = "" + time.split(":")[0] + ":" + time.split(":")[1];
 
     return res;
   }
@@ -172,6 +172,10 @@ class FixtureRightPanel extends Component {
     })
   }
 
+  location_link() {
+    return "http://maps.google.com/maps?q=" + this.state.upcoming.lat + "," + this.state.upcoming.loc
+  }
+
   getUpcomingFixtureText() {
     if (this.state.upcoming.homeTeam == "") {
       return ""
@@ -180,7 +184,7 @@ class FixtureRightPanel extends Component {
     return (
       <div>
         <p>
-          The upcoming <span class="thintext bigtext">{this.state.upcoming.sport}</span> match between <span class="thintext bigtext">{this.state.upcoming.homeTeam}</span> and <span class="thintext bigtext">{this.state.upcoming.awayTeam}</span> is at <span class="thintext bigtext">{this.state.upcoming.location}</span> on <span class="thintext bigtext">{this.state.upcoming.date}</span> at <span class="thintext bigtext">{this.state.upcoming.time}</span>.
+          The upcoming <span class="thintext bigtext">{this.state.upcoming.sport}</span> match between <span class="thintext bigtext">{this.state.upcoming.homeTeam}</span> and <span class="thintext bigtext">{this.state.upcoming.awayTeam}</span> is at <a id="rpvenue" href={this.location_link()} target="_blank">{this.state.upcoming.location}</a> on <span class="thintext bigtext">{this.state.upcoming.date}</span> at <span class="thintext bigtext">{this.state.upcoming.time}</span>.
         </p>
 
         <hr />
