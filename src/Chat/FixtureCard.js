@@ -156,6 +156,10 @@ class FixtureCard extends Component {
           })
   }
 
+  decline_fixture() {
+    this.props.remove_fixture(this.props.data.AdID)
+  }
+
   render() {
     return (
       <div class="card">
@@ -176,6 +180,9 @@ class FixtureCard extends Component {
         </div>
 
         <Button class="accept" onClick={() => this.accept_fixture()}>Accept Ad and Chat to Opposition</Button>
+
+        <Button class="decline" onClick={() => this.decline_fixture()}>Decline Ad</Button>
+
 
         <div class="voting">
           <div class="voting-header">
