@@ -23,7 +23,6 @@ class FixtureCard extends Component {
     var _this = this
     axios.get(request_url)
           .then(function(result) {
-            // console.log(result);
             _this.setState({location: result.data.results[0].formatted_address});
           })
 
@@ -46,7 +45,6 @@ class FixtureCard extends Component {
                       + "&fixture_id=" + this.props.data.AdID
     axios.get(vote_status_req)
           .then(function(result) {
-            // console.log(result);
             switch (result.data.trim()) {
               case "upvote":
                 _this.setState({
@@ -127,7 +125,6 @@ class FixtureCard extends Component {
 
   pretty_date(date) {
     var day = moment(date)
-    console.log(day)
     return day.format("dddd, MMMM Do YYYY, H:mm")
   }
 
