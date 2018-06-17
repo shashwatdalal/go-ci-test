@@ -15,22 +15,7 @@ class OpenChat extends Component {
   }
 
   handleTextChange(e) {
-    console.log("handleTextChange");
-    if (e.keyCode === 13) {
-      var d = new Date();
-      var time = d.getTime();
-      const payload = {
-        SenderID:ActiveUserID.getID(),
-        SenderName:UserProfile.getName(),
-        Message:this.state.message,
-        Time: time
-      };
-      console.log("Sending Message");
-      axios.post('http://localhost:5000/message', payload);
-      // sendMessage()
-    } else {
-      this.setState({message: e.target.value})
-    }
+    this.setState({message: e.target.value})
   }
 
 
@@ -43,30 +28,20 @@ class OpenChat extends Component {
     if (this.state.message.replace(/\s/g, '').length){
       var d = new Date();
       var time = d.getTime();
-      var new_message = {
-        SenderID:ActiveUserID.getID(),
-        SenderName:UserProfile.getName(),
-        Message:this.state.message,
-        Time: time
-      }
-      this.setState({
-        messages: [
-          ...this.state.messages,
-          new_message
-        ],
-        message:""
-      }, () => {
-        this.scrollChat();
-      });
       var chat_name = (this.props.is_fixture) ?
                           ("_fixture" + this.props.active_chat.FixtureID)
                           : ("_team" + this.props.active_chat.UserTeamID)
       var message_info = {
         Chat: chat_name,
         SenderID: ActiveUserID.getID(),
+        SenderName:UserProfile.getName(),
         Message: this.state.message,
         Time: time
       }
+      console.log("Sending Message");
+      this.setState({
+        message:""
+      })
       axios.post("/addMessage", message_info)
         .then(function(response){
           // console.log(response)
@@ -74,37 +49,37 @@ class OpenChat extends Component {
     }
   }
 
-  // getChatMessages() {
-  //   var _this = this;
-  //   // Calculate name of chat
-  //   var chat_name = (this.props.is_fixture) ?
-  //                       ("_fixture" + this.props.active_chat.FixtureID)
-  //                       : ("_team" + this.props.active_chat.UserTeamID)
-  //   var get_team_req = "getTeamMembers?team=" + this.props.active_chat.UserTeamID
-  //   var get_chat_req = "getChatMessages?name=" + chat_name
-  //   // Get Team Members
-  //   axios.get(get_team_req)
-  //       .then(function(result) {
-  //         _this.setState({
-  //           team_members: result.data
-  //         });
-  //         // Once Team Members loaded can load messages
-  //         axios.get(get_chat_req)
-  //             .then(function(result) {
-  //               if (result.data != null) {
-  //                 _this.setState({
-  //                   messages: result.data
-  //                 });
-  //               } else {
-  //                 _this.setState({
-  //                   messages: []
-  //                 });
-  //               }
-  //               var messageBox = document.getElementById("MessageBox");
-  //               messageBox.scrollTop = messageBox.scrollHeight;
-  //             })
-  //       })
-  // }
+  getInitialChatMessages() {
+    var _this = this;
+    // Calculate name of chat
+    var chat_name = (this.props.is_fixture) ?
+                        ("_fixture" + this.props.active_chat.FixtureID)
+                        : ("_team" + this.props.active_chat.UserTeamID)
+    var get_team_req = "getTeamMembers?team=" + this.props.active_chat.UserTeamID
+    var get_chat_req = "getChatMessages?name=" + chat_name
+    // Get Team Members
+    axios.get(get_team_req)
+        .then(function(result) {
+          _this.setState({
+            team_members: result.data
+          });
+          // Once Team Members loaded can load messages
+          axios.get(get_chat_req)
+              .then(function(result) {
+                if (result.data != null) {
+                  _this.setState({
+                    messages: result.data
+                  });
+                } else {
+                  _this.setState({
+                    messages: []
+                  });
+                }
+                var messageBox = document.getElementById("MessageBox");
+                messageBox.scrollTop = messageBox.scrollHeight;
+              })
+        })
+  }
 
 
   componentDidUpdate(prevProps) {
@@ -113,31 +88,40 @@ class OpenChat extends Component {
      this.setState({
        messages: [{
          sender_name: "...",
-         message: "..."
+         message: ""
        }]
      })
-     this.getChatMessages();
+     this.setUpChannel()
+     this.getInitialChatMessages()
     }
   }
 
   componentDidMount() {
-    this.getChatMessages()
+    this.setUpChannel()
+    this.getInitialChatMessages()
   }
 
-  getChatMessages() {
-    alert("getChatMessages")
+  setUpChannel() {
+    alert("Setting up pusher channel")
+    // Calculate name of chat
+    var chat_name = (this.props.is_fixture) ?
+                        ("_fixture" + this.props.active_chat.FixtureID)
+                        : ("_team" + this.props.active_chat.UserTeamID)
     const pusher = new Pusher('112f8743d26528cd9b7e', {
         cluster: 'eu',
         encrypted: true
       });
-    const channel = pusher.subscribe('chat');
+    const channel = pusher.subscribe(chat_name);
     channel.bind('message', data => {
       console.log("Received message");
-      this.setState({ messages: [...this.state.messages, data], test: '' });
+      this.setState({
+        messages: [...this.state.messages, data]
+      }, () => {
+        this.scrollChat();
+      });
     });
     this.handleTextChange = this.handleTextChange.bind(this);
   }
-
 
   chatName(chat) {
     if (chat.FixtureID == -1) {
@@ -173,6 +157,11 @@ class OpenChat extends Component {
             placeholder="Type a message..."
             onChange={e => this.handleTextChange(e)}
             value={this.state.message}
+            onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  this.sendMessage()
+                }
+              }}
             />
         </div>
 

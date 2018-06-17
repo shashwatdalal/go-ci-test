@@ -5,12 +5,15 @@ import (
   "log"
   _ "github.com/lib/pq"
 	"github.com/gorilla/mux"
+
 	. "./handlers"
 )
 
 func main() {
 	ConnectToDatabase()
 	defer Database.Close()
+
+	SetUpPusher()
 
 	r := mux.NewRouter()
 

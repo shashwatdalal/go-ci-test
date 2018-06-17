@@ -9,10 +9,18 @@ import (
 	"net/url"
 	"strings"
 	. "../utils"
+
 )
 
-type Message struct {
+type MessageInfo struct {
 	Chat 			 string
+	SenderID	 int
+	SenderName string
+	Message		 string
+	TimeSent   string
+}
+
+type ChannelMessage struct {
 	SenderID	 int
 	SenderName string
 	Message		 string
@@ -113,10 +121,10 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
   rows, err := Database.Query(query)
   CheckErr(err)
 
-	var result []Message
+	var result []ChannelMessage
 
 	for rows.Next() {
-		data := Message{}
+		data := ChannelMessage{}
 		err = rows.Scan(
 			&data.SenderID,
 			&data.SenderName,
@@ -161,7 +169,7 @@ func escape(source string) string {
 
 var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
 	decoder := json.NewDecoder(request.Body)
-  var message Message
+  var message MessageInfo
   err := decoder.Decode(&message)
   if err != nil {
       panic(err)
@@ -169,12 +177,18 @@ var AddMessage = http.HandlerFunc(func (writer http.ResponseWriter, request *htt
   }
 	chat_name := message.Chat + "_messages"
 	columns := "sender_id, message, time_sent"
-	// Run query
   query := fmt.Sprintf("INSERT INTO %s (%s) VALUES('%d', '%s', LOCALTIMESTAMP);",
 							chat_name, columns, message.SenderID, escape(message.Message))
-	// fmt.Println(query)
   _, err = Database.Query(query)
   CheckErr(err)
+
+	// Message to send to other subscribers to channel
+	 channel_message := ChannelMessage{SenderID: message.SenderID,
+			 SenderName: message.SenderName, Message: message.Message,
+			 TimeSent: message.TimeSent}
+
+	 // trigger an event on a channel, along with a data payload
+	 PusherClient.Trigger(message.Chat, "message", channel_message)
 })
 
 
