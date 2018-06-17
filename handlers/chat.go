@@ -94,6 +94,9 @@ var GetChats = http.HandlerFunc(func (writer http.ResponseWriter, request *http.
 
 	j,_ := json.Marshal(chats) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+	fmt.Println("GetChats>>>")
+	fmt.Println(string(j))
+	fmt.Println("<<<")
 })
 
 var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request *http.Request) {
@@ -128,6 +131,9 @@ var GetChatMessages = http.HandlerFunc(func (writer http.ResponseWriter, request
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+	fmt.Println("GetChatMessages: ", chat_db_name, ">>>")
+	fmt.Println(string(j))
+	fmt.Println("<<<")
 })
 
 func escape(source string) string {
@@ -198,4 +204,8 @@ var GetTeamMembers = http.HandlerFunc(func (writer http.ResponseWriter, request 
 
 	j,_ := json.Marshal(result) // Convert the list of DB hits to a JSON
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
+
+	fmt.Println("GetTeamMembers: ", team_id, ">>>")
+	fmt.Println(string(j))
+	fmt.Println("<<<")
 })
