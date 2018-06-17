@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-    BrowserRouter, Switch, Route
+    HashRouter, Switch, Route
 } from 'react-router-dom';
 import App from './App';
 import LoginForm from './Login/LoginForm';
@@ -13,13 +13,13 @@ import store from "./store";
 
 ReactDOM.render((
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             <Switch>
                 <Route exact path='/' component={LoginForm}/>
                 <Route exact path='/newUser' component={NewUserForm}/>
                 <Route path='/' component={App}/>
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 ), document.getElementById('root'))
 
