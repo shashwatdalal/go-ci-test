@@ -14,7 +14,7 @@ class TeamsCard extends Component {
 
     render() {
         return (
-          <div>
+          <div id="teamscard">
             <h2> Team info</h2>
             <Tabs defaultActiveKey={1}>
                 {this.props.teams.map((t, index) => {

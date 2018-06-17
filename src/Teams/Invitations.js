@@ -3,6 +3,8 @@ import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 import {declineInvitation, acceptInvitation, fetchInvitations} from "../actions/invitationsActions";
 import {connect} from "react-redux";
 
+import "./Stylesheets/invitation.css"
+
 class Invitations extends Component {
 
     componentWillMount() {
@@ -14,7 +16,7 @@ class Invitations extends Component {
             <div>
                 <ListGroup>
                     {this.props.invitations.map((invitation) =>
-                        <ListGroupItem header={invitation.name}>
+                        <ListGroupItem class="invitation" header={invitation.name}>
                             <Button bsStyle="success"
                                     onClick={this.props.acceptInvitation.bind(this, invitation)}> Accept </Button>
                             <Button bsStyle="danger"

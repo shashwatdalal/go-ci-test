@@ -58,7 +58,7 @@ class TeamTab extends Component {
                         team={this.props.team}/>
                 </div>
                 <div class="AddPlayer">
-                    <h2> Invite more players </h2>
+                    <h3>Invite more players</h3>
                     <TeamInvitationSearch addInvitee={(this.addInvitee)}
                                           removeInvitee={this.removeInvitee}
                                           invitees={this.state.invitees}/>

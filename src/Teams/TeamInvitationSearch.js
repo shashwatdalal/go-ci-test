@@ -79,28 +79,34 @@ class TeamInvitationSearch extends Component {
   render() {
     var _this = this
     return (
-          <div id="invitationSection">
-            <h2>Invitations will be sent to the following</h2>
-            {(this.props.invitees.length === 0) ? "No users selected, search below" :
-              (<ListGroup>
-                {this.props.invitees
-                  .map(inv => _this.inviteeListItem(inv))}
-                </ListGroup>)}
-            <div id="searchSection">
-              <h3>User Search</h3>
-              <input
-                id="SearchBox"
-                placeholder="Search by username"
-                ref={input => this.search = input}
-                onChange={e => this.inputChange(e)}
-                value={this.state.query}
-              />
-              <ListGroup>
-                {this.state.query_results
-                  .map(res => _this.queryListItem(res))}
-              </ListGroup>
-            </div>
-        </div>)
+      <div id="searchSection">
+        <h3 class="nomargintop">User Search</h3>
+        <input
+          id="SearchBox"
+          placeholder="Search by username"
+          ref={input => this.search = input}
+          onChange={e => this.inputChange(e)}
+          value={this.state.query}
+        />
+        <ListGroup>
+          {this.state.query_results
+            .map(res => _this.queryListItem(res))}
+        </ListGroup>
+        <div id="invitationSection">
+          <h3>Invitations will be sent to the following</h3>
+          {
+            (this.props.invitees.length === 0) ? "No users selected, search below" :
+            (<ListGroup>
+              {
+                this.props.invitees.map(inv => _this.inviteeListItem(inv))
+              }
+             </ListGroup>
+           )
+         }
+
+        </div>
+      </div>
+    )
   }
 
 
