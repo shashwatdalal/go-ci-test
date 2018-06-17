@@ -258,7 +258,7 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 	_, err = Database.Query(query)
   CheckErr(err)
 
-	// Delete from the promoted_fixtures table
+	// Delete from the advertisements table
 	query = fmt.Sprintf("DELETE FROM advertisements WHERE advert_id=%d;", acceptance.AdID)
 	_, err = Database.Query(query)
   CheckErr(err)
@@ -281,4 +281,26 @@ var AcceptAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
 	fmt.Println(query)
 	_, err = Database.Query(query)
 	CheckErr(err)
+})
+
+type Declined struct {
+  DeclinerID int
+	AdID			 int
+}
+
+var DeclineAdvert = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	decoder := json.NewDecoder(request.Body)
+	var declined Declined
+	err := decoder.Decode(&declined)
+	if err != nil {
+		panic(err)
+		defer request.Body.Close()
+	}
+
+  // Delete from the promoted_fixtures table
+	query := fmt.Sprintf("DELETE FROM promoted_fixtures WHERE advert_id=%d AND team_id=%d;",
+		 declined.AdID, declined.DeclinerID)
+	_, err = Database.Query(query)
+  CheckErr(err)
+
 })

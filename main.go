@@ -12,6 +12,8 @@ func main() {
 	ConnectToDatabase()
 	defer Database.Close()
 
+	SetUpPusher()
+
 	r := mux.NewRouter()
 
 	// Profile page
@@ -39,6 +41,7 @@ func main() {
 	r.Handle("/removeUpvote", RemoveUpvote).Methods("POST")
 	r.Handle("/removeDownvote", RemoveDownvote).Methods("POST")
 	r.Handle("/acceptAdvert", AcceptAdvert).Methods("POST")
+	r.Handle("/declineAdvert", DeclineAdvert).Methods("POST")
 
 	// Chat Page -- Right Panel
 	r.Handle("/getupcominggame", GetFixtureDetails).Methods("GET")
@@ -47,8 +50,6 @@ func main() {
 	r.Handle("/rejectsubmittedscore", RejectSubmittedScore).Methods("GET")
 	r.Handle("/submitscore", SubmitScore).Methods("GET")
 	r.Handle("/getprevgame", GetPreviousGame).Methods("GET")
-
-
 
 	// Matchmaking
 	r.HandleFunc("/matchmaking", GetMatchmaking).Methods("GET")

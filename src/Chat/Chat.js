@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ChatList from './ChatList';
 import OpenChat from './OpenChat';
 import ChatRightPanel from './ChatRightPanel';
+import Pusher from 'pusher-js';
 import ActiveUserID from '../Profile/ActiveUserID'
 
 import './Stylesheets/Chat.css';
@@ -12,15 +13,20 @@ var axios = require('axios');
 class Chat extends Component {
   state = {
     active_chat: null,
-    chats: []
+    chats: [],
+    pusher: new Pusher('112f8743d26528cd9b7e', {
+        cluster: 'eu',
+        encrypted: true
+      }),
+    channel: null
   }
 
   initialiseActiveChat() {
     if (this.state.chats.length != 0) {
       this.setActiveChat(this.state.chats[0].Name)
     }
-  }
 
+  }
   getChats() {
     var _this = this;
     var query = "getChats?userID=" + ActiveUserID.getID()
@@ -40,18 +46,25 @@ class Chat extends Component {
     this.getChats()
   }
 
+  getChatName(chat) {
+    var name = (chat.FixtureID !== -1) ?
+                        ("_fixture" + chat.FixtureID)
+                        : ("_team" + chat.UserTeamID)
+    console.log(name)
+    return name
+  }
+
   setActiveChat(chat) {
+    console.log("Setting active_chat");
+    if (this.state.active_chat != null) {
+      console.log("Unsubscribing from channel")
+      this.state.pusher.unsubscribe(this.getChatName(this.state.active_chat))
+    }
     this.setState({
+      channel: this.state.pusher.subscribe(this.getChatName(chat)),
       active_chat: chat
     })
   }
-
-  /*
-
-
-
-
-  */
 
   render() {
       var _this = this
@@ -60,14 +73,15 @@ class Chat extends Component {
           <div id="left-block" class="chatpagepanel">
             <ChatList active_chat={this.state.active_chat}
                       chats={this.state.chats}
-                      setActiveChat={(chat) => _this.setState({active_chat: chat})}/>
+                      setActiveChat={(chat) => _this.setActiveChat(chat)}/>
           </div>
 
           <div id="central-block" class="chatpagepanel">
             {
               (this.state.active_chat != null) ?
               (<OpenChat active_chat={this.state.active_chat}
-              is_fixture={this.state.active_chat.FixtureID != -1}/>)
+              is_fixture={this.state.active_chat.FixtureID != -1}
+              channel={this.state.channel}/>)
               : (<h3>Select a chat in the left panel to view messages</h3>)
             }
           </div>
