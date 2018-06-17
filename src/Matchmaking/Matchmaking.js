@@ -66,6 +66,7 @@ const sportOptions = [
   { value: 'Archery', label: 'Archery' },
 ]
 
+
 function roundMinutes(date) {
 
     date.setHours(date.getHours() + Math.round(date.getMinutes()/60));
@@ -111,6 +112,7 @@ class Matchmaking extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleResponse= this.handleResponse.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     componentDidMount() {
@@ -167,16 +169,16 @@ class Matchmaking extends Component {
       console.log(this.state)
         event.preventDefault();
         var url = "/matchmaking?";
-        var StartDate = moment.utc(this.state.Date);
-        var EndDate = StartDate.clone().add(this.state.Duration.value, 'minutes');
-
+        var StartDate = moment.utc(this.state.date);
+        var EndDate = StartDate.clone().add(this.state.Duration, 'minutes');
+        
         url += "teamid=" + this.state.Team + "&";
         url += "startdate=" + StartDate.format() + "&";
         url += "enddate=" + EndDate.format() + "&";
         url += "lat=" + this.state.position.lat + "&";
         url += "lng=" + this.state.position.lng + "&";
         url += "radius=" + this.state.Radius + "&";
-        url += "sport=" + this.state.Sport.value + "&";
+        url += "sport=" + this.state.Sport + "&";
         url += "players=" + this.state.Players;
 
         axios.get(url).then((response) => {this.handleResponse(response)});
@@ -228,6 +230,16 @@ class Matchmaking extends Component {
   		}
     }
 
+    handleDateChange(date){
+      console.log(date)
+      var object = {};
+      object['date'] = roundMinutes(date);
+      console.log(object)
+      this.setState(object);
+      console.log(this.state)
+
+    }
+
 
     render() {
         return (
@@ -269,7 +281,7 @@ class Matchmaking extends Component {
 
                             <DateTimePicker
                               value={this.state.date}
-                              onChange={date => this.setState({date:roundMinutes(date)})}
+                              onChange={this.handleDateChange}
                               minDate={roundMinutes(new Date())}
                               />
                             <br />

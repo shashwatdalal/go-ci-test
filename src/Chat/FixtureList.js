@@ -11,7 +11,7 @@ class FixtureList extends Component {
 
   constructor(props) {
     super(props)
-    // this.removeFixture = this.removeFixture.bind(this)
+    this.removeFixture = this.removeFixture.bind(this)
   }
 
   componentDidMount() {
@@ -26,13 +26,13 @@ class FixtureList extends Component {
             _this.setState({fixtures: result.data});
         })
   }
-  //
-  // removeFixture(id) {
-  //   this.setState({
-  //     fixtures: this.state.fixtures.filter(fixture.AdID != id)
-  //   })
-  //   this.props.updateChatList()
-  // }
+
+  removeFixture(id) {
+    this.setState({
+      fixtures: this.state.fixtures.filter(fixture => fixture.AdID != id)
+    })
+    this.props.get_chats()
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.team_id !== this.props.team_id) {
@@ -45,7 +45,10 @@ class FixtureList extends Component {
           <div class="FixtureList">
               <h3>Vote on fixtures from other teams below</h3>
               {
-                  this.state.fixtures.map(fixture => (<FixtureCard key={`li-${fixture.AdID}`} data={fixture} team_id={this.props.team_id}/>))
+                  this.state.fixtures.map(fixture =>
+                    (<FixtureCard key={`li-${fixture.AdID}`}
+                      remove_fixture={this.removeFixture}
+                      data={fixture} team_id={this.props.team_id}/>))
               }
           </div>
       );

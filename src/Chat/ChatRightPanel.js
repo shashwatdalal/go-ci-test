@@ -16,7 +16,7 @@ class ChatRightPanel extends Component {
     var _this = this
     // console.log(this.props.active_chat.FixtureID);
     return (<div>{(this.props.active_chat.FixtureID !== -1) ? (<FixtureRightPanel fixture_id={this.props.active_chat.FixtureID}/>)
-                                : (<TeamRightPanel team_id={this.props.active_chat.UserTeamID}/>)}</div>
+                                : (<TeamRightPanel get_chats={() => _this.props.get_chats()} team_id={this.props.active_chat.UserTeamID}/>)}</div>
       );
     }
 }
