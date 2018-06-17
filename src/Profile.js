@@ -85,8 +85,8 @@ class Profile extends Component {
 
            axios.get(request_url)
                  .then(function(result) {
-                   // console.log(result);
                    _this.setState({location: result.data.results[0].formatted_address});
+                   _this.scrollFixtures();
                  })
          });
   }
@@ -94,21 +94,22 @@ class Profile extends Component {
   loadUserFixtures() {
     var _this = this;
     var username = UserProfile.getName();
-    axios.get("prevfix.json")
-    // axios.get('/getuserfixtures?username=' + username)
+    // axios.get("prevfix.json")
+    axios.get('/getuserfixtures?username=' + username)
          .then(function(response) {
            _this.setState({
              fixtures: response.data
            });
            _this.calcWDL();
+           _this.scrollFixtures();
          });
   }
 
   loadUpcoming() {
     var _this = this;
     var username = UserProfile.getName();
-    axios.get('/upfix.json')
-    // axios.get('/getuserupcoming?username=' + username)
+    // axios.get('/upfix.json')
+    axios.get('/getuserupcoming?username=' + username)
         .then(function (response) {
             _this.setState({
                 upcoming: response.data
@@ -120,6 +121,7 @@ class Profile extends Component {
     this.loadUserInformation();
     this.loadUserFixtures();
     this.loadUpcoming();
+    this.scrollFixtures();
   }
 
   calcWDL() {
@@ -149,9 +151,7 @@ class Profile extends Component {
         }
       }
     }
-    console.log("ghere")
     var newwdl = [w, d, l]
-    console.log("here")
 
     this.setState({
       wdl: newwdl
@@ -168,41 +168,46 @@ class Profile extends Component {
     })
   }
 
+  scrollFixtures() {
+    var box = document.getElementById("carousel");
+    box.scrollLeft = box.scrollWidth;
+  }
+
   render() {
     return (
       <div id='contentpanel'>
         <div id='contentcontainer'>
-          <p class='thintext centertext textbackground'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
 
           <WDLShow data={this.state.wdl} />
 
           <hr />
 
-          <div id='fixturesbox'>
-            <h3 class='centertext subheading'>Your Matches</h3>
-            <table>
-              <thead>
-                <td>
-                  <h3 class="notopmargin centertext">Previous</h3>
-                </td>
-                <td>
-                  <h3 class="notopmargin centertext">Upcoming</h3>
-                </td>
-              </thead>
-              <tr>
-                <td>
-                {
-                  this.state.fixtures.length == 0 ? <b>(empty)</b> :
-                  this.state.fixtures.map(item => (<PreviousFixtureCard data={item} />))
-                }
-                </td>
-                <td>
-                {
-                  this.state.upcoming.length == 0 ? <b>(empty)</b> :
-                  this.state.upcoming.map(item => (<UpcomingFixtureCard data={item} />))
-                }
-                </td>
+          <div id="carousel">
+            <table id="carousel-table">
+              <tr id="carousel-row">
+              {
+                this.state.fixtures.length == 0 ? <b>(empty)</b> :
+                this.state.fixtures.map(item => (
+                  <td class="carousel-cell">
+                    <div class="cell-wrap">
+                      <PreviousFixtureCard data={item} />
+                    </div>
+                  </td>
+                  )
+                )
+              }
+              {
+                this.state.upcoming.length == 0 ? <b>(empty)</b> :
+                this.state.upcoming.map(item => (
+                  <td class="carousel-cell">
+                    <div class="cell-wrap">
+                      <UpcomingFixtureCard data={item} />
+                    </div>
+                  </td>
+                  )
+                )
+              }
               </tr>
             </table>
           </div>

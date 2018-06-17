@@ -22,8 +22,8 @@ class Chat extends Component {
 
   getChats() {
     var _this = this;
-    // var query = "getChats?userID=" + ActiveUserID.getID()
-    var query = "t_getchats.json" //TODO
+    var query = "getChats?userID=" + ActiveUserID.getID()
+    // var query = "t_getchats.json" //TODO
     this.serverRequest =
         axios
             .get(query)

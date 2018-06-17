@@ -55,3 +55,33 @@ td {
 .notopmargin {
   margin-top: 5px;
 }
+
+
+
+
+
+#carousel {
+  height: 100%;
+  max-width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#carousel-table {
+  white-space: nowrap;
+  display: block;
+}
+
+.cell-wrap {
+  position: relative;
+  width: inherit;
+  height: inherit;
+  padding: 5px;
+}
+
+.carousel-cell {
+  vertical-align: middle;
+  height: 100%;
+}
