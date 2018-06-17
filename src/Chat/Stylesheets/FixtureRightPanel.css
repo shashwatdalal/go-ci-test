@@ -12,12 +12,14 @@
 
 #rightPanelWrapper input[type=text]{
   width: 100px;
-  height: 40px;
+  height: 80px;
   font-size: 5vmin;
   display: inline;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
+  background-color: black;
   text-align: center;
+  color: white;
 }
 
 #recordScoreTable {

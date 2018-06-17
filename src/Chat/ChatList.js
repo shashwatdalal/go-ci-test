@@ -11,16 +11,19 @@ class ChatList extends Component {
 
     generateChatCard(chat) {
       var _this = this
-      return (<div class={(chat == this.props.active_chat) ? "activeChatCardHolder" : "chatCardHolder"}
+      return (
+        <div class={(chat == this.props.active_chat) ? "activeChatCardHolder" : "chatCardHolder"}
                 onClick={() => this.props.setActiveChat(chat)}>
-                  <ChatOverviewCard key={`li-${chat.id}`} data={chat}/>
-              </div>)
+          <ChatOverviewCard key={`li-${chat.id}`} data={chat}/>
+        </div>
+      )
     }
 
     render() {
         return (
-            <div class="ChatList">
+            <div id="chatlist">
                 <h1>Chats</h1>
+                <hr />
                 {(this.props.chats.length > 0) ?
                   (<ListGroup>{
                     this.props.chats.map(chat => this.generateChatCard(chat))

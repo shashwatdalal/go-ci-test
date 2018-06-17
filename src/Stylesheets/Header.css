@@ -2,8 +2,9 @@
   background-color: black;
   color: white;
   align-content: center;
-  height: 10%;
+  height: 100%;
 
+  overflow: hidden;
   border-bottom: solid 2px white;
 }
 
@@ -12,7 +13,7 @@
   padding-bottom: 10px;
   text-align: center;
   margin: auto;
-  font-size: 6vmin;
+  font-size: 5vmin;
 }
 
 
@@ -36,7 +37,7 @@
   text-align: center;
   padding-left: 15%;
   padding-right: 15%;
-  font-size: 2vmin;
+  font-size: 1.75vmin;
   text-decoration: none;
 }
 

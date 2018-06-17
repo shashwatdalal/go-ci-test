@@ -171,7 +171,7 @@ class Matchmaking extends Component {
         var url = "/matchmaking?";
         var StartDate = moment.utc(this.state.date);
         var EndDate = StartDate.clone().add(this.state.Duration, 'minutes');
-        
+
         url += "teamid=" + this.state.Team + "&";
         url += "startdate=" + StartDate.format() + "&";
         url += "enddate=" + EndDate.format() + "&";
@@ -348,7 +348,7 @@ class Matchmaking extends Component {
 
 
                         </div>
-                    <button onClick = {this.handleSubmit}>
+                    <button class="submitbutton" onClick = {this.handleSubmit}>
                         Submit
                     </button>
                     <span id='submittick'></span>

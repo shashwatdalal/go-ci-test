@@ -1,45 +1,32 @@
 .game-brief {
   text-align: left;
-  grid-area: gb;
 }
 
 .date {
-  grid-area: dt;
   text-align: left;
 }
 
 .venue {
-  grid-area: vn;
   text-align: right;
 }
 
 .voting {
-  grid-area: vt;
+  align-items: center;
 }
 
-.accept {
-  grid-area: ac;
+.btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .card {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(20px, auto);
-    grid-row-gap: 1vh;
-    grid-template-areas:
-      "gb gb gb gb gb gb gb gb gb "
-      "dt dt dt dt vn vn vn vn vn "
-      "vt vt vt vt vt vt vt vt vt "
-      "ac ac ac ac ac ac ac ac ac "
 }
 
 .card {
     padding: 10px;
-    border-top: 3px solid #bfbfbf;
-    border-bottom: 3px solid #bfbfbf;
     margin: 0;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .game-brief {
@@ -55,7 +42,6 @@
 .voting-header {
   font-size: 0.9vw;
   width: 100%;
-  border-bottom: 3px solid  #cccccc;
 }
 
 .vote-up {
@@ -75,7 +61,8 @@
 }
 
 .vote-down:hover, .vote-down-selected:hover, .vote-up:hover, .vote-up-selected:hover {
-  background-color: #d9d9d9
+  background-color: #333;
+  opacity: 0.5;
 }
 
 .vote-down-selected {
@@ -86,8 +73,28 @@
 
 .vote-up, .vote-down, .vote-up-selected, .vote-down-selected {
   margin-left: 1vw;
-  padding-left: 0.3vw;
-  padding-right: 0.3vw;
   cursor: pointer;
-  display: inline-block;
+}
+
+#preftext {
+  font-size: 1.5vmin;
+}
+
+.votetable {
+  width: 90%;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.separatorcell {
+  width: 5%;
+}
+
+.votecell {
+  margin: 0;
+  width: 30%;
+  text-align: center;
+  border-collapse:separate;
+  border-spacing: 2.5%;
 }

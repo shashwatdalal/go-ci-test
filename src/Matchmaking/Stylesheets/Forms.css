@@ -44,3 +44,8 @@
     display:  inline;
     position: relative;
 }
+
+.submitbutton {
+  margin-top: 10px;
+  color: black;
+}

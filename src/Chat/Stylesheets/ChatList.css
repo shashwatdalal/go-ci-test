@@ -1,11 +1,7 @@
-.ChatList {
-    border-right: 1px solid #ccc;
-    height: 100%;
-    overflow: hidden;
-}
+ #chatlist h1 {
+   margin-bottom: 0;
+ }
 
-.ChatList h1 {
-  margin: 3px;
-  padding: 0;
-  border-bottom: 3px solid #bfbfbf;
+#chatlist hr {
+  margin-top: 0;
 }

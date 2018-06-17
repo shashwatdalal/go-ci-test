@@ -144,7 +144,7 @@ class OpenChat extends Component {
         </div>
         <div class="MessageEntry">
           <input
-            id="MessageEntry"
+            id="messageentrybox"
             type="text"
             onChange={e => this.inputChange(e)}
             value={this.state.message}

@@ -177,9 +177,9 @@ class FixtureRightPanel extends Component {
   }
 
   getUpcomingFixtureText() {
-    if (this.state.upcoming.homeTeam == "") {
-      return ""
-    }
+    // if (this.state.upcoming.homeTeam == "") {
+    //   return ""
+    // }
 
     return (
       <div>

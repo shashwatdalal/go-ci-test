@@ -157,23 +157,51 @@ class FixtureCard extends Component {
   }
 
   render() {
-    return <div class="card">
-        <div class="game-brief"> {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs <div class="team-name"> {this.props.data.Name} </div> </div>
-        <div class="venue">Venue: <br/> <a href={this.location_link()} target="_blank">{this.state.location}</a></div>
-        <div class="date"> Time: <br/>  {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}</div>
-        <Button class="accept" onClick={() => this.accept_fixture()}>Accept Ad and Chat to Opposition</Button>
-        <div class="voting">
-          <div class="voting-header"> {"Let your friends know if you're available by voting below"} </div>
-          <div class={this.state.upvoted ? 'vote-up-selected': 'vote-up'}
-            onClick={() => this.toggle_upvote()}>
-              {"(" + this.state.upvotes + ") Can Play"}
-          </div>
-          <div class={this.state.downvoted ? 'vote-down-selected': 'vote-down'}
-            onClick={() => this.toggle_downvote()}>
-              {"(" + this.state.downvotes + ") Busy"}
+    return (
+      <div class="card">
+        <div class="game-brief">
+          {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs
+          <div class="team-name">
+            {this.props.data.Name}
           </div>
         </div>
+
+        <div class="venue">
+          Venue: <br/>
+          <a href={this.location_link()} target="_blank">{this.state.location}</a>
+        </div>
+
+        <div class="date"> Time: <br/>
+          {this.fixture_time(this.props.data.StartTime, this.props.data.EndTime)}
+        </div>
+
+        <Button class="accept" onClick={() => this.accept_fixture()}>Accept Ad and Chat to Opposition</Button>
+
+        <div class="voting">
+          <div class="voting-header">
+            {"Let your friends know if you're available by voting below"}
+          </div>
+
+          <table class="votetable">
+            <tr>
+              <td class={"votecell " + (this.state.upvoted ? 'vote-up-selected': 'vote-up')}
+                onClick={() => this.toggle_upvote()}>
+                <h3 id="preftext">{"(" + this.state.upvotes + ") Can Play"}</h3>
+              </td>
+
+              <td class="separatorcell"></td>
+
+              <td class={"votecell " + (this.state.downvoted ? 'vote-down-selected': 'vote-down')}
+                onClick={() => this.toggle_downvote()}>
+                <h3 id="preftext">{"(" + this.state.downvotes + ") Busy"}</h3>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
       </div>
+    )
   }
 }
 

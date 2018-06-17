@@ -86,11 +86,13 @@ class ChatOverviewCard extends Component {
   }
 
   render() {
-    return <div class="ChatCard">
-          {this.chatAbbreviation(this.props.data)}
-          <div class="chat_name"> {this.chatName(this.props.data)} </div>
-          <div class="chat_members"> {this.chatMembers()}</div>
+    return (
+      <div class="ChatCard">
+        {this.chatAbbreviation(this.props.data)}
+        <div class="chat_name"> {this.chatName(this.props.data)} </div>
+        <div class="chat_members"> {this.chatMembers()}</div>
       </div>
+    )
   }
 }
 
