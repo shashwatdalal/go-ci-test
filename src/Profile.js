@@ -4,6 +4,7 @@ import axios from 'axios';
 import UserProfile from './Profile/UserProfile';
 import PreviousFixtureCard from './Profile/PreviousFixtureCard';
 import UpcomingFixtureCard from './Profile/UpcomingFixtureCard';
+import WDLShow from './Profile/WDLShow';
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox";
 
 import './Stylesheets/master.css';
@@ -26,7 +27,8 @@ class Profile extends Component {
       places: [],
       fixtures: [],
       upcoming: [],
-      isEditing: false
+      isEditing: false,
+      wdl: [0, 0, 0]
     };
 
     this.onPlacesChanged = this.onPlacesChanged.bind(this)
@@ -98,6 +100,7 @@ class Profile extends Component {
            _this.setState({
              fixtures: response.data
            });
+           _this.calcWDL();
          });
   }
 
@@ -119,6 +122,42 @@ class Profile extends Component {
     this.loadUpcoming();
   }
 
+  calcWDL() {
+    var w = 0;
+    var d = 0;
+    var l = 0;
+
+    for (var i = 0; i < this.state.fixtures.length; i++) {
+      var fixture = this.state.fixtures[i];
+
+      if (fixture.ScoreHome == fixture.ScoreAway) {
+        d++;
+      }
+      
+      if (fixture.IsHome) {
+        if (fixture.ScoreHome > fixture.ScoreAway) {
+          w++;
+        } else {
+          l++;
+        }
+      } else {
+        if (fixture.ScoreAway > fixture.ScoreHome) {
+          w++;
+        } else {
+          l++;
+        }
+      }
+    }
+    console.log("ghere")
+    var newwdl = [w, d, l]
+    console.log("here")
+
+    this.setState({
+      wdl: newwdl
+    });
+
+  }
+
   showEditBox(e) {
     e.preventDefault();
 
@@ -134,6 +173,8 @@ class Profile extends Component {
         <div id='contentcontainer'>
           <p class='thintext centertext'>Welcome back</p>
           <h1 id='username' class='centertext'>{UserProfile.getName()}</h1>
+
+          <WDLShow data={this.state.wdl} />
 
           <div id='fixturesbox'>
             <table>

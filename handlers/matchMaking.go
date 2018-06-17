@@ -88,7 +88,7 @@ func updatePromoted(advertID int, posterIDString string, latString string, longS
 	fmt.Println(">", query)
 	fmt.Println("^Not sent (promoting to all instead)")
 
-	query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_id != %d;", posterID)
+	// query = fmt.Sprintf("SELECT team_id FROM team_names WHERE team_id != %d;", posterID)
 
 	rows, err = Database.Query(query)
 	CheckErr(err)
@@ -97,6 +97,7 @@ func updatePromoted(advertID int, posterIDString string, latString string, longS
 		var oppteamID int
 		rows.Scan(&oppteamID)
 		query = fmt.Sprintf("INSERT INTO promoted_fixtures VALUES (%d, %d);", advertID, oppteamID)
+		fmt.Println(query)
 		_, err = Database.Query(query)
 		CheckErr(err)
 	}

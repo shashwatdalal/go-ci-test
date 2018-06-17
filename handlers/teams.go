@@ -198,6 +198,14 @@ var AddTeam = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Re
 
 	RecalculateTeamLocation(team_id)
 
+	// Add to team_avail
+	// Run query to add user's default availability to DB
+	query = fmt.Sprintf("INSERT INTO team_avail VALUES (%d);", team_id)
+	_, err = Database.Query(query)
+	CheckErr(err)
+
+	RecalculateTeamAvailability(team_id)
+
 	// Add captain as team member
   query = fmt.Sprintf("INSERT INTO team_members (user_id, team_id) VALUES(%d, %d);",
 							teamInfo.CaptainID, team_id)
