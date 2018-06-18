@@ -24,6 +24,7 @@ node {
                    goImage.inside('-v $PWD:/go/src/go-ci-test') {
                      sh 'go build -o main'
                    }
+            }
      )
     }
 
