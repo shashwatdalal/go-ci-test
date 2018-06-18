@@ -114,6 +114,7 @@ class Profile extends Component {
             _this.setState({
                 upcoming: response.data
             });
+            _this.scrollFixtures();
         });
   }
 
@@ -121,7 +122,6 @@ class Profile extends Component {
     this.loadUserInformation();
     this.loadUserFixtures();
     this.loadUpcoming();
-    this.scrollFixtures();
   }
 
   calcWDL() {

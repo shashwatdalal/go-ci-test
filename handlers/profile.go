@@ -173,7 +173,9 @@ var GetUserUpcoming = http.HandlerFunc(func (writer http.ResponseWriter, request
 	merge(&teamHome, &teamAway, &teamFixtures)
 
 	j,_ := json.Marshal(teamFixtures)        // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))           // Write the result to the console
+	fmt.Println("Upcoming>>>")           // Write the result to the console
+	fmt.Println(string(j))           // Write the result to the console
+	fmt.Println("<<<Upcoming")           // Write the result to the console
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender
 })
 
@@ -273,7 +275,9 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	merge(&teamHome, &teamAway, &teamFixtures)
 
 	j,_ := json.Marshal(teamFixtures)        // Convert the list of DB hits to a JSON
-	// fmt.Println(string(j))           // Write the result to the console
+	fmt.Println("Prev>>>")           // Write the result to the console
+	fmt.Println(string(j))           // Write the result to the console
+	fmt.Println("<<<Prev")           // Write the result to the console
 	fmt.Fprintln(writer, string(j)) // Write the result to the sender})
 })
 
