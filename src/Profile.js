@@ -183,6 +183,7 @@ class Profile extends Component {
 
           <hr />
 
+          <h3 class="centertext subheading">← scroll left for older | scroll right for newer →</h3>
           <div id="carousel">
             <table id="carousel-table">
               <tr id="carousel-row">
