@@ -38,6 +38,11 @@
     position: relative;
 }
 
+.react-datetime-picker{
+    color:    #000000;
+    background-color: #FFFFFF;
+}
+
 #duration{
     width:    48%;
     float:    right;
