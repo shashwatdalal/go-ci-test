@@ -61,10 +61,8 @@ td {
 
 
 #carousel {
-  height: 20%;
   max-width: 100%;
   overflow: auto;
-  white-space: nowrap;
   margin-left: auto;
   margin-right: auto;
 }
