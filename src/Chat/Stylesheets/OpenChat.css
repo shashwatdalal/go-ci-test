@@ -1,22 +1,23 @@
 .ChatHeader {
-    height: 4vh;
-    z-index: 200;
+  z-index: 200;
+  height: 3.7vw;
 }
 
-.ChatHeader h3 {
-  margin: 0;
-  padding: 0;
+.ChatHeader h1 {
+  font-size: 3.1vw;
+  height: 100%;
+  padding-top: 0;
+  margin: 0.3vw;
 }
 
 .MessageBox {
-
-    width: 100%;
-    overflow-y: scroll;
-    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
-    box-sizing: content-box;
-    height: 78vh;
-    scroll-behavior: auto;
-    border: none;
+  width: 100%;
+  overflow-y: scroll;
+  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box;
+  height: 78vh;
+  scroll-behavior: auto;
+  border: none;
 }
 
 .MessageBuilder {
@@ -38,16 +39,6 @@
     border-style: solid;
 }
 
-/* #MessageEntry input[type=text]{
-  width: 100px;
-  height: 40px;
-  font-size: 5vmin;
-  display: inline;
-  border: none;
-  border-bottom: 2px solid black;
-  text-align: center;
-} */
-
 .SendButton {
     background-color: transparent;
     color: white;
@@ -66,8 +57,4 @@
     width: 100%;
     overflow: hidden;
     display: block;
-}
-
-.ChatHeader h1 {
-    margin:10px;
 }

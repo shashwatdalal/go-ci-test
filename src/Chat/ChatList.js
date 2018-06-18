@@ -23,7 +23,6 @@ class ChatList extends Component {
         return (
             <div id="chatlist">
                 <h1>Chats</h1>
-                <hr />
                 {(this.props.chats.length > 0) ?
                   (<ListGroup>{
                     this.props.chats.map(chat => this.generateChatCard(chat))

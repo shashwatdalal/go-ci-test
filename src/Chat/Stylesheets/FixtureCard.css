@@ -7,11 +7,7 @@
 }
 
 .venue {
-  text-align: right;
-}
-
-.voting {
-  align-items: center;
+  text-align: left;
 }
 
 .btn {
@@ -20,13 +16,20 @@
 }
 
 .card {
-}
-
-.card {
-    padding: 10px;
-    margin: 0;
+    border: 1px solid #ccc;
+    margin: 0 0 10px 0;
     text-decoration: none;
     color: white;
+}
+
+.left-col {
+  width: 60%;
+  text-align: left;
+}
+
+.right-col {
+  max-width: 40%;
+  text-align: right;
 }
 
 .game-brief {
@@ -40,7 +43,8 @@
 }
 
 .voting-header {
-  font-size: 0.9vw;
+  text-align: center;
+  font-size: 1.1vw;
   width: 100%;
 }
 
