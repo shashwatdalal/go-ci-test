@@ -16,7 +16,7 @@ class WDLShow extends Component {
               Draws
             </td>
             <td>
-              Loses
+              Losses
             </td>
           </tr>
           <tr>

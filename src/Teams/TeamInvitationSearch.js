@@ -93,9 +93,9 @@ class TeamInvitationSearch extends Component {
             .map(res => _this.queryListItem(res))}
         </ListGroup>
         <div id="invitationSection">
-          <h3>Invitations will be sent to the following</h3>
+          <h3>Invitations will be sent to the following users:</h3>
           {
-            (this.props.invitees.length === 0) ? "No users selected, search below" :
+            (this.props.invitees.length === 0) ? "No users selected." :
             (<ListGroup>
               {
                 this.props.invitees.map(inv => _this.inviteeListItem(inv))

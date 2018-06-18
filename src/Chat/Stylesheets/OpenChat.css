@@ -1,21 +1,23 @@
 .ChatHeader {
   z-index: 200;
-  height: 3.7vw;
+  height: 6vh;
+  max-height: 6vh;
 }
 
 .ChatHeader h1 {
-  font-size: 3.1vw;
+  font-size: 5vh;
   height: 100%;
   padding-top: 0;
-  margin: 0.3vw;
+  margin: 0.5vh;
 }
 
 .MessageBox {
   width: 100%;
   overflow-y: scroll;
-  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  padding-left: 8.5px;
+  padding-right: 8.5px; /* Increase/decrease this value for cross-browser compatibility */
   box-sizing: content-box;
-  height: 78vh;
+  height: 77vh;
   scroll-behavior: auto;
   border: none;
 }

@@ -83,7 +83,7 @@ class Chat extends Component {
               (<OpenChat active_chat={this.state.active_chat}
               is_fixture={this.state.active_chat.FixtureID != -1}
               channel={this.state.channel}/>)
-              : (<h3>Select a chat in the left panel to view messages</h3>)
+              : (<h3>Select a chat in the left panel to view messages.</h3>)
             }
           </div>
 

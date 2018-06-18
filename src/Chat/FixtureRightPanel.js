@@ -6,6 +6,8 @@ import StandaloneSearchBox from "react-google-maps/lib/components/places/Standal
 import "./Stylesheets/FixtureRightPanel.css"
 import "../Stylesheets/master.css"
 
+var moment = require('moment');
+
 class FixtureRightPanel extends Component {
 
   constructor(props){
@@ -20,10 +22,8 @@ class FixtureRightPanel extends Component {
         sport: "",
         lat: 0.0,
         lng: 0.0,
-        location: "",
-        date: "",
-        time: ""
-      },
+        location: "(Location not found)",
+        date: ""      },
       previous: {
         homeTeam: "",
         awayTeam: "",
@@ -51,7 +51,7 @@ class FixtureRightPanel extends Component {
              return;
            }
 
-           var datesplit = _this.formatTimeText(response.data.Date);
+           var prettydate = _this.formatTimeText(response.data.Date);
 
            var venue_latlng = response.data.LocLat + "," + response.data.LocLng;
            var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
@@ -62,8 +62,7 @@ class FixtureRightPanel extends Component {
              homeTeam: response.data.HomeTeam,
              awayTeam: response.data.AwayTeam,
              sport:    response.data.Sport,
-             date:     datesplit[0],
-             time:     datesplit[1],
+             date:     prettydate,
              location: ""
            }
 
@@ -76,8 +75,7 @@ class FixtureRightPanel extends Component {
                      homeTeam: response.data.HomeTeam,
                      awayTeam: response.data.AwayTeam,
                      sport:    response.data.Sport,
-                     date:     datesplit[0],
-                     time:     datesplit[1],
+                     date:     prettydate,
                      location: result.data.results[0].formatted_address
                    }
 
@@ -148,23 +146,16 @@ class FixtureRightPanel extends Component {
     this.queryPreviousGame();
   }
 
-  formatTimeText(time) {
-    //time = 2018-01-01T00:00:00Z
-    var res = new Array(2);
 
-    var splitAtT = time.split("T");
-
-    var date = splitAtT[0];
-    var splitAtDash = date.split("-");
-
-    res[0] = "" + splitAtDash[2] + "-" + splitAtDash[1] + "-" + splitAtDash[0];
-
-    var time = splitAtT[1];
-
-    res[1] = "" + time.split(":")[0] + ":" + time.split(":")[1];
-
-    return res;
+  pretty_date(date) {
+    var day = moment(date)
+    return day.format("dddd, MMMM Do YYYY, H:mm")
   }
+
+  formatTimeText(date){
+    return this.pretty_date(date);
+  }
+
 
   handleSelect(key) {
     this.setState({
@@ -184,7 +175,7 @@ class FixtureRightPanel extends Component {
     return (
       <div>
         <p>
-          The upcoming <span class="thintext bigtext">{this.state.upcoming.sport}</span> match between <span class="thintext bigtext">{this.state.upcoming.homeTeam}</span> and <span class="thintext bigtext">{this.state.upcoming.awayTeam}</span> is at <a id="rpvenue" href={this.location_link()} target="_blank">{this.state.upcoming.location}</a> on <span class="thintext bigtext">{this.state.upcoming.date}</span> at <span class="thintext bigtext">{this.state.upcoming.time}</span>.
+          The upcoming <span class="thintext bigtext">{this.state.upcoming.sport}</span> match between <span class="thintext bigtext">{this.state.upcoming.homeTeam}</span> and <span class="thintext bigtext">{this.state.upcoming.awayTeam}</span> is at <a id="rpvenue" href={this.location_link()} target="_blank">{this.state.upcoming.location}</a> at <span class="thintext bigtext">{this.state.upcoming.date}</span>.
         </p>
 
         <hr />

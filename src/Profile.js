@@ -183,11 +183,12 @@ class Profile extends Component {
 
           <hr />
 
+          <h3 class="centertext subheading">← scroll left for older | scroll right for newer →</h3>
           <div id="carousel">
             <table id="carousel-table">
               <tr id="carousel-row">
               {
-                this.state.fixtures.length == 0 ? <b>(empty)</b> :
+                this.state.fixtures.length == 0 ? <b>(No previous matches)</b> :
                 this.state.fixtures.map(item => (
                   <td class="carousel-cell">
                     <div class="cell-wrap">
@@ -198,7 +199,7 @@ class Profile extends Component {
                 )
               }
               {
-                this.state.upcoming.length == 0 ? <b>(empty)</b> :
+                this.state.upcoming.length == 0 ? <b>(No upcoming matches)</b> :
                 this.state.upcoming.map(item => (
                   <td class="carousel-cell">
                     <div class="cell-wrap">

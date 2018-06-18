@@ -27,12 +27,12 @@
 #left-block {
   width: 20%;
   left: 0%;
-  border-right: 2px solid white;
 }
 
 #central-block {
   width: 45%;
   left: 20%;
+  border-left: 2px solid white;
   border-right: 2px solid white;
 }
 
