@@ -21,8 +21,10 @@
 }
 
 
-.oppname {
+.teamname {
     font-size: 2.5vmin;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
@@ -35,9 +37,26 @@
 }
 
 .resultcard h2 {
-    font-size: 5vmin;
+    font-size: 4vmin;
 }
 
 .subtext {
   font-size:1.5vmin;
+}
+
+.teamvs table {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+}
+
+.teamvs td {
+  width: 33%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.notopmargin {
+  margin-top: 0;
 }

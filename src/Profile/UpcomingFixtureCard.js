@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Stylesheets/ProfileFixtureCard.css';
 
 var axios = require('axios');
+var moment = require('moment');
 
 class UpcomingFixtureCard extends Component {
   state = {
@@ -21,21 +22,58 @@ class UpcomingFixtureCard extends Component {
           })
   }
 
-  formatDate(date) {
-    var start = (date.split("Z"))[0].split("T");
-    return start[0] + " " + start[1]
-  }
 
-  render() {
-    return (
-      <div class={"resultcard unplayed"}>
-      <p class='centertext'>versus <span class='oppname'>{this.props.data.Opposition} <span class="subtext">({this.props.data.IsHome ? "Home" : "Away"})</span></span><br />
-      playing for <b>{this.props.data.ForTeam}</b> in <b>{this.props.data.Sport}</b></p>
-      <p class='centertext'>{this.formatDate(this.props.data.Date)}, {this.state.Location}</p>
-      </div>
-    )
+    pretty_date(date) {
+      var day = moment(date)
+      return day.format("dddd, MMMM Do YYYY, H:mm")
+    }
+
+    formatDate(date){
+      return this.pretty_date(date);
+    }
+
+    getFixtureVsText(item) {
+      var home = "";
+      var away = "";
+
+      if (item.IsHome) {
+        home = item.ForTeam;
+        away = item.Opposition;
+      } else {
+        home = item.Opposition;
+        away = item.ForTeam;
+      }
+
+      return (
+        <table class="teamvs">
+          <tr>
+            <td>
+            <span class="teamname">{home}</span>
+            </td>
+
+            <td>
+              vs
+            </td>
+
+            <td>
+              <span class="teamname">{away}</span>
+            </td>
+          </tr>
+        </table>
+      )
+    }
+
+    render() {
+      return (
+        <div class="resultcard unplayed">
+          <h3 class='centertext'>{this.formatDate(this.props.data.Date)}</h3>
+          <p class='centertext'>{this.state.Location}</p>
+          {this.getFixtureVsText(this.props.data)}
+          <p class='centertext'>{this.props.data.Sport}</p>
+        </div>
+      )
+    }
   }
-}
 
 
 export default UpcomingFixtureCard;
