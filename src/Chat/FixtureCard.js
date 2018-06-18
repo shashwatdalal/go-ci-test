@@ -194,7 +194,7 @@ class FixtureCard extends Component {
     var _this = this;
     axios.post("/acceptAdvert", acceptance)
           .then(function(result) {
-            _this.props.remove_fixture_and_refresh(_this.props.data.AdID)
+            _this.props.remove_fixture(_this.props.data.AdID)
           })
   }
 

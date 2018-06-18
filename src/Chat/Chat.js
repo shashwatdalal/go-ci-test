@@ -28,6 +28,7 @@ class Chat extends Component {
 
   }
   getChats() {
+    console.log("Getting chats");
     var _this = this;
     var query = "getChats?userID=" + ActiveUserID.getID()
     this.serverRequest =
