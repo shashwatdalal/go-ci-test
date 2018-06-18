@@ -42,17 +42,18 @@ class FixtureList extends Component {
 
   render() {
       return (
-          <div class="FixtureList">
-              <h3>Vote on fixtures from other teams below</h3>
-              {
-                  this.state.fixtures.map(fixture =>
-                    (
-                      <div>
-                        <FixtureCard key={`li-${fixture.AdID}`}
-                        remove_fixture={this.removeFixture}
-                        data={fixture} team_id={this.props.team_id}/>
-                        <hr/>
-                      </div>)
+        <div class="FixtureList">
+          <h3>Vote on fixtures from other teams below</h3>
+          {
+            this.state.fixtures.map(fixture =>
+              (
+                <div>
+                  <FixtureCard key={`li-${fixture.AdID}`}
+                               remove_fixture={this.removeFixture}
+                               data={fixture}
+                               team_id={this.props.team_id}
+                               channel={this.props.channel}/>
+                  </div>)
                     )
               }
           </div>

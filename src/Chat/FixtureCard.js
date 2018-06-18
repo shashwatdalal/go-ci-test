@@ -17,6 +17,8 @@ class FixtureCard extends Component {
   }
 
   componentDidMount() {
+    this.setUpChannel()
+
     var request_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
                       + this.props.data.LocLat + "," + this.props.data.LocLng
 
@@ -61,7 +63,57 @@ class FixtureCard extends Component {
 
   }
 
+  setUpChannel() {
+    var ad_name = "ad_" + this.props.data.AdID
+    console.log("Setting up pusher channel - " + ad_name)
+    this.props.channel.bind(ad_name + "_add_up", data => {
+      console.log("Received upvote");
+      this.setState({
+        upvotes: this.state.upvotes + 1
+      })
+      if (data === ActiveUserID.getID()) {
+        this.setState({
+          upvoted: true
+        })
+      }
+    });
+    this.props.channel.bind(ad_name + "_add_dwn", data => {
+      console.log("Received downvote");
+      this.setState({
+        downvotes: this.state.downvotes + 1
+      })
+      if (data === ActiveUserID.getID()) {
+        this.setState({
+          downvoted: true
+        })
+      }
+    });
+    this.props.channel.bind(ad_name + "_rmv_up", data => {
+      console.log("Received rmv upvote");
+      this.setState({
+        upvotes: this.state.upvotes - 1
+      })
+      if (data === ActiveUserID.getID()) {
+        this.setState({
+          upvoted: false
+        })
+      }
+    });
+    this.props.channel.bind(ad_name + "_rmv_dwn", data => {
+      console.log("Received rmv downvote");
+      this.setState({
+        downvotes: this.state.downvotes - 1
+      })
+      if (data === ActiveUserID.getID()) {
+        this.setState({
+          downvoted: false
+        })
+      }
+    });
+  }
+
   toggle_upvote() {
+    console.log("toggle_upvote");
     var vote = {
       UserID:     ActiveUserID.getID(),
       TeamID:     this.props.team_id,
@@ -72,27 +124,24 @@ class FixtureCard extends Component {
       axios.post("/addUpvote", vote)
       axios.post("/removeDownvote", vote)
       this.setState({
-        downvotes: this.state.downvotes - 1,
-        upvotes: this.state.upvotes + 1,
         upvoted: true,
         downvoted: false
       })
     } else if (this.state.upvoted) {
       axios.post("/removeUpvote", vote)
       this.setState({
-        upvotes: this.state.upvotes - 1,
         upvoted: false
       })
     } else {
       axios.post("/addUpvote", vote)
       this.setState({
-        upvotes: this.state.upvotes + 1,
         upvoted: true
       })
     }
   }
 
   toggle_downvote() {
+    console.log("toggle_downvote");
     var vote = {
       UserID:     ActiveUserID.getID(),
       TeamID:     this.props.team_id,
@@ -103,21 +152,17 @@ class FixtureCard extends Component {
       axios.post("/addDownvote", vote)
       axios.post("/removeUpvote", vote)
       this.setState({
-        upvotes: this.state.upvotes - 1,
-        downvotes: this.state.downvotes + 1,
         upvoted: false,
-        downvoted: true
+        downvoted: false
       })
     } else if (this.state.downvoted) {
       axios.post("/removeDownvote", vote)
       this.setState({
-        downvotes: this.state.downvotes - 1,
         downvoted: false
       })
     } else {
       axios.post("/addDownvote", vote)
       this.setState({
-        downvotes: this.state.downvotes + 1,
         downvoted: true
       })
     }

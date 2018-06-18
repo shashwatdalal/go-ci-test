@@ -132,6 +132,12 @@ var AddUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *http.
               vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = Database.Query(query)
   CheckErr(err)
+
+	// Push upvote addition
+	channel := fmt.Sprintf("_team%d", vote.TeamID)
+	message := fmt.Sprintf("ad_%d_add_up", vote.AdvertID)
+	PusherClient.Trigger(channel, message, vote.UserID)
+
 })
 
 
@@ -151,6 +157,10 @@ var AddDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *htt
   _, err = Database.Query(query)
   CheckErr(err)
 
+	channel := fmt.Sprintf("_team%d", vote.TeamID)
+	message := fmt.Sprintf("ad_%d_add_dwn", vote.AdvertID)
+	PusherClient.Trigger(channel, message, vote.UserID)
+
 })
 
 
@@ -169,6 +179,10 @@ var RemoveUpvote = http.HandlerFunc(func(writer http.ResponseWriter, request *ht
               vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = Database.Query(query)
   CheckErr(err)
+
+	channel := fmt.Sprintf("_team%d", vote.TeamID)
+	message := fmt.Sprintf("ad_%d_rmv_up", vote.AdvertID)
+	PusherClient.Trigger(channel, message, vote.UserID)
 })
 
 
@@ -187,6 +201,10 @@ var RemoveDownvote = http.HandlerFunc(func(writer http.ResponseWriter, request *
               vote.UserID, vote.TeamID, vote.AdvertID)
   _, err = Database.Query(query)
   CheckErr(err)
+
+	channel := fmt.Sprintf("_team%d", vote.TeamID)
+	message := fmt.Sprintf("ad_%d_rmv_dwn", vote.AdvertID)
+	PusherClient.Trigger(channel, message, vote.UserID)
 
 })
 

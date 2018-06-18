@@ -56,7 +56,7 @@ class Chat extends Component {
 
   setActiveChat(chat) {
     console.log("Setting active_chat");
-    if (this.state.active_chat != null) {
+    if (this.state.active_chat != null && chat != this.state.active_chat) {
       console.log("Unsubscribing from channel")
       this.state.pusher.unsubscribe(this.getChatName(this.state.active_chat))
     }
@@ -89,7 +89,9 @@ class Chat extends Component {
           <div id="right-block" class="chatpagepanel">
             {
               (this.state.active_chat != null) ?
-              <ChatRightPanel active_chat={this.state.active_chat} get_chats={() => this.getChats()}/>
+              <ChatRightPanel active_chat={this.state.active_chat}
+                              get_chats={() => this.getChats()}
+                              channel={this.state.channel}/>
               : ""
             }
           </div>
