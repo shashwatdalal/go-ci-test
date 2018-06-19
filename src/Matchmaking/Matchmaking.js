@@ -249,7 +249,7 @@ class Matchmaking extends Component {
 
                         <div id="players_container">
                           <br />
-                          Players
+                          Number of Players
                           <br />
 
                           <Select
@@ -276,7 +276,7 @@ class Matchmaking extends Component {
 
                           <div id= "datetime">
                             <br />
-                            Time
+                            Preferred Date and Time
                             <br />
 
                             <DateTimePicker
@@ -289,7 +289,7 @@ class Matchmaking extends Component {
 
                           <div id = "duration">
                             <br />
-                            Duration
+                            Preferred Duration
                             <br />
 
                             <Select
@@ -305,7 +305,7 @@ class Matchmaking extends Component {
 
                         <div class="form_container">
                           <br />
-                          Location
+                          Preferred Location to Play
                           <br />
 
                           <StandaloneSearchBox
@@ -333,7 +333,7 @@ class Matchmaking extends Component {
                           />
 
                           <br />
-                          Radius
+                          Distance Willing to Travel
                           <br />
 
                           <input
