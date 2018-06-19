@@ -44,6 +44,7 @@
 
 .voting-header {
   text-align: center;
+  padding-top: 0.2vh;
   font-size: 1.1vw;
   width: 100%;
 }

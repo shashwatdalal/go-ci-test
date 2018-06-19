@@ -1,5 +1,9 @@
 .FixtureList {
-  /* overflow-y: hidden;
-  height: 90%;
-  max-height: 90%; */
+  height: 60%;
+  max-height: 60%;
+}
+
+.FixtureMap {
+  height: 40%;
+  max-height: 40%;
 }
