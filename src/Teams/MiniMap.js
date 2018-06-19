@@ -3,8 +3,6 @@ import GoogleMapReact from 'google-map-react';
 import "./Stylesheets/MainGrid.css"
 import Popover from "react-bootstrap/es/Popover";
 
-const AnyReactComponent = ({text}) => <div class="circle">{text}</div>;
-
 class SimpleMap extends Component {
 
     render() {
@@ -22,11 +20,10 @@ class SimpleMap extends Component {
                         <Popover
                             id="popover-basic"
                             placement="right"
-                            title={p.name}
                             positionTop={-70}
                             lat={p.location.lat}
                             lng={p.location.lng}>
-                            <img src={p.image}/>
+                            <div class="popover-text">{p.name}</div>
                         </Popover>
                         : null)}
                 </GoogleMapReact>
