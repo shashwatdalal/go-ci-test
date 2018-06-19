@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 import Popover from "react-bootstrap/es/Popover";
+import FixtureMapPopover from "./FixtureMapPopover";
 import './Stylesheets/FixtureMap.css'
-
-const AnyReactComponent = ({text}) => <div class="circle">{text}</div>;
 
 class FixtureMap extends Component {
 
@@ -27,8 +26,8 @@ class FixtureMap extends Component {
                           lat={fixture.LocLat}
                           lng={fixture.LocLng}
                           onClick={() => _this.props.setSelectedFixture(fixture)}>
-                          {fixture.Name}
-                          <div class={(fixture.AdID===this.props.selectedFixture) ? "selected-popover" : "popover"}></div>
+                          <FixtureMapPopover  fixture={fixture}
+                                              selectedFixture={this.props.selectedFixture}/>
                       </Popover>
                       : null)}
               </GoogleMapReact>

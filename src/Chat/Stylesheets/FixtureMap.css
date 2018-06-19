@@ -1,12 +1,15 @@
-.popover, .selected-popover {
+.fixture-popover, .selected-popover {
   color: black;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
 }
 
-.popover {
-  background-color: white;
+.fixture-popover {
+  border: 0;
 }
 
 .selected-popover {
-  color: white;
-  background-color: red;
+  border-bottom: 3px solid red
 }
