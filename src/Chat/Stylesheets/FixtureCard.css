@@ -15,11 +15,18 @@
   margin-bottom: 5px;
 }
 
+.card, .selected-card {
+  margin: 0 0 10px 0;
+  text-decoration: none;
+  color: white;
+}
+
 .card {
-    border: 1px solid #ccc;
-    margin: 0 0 10px 0;
-    text-decoration: none;
-    color: white;
+  border: 1px solid #ccc;
+}
+
+.selected-card {
+  border: 1px solid red;
 }
 
 .left-col {

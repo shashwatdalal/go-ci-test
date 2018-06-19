@@ -66,7 +66,7 @@ class FixtureList extends Component {
                 (
                   <div>
                     <FixtureCard key={`li-${fixture.AdID}`}
-                          is_seleceted={fixture.AdID === this.state.selectedFixture}
+                          is_selected={fixture.AdID === this.state.selectedFixture}
                           remove_fixture={this.removeFixture}
                           data={fixture}
                           team_id={this.props.team_id}

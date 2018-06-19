@@ -212,7 +212,7 @@ class FixtureCard extends Component {
 
   render() {
     return (
-      <div class="card">
+      <div class={this.props.is_selected ? "selected-card" : "card"}>
         <table class="votetable">
           <tr>
             <td class="left-col">

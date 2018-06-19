@@ -1,0 +1,12 @@
+.popover, .selected-popover {
+  color: black;
+}
+
+.popover {
+  background-color: white;
+}
+
+.selected-popover {
+  color: white;
+  background-color: red;
+}
