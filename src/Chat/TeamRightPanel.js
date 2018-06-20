@@ -6,7 +6,7 @@ import {Nav, NavItem} from 'react-bootstrap';
 class TeamRightPanel extends Component {
 
   state = {
-    active_key: "2"
+    active_key: "1"
   }
 
   handleSelect(key) {
@@ -28,7 +28,7 @@ class TeamRightPanel extends Component {
             Create your own ad
           </NavItem>
           </Nav>
-           {(_this.state.active_key === "1") ? <Matchmaking team_id={_this.props.team_id}/>
+           {(_this.state.active_key === "2") ? <Matchmaking team_id={_this.props.team_id}/>
                                 : <FixtureList get_chats={() => _this.props.get_chats()}
                                    team_id={_this.props.team_id}
                                    channel={this.props.channel}/>}

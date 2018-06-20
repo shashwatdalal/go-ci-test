@@ -6,9 +6,9 @@ import './Stylesheets/App.css';
 
 class App extends Component {
     render() {
-      // if (ActiveUserID.getID() == -1) {
-      //   this.props.history.push('/')
-      // }
+      if (ActiveUserID.getID() == -1) {
+        this.props.history.push('/')
+      }
       return (
         <div class="wrapper">
             <div class="header"><Header/></div>
