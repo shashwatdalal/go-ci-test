@@ -11,6 +11,7 @@
   fontSize: 14px;
   outline: none;
   textOverflow: ellipses;
+  color: black;
 }
 
 #formSearchBox {
@@ -25,4 +26,6 @@
   fontSize: 14px;
   outline: none;
   textOverflow: ellipses;
+  color: black;
+  
 }
