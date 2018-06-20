@@ -190,7 +190,7 @@ var GetUserFixtures = http.HandlerFunc(func (writer http.ResponseWriter, request
 	userID := GetUserIDFromUsername(username)
 
 	// Build queries
-	ordering := "ORDER BY date DESC"
+	ordering := "ORDER BY date ASC"
 	commonQueryFields := "sport, loc_lat, loc_lng, date, score_home, score_away"
 	tables := "previous_fixtures JOIN team_members"
 
