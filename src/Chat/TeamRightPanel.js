@@ -21,11 +21,11 @@ class TeamRightPanel extends Component {
     return (
       <div>
         <Nav bsStyle="tabs" activeKey={this.state.active_key} onSelect={k => this.handleSelect(k)}>
-          <NavItem eventKey="1" title="Matchmaking">
-            Create A Fixture Ad
-          </NavItem>
-          <NavItem eventKey="2" title="Fixtures">
+          <NavItem eventKey="1" title="Fixtures">
             View Advertisements
+          </NavItem>
+          <NavItem eventKey="2" title="Create">
+            Create your own ad
           </NavItem>
           </Nav>
            {(_this.state.active_key === "1") ? <Matchmaking team_id={_this.props.team_id}/>

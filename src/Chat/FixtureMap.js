@@ -10,7 +10,7 @@ class FixtureMap extends Component {
       var _this = this
       return (
           // Important! Always set the container height explicitly
-          <div style={{height: '50vh', width: '100%'}}>
+          <div style={{height: '35vh', width: '100%'}}>
               <GoogleMapReact
                   bootstrapURLKeys={{key: "AIzaSyC8Ux3avYGKFFPFl3EEmHVOqqRF4sfBJdk"}}
                   defaultCenter={{
