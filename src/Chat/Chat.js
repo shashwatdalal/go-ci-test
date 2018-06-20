@@ -21,9 +21,16 @@ class Chat extends Component {
     channel: null
   }
 
+  constructor(props) {
+    super(props);
+    this.getChats = this.getChats.bind(this);
+    this.getChatName = this.getChatName.bind(this);
+    this.initialiseActiveChat = this.initialiseActiveChat.bind(this);
+  }
+
   initialiseActiveChat() {
     if (this.state.chats.length != 0) {
-      this.setActiveChat(this.state.chats[0].Name)
+      this.setActiveChat(this.state.chats[this.state.chats.length - 1])
     }
 
   }
@@ -35,11 +42,13 @@ class Chat extends Component {
         axios
             .get(query)
             .then(function (result) {
-                if (result.data != null) {
-                  _this.setState({
-                      chats: result.data
-                  }, _this.initialiseActiveChat())
-                }
+              console.log(result.data)
+              console.log(_this.state.chats)
+              if (result.data != null) {
+                _this.setState({
+                    chats: result.data
+                }, _this.initialiseActiveChat())
+              }
             })
   }
 
@@ -91,7 +100,7 @@ class Chat extends Component {
             {
               (this.state.active_chat != null) ?
               <ChatRightPanel active_chat={this.state.active_chat}
-                              get_chats={() => this.getChats()}
+                              get_chats={() => _this.getChats()}
                               channel={this.state.channel}/>
               : ""
             }

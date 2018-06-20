@@ -10,9 +10,13 @@ class Header extends Component {
                 <div id="menuwrapper">
                     <table>
                       <tr>
-                        <td><Link to="/profile">Profile</Link></td>
-                        <td><Link to="/teams">Teams</Link></td>
-                        <td><Link to="/chat">Chat</Link></td>
+                        <td></td>
+                        <td></td>
+                        <td class="clickable"><Link to="/profile">Profile</Link></td>
+                        <td class="clickable"><Link to="/teams">Teams</Link></td>
+                        <td class="clickable"><Link to="/chat">Chat</Link></td>
+                        <td></td>
+                        <td class="clickable"><Link to="/">Log Out</Link></td>
                       </tr>
                     </table>
                 </div>

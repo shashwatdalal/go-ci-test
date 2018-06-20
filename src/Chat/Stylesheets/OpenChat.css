@@ -2,6 +2,7 @@
   z-index: 200;
   height: 6vh;
   max-height: 6vh;
+  overflow: hidden;
 }
 
 .ChatHeader h1 {
