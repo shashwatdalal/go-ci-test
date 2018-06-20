@@ -26,6 +26,7 @@
   border-radius: 5px;
   padding: 5px;
   display: inline-block;
+  font-size: 1.8vh;
 }
 
 .received_team .sender, .received_fixture_team .sender,
@@ -58,7 +59,7 @@
 }
 
 .message {
-  font-size: 1.5vh;
+  font-size: 2vh;
 }
 
 .sent {
