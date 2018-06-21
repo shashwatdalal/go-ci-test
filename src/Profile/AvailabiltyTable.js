@@ -14,7 +14,8 @@ export default class AvailabiltyTable extends React.Component {
                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    isSubmitted: false
+    isSubmitted: false,
+    isMouseDown: false,
   }
 
   numToDay(i) {
@@ -74,7 +75,23 @@ export default class AvailabiltyTable extends React.Component {
       // Add day
       row.push(<td>{this.numToDay(i)}</td>)
       for (let j = 0; j < 16; j++) {
-        row.push(<td onClick={e => this.toggle(i, j, e)} id={"av" + i + "_" + j} class={"avBox " + (this.state.availability[i][j] ? "checked" : "unchecked")}></td>)
+        row.push(<td
+          onMouseDown={e => {
+            this.state.isMouseDown = true;
+            this.toggle(i, j, e);
+            return false;
+            }}
+          onMouseOver={e => {
+            if(this.state.isMouseDown)
+              this.toggle(i, j, e)
+          }}
+          onMouseUp={e =>{
+            this.state.isMouseDown = false;
+          }}
+          style = {{selectstart:'false'}} //prevents text selection while dragging
+          id={"av" + i + "_" + j}
+          class={"avBox " + (this.state.availability[i][j] ? "checked" : "unchecked")}
+          ></td>)
       }
 
       // Add 'clearRow option'
