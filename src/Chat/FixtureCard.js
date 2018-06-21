@@ -217,8 +217,7 @@ class FixtureCard extends Component {
           <tr>
             <td class="left-col">
               <div class="game-brief">
-                {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs
-                <div class="team-name">{this.props.data.Name}</div>
+                {this.props.data.NumPlayers}-a-side {this.props.data.Sport} vs <div class="team-name">{this.props.data.Name}</div>
               </div>
 
               <div class="date"> Time: <br/>
@@ -246,14 +245,14 @@ class FixtureCard extends Component {
                   <tr>
                     <td class={"votecell " + (this.state.upvoted ? 'vote-up-selected': 'vote-up')}
                       onClick={() => this.toggle_upvote()}>
-                      <h3 id="preftext">{"(" + this.state.upvotes + ") Yes"}</h3>
+                      <h3 class="preftext">{"(" + this.state.upvotes + ") Yes"}</h3>
                     </td>
 
                     <td class="separatorcell"></td>
 
                     <td class={"votecell " + (this.state.downvoted ? 'vote-down-selected': 'vote-down')}
                       onClick={() => this.toggle_downvote()}>
-                      <h3 id="preftext">{"(" + this.state.downvotes + ") No"}</h3>
+                      <h3 class="preftext">{"(" + this.state.downvotes + ") No"}</h3>
                     </td>
                   </tr>
                 </table>

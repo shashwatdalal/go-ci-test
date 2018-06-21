@@ -24,7 +24,8 @@
 }
 
 #menuwrapper table {
-  width: 80%;
+  width: 100%;
+  font-weight: bold;
   margin-left: auto;
   margin-right: auto;
   table-layout: fixed;

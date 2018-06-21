@@ -88,8 +88,9 @@
   cursor: pointer;
 }
 
-#preftext {
-  font-size: 1.5vmin;
+.preftext {
+  font-weight: bold;
+  font-size: 1.7vmin;
 }
 
 .votetable {

@@ -14,6 +14,7 @@ class Invitations extends Component {
     render() {
         return (
             <div>
+                <h3 id="invitations-header">Invitations from other teams:</h3> 
                 <ListGroup>
                     {this.props.invitations.map((invitation) =>
                         <ListGroupItem class="invitation" header={invitation.name}>

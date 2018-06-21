@@ -225,37 +225,39 @@ class NewUserForm extends Component {
         Location
       </Col>
       <Col sm={10}>
-      <StandaloneSearchBox
-        ref={this.onSearchBoxMounted}
-        bounds={this.bounds}
-        onPlacesChanged={this.onPlacesChanged}
-      >
+      <div id="formSearchBox">
+        <StandaloneSearchBox
+          ref={this.onSearchBoxMounted}
+          bounds={this.bounds}
+          onPlacesChanged={this.onPlacesChanged}
+        >
 
-      <input
-        id="newuserloctext"
-        type="text"
-        placeholder="Search for your location"
-        onKeyPress={event => {
+        <input
+          id="newuserloctext"
+          type="text"
+          placeholder="Search for your location"
+          onKeyPress={event => {
             if (event.key === 'Enter') {
               this.onPlacesChanged()
               alert("In key press")
               event.preventDefault()
             }
           }}
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `99%`,
-          height: `32px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `14px`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-        }}
-      />
-      </StandaloneSearchBox>
+          style={{
+            boxSizing: `border-box`,
+            border: `1px solid transparent`,
+            width: `99%`,
+            height: `32px`,
+            padding: `0 12px`,
+            borderRadius: `3px`,
+            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+            fontSize: `14px`,
+            outline: `none`,
+            textOverflow: `ellipses`,
+          }}
+        />
+        </StandaloneSearchBox>
+      </div>
       <br />
         <LocationPicker
           name='Location'
