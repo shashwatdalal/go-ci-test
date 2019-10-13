@@ -1,6 +1,8 @@
 # MatchUps
-This was the presentation that accompanied our demo.
+This was our 2nd year, Web-App project.
+Group members: Thomas Yung, Marcel Kenlay, Andy Li, Shashwat Dalal
 # Slides
+This was the presentation that accompanied our demo.
 ![alt text](https://raw.githubusercontent.com/shashwatdalal/MatchUps/master/presentation/Slide1.png)
 ![alt text](https://raw.githubusercontent.com/shashwatdalal/MatchUps/master/presentation/Slide2.png)
 ![alt text](https://raw.githubusercontent.com/shashwatdalal/MatchUps/master/presentation/Slide3.png)
